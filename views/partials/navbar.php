@@ -50,14 +50,14 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Juanito Perez
+                            <?php echo $this->user['name'] ?>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Perfil</a>
                             <a class="dropdown-item" href="<?php echo constant('URL') ?>users">Usuarios</a>
                             <a class="dropdown-item" href="<?php echo constant('URL') ?>rols">Roles</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Cerrar sesion</a>
+                            <a class="dropdown-item" href="<?php echo constant('URL') ?>signin/logout">Cerrar sesion</a>
                         </div>
                     </li>
                 </ul>

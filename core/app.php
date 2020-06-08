@@ -1,6 +1,6 @@
 <?php
 
-require_once 'controllers/error.controller.php';
+require_once 'controllers/not_found.controller.php';
 class App
 {
     function __construct()
@@ -37,7 +37,7 @@ class App
                 $controller->render();
             }
         } else {
-            $controller = new ErrorController();
+            $controller = new Not_foundController();
             $controller->render();
         }
     }
