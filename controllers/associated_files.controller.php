@@ -5,6 +5,10 @@ class Associated_filesController extends Controller
     public function __construct()
     {
         parent::__construct();
+        session_start();
+        if(!isset($_SESSION['user'])){
+            header('Location:'.constant('URL'));
+        }
     }
 
     public function index()

@@ -12,12 +12,12 @@
                 <h5 class="card-title text-center justify-text-center">Comite de Evaluacion y Seguimiento</h5>
                 <div class="row justify-content-center">
                     <div class="col-10">
-                        <form method="POST" action="#">
+                        <form id="form">
                             <label>Correo Electronico </label>
-                            <input class="form-control" type="text" name="nombre" id="nombre" placeholder="example@.com">
+                            <input class="form-control" type="email" name="email" id="email" placeholder="example@.com">
 
                             <label>Contraseña</label>
-                            <input class="form-control" type="password" name="contraseña" id="contraseña" placeholder="Contraseña">
+                            <input class="form-control" type="password" name="password" id="password" placeholder="Contraseña">
 
                             <div class="row mt-2 ml-2">
                                 <a href="#">Olvide mi contraseña</a>
