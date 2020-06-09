@@ -4,7 +4,7 @@
 <div class="container my-5">
     <div class="row">
         <div class="col">
-            <h4>Tipos de contrato</h4>
+            <h3>Responsables de medidas formativas</h3>
         </div>
         <div class="col-2 text-right">
             <div class="dropdown">
@@ -18,8 +18,21 @@
             </div>
         </div>
     </div>
-    <div class="row mt-3" id="data-contract-types">
-        
+    <div class="row mt-3">
+        <div class="col">
+            <table class="table table-bordered" id="formative-measure-responsibles">
+                <thead>
+                    <th>Nombre</th>
+                    <th>Correo Misena</th>
+                    <th>Documento</th>
+                    <th>Telefono</th>
+                    <th>Opciones</th>
+                </thead>
+                <tbody id="data-formative-measure-responsible">
+
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

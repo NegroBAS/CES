@@ -12,7 +12,7 @@
                 <h5 class="card-title text-center justify-text-center">Comite de Evaluacion y Seguimiento</h5>
                 <div class="row justify-content-center">
                     <div class="col-10">
-                        <form id="form">
+                        <form action="<?php echo constant('URL') ?>signin/login" method="POST">
                             <label>Correo Electronico </label>
                             <input class="form-control" type="email" name="email" id="email" placeholder="example@.com">
 

@@ -8,12 +8,18 @@ class Contract_typesController extends Controller{
             header('Location:'.constant('URL'));
         }
 
+        $this->view->scripts = [
+            '/js/contract_types/main.js'
+        ];
+
         $this->view->user = $_SESSION['user'];
+        $this->contract_type = $this->loadModel('ContractType');
     }
 
     public function index()
     {
-
+        $reponse = $this->contract_type->all();
+        echo json_encode($reponse);
     }
 
     public function store()
@@ -34,6 +40,20 @@ class Contract_typesController extends Controller{
     public function destroy()
     {
         
+    }
+
+    public function masive()
+    {
+        $contract_types = json_decode($_POST['contract_types']);
+        foreach ($contract_types as $contract_type) {
+            $this->contract_type->create([
+                'name'=>$contract_type->name
+            ]);
+        }
+        echo json_encode([
+            'status'=>200,
+            'message'=>'Tipos de contratos actualizados'
+        ]);
     }
 
     public function render()
