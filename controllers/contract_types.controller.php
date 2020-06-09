@@ -7,12 +7,20 @@ class Contract_typesController extends Controller{
         if(!isset($_SESSION['user'])){
             header('Location:'.constant('URL'));
         }
-
         $this->view->user = $_SESSION['user'];
+
+        $this->view->scripts = [
+            '/js/contract_types/main.js',
+            '/js/sweetalert.js'
+        ];
+        $this->contract = $this->loadModel('ContractType');
     }
 
     public function index()
     {
+        $response = $this->contract->getAll();
+        echo json_encode($response);
+        return;
 
     }
 

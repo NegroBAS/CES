@@ -6,19 +6,22 @@ const app = {
                 method:'POST',
                 body: new FormData(form)
             });
+            console.log(res);
             let data = await res.json();
-            if(data.status===200){
-                document.location.replace(this.url+"rols");
-            }
+            console.log(data.status);
+
+            // if(data.status===200){
+            //     document.location.replace(this.url+"rols");
+            // }
         } catch (error) {
             console.log(error);
         }
     }
 }
 
-$(document).ready(function () {
-    document.getElementById('form').onsubmit = function (e) {
-        e.preventDefault();
-        app.login(this);
-    }
-});
+// $(document).ready(function () {
+//     document.getElementById('form').onsubmit = function (e) {
+//         e.preventDefault();
+//         app.login(this);
+//     }
+// });

@@ -27,12 +27,10 @@ class SigninController extends Controller{
                 $_SESSION['user'] = [
                     'name'=>$response['user']->name,
                     'email'=>$response['user']->email,
-                    'rol_id'=>$response['rol_id']
+                    'rol_id'=>$response['user']->rol_id
                 ];
-                echo json_encode([
-                    'status'=>200,
-                    'message'=>'Loggued'
-                ]);
+                header('Location:'.constant('URL').'rols');
+               
             }else{
                 echo json_encode([
                     'status'=>401,
