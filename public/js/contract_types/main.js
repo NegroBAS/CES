@@ -37,7 +37,6 @@ const app = {
                 method:'POST',
                 body:fd
             });
-            console.log('actualizando');
             data = await res.json();
             if(data.status===200){
                 toastr.success('', data.message, {
@@ -53,7 +52,6 @@ const app = {
         try {
             let res = await fetch(`${this.url}contract_types/index`);
             let data = await res.json();
-            console.log(data);
             if(data.status===200){
                 if(data.contract_types.length>0){
                     let html = '';

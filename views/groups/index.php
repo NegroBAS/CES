@@ -4,16 +4,16 @@
 
 <div class="container my-5">
 
-    <div class="row">
-        <div class="col">
-            <h4>Grupos</h4>
-        </div>
-        <div class="col-2 text-right">
-            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal" id="btnCreate"><i class="fa fa-plus"></i> Crear</button>
-        </div>
+  <div class="row">
+    <div class="col">
+      <h3>Grupos</h3>
     </div>
+    <div class="col-2 text-right">
+      <button class="btn btn-success btn-sm" id="btnCreate"><i class="fa fa-plus"></i> Crear</button>
+    </div>
+  </div>
 
-    <div class="row">
+  <div class="row mt-3">
     <div class="col">
       <table class="table table-striped " id="group">
         <thead>
@@ -37,7 +37,7 @@
 
 
 <!-- Modal CREATE -->
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
