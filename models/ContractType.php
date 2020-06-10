@@ -4,8 +4,6 @@ class ContractType extends Model{
 
     public $id;
     public $name;
-    public $created_at;
-    public $updated_at;
 
     public function __construct() {
         parent::__construct();
@@ -13,19 +11,20 @@ class ContractType extends Model{
 
     public function all()
     {
-        $contracts = [];
         try {
-            $query = $this->db->connect()->query('SELECT * FROM contract_types');
-            while ($row = $query->fetch()) {
-                $contract = new ContractType();
-                $contract->id = $row['id'];
-                $contract->name = $row['name'];
-                $contract->created_at = $row['created_at'];
-                $contract->updated_at = $row['updated_at'];
-                array_push($contracts, $contract);
-            }
-            return $contracts;
 
+            $contract_types = [];
+            $query = $this->db->connect()->query('SELECT * FROM contract_types');
+            while($row = $query->fetch()){
+                $contract_type = new ContractType();
+                $contract_type->id = $row['id'];
+                $contract_type->name = $row['name'];
+                array_push($contract_types, $contract_type);
+            }
+            return [
+                'status'=>200,
+                'contract_types'=>$contract_types
+            ];
         } catch (PDOException $e) {
             return [
                 'status'=>500,
@@ -34,28 +33,6 @@ class ContractType extends Model{
         }
     }
 
-    public function masive($data)
-    {
-        try {
-            $query = $this->db->connect()->prepare('INSERT INTO contract_types(created_at,id, name,updated_at) VALUES (:created_at,:id,:name,:updated_at) ');
-            if ($query->execute([
-                'created_at' => $data['createdAt'],
-                'id'=>$data['id'],
-                'name' => $data['name'],
-                'updated_at' => $data['updatedAt']
-            ])) {
-                return [
-                    'status' => 'ok',
-                    'message' => 'Nuevo contrato Creado'
-                ];
-            }
-        } catch (PDOException $e) {
-            return [
-                'status' => 'error',
-                'message' => $e->getMessage()
-            ];
-        }
-    }
 
     public function find($id)
     {
@@ -72,7 +49,14 @@ class ContractType extends Model{
     public function create($data)
     {
         try {
-
+            $query = $this->db->connect()->prepare('INSERT INTO contract_types(name) VALUES (:name)');
+            $query->execute([
+                'name'=>$data['name']
+            ]);
+            return [
+                'status'=>200,
+                'message'=>'Nuevo tipo de contrato creado'
+            ];
         } catch (PDOException $e) {
             return [
                 'status'=>500,

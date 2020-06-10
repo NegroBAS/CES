@@ -1,12 +1,14 @@
 <?php
 
-class SigninController extends Controller{
-    public function __construct() {
+class SigninController extends Controller
+{
+    public function __construct()
+    {
         parent::__construct();
-        
+
         session_start();
-        if(isset($_SESSION['user'])){
-            header('Location:'.constant('URL').'rols');
+        if (isset($_SESSION['user'])) {
+            header('Location:' . constant('URL') . 'rols');
         }
 
         $this->view->scripts = [
@@ -21,10 +23,10 @@ class SigninController extends Controller{
         $email = $_POST['email'];
         $password = $_POST['password'];
         $response = $this->user->findByEmail($email);
-        if($response['user']!=null){
-            if(password_verify($password, $response['user']->password)){
-                session_start();
+        if ($response['user'] != null) {
+            if (password_verify($password, $response['user']->password)) {
                 $_SESSION['user'] = [
+<<<<<<< HEAD
                     'name'=>$response['user']->name,
                     'email'=>$response['user']->email,
                     'rol_id'=>$response['user']->rol_id
@@ -35,12 +37,23 @@ class SigninController extends Controller{
                 echo json_encode([
                     'status'=>401,
                     'message'=>'Invalid credentials'
+=======
+                    'name' => $response['user']->name,
+                    'email' => $response['user']->email,
+                    'rol_id' => $response['user']->rol_id
+                ];
+                header('Location: '.constant('URL').'rols');
+            } else {
+                echo json_encode([
+                    'status' => 401,
+                    'message' => 'Invalid credentials'
+>>>>>>> e8773b60592ea5eb6fbdba595d16682a28db3929
                 ]);
             }
-        }else{
+        } else {
             echo json_encode([
-                'status'=>400, 
-                'message'=>'User not found'
+                'status' => 400,
+                'message' => 'User not found'
             ]);
         }
     }
@@ -49,7 +62,7 @@ class SigninController extends Controller{
     {
         session_start();
         session_destroy();
-        header('Location: '.constant('URL'));
+        header('Location: ' . constant('URL'));
     }
 
     public function render()

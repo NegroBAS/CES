@@ -1,31 +1,26 @@
-<?php require_once('views/layouts/header.php') ?>
-<?php require_once('views/partials/navbar.php') ?>
-
-
+<?php require('views/layouts/header.php') ?>
+<?php require('views/partials/navbar.php') ?>
 <div class="container my-5">
-  <div class="row">
+    <div class="row">
         <div class="col">
             <h3>Cargos</h3>
         </div>
-        <div class="col-2 text-right">
-        <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Opciones
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#" id="btnCreate" data-target="#modal" data-toggle="modal">Agregar</a>
-                <a class="dropdown-item" href="#" id="btnUpdate">Actualizar informacion</a>
+        <div class="col-2 text-md-right">
+            <div class="dropdown">
+                <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Opciones
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Agregar</a>
+                    <a class="dropdown-item" href="#" id="update">Actualizar</a>
+                </div>
             </div>
         </div>
     </div>
-  <div class="row my-3" id="data-positions">
-
-  </div>
-
-
+    <div class="row mt-3" id="data-positions">
+        
+    </div>
 </div>
-
-
-
 
 <!-- Modal CREATE -->
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -57,4 +52,5 @@
   </div>
 </div>
 
-<?php require_once('views/layouts/footer.php') ?>
+<?php require('views/layouts/footer.php') ?>
+

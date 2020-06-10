@@ -7,6 +7,7 @@ class Contract_typesController extends Controller{
         if(!isset($_SESSION['user'])){
             header('Location:'.constant('URL'));
         }
+
         $this->view->user = $_SESSION['user'];
 
         $this->view->scripts = [
@@ -14,13 +15,16 @@ class Contract_typesController extends Controller{
             '/js/sweetalert.js'
         ];
         $this->contract = $this->loadModel('ContractType');
+
     }
 
     public function index()
     {
-        $response = $this->contract->getAll();
+
+        $response = $this->contract->all();
         echo json_encode($response);
         return;
+
 
     }
 
@@ -42,6 +46,20 @@ class Contract_typesController extends Controller{
     public function destroy()
     {
         
+    }
+
+    public function masive()
+    {
+        $contract_types = json_decode($_POST['contract_types']);
+        foreach ($contract_types as $contract_type) {
+            $this->contract->create([
+                'name'=>$contract_type->name
+            ]);
+        }
+        echo json_encode([
+            'status'=>200,
+            'message'=>'Tipos de contratos actualizados'
+        ]);
     }
 
     public function render()

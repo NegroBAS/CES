@@ -8,6 +8,10 @@ class PositionsController extends Controller{
             header('Location:'.constant('URL'));
         }
 
+        $this->view->scripts = [
+            '/js/positions/main.js'
+        ];
+
         $this->view->user = $_SESSION['user'];
 
         $this->view->scripts = [
@@ -16,6 +20,7 @@ class PositionsController extends Controller{
         ];
         $this->position = $this->loadModel('Position');
 
+
     }
 
     public function index()
@@ -23,6 +28,7 @@ class PositionsController extends Controller{
         $response = $this->position->all();
         echo json_encode($response);
         return;
+
 
     }
 
@@ -78,6 +84,21 @@ class PositionsController extends Controller{
         $res = $this->position->Delete($id);
         echo json_encode($res);
         
+    }
+
+    public function masive()
+    {
+        $positions = json_decode($_POST['positions']);
+        foreach ($positions as $position) {
+            $this->position->create([
+                'name'=>$position->name,
+                'type'=>$position->type
+            ]);
+        }
+        echo json_encode([
+            'status'=>200,
+            'message'=>'Cargos actualizados'
+        ]);
     }
 
     public function render()

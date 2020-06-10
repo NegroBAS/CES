@@ -43,6 +43,7 @@
                         <a class="dropdown-item" href="<?php echo constant('URL') ?>infringement_classifications">Clasificacion de las faltas</a>
                         <a class="dropdown-item" href="<?php echo constant('URL') ?>learner_novelties">Novedades del aprendiz</a>
                         <a class="dropdown-item" href="<?php echo constant('URL') ?>novelty_types">Tipos de novedades del aprendiz</a>
+                        <a class="dropdown-item" href="<?php echo constant('URL') ?>formative_measure_responsibles">Responsables de medidas formativas</a>
                     </div>
                 </li>
             </ul>

@@ -2,20 +2,26 @@
 <?php require_once('views/partials/navbar.php') ?>
 
 <div class="container my-5">
-<div class="row">
+
+    <div class="row">
         <div class="col">
-            <h3>Tipos de Contratos</h3>
+            <h4>Tipos de contrato</h4>
         </div>
         <div class="col-2 text-right">
-        <button class="btn btn-success btn-sm "data-toggle="modal" data-target="#modal" id="btnCreate"><i class="fa fa-plus"></i>
-             Crear
-            </button>
+            <div class="dropdown">
+                <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Opciones
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#" "data-toggle="modal" data-target="#modal" id="btnCreate" >Agregar</a>
+                    <a class="dropdown-item" href="#" id="update">Actualizar</a>
+                </div>
+            </div>
         </div>
     </div>
-  <div class="row my-3" id="data-contract_types">
-  </div>
-</div>
-
+    <div class="row mt-3" id="data-contract-types">
+        
+    </div>
 </div>
 
 
@@ -48,4 +54,4 @@
     </div>
   </div>
 
-  <?php require_once('views/layouts/footer.php') ?>
+<?php require_once('views/layouts/footer.php') ?>
