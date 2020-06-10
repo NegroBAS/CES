@@ -9,7 +9,7 @@
         </div>
         <div class="col-2 text-right">
             <div class="dropdown">
-            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal" id="btnCreate"><i class="fa fa-plus"></i> Crear</button>
+            <button class="btn btn-success btn-sm" id="btnCreate"><i class="fa fa-plus"></i> Crear</button>
             </div>
         </div>
     </div>
