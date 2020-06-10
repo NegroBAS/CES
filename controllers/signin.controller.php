@@ -26,28 +26,15 @@ class SigninController extends Controller
         if ($response['user'] != null) {
             if (password_verify($password, $response['user']->password)) {
                 $_SESSION['user'] = [
-<<<<<<< HEAD
                     'name'=>$response['user']->name,
                     'email'=>$response['user']->email,
                     'rol_id'=>$response['user']->rol_id
                 ];
                 header('Location:'.constant('URL').'rols');
-               
             }else{
                 echo json_encode([
                     'status'=>401,
                     'message'=>'Invalid credentials'
-=======
-                    'name' => $response['user']->name,
-                    'email' => $response['user']->email,
-                    'rol_id' => $response['user']->rol_id
-                ];
-                header('Location: '.constant('URL').'rols');
-            } else {
-                echo json_encode([
-                    'status' => 401,
-                    'message' => 'Invalid credentials'
->>>>>>> e8773b60592ea5eb6fbdba595d16682a28db3929
                 ]);
             }
         } else {
