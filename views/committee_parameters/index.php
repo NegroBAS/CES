@@ -3,7 +3,7 @@
 <div class="container my-5">
     <div class="row">
         <div class="col">
-            <h3>Parametros de comité</h3>
+            <h4>Parametros de comité</h4>
         </div>
     </div>
 </div>

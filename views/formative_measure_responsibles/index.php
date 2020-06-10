@@ -4,7 +4,7 @@
 <div class="container my-5">
     <div class="row">
         <div class="col">
-            <h3>Responsables de medidas formativas</h3>
+            <h4>Responsables de medidas formativas</h4>
         </div>
         <div class="col-2 text-right">
             <div class="dropdown">

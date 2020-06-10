@@ -6,7 +6,7 @@
 
   <div class="row">
     <div class="col">
-      <h3>Grupos</h3>
+      <h4>Grupos</h4>
     </div>
     <div class="col-2 text-right">
       <button class="btn btn-success btn-sm" id="btnCreate"><i class="fa fa-plus"></i> Crear</button>

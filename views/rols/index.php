@@ -4,7 +4,7 @@
 <div class="container my-5">
     <div class="row">
         <div class="col">
-            <h3>Roles</h3>
+            <h4>Roles</h4>
         </div>
         <div class="col-2 text-right">
             <button id="btn-create" class="btn btn-success btn-sm">Crear</button>
