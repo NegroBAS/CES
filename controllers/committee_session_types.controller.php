@@ -9,11 +9,13 @@ class Committee_session_typesController extends Controller{
         }
 
         $this->view->user = $_SESSION['user'];
+        $this->committee_session_type = $this->loadModel('CommitteeSessionType');
     }
 
     public function index()
     {
-
+        $response = $this->committee_session_type->all();
+        echo json_encode($response);
     }
 
     public function store()

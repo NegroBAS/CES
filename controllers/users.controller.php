@@ -45,6 +45,12 @@ class UsersController extends Controller{
         echo json_encode($response);
     }
 
+    public function findSubdirector()
+    {
+        $response = $this->user->findSubdirector();
+        echo json_encode($response);
+    }
+
     public function edit($param = null)
     {
         $id = $param[0];
