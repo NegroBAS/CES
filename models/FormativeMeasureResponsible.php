@@ -60,6 +60,32 @@ class FormativeMeasureResponsible extends Model{
     public function find($id)
     {
         try {
+            $query = $this->db->connect()->prepare('SELECT * FROM formative_measure_responsibles WHERE id = :id');
+            $query->execute([
+                'id' => $id
+            ]);
+            while($row = $query->fetch()){
+                $formative_measure_responsible = new FormativeMeasureResponsible();
+                $formative_measure_responsible->id = $row['id'];
+                $formative_measure_responsible->username = $row['username'];
+                $formative_measure_responsible->misena_email = $row['misena_email'];
+                $formative_measure_responsible->institutional_email = $row['institutional_email'];
+                $formative_measure_responsible->document_type_id = $row['document_type_id'];
+                $formative_measure_responsible->document = $row['document'];
+                $formative_measure_responsible->birthdate = $row['birthdate'];
+                $formative_measure_responsible->phone = $row['phone'];
+                $formative_measure_responsible->phone_ip = $row['phone_ip'];
+                $formative_measure_responsible->gender = $row['gender'];
+                $formative_measure_responsible->position_id = $row['position_id'];
+                $formative_measure_responsible->contract_type_id = $row['contract_type_id'];
+                $formative_measure_responsible->type = $row['type'];
+                $formative_measure_responsible->photo = $row['photo'];
+                $formative_measure_responsible->state = $row['state'];
+            }
+            return [
+                'status' => 200,
+                'responsible' => $formative_measure_responsible
+            ];
 
         } catch (PDOException $e) {
             return [
@@ -72,6 +98,27 @@ class FormativeMeasureResponsible extends Model{
     public function create($data)
     {
         try {
+            $query = $this->db->connect()->prepare('INSERT INTO formative_measure_responsibles(username, misena_email, institutional_email, document_type_id, document, birthdate,phone, phone_ip, gender, position_id,contract_type_id,type,photo,state) VALUES (:username, :misena_email, :institutional_email, :document_type_id, :document, :birthdate,:phone, :phone_ip, :gender, :position_id, :contract_type_id, :type, :photo, :state)');
+            $query->execute([
+                'username' => $data['username'],
+                'misena_email' => $data['misena_email'],
+                'institutional_email' => $data['institutional_email'],
+                'document_type_id' => $data['document_type_id'],
+                'document' => $data['document'],
+                'birthdate' => $data['birthdate'],
+                'phone' => $data['phone'],
+                'phone_ip' => $data['phone_ip'],
+                'gender' => $data['gender'],
+                'position_id' => $data['position_id'],
+                'contract_type_id' => $data['contract_type_id'],
+                'type' => $data['type'],
+                'photo' => $data['photo'],
+                'state' => $data['state']
+            ]);
+            return [
+                'status' => 200,
+                'message' => 'Nuevo responsable agregado'
+            ];
 
         } catch (PDOException $e) {
             return [
@@ -83,6 +130,28 @@ class FormativeMeasureResponsible extends Model{
     public function update($data)
     {
         try {
+            $query = $this->db->connect()->prepare('UPDATE formative_measure_responsibles SET username = :username, misena_email = :misena_email, institutional_email = :institutional_email, document_type_id = :document_type_id, document = :document, birthdate = :birthdate, phone = :phone, phone_ip = :phone_ip, gender = :gender, position_id = :position_id, contract_type_id = :contract_type_id, type = :type, photo = :photo, state = :state WHERE id = :id');
+            $query->execute([
+                'username' => $data['username'],
+                'misena_email' => $data['misena_email'],
+                'institutional_email' => $data['institutional_email'],
+                'document_type_id' => $data['document_type_id'],
+                'document' => $data['document'],
+                'birthdate' => $data['birthdate'],
+                'phone' => $data['phone'],
+                'phone_ip' => $data['phone_ip'],
+                'gender' => $data['gender'],
+                'position_id' => $data['position_id'],
+                'contract_type_id' => $data['contract_type_id'],
+                'type' => $data['type'],
+                'photo' => $data['photo'],
+                'state' => $data['state'],
+                'id' => $data['id']
+            ]);
+            return [
+                'status' => 200,
+                'message' => 'Responsable actualizado'
+            ];
             
         } catch (PDOException $e) {
             return [
@@ -95,6 +164,14 @@ class FormativeMeasureResponsible extends Model{
     public function delete($id)
     {
         try {
+            $query = $this->db->connect()->prepare('DELETE FROM formative_measure_responsibles WHERE id = :id');
+            $query->execute([
+                'id' => $id
+            ]);
+            return [
+                'status'=>200,
+                'message' => 'Responsable eliminado'
+            ];
             
         } catch (PDOException $e) {
             return [

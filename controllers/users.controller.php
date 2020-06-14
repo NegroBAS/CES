@@ -11,7 +11,8 @@ class UsersController extends Controller{
         $this->view->user = $_SESSION['user'];
 
         $this->view->scripts = [
-            '/js/users/main.js'
+            '/js/users/main.js',
+            '/js/sweetalert.js'
         ];
 
         $this->user = $this->loadModel('User');

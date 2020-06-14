@@ -51,7 +51,10 @@ class Modality extends Model{
                 
             }
               
-            return $modalitie;
+            return [
+                'modalities' => $modalitie,
+                'status'=> 200
+            ];
 
         } catch (PDOException $e) {
             return [
@@ -71,7 +74,7 @@ class Modality extends Model{
                 'updated_at' => $data['updated_at']
             ])){
                 return [
-                    'status' => 'ok',
+                    'status' => 200,
                     'message' => 'Nueva Modalidad Creada'
                 ];
             } 
@@ -94,7 +97,7 @@ class Modality extends Model{
                 
             ])){
                 return [
-                    'status' => 'ok',
+                    'status' => 200,
                     'message' => 'Modalidad Actualizada '
                 ];
             } 
@@ -115,7 +118,7 @@ class Modality extends Model{
                 'id' =>$id
             ])){
                 return [
-                    'status' => 'ok',
+                    'status' => 200,
                     'message' => 'Modalidad Eliminada '
                 ];
             } 

@@ -45,7 +45,7 @@ class PositionsController extends Controller{
             $type = $_POST['type'];
             $created_at = date("Y,m,d,g,i,s");
             $updated_at = date("Y,m,d,g,i,s");
-            $res = $this->position->store([
+            $res = $this->position->create([
                 'name' => $name,
                 'type' => $type,
                 'created_at' => $created_at,
@@ -56,8 +56,14 @@ class PositionsController extends Controller{
         
     }
 
-    public function show()
+    public function show($param = null)
     {
+        $id = $param[0];
+        $res = $this->position->find($id);
+        echo json_encode([
+            'status'=>200,
+            'positions'=>$res
+            ]);
         
     }
 

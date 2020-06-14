@@ -1,5 +1,6 @@
 <?php require('views/layouts/header.php') ?>
 <?php require('views/partials/navbar.php') ?>
+
 <div class="container my-5">
     <div class="row">
         <div class="col">
@@ -11,7 +12,7 @@
                     Opciones
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Agregar</a>
+                    <a class="dropdown-item" href="#" id="btn-create">Agregar</a>
                     <a class="dropdown-item" href="#" id="update">Actualizar</a>
                 </div>
             </div>
@@ -35,18 +36,24 @@
       <div class="modal-body">
         <form id="form">
           <div class="form-group">
-            <label for="name" class="text-muted">Nombre</label>
+            <label for="name" class="text-muted">nombre</label>
             <input type="text" name="name" id="name" class="form-control">
+            <div class="invalid-feedback" id="nameMessage">
+
+            </div>
           </div>
           <div class="form-group">
-            <label for="type" class="text-muted">Tipo</label>
+            <label for="type" class="text-muted">tipo</label>
             <input type="text" name="type" id="type" class="form-control">
+            <div class="invalid-feedback" id="typeMessage">
+
+            </div>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" id="btnForm" data-dismiss="modal" class="btn btn-success"><i class="far fa-save"></i> Guardar</button>
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" form="form" class="btn btn-primary" id="btnForm">Guardar</button>
       </div>
     </div>
   </div>

@@ -94,8 +94,8 @@ class Position extends Model{
 
             ])) {
                 return [
-                    'status' => 'ok',
-                    'message' => 'Rango Actualizado '
+                    'status' => 200,
+                    'message' => 'Cargo Actualizado '
                 ];
             }
         } catch (PDOException $e) {
@@ -114,8 +114,8 @@ class Position extends Model{
                 'id' => $id
             ])) {
                 return [
-                    'status' => 'ok',
-                    'message' => 'Rango Eliminado '
+                    'status' => 200,
+                    'message' => 'Cargo Eliminado '
                 ];
             }
         } catch (PDOException $e) {

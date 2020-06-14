@@ -30,21 +30,43 @@ class Contract_typesController extends Controller{
 
     public function store()
     {
+        $name = $_POST['name'];
+        $res = $this->contract->create([
+            'name' => $name
+        ]);
+        echo json_encode($res);
+        return;        
+    }
+
+    public function show($param = null)
+    {
+        $id = $param[0];
+        $res = $this->contract->find($id);
+        echo json_encode([
+            'contract_types' => $res,
+            'status' => 200
+            ]);
         
     }
 
-    public function show()
+    public function edit($param = null)
     {
+        date_default_timezone_set("America/Bogota");
+        $id = $param[0];
+        $name = $_POST['name'];
+        $res = $this->contract->update([
+            'id' => $id,
+            'name' => $name
+        ]);
+        echo json_encode($res);
         
     }
 
-    public function edit()
+    public function destroy($param = null)
     {
-        
-    }
-
-    public function destroy()
-    {
+        $id = $param[0];
+        $res = $this->contract->Delete($id);
+        echo json_encode($res);
         
     }
 

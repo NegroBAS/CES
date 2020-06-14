@@ -9,30 +9,74 @@ class Formation_program_typesController extends Controller{
         }
 
         $this->view->user = $_SESSION['user'];
+        $this->view->scripts = [
+            '/js/formation_program_types/main.js',
+            '/js/sweetalert.js'
+        ];
+        $this->formation = $this->loadModel('FormationProgramType');
     }
 
     public function index()
     {
+        $res = $this->formation->all();
+        echo json_encode(['formation_program_types' => $res]);
+        return;
+
 
     }
 
     public function store()
     {
+        date_default_timezone_set("America/Bogota");
+        $name = $_POST['name'];
+        $elective_months = $_POST['elective_months'];
+        $practice_months = $_POST['practice_months'];
+        $created_at =date("Y,m,d,g,i,s");
+        $updated_at=date("Y,m,d,g,i,s");
+        $res = $this->formation->create([
+            'name' => $name,
+            'elective_months' => $elective_months,
+            'practice_months' => $practice_months,
+            'created_at' => $created_at,
+            'updated_at' => $updated_at
+        ]);
+        echo json_encode($res);
+        return;
         
     }
 
-    public function show()
+    public function show($param = null)
     {
+        $id = $param[0];
+        $res= $this->formation->find($id);
+        echo json_encode($res);
         
     }
 
-    public function edit()
+    public function edit($param = null)
     {
+        date_default_timezone_set("America/Bogota");
+        $id = $param[0];
+        $name = $_POST['name'];
+        $elective_months = $_POST['elective_months'];
+        $practice_months = $_POST['practice_months'];
+        $updated_at= date("Y,m,d,g,i,s");
+        $res = $this->formation->update([
+            'id' => $id,
+            'name' => $name,
+            'elective_months' => $elective_months,
+            'practice_months' => $practice_months,
+            'updated_at' => $updated_at
+        ]);
+        echo json_encode($res);
         
     }
 
-    public function destroy()
+    public function destroy($param = null)
     {
+        $id = $param[0];
+        $res = $this->formation->delete($id);
+        echo json_encode($res);
         
     }
 

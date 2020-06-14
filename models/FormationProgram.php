@@ -60,7 +60,11 @@ class FormationProgram extends Model{
                 $program->updated_at = $row['updated_at'];
                 
             }
-            return $program;
+            return [
+                'formation_programs' => $program,
+                'status' => 200
+                
+            ];
         } catch (PDOException $e) {
             return [
                 'status' => 500,
@@ -81,7 +85,7 @@ class FormationProgram extends Model{
                 'updated_at' => $data['updated_at']
             ])){
                 return [
-                    'status' => 'ok',
+                    'status' => 200,
                     'message' => 'Nuevo Programa de Formacion Creado'
                 ];
             } 
@@ -105,7 +109,7 @@ class FormationProgram extends Model{
                 
             ])){
                 return [
-                    'status' => 'ok',
+                    'status' => 200,
                     'message' => 'Programa Actualizado '
                 ];
             } 
@@ -125,7 +129,7 @@ class FormationProgram extends Model{
                 'id' =>$id
             ])){
                 return [
-                    'status' => 'ok',
+                    'status' => 200,
                     'message' => 'Programa Eliminado '
                 ];
             }  

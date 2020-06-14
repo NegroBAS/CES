@@ -1,6 +1,11 @@
 <?php
 
-class CommitteeParameter extends Model{
+class CommitteeSessionState extends Model{
+
+    public $id;
+    public $name;
+    public $created_at;
+    public $updated_at;
 
     public function __construct() {
         parent::__construct();
@@ -9,6 +14,17 @@ class CommitteeParameter extends Model{
     public function all()
     {
         try {
+            $states = [];
+            $query = $this->db->connect()->query('SELECT * FROM committee_session_states');
+            while ($row = $query->fetch()) {
+                $state = new CommitteeSessionState();
+                $state->id = $row['id'];
+                $state->name = $row['name'];
+                $state->created_at = $row['created_at'];
+                $state->updated_at = $row['updated_at'];
+                array_push($states, $state);
+            }
+            return $states;
 
         } catch (PDOException $e) {
             return [

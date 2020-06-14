@@ -37,6 +37,18 @@ class ContractType extends Model{
     public function find($id)
     {
         try {
+            $contract = [];
+            $query = $this->db->connect()->prepare('SELECT * FROM contract_types WHERE id=:id');
+            $query->bindParam('id', $id);
+            $query->execute();
+
+            while ($row = $query->fetch()) {
+                $contract = new ContractType();
+                $contract->id = $row['id'];
+                $contract->name = $row['name'];
+            }
+
+            return $contract;
 
         } catch (PDOException $e) {
             return [
@@ -67,7 +79,17 @@ class ContractType extends Model{
     public function update($data)
     {
         try {
-            
+            $query = $this->db->connect()->prepare('UPDATE contract_types SET name=:name  WHERE id=:id ');
+            if ($query->execute([
+                'name' => $data['name'],
+                'id' => $data['id']
+
+            ])) {
+                return [
+                    'status' => 200,
+                    'message' => 'Contrato Actualizado '
+                ];
+            }
         } catch (PDOException $e) {
             return [
                 'status'=>500,
@@ -79,7 +101,15 @@ class ContractType extends Model{
     public function delete($id)
     {
         try {
-            
+            $query = $this->db->connect()->prepare('DELETE FROM contract_types   WHERE id=:id ');
+            if ($query->execute([
+                'id' => $id
+            ])) {
+                return [
+                    'status' => 200,
+                    'message' => 'Contrato Eliminado '
+                ];
+            }
         } catch (PDOException $e) {
             return [
                 'status'=>500,

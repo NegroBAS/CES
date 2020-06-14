@@ -9,7 +9,7 @@
         </div>
         <div class="col-2 text-right">
             <div class="dropdown">
-            <button class="btn btn-success btn-sm" id="btnCreate"><i class="fa fa-plus"></i> Crear</button>
+            <button class="btn btn-success btn-sm" id="btn-create"><i class="fa fa-plus"></i> Crear</button>
             </div>
         </div>
     </div>
@@ -41,7 +41,7 @@
                         </form>
         <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="button" id="btnForm" data-dismiss="modal" class="btn btn-success"><i class="far fa-save"></i> Guardar</button>
+                <button type="submit" form="form" id="btnForm" class="btn btn-success"><i class="far fa-save"></i> Guardar</button>
         </div>                           
         </div>
     </div>

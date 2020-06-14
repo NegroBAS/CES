@@ -82,7 +82,10 @@ class Group extends Model{
                 
             }
               
-            return $group;
+            return [
+                'groups' => $group,
+                'status' => 200
+            ];
 
         } catch (PDOException $e) {
             return [
@@ -112,8 +115,8 @@ class Group extends Model{
                 'updated_at' => $data['updated_at']
             ])){
                 return [
-                    'status' => 'ok',
-                    'message' => 'Usuario Creado '
+                    'status' => 200,
+                    'message' => 'Grupo creado '
                 ];
             } 
         } catch (PDOException $e) {
@@ -144,8 +147,8 @@ class Group extends Model{
                 
             ]))
                 return [
-                    'status' => 'ok',
-                    'message' => 'Usuario Actualizado'
+                    'status' => 200,
+                    'message' => 'Grupo actualizado'
                 ];
             
         } catch (PDOException $e) {
@@ -164,8 +167,8 @@ class Group extends Model{
                 'id' =>$id
             ])){
                 return [
-                    'status' => 'ok',
-                    'message' => 'Usuario Eliminado '
+                    'status' => 200,
+                    'message' => 'Grupo eliminado '
                 ];
             } 
             

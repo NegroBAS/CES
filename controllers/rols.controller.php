@@ -12,7 +12,8 @@ class RolsController extends Controller{
         $this->view->user = $_SESSION['user'];
 
         $this->view->scripts = [
-            '/js/rols/main.js'
+            '/js/rols/main.js',
+            '/js/sweetalert.js'
         ];
 
         $this->rol = $this->loadModel('Rol');

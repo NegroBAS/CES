@@ -9,10 +9,18 @@ class Committee_session_statesController extends Controller{
         }
 
         $this->view->user = $_SESSION['user'];
+        $this->view->scripts = [
+            '/js/comitte_session_states/main.js',
+            '/js/sweetalert.js'
+        ];
+        $this->comitte_session_states = $this->loadModel('CommitteeSessionState');
     }
 
     public function index()
     {
+        $res = $this->comitte_session_states->all();
+       echo json_encode(['comitte_session_states' => $res]);
+       return;
 
     }
 

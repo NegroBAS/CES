@@ -51,7 +51,10 @@ class DocumentType extends Model{
                 
             }
               
-            return $contract;
+            return [
+                'document_types' => $contract,
+                'status' =>200
+            ];
 
         } catch (PDOException $e) {
             return [
@@ -71,7 +74,7 @@ class DocumentType extends Model{
                 'updated_at' => $data['updated_at']
             ])){
                 return [
-                    'status' => 'ok',
+                    'status' => 200,
                     'message' => 'Nuevo contrato Creado'
                 ];
             } 
@@ -94,7 +97,7 @@ class DocumentType extends Model{
                 
             ])){
                 return [
-                    'status' => 'ok',
+                    'status' => 200,
                     'message' => 'Tipo Documento Actualizado '
                 ];
             } 
@@ -115,7 +118,7 @@ class DocumentType extends Model{
                 'id' =>$id
             ])){
                 return [
-                    'status' => 'ok',
+                    'status' => 200,
                     'message' => 'Tipo Documento Eliminado '
                 ];
             } 

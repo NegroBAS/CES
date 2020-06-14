@@ -32,8 +32,8 @@ const app = {
                         <td>${user.email}</td>
                         <td>${user.rol_name}</td>
                         <td>
-                            <button class="btn btn-outline-danger delete">Eliminar</button>
-                            <button class="btn btn-outline-primary edit">Editar</button>
+                        <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
+                        <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
                         </td>
                     </tr>
                     `;
@@ -154,6 +154,22 @@ $(document).ready(async function () {
     });
     $(document).on('click', '.delete', function () {
         id = $(this.parentElement.parentElement).data('id');
-        app.delete(id);
+        Swal.fire({
+            title: "¿Estas seguro?",
+            text: "No podras revertir esto!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            cancelButtonText: "Cancelar",
+            confirmButtonText: "Si, eliminar",
+          }).then((result) => {
+            if (result.value) {
+              Swal.fire("Eliminado!", "El aprendiz ha sido eliminado.", "success");
+              let id = $($(this)[0].parentElement.parentElement).data("id");
+              app.delete(id);
+              app.get();
+            }
+          });
     });
 });

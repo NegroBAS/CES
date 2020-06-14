@@ -47,7 +47,7 @@ class GroupsController extends Controller{
         $practice_end_date = $_POST['practice_end_date'];
         $created_at =date("Y,m,d,g,i,s");
         $updated_at=date("Y,m,d,g,i,s");
-        $res = $this->groups->store([
+        $res = $this->groups->create([
             'code_tab' => $code_tab,
             'modality_id' => $modality_id,
             'formation_program_id' => $formation_program_id,

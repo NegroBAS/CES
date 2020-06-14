@@ -9,11 +9,11 @@
         </div>
         <div class="col-2 text-right">
             <div class="dropdown">
-            <button class="btn btn-success btn-sm text-white mb-3" data-toggle="modal" data-target="#modal" id="btnCreate"><i class="fa fa-plus"></i> Crear</button>
+            <button class="btn btn-success btn-sm text-white"  id="btn-create"><i class="fa fa-plus"></i> Crear</button>
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" mt-3>
                 <div class="col">
                         <table class="table table-striped text-center" id="tabla">
                                 <thead>
@@ -64,13 +64,13 @@
                                  </div>
                             </div>
                             <div class="form-group">
-                                <label for="formation_program_type_id">Nombre Tipo de Programa</label>
+                                <label for="formation_program_type_id">Nombre tipo de programa</label>
                                 <select  name="formation_program_type_id" id="formation_program_type_id" class="form-control"></select>
                             </div>
                         </form>
         <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="button" id="btnForm" data-dismiss="modal" class="btn btn-success"><i class="far fa-save"></i> Guardar</button>
+                        <button type="submit" form="form" id="btnForm"  class="btn btn-primary"><i class="far fa-save"></i> Guardar</button>
         </div>          
 
     </div>

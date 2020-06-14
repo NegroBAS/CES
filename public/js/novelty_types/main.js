@@ -15,8 +15,8 @@ const app = {
                                 <div class="card-header bg-primary"></div>
                                 <div class="card-body text-center">
                                     <h5>${novelty_type.name}</h5>
-                                    <button class="btn btn-sm btn-outline-danger delete">Eliminar</button>
-                                    <button class="btn btn-sm btn-outline-primary edit">Editar</button>
+                                    <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
+                <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -118,6 +118,8 @@ $(document).ready(async function () {
     $(document).on('click', '.edit', async function () {
         id = $(this.parentElement.parentElement).data('id');
         app.edit = true;
+        val.limpiar();
+        val.validaciones();
         await app.getOne(id);
     })
     document.getElementById('btn-create').onclick = function(){
@@ -125,6 +127,8 @@ $(document).ready(async function () {
         $('#form').trigger('reset');
         $('#modal-create').find('.modal-title').text('Crear tipo de novedad');
         $('#modal-create').modal('toggle');
+        val.limpiar();
+        val.validaciones();
     }
     document.getElementById('form').onsubmit = async function (e) {
         e.preventDefault();
@@ -135,3 +139,56 @@ $(document).ready(async function () {
         }
     }
 });
+
+
+const val = {
+    validaciones() {
+       let name = document.getElementById("name");
+
+   
+       let letrasRegex = /^[A-Za-z _]*[A-Za-z][A-Za-z _]*$/;
+       let btn = document.getElementById("btnForm");
+
+       btn.setAttribute("disabled", "disabled");
+   
+       name.oninput = function () {
+         if (letrasRegex.test(this.value)) {
+           this.classList.remove("is-invalid");
+           this.classList.add("is-valid");
+         } else {
+           this.classList.remove("is-valid");
+           this.classList.add("is-invalid");
+           document.getElementById("nameMessage").innerHTML =
+             "Este campo es requerido";
+         }
+   
+         if (this.value === "") {
+           console.log("campo requerido");
+           document.getElementById("nameMessage").innerHTML =
+             "Este campo es requerido";
+           this.classList.add("is-invalid");
+         }
+   
+         if (letrasRegex.test(this.value)) {
+           btn.removeAttribute("disabled");
+         } else {
+           btn.setAttribute("disabled", "disabled");
+         }
+       };
+
+     },
+
+     limpiar(){
+       let name = document.getElementById("name");
+
+       
+
+       console.log("limpiando");
+       name.classList.remove("is-invalid");    
+       name.classList.remove("is-valid");
+
+
+     }
+
+
+}

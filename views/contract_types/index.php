@@ -13,7 +13,7 @@
                     Opciones
                 </button>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#" "data-toggle="modal" data-target="#modal" id="btnCreate" >Agregar</a>
+                    <a class="dropdown-item" href="#" class="dropdown-item" id="btn-create" >Agregar</a>
                     <a class="dropdown-item" href="#" id="update">Actualizar</a>
                 </div>
             </div>
@@ -48,7 +48,7 @@
         </form>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-          <button type="button" id="btnForm" data-dismiss="modal" class="btn btn-success"><i class="far fa-save"></i> Guardar</button>
+          <button type="submit" form="form" id="btnForm" class="btn btn-primary"><i class="far fa-save"></i> Guardar</button>
         </div>
       </div>
     </div>

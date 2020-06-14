@@ -28,12 +28,15 @@
               <div class="form-group">
                   <label for="name">Nombre</label>
                   <input type="text" name="name" id="name" class="form-control">
+                  <div class="invalid-feedback" id="nameMessage">
+
+                </div>
               </div>
           </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="submit" form="form" class="btn btn-primary">Guardar</button>
+        <button type="submit" form="form" id="btnForm" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>
