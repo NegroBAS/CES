@@ -182,7 +182,7 @@ const app = {
                 let name = document.getElementById('name');
                
                 let numberRegex = /^([0-9])*$/;
-                let letrasRegex = /^[A-Za-z _]*[A-Za-z][A-Za-z _]*$/;
+                let letrasRegex = /^[a-zA-ZÀ-ÿ\u00E0-\u00FC]+(\s*[a-zA-ZÀ-ÿ\u00E0-\u00FC]*)*[a-zA-ZÀ-ÿ\u00E0-\u00FC]+$/;
                 let btnForm = document.getElementById('btnForm');
                 let estado = new Array(5);
               

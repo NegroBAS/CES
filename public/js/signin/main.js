@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const app = {
     url: document.getElementById('url').content,
     login:async function (form) {
@@ -26,5 +25,4 @@ const app = {
 //         app.login(this);
 //     }
 // });
-=======
->>>>>>> e8773b60592ea5eb6fbdba595d16682a28db3929
+
