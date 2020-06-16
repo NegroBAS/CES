@@ -49,14 +49,19 @@
             <div class="modal-body">
 
                 <form action="" method="post" id="form">
-                    <div class="form-group">
-                        <label for="username">Nombre</label>
-                        <input type="text" name="username" id="username" class="form-control">
-                        <div class="invalid-feedback" id="nameMessage">
+                    <div class="form-row">
+                        <div class="col">
+                                <div class="form-group">
+                                <label for="username">Nombre</label>
+                                <input type="text" name="username" id="username" class="form-control">
+                                <div class="invalid-feedback" id="nameMessage">
 
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
+                    
+                    <div class="form-row">
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="document_type_id">Tipo Documento</label>
@@ -74,7 +79,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="form-row">
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="phone">Telefono</label>
@@ -95,7 +100,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="form-row">
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="group_id">Grupo</label>
@@ -110,7 +115,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="form-row">
                         <div class="col">
                             <div class="form-group">
                                 <label for="photo">Fotografia</label>

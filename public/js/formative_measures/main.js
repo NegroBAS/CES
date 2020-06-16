@@ -6,13 +6,13 @@ const app = {
         let res = await resp.json();
         let formative_measures = res.formative_measures;
         let html = '';
-        formative_measures.forEach(formative_measures => {
+        formative_measures.forEach(formative_measure => {
             html += `
             <div class="col-3 mb-2">
-                <div class="card" data-id="${formative_measures.id}">
+                <div class="card" data-id="${formative_measure.id}">
                     <div class="card-header bg-primary"></div>
                     <div class="card-body text-center">
-                        <h5>${formative_measures.name}</h5>
+                        <h5>${formative_measure.name}</h5>
                         <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
                         <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
                     </div>
@@ -31,7 +31,7 @@ const app = {
                 $('.modal #form').trigger('reset');
                 $('.modal').modal('toggle');
                 $('.modal').find('.modal-title').text('Editar medida formativa');
-                document.getElementById('name').value = data.measure.name
+                document.getElementById('name').value = data.formative_measure.name
             }
         } catch (error) {
             console.log(error);

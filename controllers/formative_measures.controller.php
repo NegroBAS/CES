@@ -13,13 +13,13 @@ class Formative_measuresController extends Controller{
         $this->view->scripts = [
             '/js/formative_measures/main.js',
             '/js/sweetalert.js'];
-        $this->formative = $this->loadModel('FormativeMeasure');
+        $this->formative_measure = $this->loadModel('FormativeMeasure');
     }
 
     public function index()
     {
-        $res = $this->formative->all();
-        echo json_encode(['formative_measures' => $res]);
+        $formative_measures = $this->formative_measure->all();
+        echo json_encode($formative_measures);
         return;
 
     }
@@ -30,7 +30,7 @@ class Formative_measuresController extends Controller{
         $name = $_POST['name'];
         $created_at =date("Y,m,d,g,i,s");
         $updated_at=date("Y,m,d,g,i,s");
-        $res = $this->formative->create([
+        $res = $this->formative_measure->create([
             'name' => $name,
             'created_at' => $created_at,
             'updated_at' => $updated_at
@@ -43,8 +43,8 @@ class Formative_measuresController extends Controller{
     public function show($param = null)
     {
         $id = $param[0];
-        $res= $this->formative->find($id);
-        echo json_encode($res);
+        $formative_measure= $this->formative_measure->find($id);
+        echo json_encode($formative_measure);
         
     }
 
@@ -54,7 +54,7 @@ class Formative_measuresController extends Controller{
         $id = $param[0];
         $name = $_POST['name'];
         $updated_at= date("Y,m,d,g,i,s");
-        $res = $this->formative->update([
+        $res = $this->formative_measure->update([
             'id' => $id,
             'name' => $name,
             'updated_at' => $updated_at
@@ -66,7 +66,7 @@ class Formative_measuresController extends Controller{
     public function destroy($param= null)
     {
         $id = $param[0];
-        $res = $this->formative->delete($id);
+        $res = $this->formative_measure->delete($id);
         echo json_encode($res);
         
     }

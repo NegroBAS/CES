@@ -14,23 +14,24 @@ class Learner_noveltiesController extends Controller{
             '/js/learner_novelties/main.js',
             '/js/sweetalert.js'
         ];
-        $this->request = $this->loadModel('LearnerNovelty');
-        $this->committees = $this->loadModel('Committee');
-        $this->learners = $this->loadModel('Learner');
-        $this->novelty_types = $this->loadModel('NoveltyType');
+        $this->learner_novelty = $this->loadModel('LearnerNovelty');
+        $this->committee = $this->loadModel('Committee');
+        $this->learner = $this->loadModel('Learner');
+        $this->novelty_type = $this->loadModel('NoveltyType');
     }
 
     public function index()
     {
-        $res = $this->request->all();
-        $res1 = $this->committees->all();
-        $res2 = $this->learners->all();
-        $res3 = $this->novelty_types->all();
+        $learner_novelties = $this->learner_novelty->all();
+        $committees = $this->committee->all();
+        $learners = $this->learner->all();
+        $novelty_types = $this->novelty_type->all();
         echo json_encode([
-            'learner_novelties' => $res,
-            'committees' => $res1,
-            'learners' => $res2,
-            'novelty_types' => $res3
+            $learner_novelties,
+            $committees,
+            $learners,
+            $novelty_types
+
             ]);
         return;
 
@@ -46,7 +47,7 @@ class Learner_noveltiesController extends Controller{
         $reply_date = $_POST['reply_date'];
         $created_at =date("Y,m,d,g,i,s");
         $updated_at=date("Y,m,d,g,i,s");
-        $res = $this->request->create([
+        $res = $this->learner_novelty->create([
             'learner_id' => $learner_id,
             'committee_id' => $committee_id,
             'novelty_type_id' => $novelty_type_id,
@@ -63,8 +64,8 @@ class Learner_noveltiesController extends Controller{
     public function show($param= null)
     {
         $id = $param[0];
-        $res= $this->request->find($id);
-        echo json_encode($res);
+        $learner_novelty= $this->learner_novelty->find($id);
+        echo json_encode($learner_novelty);
         
     }
 
@@ -78,7 +79,7 @@ class Learner_noveltiesController extends Controller{
         $justification = $_POST['justification'];
         $reply_date = $_POST['reply_date'];
         $updated_at= date("Y,m,d,g,i,s");
-        $res = $this->request->update([
+        $res = $this->learner_novelty->update([
             'id' => $id,
             'learner_id' => $learner_id,
             'committee_id' => $committee_id,
@@ -94,7 +95,7 @@ class Learner_noveltiesController extends Controller{
     public function destroy($param = null)
     {
         $id = $param[0];
-        $res = $this->request->delete($id);
+        $res = $this->learner_novelty->delete($id);
         echo json_encode($res);
         
     }

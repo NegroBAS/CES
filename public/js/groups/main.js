@@ -21,9 +21,9 @@ const app = {
         });
         document.getElementById('data-groups').innerHTML = html;
          html = '';
-        data[2].formation_programs.forEach(formation_programs => {
+        data[2].formation_programs.forEach(formation_program => {
             html += `
-            <option value="${formation_programs.id}">${formation_programs.name}</option>
+            <option value="${formation_program.id}">${formation_program.name}</option>
              `
         });
         document.getElementById('formation_program_id').innerHTML = html;
@@ -49,13 +49,13 @@ const app = {
                 $('.modal #form').trigger('reset');
                 $('.modal').modal('toggle');
                 $('.modal').find('.modal-title').text('Editar grupo');
-                document.getElementById('code_tab').value = data.groups.code_tab;
-                document.getElementById('quantity_learners').value = data.groups.quantity_learners;
-                document.getElementById('active_learners').value = data.groups.active_learners;
-                document.getElementById('elective_start_date').value = data.groups.elective_start_date;
-                document.getElementById('elective_end_date').value = data.groups.elective_end_date;
-                document.getElementById('practice_start_date').value = data.groups.practice_start_date;
-                document.getElementById('practice_end_date').value = data.groups.practice_end_date;
+                document.getElementById('code_tab').value = data.group.code_tab;
+                document.getElementById('quantity_learners').value = data.group.quantity_learners;
+                document.getElementById('active_learners').value = data.group.active_learners;
+                document.getElementById('elective_start_date').value = data.group.elective_start_date;
+                document.getElementById('elective_end_date').value = data.group.elective_end_date;
+                document.getElementById('practice_start_date').value = data.group.practice_start_date;
+                document.getElementById('practice_end_date').value = data.group.practice_end_date;
             }
         } catch (error) {
             console.log(error);

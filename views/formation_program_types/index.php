@@ -33,33 +33,42 @@
       <div class="modal-body">
                 
                         <form action="" method="post" id="form">
-                            <div class="form-group">
-                                <label for="name">Nombre</label>
-                                <input type="text" name="name" id="name" class="form-control">
-                                <div class="invalid-feedback"  id="nameMessage" >
-                                                    
+
+                          <div class="form-row">
+                            <div class="col">
+                                <div class="form-group">
+                                        <label for="name">Nombre</label>
+                                        <input type="text" name="name" id="name" class="form-control">
+                                        <div class="invalid-feedback"  id="nameMessage" >
+                                        </div>               
                                 </div> 
-                                <div class="row">
-                                  
+                            </div>
+                          </div>
+
+                          <div class="form-row">
                                   <div class="col">
-                                    <label for="name">Meses lectivos </label>
-                                    <input type="number" name="elective_months" id="elective_months" class="form-control">
-                                    <div class="invalid-feedback"  id="electiveMessage" >
-                                                    
-                                </div> 
-                                  
+                                        <div class="form-group">
+                                            <label for="name">Meses lectivos </label>
+                                                <input type="number" name="elective_months" id="elective_months" class="form-control">
+                                                <div class="invalid-feedback"  id="electiveMessage" >
+                                                                
+                                                </div> 
+                                       </div>                                 
                                   </div>
                                   <div class="col">
-                                    <label for="name">Meses practicos</label>
-                                    <input type="number" name="practice_months" id="practice_months" class="form-control">
-                                    <div class="invalid-feedback"  id="practiceMessage" >
-                                                    
-                                </div> 
+                                      <div class="form-group">
+                                            <label for="name">Meses practicos</label>
+                                            <input type="number" name="practice_months" id="practice_months" class="form-control">
+                                            <div class="invalid-feedback"  id="practiceMessage" >
+                                                            
+                                            </div> 
+
+                                      </div>                                     
                                   </div>
-                                </div>
+                          </div>
                                
                              
-                            </div>
+                            
                         </form>
         </div>
         <div class="modal-footer">

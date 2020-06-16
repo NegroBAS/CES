@@ -33,7 +33,7 @@ const app = {
               $('.modal #form').trigger('reset');
               $('.modal').modal('toggle');
               $('.modal').find('.modal-title').text('Editar tipo secion comite');
-              document.getElementById('name').value = data.commite.name
+              document.getElementById('name').value = data.committee_session_type.name
           }
       } catch (error) {
           console.log(error);

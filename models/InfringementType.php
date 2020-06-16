@@ -14,17 +14,20 @@ class InfringementType extends Model{
     public function all()
     {
         try {
-            $infringements = [];
+            $infringement_types = [];
             $query = $this->db->connect()->query('SELECT * FROM infringement_types');
             while ($row = $query->fetch()) {
-                $infringement = new InfringementType();
-                $infringement->id = $row['id'];
-                $infringement->name = $row['name'];
-                $infringement->created_at = $row['created_at'];
-                $infringement->updated_at = $row['updated_at'];
-                array_push($infringements, $infringement);
+                $infringement_type = new InfringementType();
+                $infringement_type->id = $row['id'];
+                $infringement_type->name = $row['name'];
+                $infringement_type->created_at = $row['created_at'];
+                $infringement_type->updated_at = $row['updated_at'];
+                array_push($infringement_types, $infringement_type);
             }
-            return $infringements;
+            return [
+                'infringement_types' => $infringement_types,
+                'status' => 200
+            ];
 
         } catch (PDOException $e) {
             return [
@@ -37,21 +40,21 @@ class InfringementType extends Model{
     public function find($id)
     {
         try {
-            $type = [];
+            $infringement_type = [];
             $query = $this->db->connect()->prepare('SELECT * FROM infringement_types WHERE id=:id');
             $query->bindParam('id', $id);
             $query->execute();
 
             while ($row = $query->fetch()) {
-                $type = new InfringementType();
-                $type->id = $row['id'];
-                $type->name = $row['name'];
-                $type->created_at = $row['created_at'];
-                $type->updated_at = $row['updated_at'];
+                $infringement_type = new InfringementType();
+                $infringement_type->id = $row['id'];
+                $infringement_type->name = $row['name'];
+                $infringement_type->created_at = $row['created_at'];
+                $infringement_type->updated_at = $row['updated_at'];
             }
 
             return [
-                'type' => $type,
+                'infringement_type' => $infringement_type,
                 'status' =>200
             ];
 

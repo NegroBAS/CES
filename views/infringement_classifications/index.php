@@ -32,13 +32,18 @@
       </div>
       <div class="modal-body">
                         <form action="" method="post" id="form">
-                            <div class="form-group">
-                                <label for="name">Nombre</label>
-                                <input type="text" name="name" id="name" class="form-control">
-                                <div class="invalid-feedback"  id="nameMessage" >
-                                                    
-                                  </div> 
-                        </div>
+                          <div class="form-row">
+                            <div class="col">
+                                  <div class="form-group">
+                                      <label for="name">Nombre</label>
+                                      <input type="text" name="name" id="name" class="form-control">
+                                      <div class="invalid-feedback"  id="nameMessage" >
+                                                          
+                                        </div> 
+                                </div>
+                            </div>
+                          </div>
+                            
                         </form>
         <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

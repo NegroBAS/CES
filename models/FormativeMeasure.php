@@ -14,17 +14,20 @@ class FormativeMeasure extends Model{
     public function all()
     {
         try {
-            $formatives = [];
+            $formative_measures = [];
             $query = $this->db->connect()->query('SELECT * FROM formative_measures');
             while ($row = $query->fetch()) {
-                $formative = new FormativeMeasure();
-                $formative->id = $row['id'];
-                $formative->name = $row['name'];
-                $formative->created_at = $row['created_at'];
-                $formative->updated_at = $row['updated_at'];
-                array_push($formatives, $formative);
+                $formative_measure = new FormativeMeasure();
+                $formative_measure->id = $row['id'];
+                $formative_measure->name = $row['name'];
+                $formative_measure->created_at = $row['created_at'];
+                $formative_measure->updated_at = $row['updated_at'];
+                array_push($formative_measures, $formative_measure);
             }
-            return $formatives;
+            return [
+                'formative_measures' => $formative_measures,
+                'status'=> 200
+            ];
 
         } catch (PDOException $e) {
             return [
@@ -37,21 +40,21 @@ class FormativeMeasure extends Model{
     public function find($id)
     {
         try {
-            $contract = [];
+            $formative_measure = [];
             $query = $this->db->connect()->prepare('SELECT * FROM formative_measures WHERE id=:id');
             $query->bindParam('id', $id);
             $query->execute();
 
             while ($row = $query->fetch()) {
-                $contract = new FormativeMeasure();
-                $contract->id = $row['id'];
-                $contract->name = $row['name'];
-                $contract->created_at = $row['created_at'];
-                $contract->updated_at = $row['updated_at'];
+                $formative_measure = new FormativeMeasure();
+                $formative_measure->id = $row['id'];
+                $formative_measure->name = $row['name'];
+                $formative_measure->created_at = $row['created_at'];
+                $formative_measure->updated_at = $row['updated_at'];
             }
 
             return [
-                'measure'=>$contract,
+                'formative_measure'=>$formative_measure,
                 'status' => 200
             ];
         } catch (PDOException $e) {

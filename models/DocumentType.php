@@ -39,22 +39,22 @@ class DocumentType extends Model{
     public function find($id)
     {
         try {
-            $contract=[];
+            $document_type=[];
             $query = $this->db->connect()->prepare('SELECT * FROM document_types WHERE id=:id');
             $query->bindParam('id',$id);
             $query->execute();
 
             while ($row = $query->fetch()) {
-                $contract = new DocumentType();
-                $contract->id = $row['id'];
-                $contract->name = $row['name'];
-                $contract->created_at = $row['created_at'];
-                $contract->updated_at = $row['updated_at'];
+                $document_type = new DocumentType();
+                $document_type->id = $row['id'];
+                $document_type->name = $row['name'];
+                $document_type->created_at = $row['created_at'];
+                $document_type->updated_at = $row['updated_at'];
                 
             }
               
             return [
-                'document_types' => $contract,
+                'document_type' => $document_type,
                 'status' =>200
             ];
 

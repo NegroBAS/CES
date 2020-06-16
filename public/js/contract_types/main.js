@@ -80,12 +80,12 @@ const app = {
         try {
             let res = await fetch(`${this.url}contract_types/show/${id}`);
             let data = await res.json();
-            console.log(data.contract_types);
+            console.log(data);
             if(data.status===200){
                 $('.modal #form').trigger('reset');
                 $('.modal').modal('toggle');
                 $('.modal').find('.modal-title').text('Editar tipo de contrato');
-                document.getElementById('name').value = data.contract_types.name
+                document.getElementById('name').value = data.contract_type.name
 
             }
         } catch (error) {

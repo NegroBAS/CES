@@ -6,13 +6,13 @@ const app = {
         let res = await resp.json();
         let infringement_types = res.infringement_types;
         let html = '';
-        infringement_types.forEach(infringement_types => {
+        infringement_types.forEach(infringement_type => {
             html += `
             <div class="col-3 mb-2">
-                <div class="card" data-id="${infringement_types.id}">
+                <div class="card" data-id="${infringement_type.id}">
                     <div class="card-header bg-primary"></div>
                     <div class="card-body text-center">
-                        <h5>${infringement_types.name}</h5>
+                        <h5>${infringement_type.name}</h5>
                         <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
                         <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
                     </div>
@@ -31,7 +31,7 @@ const app = {
                 $('.modal #form').trigger('reset');
                 $('.modal').modal('toggle');
                 $('.modal').find('.modal-title').text('Editar falta');
-                document.getElementById('name').value = data.type.name
+                document.getElementById('name').value = data.infringement_type.name
             }
         } catch (error) {
             console.log(error);

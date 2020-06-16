@@ -86,7 +86,7 @@ class Group extends Model{
             }
               
             return [
-                'groups' => $group,
+                'group' => $group,
                 'status' => 200
             ];
 

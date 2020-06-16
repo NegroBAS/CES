@@ -84,7 +84,7 @@ class FormativeMeasureResponsible extends Model{
             }
             return [
                 'status' => 200,
-                'responsible' => $formative_measure_responsible
+                'formative_measure_responsible' => $formative_measure_responsible
             ];
 
         } catch (PDOException $e) {

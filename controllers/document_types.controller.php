@@ -15,16 +15,14 @@ class Document_typesController extends Controller{
             '/js/sweetalert.js'
         ];
 
-        $this->document = $this->loadModel('DocumentType');
+        $this->document_type = $this->loadModel('DocumentType');
 
     }
 
     public function index()
     {
-        $response = $this->document->all();
-        echo json_encode([
-            'document_types'=>$response
-        ]);
+        $document_types = $this->document_type->all();
+        echo json_encode($document_types);
         return;
 
     }
@@ -36,7 +34,7 @@ class Document_typesController extends Controller{
         $name = $_POST['name'];
         $created_at =date("Y,m,d,g,i,s");
         $updated_at=date("Y,m,d,g,i,s");
-        $response = $this->document->create([
+        $response = $this->document_type->create([
             'name' => $name,
             'created_at' => $created_at,
             'updated_at' => $updated_at
@@ -48,8 +46,8 @@ class Document_typesController extends Controller{
     public function show($param  = null)
     {
         $id = $param[0] ;
-        $response = $this->document->find($id);
-        echo json_encode($response);
+        $document_type = $this->document_type->find($id);
+        echo json_encode($document_type);
         
     }
 
@@ -59,7 +57,7 @@ class Document_typesController extends Controller{
         $id = $param[0];
         $name = $_POST['name'];
         $updated_at= date("Y,m,d,g,i,s");
-        $response = $this->document->update([
+        $response = $this->document_type->update([
             'id' => $id,
             'name' => $name,
             'updated_at' => $updated_at
@@ -71,7 +69,7 @@ class Document_typesController extends Controller{
     public function destroy($param  = null)
     {
         $id = $param[0];
-        $response = $this->document->Delete($id);
+        $response = $this->document_type->Delete($id);
         echo json_encode($response);
         
     }

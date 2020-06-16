@@ -7,15 +7,15 @@ const app = {
         
         let formation_program_types = res.formation_program_types;
         let html = '';
-        formation_program_types.forEach(formation_program_types => {
+        formation_program_types.forEach(formation_program_type => {
             html += `
             <div class="col-3 mb-2">
-                    <div class="card" data-id="${formation_program_types.id}">
+                    <div class="card" data-id="${formation_program_type.id}">
                         <div class="card-header bg-primary"></div>
                         <div class="card-body text-center">
-                            <h3>${formation_program_types.name}</h3>
-                            <p>Meses Lectivos ${formation_program_types.elective_months} <br>
-                             Meses Practicos  ${formation_program_types.practice_months}</p>
+                            <h3>${formation_program_type.name}</h3>
+                            <p>Meses Lectivos ${formation_program_type.elective_months} <br>
+                             Meses Practicos  ${formation_program_type.practice_months}</p>
                              <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
                              <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>                 
                         </div>

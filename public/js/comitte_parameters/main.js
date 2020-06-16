@@ -5,25 +5,26 @@ const app = {
             let resp = await fetch(`${this.url}committee_parameters/index`);
             let res = await resp.json();
             console.log(res);
-            let comitte_session_states = res.comitte_session_states;
+            console.log(resp);
+            let comitte_session_states = res[1].comitte_session_states;
             let html = '';
         
-            comitte_session_states.forEach(comitte_session_states => {
+            comitte_session_states.forEach(comitte_session_state => {
                 html += `
-                         <option value="${comitte_session_states.id}">${comitte_session_states.name}</option>
+                         <option value="${comitte_session_state.id}">${comitte_session_state.name}</option>
                          `
             });
             document.getElementById('comitte_session_state_id').innerHTML = html;
 
-            let comitte_parameters = res.comitte_parameters;
+            let comitte_parameters = res[0].comitte_parameters;
              html = '';
              
-            comitte_parameters.forEach(comitte_parameters => {
+            comitte_parameters.forEach(comitte_parameter => {
                 html += `
-                        <tr data-id="${comitte_parameters.id}">
-                        <td>${comitte_parameters.name}</td>
-                        <td>${comitte_parameters.content}</td>
-                        <td>${comitte_parameters.name_state}</td>
+                        <tr data-id="${comitte_parameter.id}">
+                        <td>${comitte_parameter.name}</td>
+                        <td>${comitte_parameter.content}</td>
+                        <td>${comitte_parameter.name_state}</td>
                         <td>
 
                         <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
@@ -45,8 +46,8 @@ const app = {
                     $('.modal #form').trigger('reset');
                     $('.modal').modal('toggle');
                     $('.modal').find('.modal-title').text('Editar parametro de comite');
-                    document.getElementById('name').value = data.parameters.name
-                    document.getElementById('content').value = data.parameters.content
+                    document.getElementById('name').value = data.comitte_parameter.name
+                    document.getElementById('content').value = data.comitte_parameter.content
                 }
             } catch (error) {
                 console.log(error);

@@ -4,17 +4,17 @@ const app = {
     get: async function () {
         let resp = await fetch(`${this.url}learner_novelties/index`);
         let res = await resp.json();
-        let learner_novelties = res.learner_novelties;
+        let learner_novelties = res[0].learner_novelties;
         let html = '';
         console.log(res);
-        learner_novelties.forEach(learner_novelties => {
+        learner_novelties.forEach(learner_novelty => {
             html += `
-            <tr data-id="${learner_novelties.id}">
-                <td>${learner_novelties.learners_name}</td>
-                <td>${learner_novelties.committees_number}</td>
-                <td>${learner_novelties.novelty_name}</td>
-                <td>${learner_novelties.justification}</td>
-                <td>${learner_novelties.reply_date}</td>
+            <tr data-id="${learner_novelty.id}">
+                <td>${learner_novelty.learners_name}</td>
+                <td>${learner_novelty.committees_number}</td>
+                <td>${learner_novelty.novelty_name}</td>
+                <td>${learner_novelty.justification}</td>
+                <td>${learner_novelty.reply_date}</td>
                 <td>
                 <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
                 <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
@@ -24,29 +24,29 @@ const app = {
         });
         document.getElementById('data-learner_novelties').innerHTML = html;
 
-        let committees = res.committees.committees;
+        let committees = res[1].committees;
          html = '';
-         committees.forEach(committees => {
+         committees.forEach(committee => {
             html +=  `
-             <option value="${committees.id}">${committees.record_number}</option>
+             <option value="${committee.id}">${committee.record_number}</option>
              `
         });
         document.getElementById('committee_id').innerHTML = html;
 
-        let learners = res.learners.learners;
+        let learners = res[2].learners;
          html = '';
-        learners.forEach(learners => {
+        learners.forEach(learner => {
             html +=  `
-             <option value="${learners.id}">${learners.username}</option>
+             <option value="${learner.id}">${learner.username}</option>
              `
         });
         document.getElementById('learner_id').innerHTML = html;
 
-        let novelty_types = res.novelty_types.novelty_types;
+        let novelty_types = res[3].novelty_types;
          html = '';
-        novelty_types.forEach(novelty_types => {
+        novelty_types.forEach(novelty_type => {
             html +=  `
-             <option value="${novelty_types.id}">${novelty_types.name}</option>
+             <option value="${novelty_type.id}">${novelty_type.name}</option>
              `
         });
         document.getElementById('novelty_type_id').innerHTML = html;
@@ -60,11 +60,11 @@ const app = {
                 $('.modal #form').trigger('reset');
                 $('.modal').modal('toggle');
                 $('.modal').find('.modal-title').text('Editar novedad');
-                document.getElementById('learner_id').value = data.novelty.learner_id;
-                document.getElementById('committee_id').value = data.novelty.committee_id;
-                document.getElementById('novelty_type_id').value = data.novelty.novelty_type_id;
-                document.getElementById('justification').value = data.novelty.justification;
-                document.getElementById('reply_date').value = data.novelty.reply_date;
+                document.getElementById('learner_id').value = data.learner_novelty.learner_id;
+                document.getElementById('committee_id').value = data.learner_novelty.committee_id;
+                document.getElementById('novelty_type_id').value = data.learner_novelty.novelty_type_id;
+                document.getElementById('justification').value = data.learner_novelty.justification;
+                document.getElementById('reply_date').value = data.learner_novelty.reply_date;
             }
         } catch (error) {
             console.log(error);

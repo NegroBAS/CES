@@ -19,12 +19,12 @@ class Modality extends Model
             $modalities = [];
             $query = $this->db->connect()->query('SELECT * FROM modalities');
             while ($row = $query->fetch()) {
-                $modalitie = new Modality();
-                $modalitie->id = $row['id'];
-                $modalitie->name = $row['name'];
-                $modalitie->created_at = $row['created_at'];
-                $modalitie->updated_at = $row['updated_at'];
-                array_push($modalities, $modalitie);
+                $modality = new Modality();
+                $modality->id = $row['id'];
+                $modality->name = $row['name'];
+                $modality->created_at = $row['created_at'];
+                $modality->updated_at = $row['updated_at'];
+                array_push($modalities, $modality);
             }
             return [
                 'status' => 200,
@@ -41,21 +41,21 @@ class Modality extends Model
     public function find($id)
     {
         try {
-            $modalitie = [];
+            $modality = [];
             $query = $this->db->connect()->prepare('SELECT * FROM modalities WHERE id=:id');
             $query->bindParam('id', $id);
             $query->execute();
 
             while ($row = $query->fetch()) {
-                $modalitie = new Modality();
-                $modalitie->id = $row['id'];
-                $modalitie->name = $row['name'];
-                $modalitie->created_at = $row['created_at'];
-                $modalitie->updated_at = $row['updated_at'];
+                $modality = new Modality();
+                $modality->id = $row['id'];
+                $modality->name = $row['name'];
+                $modality->created_at = $row['created_at'];
+                $modality->updated_at = $row['updated_at'];
             }
 
             return [
-                'modalities' => $modalitie,
+                'modality' => $modality,
                 'status' => 200
             ];
         } catch (PDOException $e) {

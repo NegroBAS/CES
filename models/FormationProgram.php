@@ -48,23 +48,23 @@ class FormationProgram extends Model{
     public function find($id)
     {
         try {
-            $program=[];
+            $formation_program=[];
             $query = $this->db->connect()->prepare('SELECT * FROM formation_programs WHERE id=:id');
             $query->bindParam('id',$id);
             $query->execute();
 
             while ($row = $query->fetch()) {
-                $program = new FormationProgram();
-                $program->id = $row['id'];
-                $program->code = $row['code'];
-                $program->name = $row['name'];
-                $program->formation_program_type_id = $row['formation_program_type_id'];
-                $program->created_at = $row['created_at'];
-                $program->updated_at = $row['updated_at'];
+                $formation_program = new FormationProgram();
+                $formation_program->id = $row['id'];
+                $formation_program->code = $row['code'];
+                $formation_program->name = $row['name'];
+                $formation_program->formation_program_type_id = $row['formation_program_type_id'];
+                $formation_program->created_at = $row['created_at'];
+                $formation_program->updated_at = $row['updated_at'];
                 
             }
             return [
-                'formation_programs' => $program,
+                'formation_program' => $formation_program,
                 'status' => 200
                 
             ];

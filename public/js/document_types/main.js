@@ -6,13 +6,13 @@ const app = {
         let res = await resp.json();
         let document_types = res.document_types;
         let html = '';
-        document_types.forEach(document_types => {
+        document_types.forEach(document_type => {
             html += `
             <div class="col-3 mb-2">
-                <div class="card" data-id="${document_types.id}">
+                <div class="card" data-id="${document_type.id}">
                     <div class="card-header bg-primary"></div>
                     <div class="card-body text-center">
-                        <h5>${document_types.name}</h5>
+                        <h5>${document_type.name}</h5>
                         <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
                          <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
                     </div>
@@ -32,7 +32,7 @@ const app = {
                 $('.modal #form').trigger('reset');
                 $('.modal').modal('toggle');
                 $('.modal').find('.modal-title').text('Editar tipo de contrato');
-                document.getElementById('name').value = data.document_types.name
+                document.getElementById('name').value = data.document_type.name
             }
         } catch (error) {
             console.log(error);

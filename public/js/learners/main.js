@@ -5,6 +5,7 @@ const app = {
             let res = await fetch(`${this.url}learners/index`);
             let data = await res.json();
             let html = "";
+            console.log(data);
             data[0].learners.forEach((learner) => {
                 html += `
                 <tr data-id="${learner.id}">

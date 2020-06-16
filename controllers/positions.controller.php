@@ -25,8 +25,8 @@ class PositionsController extends Controller{
 
     public function index()
     {
-        $response = $this->position->all();
-        echo json_encode($response);
+        $positions = $this->position->all();
+        echo json_encode($positions);
         return;
 
 
@@ -60,10 +60,7 @@ class PositionsController extends Controller{
     {
         $id = $param[0];
         $res = $this->position->find($id);
-        echo json_encode([
-            'status'=>200,
-            'positions'=>$res
-            ]);
+        echo json_encode($res);
         
     }
 

@@ -33,21 +33,21 @@ class CommitteeSessionType extends Model{
     public function find($id)
     {
         try {
-            $comitte = [];
+            $committee_session_type = [];
             $query = $this->db->connect()->prepare('SELECT * FROM committee_session_types WHERE id=:id');
             $query->bindParam('id', $id);
             $query->execute();
 
             while ($row = $query->fetch()) {
-                $comitte = new CommitteeSessionType();
-                $comitte->id = $row['id'];
-                $comitte->name = $row['name'];
-                $comitte->created_at = $row['created_at'];
-                $comitte->updated_at = $row['updated_at'];
+                $committee_session_type = new CommitteeSessionType();
+                $committee_session_type->id = $row['id'];
+                $committee_session_type->name = $row['name'];
+                $committee_session_type->created_at = $row['created_at'];
+                $committee_session_type->updated_at = $row['updated_at'];
             }
 
             return [
-                'commite'=>$comitte,
+                'committee_session_type'=>$committee_session_type,
                 'status' => 200
             ];
 

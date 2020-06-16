@@ -18,8 +18,8 @@ class Novelty_typesController extends Controller{
 
     public function index()
     {
-        $response = $this->novelty_type->all();
-        echo json_encode($response);
+        $novelty_types = $this->novelty_type->all();
+        echo json_encode($novelty_types);
     }
 
     public function store()
@@ -32,8 +32,8 @@ class Novelty_typesController extends Controller{
     public function show($param = 0)
     {
         $id = $param[0];
-        $response = $this->novelty_type->find($id);
-        echo json_encode($response);
+        $novelty_type = $this->novelty_type->find($id);
+        echo json_encode($novelty_type);
     }
 
     public function edit($param = null)

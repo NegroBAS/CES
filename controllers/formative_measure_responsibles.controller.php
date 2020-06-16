@@ -14,17 +14,17 @@ class Formative_measure_responsiblesController extends Controller{
 
         $this->view->user = $_SESSION['user'];
         $this->formative_measure_responsible = $this->loadModel('FormativeMeasureResponsible');
-        $this->ContractType = $this->loadModel('ContractType');
-        $this->DocumentType = $this->loadModel('DocumentType');
-        $this->Position = $this->loadModel('Position');
+        $this->contract_type = $this->loadModel('ContractType');
+        $this->document_type = $this->loadModel('DocumentType');
+        $this->position = $this->loadModel('Position');
     }
 
     public function index()
     {
         $formative_measure_responsibles = $this->formative_measure_responsible->all();
-        $contract_types = $this->ContractType->all();
-        $document_types = $this->DocumentType->all();
-        $positions = $this->Position->all();
+        $contract_types = $this->contract_type->all();
+        $document_types = $this->document_type->all();
+        $positions = $this->position->all();
         echo json_encode([
             $formative_measure_responsibles,
             $contract_types,

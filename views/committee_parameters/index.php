@@ -49,34 +49,44 @@
       <div class="modal-body">
 
                         <form id="form">
-                                <div class="row">
+                                <div class="form-row">
                                         <div class="col">
-                                                <!-- //nombre// -->
-                                                <label class="font-weight-bold" for="name">Nombre</label>
-                                                <input type="text" class="form-control" id="name" name="name" placeholder="" value="">
-                                                <div class="invalid-feedback" id="nameMessage">
-                                                  
+                                                <div class="form-group">
+                                                                <!-- //nombre// -->
+                                                                <label class="font-weight-bold" for="name">Nombre</label>
+                                                                <input type="text" class="form-control" id="name" name="name" placeholder="" value="">
+                                                                <div class="invalid-feedback" id="nameMessage">
+                                                                
+                                                                </div>
                                                 </div>
+                                                
                                         </div>
                                         <div class="col">
+                                                <div class="form-group">
+                                                        <!-- //Id Sesion comite// -->
+                                                        <label class="font-weight-bold" for="name">Nombre session comite</label>
+                                                        <select  class="form-control" id="comitte_session_state_id" name="comitte_session_state_id" placeholder="" value=""></select>
+                                                        <div class="invalid-feedback" >
+                                                        
+                                                        </div>
 
-                                                <!-- //Id Sesion comite// -->
-                                                <label class="font-weight-bold" for="name">Nombre session comite</label>
-                                                <select  class="form-control" id="comitte_session_state_id" name="comitte_session_state_id" placeholder="" value=""></select>
-                                                <div class="invalid-feedback" >
-                                                    
                                                 </div>
-
                                         </div>
                                 </div>
-                          
-                                <!-- //Contrenido// -->
-                                <label class="font-weight-bold" for="content">Contenido</label>
-                                <textarea  class="form-control" cols="30" rows="8" id="content" name="content" placeholder="" value="" ></textarea>
-                                <div class="invalid-feedback" id="contentMessage">
-                                  
-                                </div>
 
+                                <div class="form-row">
+                                        <div class="col">
+                                                <div class="form-group">
+                                                        <!-- //Contrenido// -->
+                                                        <label class="font-weight-bold" for="content">Contenido</label>
+                                                        <textarea  class="form-control" cols="30" rows="8" id="content" name="content" placeholder="" value="" ></textarea>
+                                                        <div class="invalid-feedback" id="contentMessage">
+                                                        
+                                                        </div>
+
+                                                </div>
+                                        </div>
+                                </div>
                         </form>
 
                 <div class="modal-footer">

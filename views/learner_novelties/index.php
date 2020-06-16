@@ -45,7 +45,7 @@
       </div>
       <div class="modal-body">
                         <form action="" method="post" id="form">
-                        <div class="row">
+                        <div class="form-row">
                                 <div class="col-6">
                                  <div class="form-group">
                                         <label for="learner_id">Aprendiz</label>
@@ -60,7 +60,7 @@
                                 </div>
                         </div>
 
-                        <div class="row">
+                        <div class="form-row">
                                 <div class="col-6">
                                  <div class="form-group">
                                         <label for="novelty_type_id">Novedad</label>
@@ -74,7 +74,7 @@
                                         </div>                                  
                                 </div>
                         </div>
-                        <div class="row">
+                        <div class="form-row">
                                 <div class="col">                                     
                                         <div class="form-group">
                                                 <label for="justification">Justificacion</label>

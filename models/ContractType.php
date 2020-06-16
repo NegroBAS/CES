@@ -37,18 +37,21 @@ class ContractType extends Model{
     public function find($id)
     {
         try {
-            $contract = [];
+            $contract_type = [];
             $query = $this->db->connect()->prepare('SELECT * FROM contract_types WHERE id=:id');
             $query->bindParam('id', $id);
             $query->execute();
 
             while ($row = $query->fetch()) {
-                $contract = new ContractType();
-                $contract->id = $row['id'];
-                $contract->name = $row['name'];
+                $contract_type = new ContractType();
+                $contract_type->id = $row['id'];
+                $contract_type->name = $row['name'];
             }
 
-            return $contract;
+            return [
+               'status' => 200,
+               'contract_type'=> $contract_type
+            ];
 
         } catch (PDOException $e) {
             return [

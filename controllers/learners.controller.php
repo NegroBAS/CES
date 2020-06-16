@@ -14,15 +14,15 @@ class LearnersController extends Controller{
             '/js/learners/main.js'
         ];
         $this->learner = $this->loadModel('Learner');
-        $this->document_types = $this->loadModel('DocumentType');
-        $this->groups = $this->loadModel('Group');
+        $this->document_type = $this->loadModel('DocumentType');
+        $this->group = $this->loadModel('Group');
     }
 
     public function index()
     {
         $leaners = $this->learner->all();
-        $document_types = $this->document_types->all();
-        $groups = $this->groups->all();
+        $document_types = $this->document_type->all();
+        $groups = $this->group->all();
         echo json_encode([
             $leaners,
             $document_types,
