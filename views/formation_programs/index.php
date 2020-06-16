@@ -13,7 +13,7 @@
       </div>
     </div>
   </div>
-  <div class="row" mt-3>
+  <div class="row mt-3">
     <div class="col">
       <table class="table table-striped text-center" id="tabla">
         <thead>
