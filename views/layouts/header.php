@@ -8,9 +8,8 @@
     <title><?php echo $this->title; ?></title>
     <link rel="stylesheet" href="<?php echo constant('URL') ?>public/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo constant('URL') ?>public/css/toastr.min.css">
-
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css"> -->
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.5/css/responsive.bootstrap4.min.css"> -->
     <link href="https://fonts.googleapis.com/css2?family=Questrial&family=Source+Sans+Pro:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
    <?php
     foreach ($this->styles as $style) { ?>

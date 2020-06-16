@@ -13,7 +13,7 @@ class Formation_program_typesController extends Controller{
             '/js/formation_program_types/main.js',
             '/js/sweetalert.js'
         ];
-        $this->formation = $this->loadModel('FormationProgramType');
+        $this->formation_program_type = $this->loadModel('FormationProgramType');
     }
 
     public function index()
@@ -21,8 +21,6 @@ class Formation_program_typesController extends Controller{
         $res = $this->formation->all();
         echo json_encode(['formation_program_types' => $res]);
         return;
-
-
     }
 
     public function store()

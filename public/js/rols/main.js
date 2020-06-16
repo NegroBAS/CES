@@ -53,6 +53,7 @@ const app = {
                 body: new FormData(form)
             });
             let data = await res.json();
+            console.log(data);
             if(data.status===200){
                 $('.modal').modal('toggle');
                 app.get();
