@@ -1,13 +1,15 @@
 <?php
 
-class Modality extends Model{
+class Modality extends Model
+{
 
     public $id;
     public $name;
     public $created_at;
     public $updated_at;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -24,12 +26,14 @@ class Modality extends Model{
                 $modalitie->updated_at = $row['updated_at'];
                 array_push($modalities, $modalitie);
             }
-            return $modalities;
-
+            return [
+                'status' => 200,
+                'modalities' => $modalities
+            ];
         } catch (PDOException $e) {
             return [
-                'status'=>500,
-                'error'=>$e
+                'status' => 500,
+                'error' => $e
             ];
         }
     }
@@ -37,9 +41,9 @@ class Modality extends Model{
     public function find($id)
     {
         try {
-            $modalitie=[];
+            $modalitie = [];
             $query = $this->db->connect()->prepare('SELECT * FROM modalities WHERE id=:id');
-            $query->bindParam('id',$id);
+            $query->bindParam('id', $id);
             $query->execute();
 
             while ($row = $query->fetch()) {
@@ -48,14 +52,12 @@ class Modality extends Model{
                 $modalitie->name = $row['name'];
                 $modalitie->created_at = $row['created_at'];
                 $modalitie->updated_at = $row['updated_at'];
-                
             }
-              
+
             return [
                 'modalities' => $modalitie,
-                'status'=> 200
+                'status' => 200
             ];
-
         } catch (PDOException $e) {
             return [
                 'status' => 500,
@@ -72,17 +74,16 @@ class Modality extends Model{
                 'name' => $data['name'],
                 'created_at' => $data['created_at'],
                 'updated_at' => $data['updated_at']
-            ])){
+            ])) {
                 return [
                     'status' => 200,
                     'message' => 'Nueva Modalidad Creada'
                 ];
-            } 
-
+            }
         } catch (PDOException $e) {
             return [
-                'status'=>500,
-                'error'=>$e
+                'status' => 500,
+                'error' => $e
             ];
         }
     }
@@ -91,21 +92,20 @@ class Modality extends Model{
         try {
             $query = $this->db->connect()->prepare('UPDATE modalities SET name=:name ,updated_at=:updated_at  WHERE id=:id ');
             if ($query->execute([
-                'name' =>$data['name'],
+                'name' => $data['name'],
                 'updated_at' => $data['updated_at'],
                 'id' => $data['id']
-                
-            ])){
+
+            ])) {
                 return [
                     'status' => 200,
                     'message' => 'Modalidad Actualizada '
                 ];
-            } 
-            
+            }
         } catch (PDOException $e) {
             return [
-                'status'=>500,
-                'error'=>$e
+                'status' => 500,
+                'error' => $e
             ];
         }
     }
@@ -115,17 +115,16 @@ class Modality extends Model{
         try {
             $query = $this->db->connect()->prepare('DELETE FROM modalities   WHERE id=:id ');
             if ($query->execute([
-                'id' =>$id
-            ])){
+                'id' => $id
+            ])) {
                 return [
                     'status' => 200,
                     'message' => 'Modalidad Eliminada '
                 ];
-            } 
-            
+            }
         } catch (PDOException $e) {
             return [
-                'status'=>500,
+                'status' => 500,
                 'error' => $e
             ];
         }

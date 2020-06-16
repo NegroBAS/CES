@@ -16,24 +16,27 @@ class FormationProgram extends Model{
     public function all()
     {
         try {
-            $programs = [];
+            $formation_programs = [];
             $query = $this->db->connect()->query('SELECT formation_programs.id,formation_programs.code,formation_programs.name,
             formation_programs.formation_program_type_id,formation_programs.created_at,formation_programs.updated_at,
             formation_program_types.id as id_formation, formation_program_types.name as name_formation FROM formation_programs
             INNER JOIN formation_program_types ON formation_programs.formation_program_type_id = formation_program_types.id');
             while ($row = $query->fetch()) {
-                $program = new FormationProgram();
-                $program->id = $row['id'];
-                $program->code = $row['code'];
-                $program->name = $row['name'];
-                $program->formation_program_type_id = $row['formation_program_type_id'];
-                $program->created_at = $row['created_at'];
-                $program->updated_at = $row['updated_at'];
-                $program->id_formation = $row['id_formation'];
-                $program->name_formation = $row['name_formation'];
-                array_push($programs, $program);
+                $formation_program = new FormationProgram();
+                $formation_program->id = $row['id'];
+                $formation_program->code = $row['code'];
+                $formation_program->name = $row['name'];
+                $formation_program->formation_program_type_id = $row['formation_program_type_id'];
+                $formation_program->created_at = $row['created_at'];
+                $formation_program->updated_at = $row['updated_at'];
+                $formation_program->id_formation = $row['id_formation'];
+                $formation_program->name_formation = $row['name_formation'];
+                array_push($formation_programs, $formation_program);
             }
-            return $programs;
+            return [
+                'status'=>200,
+                'formation_programs'=>$formation_programs
+            ];
         } catch (PDOException $e) {
             return [
                 'status'=>500,

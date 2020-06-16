@@ -21,15 +21,15 @@ class Formative_measure_responsiblesController extends Controller{
 
     public function index()
     {
-        $response = $this->formative_measure_responsible->all();
-        $response1 = $this->ContractType->all();
-        $response2 = $this->DocumentType->all();
-        $response3 = $this->Position->all();
+        $formative_measure_responsibles = $this->formative_measure_responsible->all();
+        $contract_types = $this->ContractType->all();
+        $document_types = $this->DocumentType->all();
+        $positions = $this->Position->all();
         echo json_encode([
-            'formative_measure_responsible'=> $response,
-            'ContractType'=> $response1,
-            'DocumentType'=> $response2,
-            'Position'=> $response3
+            $formative_measure_responsibles,
+            $contract_types,
+            $document_types,
+            $positions
         ]);
         return;
     }

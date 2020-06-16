@@ -14,18 +14,20 @@ class DocumentType extends Model{
     public function all()
     {
         try {
-            $types = [];
+            $document_types = [];
             $query = $this->db->connect()->query('SELECT * FROM document_types');
             while ($row = $query->fetch()) {
-                $type = new DocumentType();
-                $type->id = $row['id'];
-                $type->name = $row['name'];
-                $type->created_at = $row['created_at'];
-                $type->updated_at = $row['updated_at'];
-                array_push($types, $type);
+                $document_type = new DocumentType();
+                $document_type->id = $row['id'];
+                $document_type->name = $row['name'];
+                $document_type->created_at = $row['created_at'];
+                $document_type->updated_at = $row['updated_at'];
+                array_push($document_types, $document_type);
             }
-            return $types;
-
+            return [
+                'status'=>200,
+                'document_types'=>$document_types
+            ];
         } catch (PDOException $e) {
             return [
                 'status'=>500,
