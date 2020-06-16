@@ -9,22 +9,28 @@
                 <div class="row  justify-content-center">
                     <img class="img-fluid" src="<?php echo constant('URL') ?>public/img/imgces.jpg" width="340" height="200">
                 </div>
-                <h5 class="card-title text-center justify-text-center">Comite de Evaluacion y Seguimiento</h5>
+                <h5 class="card-title text-center justify-text-center my-3">Comite de Evaluacion y Seguimiento</h5>
                 <div class="row justify-content-center">
                     <div class="col-10">
-                        <form action="<?php echo constant('URL') ?>signin/login" method="POST">
-                            <label>Correo Electronico </label>
-                            <input class="form-control" type="email" name="email" id="email" placeholder="example@.com">
+                        <form id="form">
+                            <div class="form-group">
+                                <label>Correo Electronico </label>
+                                <input class="form-control" type="email" name="email" id="email" placeholder="example@.com">
+                                <div class="invalid-feedback" id="email-error"></div>
+                            </div>
 
-                            <label>Contraseña</label>
-                            <input class="form-control" type="password" name="password" id="password" placeholder="Contraseña">
+                            <div class="form-group">
+                                <label>Contraseña</label>
+                                <input class="form-control" type="password" name="password" id="password" placeholder="Contraseña">
+                                <div class="invalid-feedback" id="password-error"></div>
+                            </div>
 
                             <div class="row mt-2 ml-2">
                                 <a href="#">Olvide mi contraseña</a>
                             </div>
 
                             <div class="row justify-content-center p-4">
-                                <input type="submit" class="btn btn-primary " value="Iniciar Sesión">
+                                <input id="btnLogin" type="submit" class="btn btn-primary" value="Iniciar Sesión">
                             </div>
                         </form>
                     </div>

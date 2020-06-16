@@ -28,7 +28,6 @@
                     <th>Opciones</th>
                 </thead>
                 <tbody id="data-learners">
-
                 </tbody>
             </table>
         </div>

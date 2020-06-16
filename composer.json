@@ -1,0 +1,7 @@
+{
+    "name": "project/ces",
+    "description": "Committee Project",
+    "require": {
+        "phpoffice/phpword": "^0.17.0"
+    }
+}

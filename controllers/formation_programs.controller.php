@@ -11,7 +11,8 @@ class Formation_programsController extends Controller{
         $this->view->user = $_SESSION['user'];
         $this->view->scripts = [
             '/js/formation_programs/main.js',
-        '/js/sweetalert.js'];
+            '/js/sweetalert.js'
+        ];
         $this->formation_programs = $this->loadModel('FormationProgram');
         $this->formation_program_types = $this->loadModel('FormationProgramType');
     }

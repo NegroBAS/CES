@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white" style="box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075)">
     <div class="container">
-        <a class="navbar-brand" href="#"><?php echo constant('APPNAME'); ?></a>
+        <a class="navbar-brand" href="<?php constant('URL') ?>dashboard"><?php echo constant('APPNAME'); ?></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>

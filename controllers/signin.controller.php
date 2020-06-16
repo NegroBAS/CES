@@ -8,7 +8,7 @@ class SigninController extends Controller
 
         session_start();
         if (isset($_SESSION['user'])) {
-            header('Location:' . constant('URL') . 'rols');
+            header('Location:' . constant('URL') . 'dashboard');
         }
 
         $this->view->scripts = [
@@ -30,7 +30,10 @@ class SigninController extends Controller
                     'email'=>$response['user']->email,
                     'rol_id'=>$response['user']->rol_id
                 ];
-                header('Location:'.constant('URL').'rols');
+                echo json_encode([
+                    'status'=>200,
+                    'message'=>'Logged'
+                ]);
             }else{
                 echo json_encode([
                     'status'=>401,

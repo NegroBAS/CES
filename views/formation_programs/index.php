@@ -3,33 +3,33 @@
 
 <div class="container my-5">
 
-    <div class="row">
-        <div class="col">
-            <h4>Programas de Formacion</h4>
-        </div>
-        <div class="col-2 text-right">
-            <div class="dropdown">
-            <button class="btn btn-success btn-sm text-white"  id="btn-create"><i class="fa fa-plus"></i> Crear</button>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col">
+      <h4>Programas de Formacion</h4>
     </div>
-    <div class="row" mt-3>
-                <div class="col">
-                        <table class="table table-striped text-center" id="tabla">
-                                <thead>
-                                        <tr>
-                                        <th scope="col">Codigo</th>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Nombre Tipo de Programa</th>
-                                        <th scope="col"></th> 
-                                        </tr>
-                                </thead>
-                                <tbody id="data-formation_programs">
-                                       
-                                </tbody>
-                        </table>
-                </div>
-        </div>
+    <div class="col-2 text-right">
+      <div class="dropdown">
+        <button class="btn btn-success btn-sm text-white" id="btn-create"><i class="fa fa-plus"></i> Crear</button>
+      </div>
+    </div>
+  </div>
+  <div class="row" mt-3>
+    <div class="col">
+      <table class="table table-striped text-center" id="tabla">
+        <thead>
+          <tr>
+            <th scope="col">Codigo</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Nombre Tipo de Programa</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody id="data-formation_programs">
+
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -43,35 +43,37 @@
       </div>
 
       <div class="modal-body">
-                        <form action="" method="post" id="form">  
-                            <div class="form-group">
-                                 <div class="row">
-                                         <div class="col">
-                                         <label for="code">Codigo</label>
-                                        <input type="text" name="code" id="code" class="form-control">
-                                        <div class="invalid-feedback"  id="codeMessage" >
-                                                    
-                                        </div>
-                                         </div>
-                                         <div class="col">
-                                         <label for="name">Nombre</label>
-                                        <input type="text" name="name" id="name" class="form-control">
-                                        <div class="invalid-feedback"  id="nameMessage" >
-                                                    
-                                        </div>
-                                         </div>
-                                          
-                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="formation_program_type_id">Nombre tipo de programa</label>
-                                <select  name="formation_program_type_id" id="formation_program_type_id" class="form-control"></select>
-                            </div>
-                        </form>
-        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" form="form" id="btnForm"  class="btn btn-primary"><i class="far fa-save"></i> Guardar</button>
-        </div>          
+        <form action="" method="post" id="form">
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="code">Codigo</label>
+                <input type="text" name="code" id="code" class="form-control">
+                <div class="invalid-feedback" id="codeMessage"></div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="formation_program_type_id">Tipo de programa</label>
+                <select name="formation_program_type_id" id="formation_program_type_id" class="form-control"></select>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" class="form-control" name="name" id="name">
+                <div class="invalid-feedback" id="nameMessage"></div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" form="form" id="btnForm" class="btn btn-primary"><i class="far fa-save"></i> Guardar</button>
+      </div>
 
     </div>
   </div>
