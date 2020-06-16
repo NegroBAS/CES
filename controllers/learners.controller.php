@@ -67,7 +67,6 @@ class LearnersController extends Controller{
 
     public function edit($param = null)
     {
-    date_default_timezone_set("America/Bogota");
         $id = $param[0];
         $username = $_POST['username'];
         $document_type_id = $_POST['document_type_id'];
@@ -76,7 +75,7 @@ class LearnersController extends Controller{
         $email = $_POST['email'];
         $group_id = $_POST['group_id'];
         $birthdate = $_POST['birthdate'];
-        $updated_at=date("Y,m,d,g,i,s");
+        $photo = "vacio";//$_POST['photo'];
         $res = $this->learner->update([
             'id' => $id,
             'username' => $username,
@@ -86,7 +85,7 @@ class LearnersController extends Controller{
             'email' => $email,
             'group_id' => $group_id,
             'birthdate' => $birthdate,
-            'updated_at' => $updated_at
+            'photo' => $photo
         ]);
         echo json_encode($res);
         return;

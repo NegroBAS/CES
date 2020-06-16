@@ -61,7 +61,7 @@ class Learner extends Model{
                 $learner->phone = $row['phone'];
                 $learner->email = $row['email'];
                 $learner->group_id = $row['group_id'];
-                $learner->birthdate = $row['group_id'];
+                $learner->birthdate = $row['birthdate'];
                 $learner->photo = $row['photo'];
             }
             return [

@@ -56,6 +56,9 @@ const app = {
                     data.learner.document;
                 document.getElementById("phone").value = data.learner.phone;
                 document.getElementById("email").value = data.learner.email;
+                document.getElementById("document_type_id").value = data.learner.document_type_id;
+                document.getElementById("group_id").value = data.learner.group_id;
+                document.getElementById("birthdate").value = data.learner.birthdate;
             }
         } catch (error) {
             console.log(error);

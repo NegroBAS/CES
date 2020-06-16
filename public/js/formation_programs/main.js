@@ -42,8 +42,10 @@ const app = {
                     .text("Editar programa de formacion");
                 document.getElementById("name").value =
                     data.formation_programs.name;
-                document.getElementById("code").value =
+                    document.getElementById("code").value =
                     data.formation_programs.code;
+                document.getElementById("formation_program_type_id").value =
+                    data.formation_programs.formation_program_type_id;
             }
         } catch (error) {
             console.log(error);
