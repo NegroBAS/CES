@@ -14,17 +14,17 @@ class Committee_parametersController extends Controller{
             '/js/comitte_parameters/main.js',
             '/js/sweetalert.js'
         ];
-        $this->comitte_parameters = $this->loadModel('CommitteeParameter');
-        $this->comitte_session_states = $this->loadModel('CommitteeSessionState');
+        $this->comitte_parameter = $this->loadModel('CommitteeParameter');
+        $this->comitte_session_state = $this->loadModel('CommitteeSessionState');
     }
 
     public function index()
     {
-    $res1 = $this->comitte_parameters->all();
-    $res2 = $this->comitte_session_states->all();
+    $comitte_parameters = $this->comitte_parameter->all();
+    $comitte_session_states = $this->comitte_session_state->all();
         echo json_encode([
-            'comitte_parameters' => $res1,
-            'comitte_session_states' => $res2
+            $comitte_parameters,
+             $comitte_session_states
         ]);
     return;
 
@@ -39,7 +39,7 @@ class Committee_parametersController extends Controller{
         $created_at =date("Y,m,d,g,i,s");
         $updated_at=date("Y,m,d,g,i,s");
 
-        $res = $this->comitte_parameters->create([
+        $res = $this->comitte_parameter->create([
             'name' => $name,
             'content' => $content,
             'committee_session_state_id'=> $committee_session_state_id,
@@ -54,8 +54,8 @@ class Committee_parametersController extends Controller{
     public function show($param = null)
     {
         $id = $param[0];
-        $res= $this->comitte_parameters->find($id);
-        echo json_encode($res);
+        $comitte_parameter= $this->comitte_parameter->find($id);
+        echo json_encode($comitte_parameter);
         
     }
 
@@ -67,7 +67,7 @@ class Committee_parametersController extends Controller{
         $content=$_POST['content'];
         $committee_session_state_id = $_POST['comitte_session_state_id'];
         $updated_at= date("Y,m,d,g,i,s");
-        $res = $this->comitte_parameters->update([
+        $res = $this->comitte_parameter->update([
                 'id' => $id,
                 'name' => $name,
                 'content' => $content,
@@ -81,7 +81,7 @@ class Committee_parametersController extends Controller{
     public function destroy($param = null)
     {
         $id = $param[0];
-        $res = $this->comitte_parameters->delete($id);
+        $res = $this->comitte_parameter->delete($id);
         echo json_encode($res);
         
     }

@@ -20,8 +20,8 @@ class UsersController extends Controller{
 
     public function index()
     {
-        $response = $this->user->all();
-        echo json_encode($response);
+        $users = $this->user->all();
+        echo json_encode($users);
     }
 
     public function store()
@@ -42,8 +42,8 @@ class UsersController extends Controller{
     public function show($param = null)
     {
         $id = $param[0];
-        $response = $this->user->find($id);
-        echo json_encode($response);
+        $user = $this->user->find($id);
+        echo json_encode($user);
     }
 
     public function findSubdirector()

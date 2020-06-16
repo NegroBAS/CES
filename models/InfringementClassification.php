@@ -14,17 +14,20 @@ class InfringementClassification extends Model{
     public function all()
     {
         try {
-            $infringements = [];
+            $infringement_classifications = [];
             $query = $this->db->connect()->query('SELECT * FROM infringement_classifications');
             while ($row = $query->fetch()) {
-                $infringement = new InfringementClassification();
-                $infringement->id = $row['id'];
-                $infringement->name = $row['name'];
-                $infringement->created_at = $row['created_at'];
-                $infringement->updated_at = $row['updated_at'];
-                array_push($infringements, $infringement);
+                $infringement_classification = new InfringementClassification();
+                $infringement_classification->id = $row['id'];
+                $infringement_classification->name = $row['name'];
+                $infringement_classification->created_at = $row['created_at'];
+                $infringement_classification->updated_at = $row['updated_at'];
+                array_push($infringement_classifications, $infringement_classification);
             }
-            return $infringements;
+            return [
+                'infringement_classifications' => $infringement_classifications,
+                'status' => 200
+            ];
 
         } catch (PDOException $e) {
             return [
@@ -37,22 +40,22 @@ class InfringementClassification extends Model{
     public function find($id)
     {
         try {
-            $infringement=[];
+            $infringement_classification=[];
             $query = $this->db->connect()->prepare('SELECT * FROM infringement_classifications WHERE id=:id');
             $query->bindParam('id',$id);
             $query->execute();
 
             while ($row = $query->fetch()) {
-                $infringement = new InfringementClassification();
-                $infringement->id = $row['id'];
-                $infringement->name = $row['name'];
-                $infringement->created_at = $row['created_at'];
-                $infringement->updated_at = $row['updated_at'];
+                $infringement_classification = new InfringementClassification();
+                $infringement_classification->id = $row['id'];
+                $infringement_classification->name = $row['name'];
+                $infringement_classification->created_at = $row['created_at'];
+                $infringement_classification->updated_at = $row['updated_at'];
                 
             }
               
             return [
-                'infringement'=>$infringement,
+                'infringement_classification'=>$infringement_classification,
                 'status'=>200
             ];
 

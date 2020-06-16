@@ -21,8 +21,8 @@ class RolsController extends Controller{
 
     public function index()
     {
-        $response = $this->rol->all();
-        echo json_encode($response);
+        $rols = $this->rol->all();
+        echo json_encode($rols);
         return;
     }
 
@@ -39,8 +39,8 @@ class RolsController extends Controller{
     public function show($param = null)
     {
         $id = $param[0];
-        $response = $this->rol->find($id);
-        echo json_encode($response);
+        $rols = $this->rol->find($id);
+        echo json_encode($rols);
     }
 
     public function edit($param = null)

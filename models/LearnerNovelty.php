@@ -18,7 +18,7 @@ class LearnerNovelty extends Model{
     public function all()
     {
         try {
-            $requests = [];
+            $learner_novelties = [];
             $query = $this->db->connect()->query('SELECT learner_novelties.id,learner_novelties.learner_id,
             learner_novelties.committee_id,learner_novelties.novelty_type_id,learner_novelties.justification,
             learner_novelties.reply_date,learner_novelties.created_at,learner_novelties.updated_at,learners.id as learners_id,
@@ -28,25 +28,28 @@ class LearnerNovelty extends Model{
             INNER JOIN committees ON learner_novelties.committee_id = committees.id  
             INNER JOIN novelty_types ON learner_novelties.novelty_type_id = novelty_types.id  ');
             while ($row = $query->fetch()) {
-                $request = new LearnerNovelty();
-                $request->id = $row['id'];
-                $request->learner_id = $row['learner_id'];
-                $request->committee_id = $row['committee_id'];
-                $request->novelty_type_id = $row['novelty_type_id'];
-                $request->justification = $row['justification'];
-                $request->reply_date = $row['reply_date'];
-                $request->created_at = $row['created_at'];
-                $request->updated_at = $row['updated_at'];
-                $request->learners_id = $row['learners_id'];
-                $request->learners_name = $row['learners_name'];
-                $request->committees_id = $row['committees_id'];
-                $request->committees_number = $row['committees_number'];
-                $request->novelty_id = $row['novelty_id'];
-                $request->novelty_name = $row['novelty_name'];
+                $learner_novelty = new LearnerNovelty();
+                $learner_novelty->id = $row['id'];
+                $learner_novelty->learner_id = $row['learner_id'];
+                $learner_novelty->committee_id = $row['committee_id'];
+                $learner_novelty->novelty_type_id = $row['novelty_type_id'];
+                $learner_novelty->justification = $row['justification'];
+                $learner_novelty->reply_date = $row['reply_date'];
+                $learner_novelty->created_at = $row['created_at'];
+                $learner_novelty->updated_at = $row['updated_at'];
+                $learner_novelty->learners_id = $row['learners_id'];
+                $learner_novelty->learners_name = $row['learners_name'];
+                $learner_novelty->committees_id = $row['committees_id'];
+                $learner_novelty->committees_number = $row['committees_number'];
+                $learner_novelty->novelty_id = $row['novelty_id'];
+                $learner_novelty->novelty_name = $row['novelty_name'];
 
-                array_push($requests, $request);
+                array_push($learner_novelties, $learner_novelty);
             }
-            return $requests;
+            return [
+                'learner_novelties' => $learner_novelties,
+                'status'=> 200
+            ];
         } catch (PDOException $e) {
             return [
                 'status'=>500,
@@ -58,26 +61,26 @@ class LearnerNovelty extends Model{
     public function find($id)
     {
         try {
-            $request=[];
+            $learner_novelty=[];
             $query = $this->db->connect()->prepare('SELECT * FROM learner_novelties WHERE id=:id');
             $query->bindParam('id',$id);
             $query->execute();
 
             while ($row = $query->fetch()) {
-                $request = new LearnerNovelty();
-                $request->id = $row['id'];
-                $request->learner_id = $row['learner_id'];
-                $request->committee_id = $row['committee_id'];
-                $request->novelty_type_id = $row['novelty_type_id'];
-                $request->justification = $row['justification'];
-                $request->reply_date = $row['reply_date'];
-                $request->created_at = $row['created_at'];
-                $request->updated_at = $row['updated_at'];
+                $learner_novelty = new LearnerNovelty();
+                $learner_novelty->id = $row['id'];
+                $learner_novelty->learner_id = $row['learner_id'];
+                $learner_novelty->committee_id = $row['committee_id'];
+                $learner_novelty->novelty_type_id = $row['novelty_type_id'];
+                $learner_novelty->justification = $row['justification'];
+                $learner_novelty->reply_date = $row['reply_date'];
+                $learner_novelty->created_at = $row['created_at'];
+                $learner_novelty->updated_at = $row['updated_at'];
                 
             }
               
             return [
-                'novelty'=>$request,
+                'learner_novelty'=>$learner_novelty,
                 'status'=>200
 
             ];

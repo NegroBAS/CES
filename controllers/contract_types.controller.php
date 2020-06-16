@@ -14,15 +14,15 @@ class Contract_typesController extends Controller{
             '/js/contract_types/main.js',
             '/js/sweetalert.js'
         ];
-        $this->contract = $this->loadModel('ContractType');
+        $this->contract_type = $this->loadModel('ContractType');
 
     }
 
     public function index()
     {
 
-        $response = $this->contract->all();
-        echo json_encode($response);
+        $contract_types = $this->contract_type->all();
+        echo json_encode($contract_types);
         return;
 
 
@@ -31,7 +31,7 @@ class Contract_typesController extends Controller{
     public function store()
     {
         $name = $_POST['name'];
-        $res = $this->contract->create([
+        $res = $this->contract_type->create([
             'name' => $name
         ]);
         echo json_encode($res);
@@ -41,11 +41,8 @@ class Contract_typesController extends Controller{
     public function show($param = null)
     {
         $id = $param[0];
-        $res = $this->contract->find($id);
-        echo json_encode([
-            'contract_types' => $res,
-            'status' => 200
-            ]);
+        $contract_type = $this->contract_type->find($id);
+        echo json_encode($contract_type );
         
     }
 
@@ -54,7 +51,7 @@ class Contract_typesController extends Controller{
         date_default_timezone_set("America/Bogota");
         $id = $param[0];
         $name = $_POST['name'];
-        $res = $this->contract->update([
+        $res = $this->contract_type->update([
             'id' => $id,
             'name' => $name
         ]);
@@ -65,7 +62,7 @@ class Contract_typesController extends Controller{
     public function destroy($param = null)
     {
         $id = $param[0];
-        $res = $this->contract->Delete($id);
+        $res = $this->contract_type->Delete($id);
         echo json_encode($res);
         
     }

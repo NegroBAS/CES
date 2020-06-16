@@ -14,13 +14,13 @@ class Infringement_typesController extends Controller{
             '/js/infringement_types/main.js',
             '/js/sweetalert.js'
         ];
-        $this->infringement = $this->loadModel('InfringementType');
+        $this->infringement_type = $this->loadModel('InfringementType');
     }
 
     public function index()
     {
-        $res = $this->infringement->all();
-       echo json_encode(['infringement_types' => $res]);
+        $infringement_types = $this->infringement_type->all();
+       echo json_encode($infringement_types);
        return;
 
     }
@@ -31,7 +31,7 @@ class Infringement_typesController extends Controller{
         $name = $_POST['name'];
         $created_at =date("Y,m,d,g,i,s");
         $updated_at=date("Y,m,d,g,i,s");
-        $res = $this->infringement->create([
+        $res = $this->infringement_type->create([
             'name' => $name,
             'created_at' => $created_at,
             'updated_at' => $updated_at
@@ -44,8 +44,8 @@ class Infringement_typesController extends Controller{
     public function show($param = null)
     {
         $id = $param[0];
-        $res= $this->infringement->find($id);
-        echo json_encode($res);     
+        $infringement_type= $this->infringement_type->find($id);
+        echo json_encode($infringement_type);     
         
     }
 
@@ -55,7 +55,7 @@ class Infringement_typesController extends Controller{
         $id = $param[0];
         $name = $_POST['name'];
         $updated_at= date("Y,m,d,g,i,s");
-        $res = $this->infringement->update([
+        $res = $this->infringement_type->update([
             'id' => $id,
             'name' => $name,
             'updated_at' => $updated_at
@@ -67,7 +67,7 @@ class Infringement_typesController extends Controller{
     public function destroy($param = null)
     {
         $id = $param[0];
-        $res = $this->infringement->delete($id);
+        $res = $this->infringement_type->delete($id);
         echo json_encode($res);
         
     }

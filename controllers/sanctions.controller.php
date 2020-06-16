@@ -14,13 +14,13 @@ class SanctionsController extends Controller{
             '/js/sanctions/main.js',
             '/js/sweetalert.js'
          ];
-        $this->sanctions = $this->loadModel('Sanction');
+        $this->sanction = $this->loadModel('Sanction');
     }
 
     public function index()
     {
-        $res = $this->sanctions->all();
-        echo json_encode(['sanctions' => $res]);
+        $sanctions = $this->sanction->all();
+        echo json_encode($sanctions);
         return;
 
     }
@@ -31,7 +31,7 @@ class SanctionsController extends Controller{
         $name = $_POST['name'];
         $created_at =date("Y,m,d,g,i,s");
         $updated_at=date("Y,m,d,g,i,s");
-        $res = $this->sanctions->create([
+        $res = $this->sanction->create([
             'name' => $name,
             'created_at' => $created_at,
             'updated_at' => $updated_at
@@ -44,8 +44,8 @@ class SanctionsController extends Controller{
     public function show($param = null)
     {
         $id =$param[0];
-        $res= $this->sanctions->find($id);
-        echo json_encode($res);
+        $sanction= $this->sanction->find($id);
+        echo json_encode($sanction);
         
     }
 
@@ -55,7 +55,7 @@ class SanctionsController extends Controller{
         $id = $param[0];
         $name = $_POST['name'];
         $updated_at= date("Y,m,d,g,i,s");
-        $res = $this->sanctions->update([
+        $res = $this->sanction->update([
             'id' => $id,
             'name' => $name,
             'updated_at' => $updated_at
@@ -67,7 +67,7 @@ class SanctionsController extends Controller{
     public function destroy($param = null)
     {
         $id = $param[0];
-        $res = $this->sanctions->delete($id);
+        $res = $this->sanction->delete($id);
         echo json_encode($res);
         
     }

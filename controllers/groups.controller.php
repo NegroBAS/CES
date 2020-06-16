@@ -15,16 +15,16 @@ class GroupsController extends Controller
         $this->view->scripts = [
             '/js/groups/main.js'
         ];
-        $this->groups = $this->loadModel('Group');
-        $this->modalities = $this->loadModel('Modality');
-        $this->formation_programs = $this->loadModel('FormationProgram');
+        $this->group = $this->loadModel('Group');
+        $this->modality = $this->loadModel('Modality');
+        $this->formation_program = $this->loadModel('FormationProgram');
     }
 
     public function index()
     {
-        $groups = $this->groups->all();
-        $modalities = $this->modalities->all();
-        $formation_programs = $this->formation_programs->all();
+        $groups = $this->group->all();
+        $modalities = $this->modality->all();
+        $formation_programs = $this->formation_program->all();
         echo json_encode([
             $groups,
             $modalities,
@@ -48,7 +48,7 @@ class GroupsController extends Controller
         $practice_end_date = $_POST['practice_end_date'];
         $created_at = date("Y,m,d,g,i,s");
         $updated_at = date("Y,m,d,g,i,s");
-        $res = $this->groups->create([
+        $res = $this->group->create([
             'code_tab' => $code_tab,
             'modality_id' => $modality_id,
             'formation_program_id' => $formation_program_id,
@@ -70,8 +70,8 @@ class GroupsController extends Controller
     public function show($param = null)
     {
         $id = $param[0];
-        $res = $this->groups->find($id);
-        echo json_encode($res);
+        $group = $this->group->find($id);
+        echo json_encode($group);
     }
 
     public function edit($param = null)
@@ -88,7 +88,7 @@ class GroupsController extends Controller
         $practice_start_date = $_POST['practice_start_date'];
         $practice_end_date = $_POST['practice_end_date'];
         $updated_at = date("Y,m,d,g,i,s");
-        $res = $this->groups->update([
+        $res = $this->group->update([
             'id' => $id,
             'code_tab' => $code_tab,
             'modality_id' => $modality_id,
@@ -108,7 +108,7 @@ class GroupsController extends Controller
     public function destroy($param = null)
     {
         $id = $param[0];
-        $res = $this->groups->Delete($id);
+        $res = $this->group->Delete($id);
         echo json_encode($res);
     }
 

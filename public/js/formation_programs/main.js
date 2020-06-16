@@ -4,22 +4,24 @@ const app = {
     get: async function () {
         let resp = await fetch(`${this.url}formation_programs/index`);
         let res = await resp.json();
+        console.log(res);
 
-        let formation_program_types = res.formation_program_types;
+        let formation_program_types = res[1].formation_program_types;
         let html = "<option value='0'>Seleccione una</option>";
-        formation_program_types.forEach((formation_program_types) => {
-            html += `<option value="${formation_program_types.id}">${formation_program_types.name}</option>`;
+        formation_program_types.forEach((formation_program_type) => {
+            html += `<option value="${formation_program_type.id}">${formation_program_type.name}</option>`;
         });
         document.getElementById("formation_program_type_id").innerHTML = html;
 
-        let formation_programs = res.formation_programs;
+        let formation_programs = res[0].formation_programs;
         html = "";
-        formation_programs.forEach((formation_programs) => {
+        
+        formation_programs.forEach((formation_program) => {
             html += `
-                <tr data-id="${formation_programs.id}">
-                    <td>${formation_programs.code}</td>
-                    <td>${formation_programs.name}</td>
-                    <td>${formation_programs.name_formation}</td>
+                <tr data-id="${formation_program.id}">
+                    <td>${formation_program.code}</td>
+                    <td>${formation_program.name}</td>
+                    <td>${formation_program.name_formation}</td>
                     <td>
                         <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
                         <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
@@ -41,9 +43,11 @@ const app = {
                     .find(".modal-title")
                     .text("Editar programa de formacion");
                 document.getElementById("name").value =
-                    data.formation_programs.name;
-                document.getElementById("code").value =
-                    data.formation_programs.code;
+                    data.formation_program.name;
+                    document.getElementById("code").value =
+                    data.formation_program.code;
+                document.getElementById("formation_program_type_id").value =
+                    data.formation_program.formation_program_type_id;
             }
         } catch (error) {
             console.log(error);

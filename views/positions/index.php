@@ -35,20 +35,32 @@
       </div>
       <div class="modal-body">
         <form id="form">
-          <div class="form-group">
-            <label for="name" class="text-muted">nombre</label>
-            <input type="text" name="name" id="name" class="form-control">
-            <div class="invalid-feedback" id="nameMessage">
+          <div class="form-row">
+            <div class="col">
+                    <div class="form-group">
+                    <label for="name" class="text-muted">nombre</label>
+                      <input type="text" name="name" id="name" class="form-control">
+                  <div class="invalid-feedback" id="nameMessage">
 
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="type" class="text-muted">tipo</label>
-            <input type="text" name="type" id="type" class="form-control">
-            <div class="invalid-feedback" id="typeMessage">
+                  </div>
 
+                  </div>
             </div>
+          
           </div>
+          <div class="form-row">
+                  <div class="col">
+                  <div class="form-group">
+                  <label for="type" class="text-muted">tipo</label>
+                  <input type="text" name="type" id="type" class="form-control">
+                  <div class="invalid-feedback" id="typeMessage">
+
+                  </div>
+                </div>
+              
+                </div>
+          </div>
+          
         </form>
       </div>
       <div class="modal-footer">

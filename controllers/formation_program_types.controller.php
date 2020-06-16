@@ -18,8 +18,8 @@ class Formation_program_typesController extends Controller{
 
     public function index()
     {
-        $res = $this->formation->all();
-        echo json_encode(['formation_program_types' => $res]);
+        $formation_program_types = $this->formation_program_type->all();
+        echo json_encode($formation_program_types);
         return;
     }
 
@@ -31,7 +31,7 @@ class Formation_program_typesController extends Controller{
         $practice_months = $_POST['practice_months'];
         $created_at =date("Y,m,d,g,i,s");
         $updated_at=date("Y,m,d,g,i,s");
-        $res = $this->formation->create([
+        $res = $this->formation_program_type->create([
             'name' => $name,
             'elective_months' => $elective_months,
             'practice_months' => $practice_months,
@@ -46,8 +46,8 @@ class Formation_program_typesController extends Controller{
     public function show($param = null)
     {
         $id = $param[0];
-        $res= $this->formation->find($id);
-        echo json_encode($res);
+        $formation_program_type= $this->formation_program_type->find($id);
+        echo json_encode($formation_program_type);
         
     }
 
@@ -59,7 +59,7 @@ class Formation_program_typesController extends Controller{
         $elective_months = $_POST['elective_months'];
         $practice_months = $_POST['practice_months'];
         $updated_at= date("Y,m,d,g,i,s");
-        $res = $this->formation->update([
+        $res = $this->formation_program_type->update([
             'id' => $id,
             'name' => $name,
             'elective_months' => $elective_months,
@@ -73,7 +73,7 @@ class Formation_program_typesController extends Controller{
     public function destroy($param = null)
     {
         $id = $param[0];
-        $res = $this->formation->delete($id);
+        $res = $this->formation_program_type->delete($id);
         echo json_encode($res);
         
     }

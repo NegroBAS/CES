@@ -18,8 +18,8 @@ class Committee_session_typesController extends Controller{
 
     public function index()
     {
-        $response = $this->committee_session_type->all();
-        echo json_encode($response);
+        $committee_session_types = $this->committee_session_type->all();
+        echo json_encode($committee_session_types);
         return;
     }
 
@@ -39,8 +39,8 @@ class Committee_session_typesController extends Controller{
     public function show($param = null)
     {
         $id = $param[0];
-        $res = $this->committee_session_type->find($id);
-        echo json_encode($res);
+        $committee_session_type = $this->committee_session_type->find($id);
+        echo json_encode($committee_session_type);
         
     }
 

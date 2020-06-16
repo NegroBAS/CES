@@ -14,13 +14,13 @@ class ModalitiesController extends Controller{
             '/js/modalities/main.js',
             '/js/sweetalert.js'
         ];
-        $this->modalities = $this->loadModel('Modality');
+        $this->modality = $this->loadModel('Modality');
     }
 
     public function index()
     {
-        $res = $this->modalities->all();
-        echo json_encode(['modalities' => $res]);
+        $modalities = $this->modality->all();
+        echo json_encode($modalities);
         return;
 
     }
@@ -31,7 +31,7 @@ class ModalitiesController extends Controller{
         $name = $_POST['name'];
         $created_at =date("Y,m,d,g,i,s");
         $updated_at=date("Y,m,d,g,i,s");
-        $res = $this->modalities->create([
+        $res = $this->modality->create([
             'name' => $name,
             'created_at' => $created_at,
             'updated_at' => $updated_at
@@ -43,8 +43,8 @@ class ModalitiesController extends Controller{
     public function show($param = null)
     {
         $id =$param[0];
-        $res= $this->modalities->find($id);
-        echo json_encode($res);
+        $modality= $this->modality->find($id);
+        echo json_encode($modality);
         
     }
 
@@ -54,7 +54,7 @@ class ModalitiesController extends Controller{
         $id = $param[0];
         $name = $_POST['name'];
         $updated_at= date("Y,m,d,g,i,s");
-        $res = $this->modalities->update([
+        $res = $this->modality->update([
             'id' => $id,
             'name' => $name,
             'updated_at' => $updated_at
@@ -66,7 +66,7 @@ class ModalitiesController extends Controller{
     public function destroy($param = null)
     {
         $id = $param[0];
-        $res = $this->modalities->Delete($id);
+        $res = $this->modality->Delete($id);
         // $this->view->message = $res['message'];
        echo json_encode($res);
         

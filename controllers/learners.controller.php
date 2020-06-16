@@ -14,15 +14,15 @@ class LearnersController extends Controller{
             '/js/learners/main.js'
         ];
         $this->learner = $this->loadModel('Learner');
-        $this->document_types = $this->loadModel('DocumentType');
-        $this->groups = $this->loadModel('Group');
+        $this->document_type = $this->loadModel('DocumentType');
+        $this->group = $this->loadModel('Group');
     }
 
     public function index()
     {
         $leaners = $this->learner->all();
-        $document_types = $this->document_types->all();
-        $groups = $this->groups->all();
+        $document_types = $this->document_type->all();
+        $groups = $this->group->all();
         echo json_encode([
             $leaners,
             $document_types,
@@ -66,7 +66,6 @@ class LearnersController extends Controller{
 
     public function edit($param = null)
     {
-    date_default_timezone_set("America/Bogota");
         $id = $param[0];
         $username = $_POST['username'];
         $document_type_id = $_POST['document_type_id'];
@@ -75,7 +74,7 @@ class LearnersController extends Controller{
         $email = $_POST['email'];
         $group_id = $_POST['group_id'];
         $birthdate = $_POST['birthdate'];
-        $updated_at=date("Y,m,d,g,i,s");
+        $photo = "vacio";//$_POST['photo'];
         $res = $this->learner->update([
             'id' => $id,
             'username' => $username,
@@ -85,7 +84,7 @@ class LearnersController extends Controller{
             'email' => $email,
             'group_id' => $group_id,
             'birthdate' => $birthdate,
-            'updated_at' => $updated_at
+            'photo' => $photo
         ]);
         echo json_encode($res);
         return;

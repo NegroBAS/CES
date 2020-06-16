@@ -24,7 +24,10 @@ class Sanction extends Model{
                 $sanction->updated_at = $row['updated_at'];
                 array_push($sanctions, $sanction);
             }
-            return $sanctions;
+            return [
+                'sanctions' => $sanctions,
+                'status' => 200
+            ];
 
         } catch (PDOException $e) {
             return [
@@ -37,22 +40,22 @@ class Sanction extends Model{
     public function find($id)
     {
         try {
-            $sanctions=[];
+            $sanction=[];
             $query = $this->db->connect()->prepare('SELECT * FROM sanctions WHERE id=:id');
             $query->bindParam('id',$id);
             $query->execute();
 
             while ($row = $query->fetch()) {
-                $sanctions = new Sanction();
-                $sanctions->id = $row['id'];
-                $sanctions->name = $row['name'];
-                $sanctions->created_at = $row['created_at'];
-                $sanctions->updated_at = $row['updated_at'];
+                $sanction = new Sanction();
+                $sanction->id = $row['id'];
+                $sanction->name = $row['name'];
+                $sanction->created_at = $row['created_at'];
+                $sanction->updated_at = $row['updated_at'];
                 
             }
               
             return [
-                'sanctions'=>$sanctions,
+                'sanction'=>$sanction,
                 'status' =>200
             ];
         } catch (PDOException $e) {

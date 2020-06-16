@@ -53,8 +53,8 @@
 
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Datos</a>
-                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Mas</a>
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Personal</a>
+                        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Institucional</a>
                     </div>
                 </nav>
 
@@ -62,14 +62,18 @@
                 <div class="tab-content" id="nav-tabContent">
                         <!-- //parte1// -->
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <div class="form-group">
-                        <label for="username">Nombre</label>
-                        <input type="text" name="username" id="username" class="form-control">
-                        <div class="invalid-feedback" id="nameMessage">
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="username">Nombre</label>
+                                        <input type="text" name="username" id="username" class="form-control">
+                                        <div class="invalid-feedback" id="nameMessage">
 
+                                        </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
+                    <div class="form-row">
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="document_type_id">Tipo Documento</label>
@@ -87,26 +91,29 @@
                         </div>
                     </div>
 
-                    <!-- //correos// -->
-                    <div class="row">
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="misena_email">Correo misena</label>
-                                <input type="email" name="misena_email" id="misena_email" class="form-control" placeholder="@example">
-                                <div class="invalid-feedback" id="misena_emailMessage"></div>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="institutional_email">Correo institucinal</label>
-                                <input type="email" name="institutional_email" id="institutional_email" class="form-control" placeholder="@example">
-                                <div class="invalid-feedback" id="institutional_emailMessage"></div>
-                            </div>
-                        </div>
+                    <!-- //fecha y genero// -->
+                    <div class="form-row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                            <label for="birthdate">Fecha Nacimiento</label>
+                                            <input type="date" name="birthdate" id="birthdate" class="form-control">
+                                        </div>
+                                </div>                                    
+                                    <div class="col-6">
+                                            <div class="form-group">
+                                                    <label for="gender">Genero</label>
+                                                    <select name="gender" id="gender" class="form-control">
+                                                        <option value="M">Masculino</option>
+                                                        <option value="F">Femenino</option>
+                                                        <option value="NN">No definido</option>
+                                                    </select>
+                                            </div>
+                                    </div>  
+                        
                     </div>
 
                     <!-- //telefonos// -->
-                    <div class="row">
+                    <div class="form-row">
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="phone">Celular</label>
@@ -132,26 +139,30 @@
                     <!-- //parte2// -->
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
-                         <!-- //cumpleaños y genero // -->
-                            <div class="row">
-                                 <div class="col-6">
+                         <!-- //correos  // -->
+                            <div class="form-row">
+                                    <div class="col-6">
                                     <div class="form-group">
-                                        <label for="type">Tipo</label>
-                                        <input type="text" name="type" id="type" class="form-control"></input>
+                                        <label for="misena_email">Correo misena</label>
+                                        <input type="email" name="misena_email" id="misena_email" class="form-control" placeholder="@example">
+                                        <div class="invalid-feedback" id="misena_emailMessage"></div>
                                     </div>
-                                </div>                              
+                                </div>
                                 <div class="col-6">
-                                <div class="form-group">
-                                        <label for="birthdate">Fecha Nacimiento</label>
-                                        <input type="date" name="birthdate" id="birthdate" class="form-control">
+                                        <div class="form-group">
+                                            <label for="institutional_email">Correo institucional</label>
+                                            <input type="email" name="institutional_email" id="institutional_email" class="form-control" placeholder="@example">
+                                            <div class="invalid-feedback" id="institutional_emailMessage"></div>
+                                        </div>
                                     </div>
-                                </div>
-                                </div>
+                                                              
+                                
+                            </div>
                                 
                             
 
                             <!-- //tipo contrato y cargo// -->
-                            <div class="row">
+                            <div class="form-row">
                                 <div class="col-8">
                                     <div class="form-group">
                                         <label for="contract_type_id">Tipo de contrato</label>
@@ -169,8 +180,8 @@
                                 </div>
                             </div>
 
-                            <!-- //tipo contrato y cargo// -->
-                            <div class="row">                               
+                            <!-- //tipo y cargo// -->
+                            <div class="form-row">                               
                                 <div class="col-8">
                                 <div class="form-group">
                                         <label for="position_id">Cargo</label>
@@ -178,18 +189,15 @@
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                <div class="form-group">
-                                        <label for="gender">Genero</label>
-                                        <select name="gender" id="gender" class="form-control">
-                                            <option value="M">Masculino</option>
-                                            <option value="F">Femenino</option>
-                                            <option value="NN">No definido</option>
-                                        </select>
+                                    <div class="form-group">
+                                        <label for="type">Tipo</label>
+                                        <input type="text" name="type" id="type" class="form-control"></input>
                                     </div>
-                                    </div>                               
+                                </div>                    
+                                                             
                             </div>
 
-                            <div class="row">
+                            <div class="form-row">
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="photo">Fotografia</label>

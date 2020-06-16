@@ -21,19 +21,22 @@ class CommitteeParameter extends Model{
             committee_parameters.updated_at, committee_session_states.id as id_state,committee_session_states.name as name_state FROM committee_parameters INNER JOIN committee_session_states
              ON committee_parameters.committee_session_state_id = committee_session_states.id ');
             while ($row = $query->fetch()) {
-                $parameters = new CommitteeParameter();
-                $parameters->id = $row['id'];
-                $parameters->name = $row['name'];
-                $parameters->content = $row['content'];
-                $parameters->committee_session_state_id = $row['committee_session_state_id'];
-                $parameters->created_at = $row['created_at'];
-                $parameters->updated_at = $row['updated_at'];
-                $parameters->id_state = $row['id_state'];
-                $parameters->name_state = $row['name_state'];
-                array_push($comitte_parameters, $parameters);
+                $comitte_parameter = new CommitteeParameter();
+                $comitte_parameter->id = $row['id'];
+                $comitte_parameter->name = $row['name'];
+                $comitte_parameter->content = $row['content'];
+                $comitte_parameter->committee_session_state_id = $row['committee_session_state_id'];
+                $comitte_parameter->created_at = $row['created_at'];
+                $comitte_parameter->updated_at = $row['updated_at'];
+                $comitte_parameter->id_state = $row['id_state'];
+                $comitte_parameter->name_state = $row['name_state'];
+                array_push($comitte_parameters, $comitte_parameter);
             }
 
-            return $comitte_parameters;
+            return [
+                'comitte_parameters' => $comitte_parameters,
+                'status' => 200
+            ];
 
         } catch (PDOException $e) {
             return [
@@ -46,24 +49,24 @@ class CommitteeParameter extends Model{
     public function find($id)
     {
         try {
-            $parameters=[];
+            $comitte_parameter=[];
             $query = $this->db->connect()->prepare('SELECT * FROM committee_parameters WHERE id=:id');
             $query->bindParam('id',$id);
             $query->execute();
 
             while ($row = $query->fetch()) {
-                $parameters = new CommitteeParameter();
-                $parameters->id = $row['id'];
-                $parameters->name = $row['name'];
-                $parameters->content = $row['content'];
-                $parameters->committee_session_state_id = $row['committee_session_state_id'];
-                $parameters->created_at = $row['created_at'];
-                $parameters->updated_at = $row['updated_at'];
+                $comitte_parameter = new CommitteeParameter();
+                $comitte_parameter->id = $row['id'];
+                $comitte_parameter->name = $row['name'];
+                $comitte_parameter->content = $row['content'];
+                $comitte_parameter->committee_session_state_id = $row['committee_session_state_id'];
+                $comitte_parameter->created_at = $row['created_at'];
+                $comitte_parameter->updated_at = $row['updated_at'];
                 
             }
               
             return [
-                'parameters'=>$parameters,
+                'comitte_parameter'=>$comitte_parameter,
                 'status' => 200
 
             ];

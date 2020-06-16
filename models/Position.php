@@ -54,7 +54,10 @@ class Position extends Model{
                 $position->updated_at = $row['updated_at'];
             }
 
-            return $position;
+            return [
+                'status' => 200,
+                'position' => $position
+            ];
 
         } catch (PDOException $e) {
             return [

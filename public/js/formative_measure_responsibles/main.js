@@ -53,10 +53,11 @@ const app = {
         try {
             let res = await fetch(`${this.url}formative_measure_responsibles/index`);
             let data = await res.json();
-            // if(data.status==200){
-                if(data.formative_measure_responsible.formative_measure_responsibles.length>0){
+            console.log(data);
+            if(data[0].status==200){
+                if(data[0].formative_measure_responsibles.length>0){
                     let html = '';
-                    data.formative_measure_responsible.formative_measure_responsibles.forEach(formative_measure_responsible => {
+                    data[0].formative_measure_responsibles.forEach(formative_measure_responsible => {
                         html+=`
                         <tr data-id="${formative_measure_responsible.id}">
                             <td>${formative_measure_responsible.username}</td>
@@ -72,29 +73,29 @@ const app = {
                     });
                     document.getElementById('data-formative-measure-responsible').innerHTML = html;
                 }
-            // }
+            }
 
              html = '';
-                    data.DocumentType.forEach(DocumentType => {
+                    data[2].document_types.forEach(document_type => {
                         html+=`
-                       <option value="${DocumentType.id}">${DocumentType.name}</option>
+                       <option value="${document_type.id}">${document_type.name}</option>
                         `;
                     });
                     document.getElementById('document_type_id').innerHTML = html;
 
 
             html = '';
-            data.ContractType.contract_types.forEach(ContractType => {
+            data[1].contract_types.forEach(contract_type => {
                 html+=`
-                <option value="${ContractType.id}">${ContractType.name}</option>
+                <option value="${contract_type.id}">${contract_type.name}</option>
                 `;
             });
             document.getElementById('contract_type_id').innerHTML = html;
 
             html = '';
-            data.Position.positions.forEach(positions => {
+            data[3].positions.forEach(position => {
                 html+=`
-                <option value="${positions.id}">${positions.name}</option>
+                <option value="${position.id}">${position.name}</option>
                 `;
             });
             document.getElementById('position_id').innerHTML = html;
@@ -112,20 +113,20 @@ const app = {
                 $('.modal #form').trigger('reset');
                 $('.modal').modal('toggle');
                 $('.modal').find('.modal-title').text('Editar responsable');
-                document.getElementById('username').value = data.responsible.username;
-                document.getElementById('misena_email').value = data.responsible.misena_email;
-                document.getElementById('institutional_email').value = data.responsible.institutional_email;
-                document.getElementById('document_type_id').value = data.responsible.document_type_id;
-                document.getElementById('document').value = data.responsible.document;
-                document.getElementById('birthdate').value = data.responsible.birthdate;
-                document.getElementById('phone').value = data.responsible.phone;
-                document.getElementById('phone_ip').value = data.responsible.phone_ip;
-                document.getElementById('gender').value = data.responsible.gender;
-                document.getElementById('position_id').value = data.responsible.position_id;
-                document.getElementById('contract_type_id').value = data.responsible.contract_type_id;
-                document.getElementById('type').value = data.responsible.type;
-                // document.getElementById('photo').value = data.responsible.photo;
-                document.getElementById('state').value = data.responsible.state;
+                document.getElementById('username').value = data.formative_measure_responsible.username;
+                document.getElementById('misena_email').value = data.formative_measure_responsible.misena_email;
+                document.getElementById('institutional_email').value = data.formative_measure_responsible.institutional_email;
+                document.getElementById('document_type_id').value = data.formative_measure_responsible.document_type_id;
+                document.getElementById('document').value = data.formative_measure_responsible.document;
+                document.getElementById('birthdate').value = data.formative_measure_responsible.birthdate;
+                document.getElementById('phone').value = data.formative_measure_responsible.phone;
+                document.getElementById('phone_ip').value = data.formative_measure_responsible.phone_ip;
+                document.getElementById('gender').value = data.formative_measure_responsible.gender;
+                document.getElementById('position_id').value = data.formative_measure_responsible.position_id;
+                document.getElementById('contract_type_id').value = data.formative_measure_responsible.contract_type_id;
+                document.getElementById('type').value = data.formative_measure_responsible.type;
+                // document.getElementById('photo').value = data.formative_measure_responsible.photo;
+                document.getElementById('state').value = data.formative_measure_responsible.state;
             }
         } catch (error) {
             console.log(error);

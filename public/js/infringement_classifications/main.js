@@ -6,13 +6,13 @@ const app = {
             let res = await resp.json();
             let infringement_classifications = res.infringement_classifications;
             let html = '';
-            infringement_classifications.forEach(infringement_classifications => {
+            infringement_classifications.forEach(infringement_classification => {
                 html += `
                 <div class="col-3 mb-2">
-                    <div class="card" data-id="${infringement_classifications.id}">
+                    <div class="card" data-id="${infringement_classification.id}">
                         <div class="card-header bg-primary"></div>
                         <div class="card-body text-center">
-                            <h5>${infringement_classifications.name}</h5>
+                            <h5>${infringement_classification.name}</h5>
                             <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
                             <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
                         </div>
@@ -31,7 +31,7 @@ const app = {
                     $('.modal #form').trigger('reset');
                     $('.modal').modal('toggle');
                     $('.modal').find('.modal-title').text('Editar clasificacion');
-                    document.getElementById('name').value = data.infringement.name
+                    document.getElementById('name').value = data.infringement_classification.name
                 }
             } catch (error) {
                 console.log(error);

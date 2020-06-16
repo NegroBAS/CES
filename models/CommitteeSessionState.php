@@ -14,17 +14,20 @@ class CommitteeSessionState extends Model{
     public function all()
     {
         try {
-            $states = [];
+            $comitte_session_states = [];
             $query = $this->db->connect()->query('SELECT * FROM committee_session_states');
             while ($row = $query->fetch()) {
-                $state = new CommitteeSessionState();
-                $state->id = $row['id'];
-                $state->name = $row['name'];
-                $state->created_at = $row['created_at'];
-                $state->updated_at = $row['updated_at'];
-                array_push($states, $state);
+                $comitte_session_state = new CommitteeSessionState();
+                $comitte_session_state->id = $row['id'];
+                $comitte_session_state->name = $row['name'];
+                $comitte_session_state->created_at = $row['created_at'];
+                $comitte_session_state->updated_at = $row['updated_at'];
+                array_push($comitte_session_states, $comitte_session_state);
             }
-            return $states;
+            return [
+                'comitte_session_states'=> $comitte_session_states,
+                'status' => 200
+            ];
 
         } catch (PDOException $e) {
             return [

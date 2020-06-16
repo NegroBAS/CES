@@ -84,8 +84,8 @@ const app = {
                 $(".modal #form").trigger("reset");
                 $(".modal").modal("toggle");
                 $(".modal").find(".modal-title").text("Editar Cargo");
-                document.getElementById("name").value = data.positions.name;
-                document.getElementById("type").value = data.positions.type;
+                document.getElementById("name").value = data.position.name;
+                document.getElementById("type").value = data.position.type;
             }
         } catch (error) {
             console.log(error);

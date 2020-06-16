@@ -16,13 +16,13 @@ class Formation_programsController extends Controller
             '/js/sweetalert.js'
         ];
         $this->formation_program = $this->loadModel('FormationProgram');
-        $this->formation_program_types = $this->loadModel('FormationProgramType');
+        $this->formation_program_type = $this->loadModel('FormationProgramType');
     }
 
     public function index()
     {
-        $formation_programs = $this->formation_programs->all();
-        $formation_program_types = $this->formation_program_types->all();
+        $formation_programs = $this->formation_program->all();
+        $formation_program_types = $this->formation_program_type->all();
         echo json_encode([
             $formation_programs,
             $formation_program_types
@@ -38,7 +38,7 @@ class Formation_programsController extends Controller
         $formation_program_type_id = $_POST['formation_program_type_id'];
         $created_at = date("Y,m,d,g,i,s");
         $updated_at = date("Y,m,d,g,i,s");
-        $res = $this->formation_programs->create([
+        $res = $this->formation_program->create([
             'code' => $code,
             'name' => $name,
             'formation_program_type_id' => $formation_program_type_id,
@@ -52,7 +52,7 @@ class Formation_programsController extends Controller
     public function show($param = null)
     {
         $id = $param[0];
-        $formation_program = $this->formation_programs->find($id);
+        $formation_program = $this->formation_program->find($id);
         echo json_encode($formation_program);
     }
 
@@ -64,7 +64,7 @@ class Formation_programsController extends Controller
         $name = $_POST['name'];
         $formation_program_type_id = $_POST['formation_program_type_id'];
         $updated_at = date("Y,m,d,g,i,s");
-        $res = $this->formation_programs->update([
+        $res = $this->formation_program->update([
             'id' => $id,
             'code' => $code,
             'name' => $name,
@@ -77,7 +77,7 @@ class Formation_programsController extends Controller
     public function destroy($param  = null)
     {
         $id = $param[0];
-        $res = $this->formation_programs->Delete($id);
+        $res = $this->formation_program->Delete($id);
         echo json_encode($res);
     }
 

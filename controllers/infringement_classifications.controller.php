@@ -13,13 +13,13 @@ class Infringement_classificationsController extends Controller{
             '/js/infringement_classifications/main.js',
             '/js/sweetalert.js'
         ];
-        $this->infringement = $this->loadModel('InfringementClassification');
+        $this->infringement_classification = $this->loadModel('InfringementClassification');
     }
 
     public function index()
     {
-        $res = $this->infringement->all();
-        echo json_encode(['infringement_classifications' => $res]);
+        $infringement_classifications = $this->infringement_classification->all();
+        echo json_encode($infringement_classifications);
         return;
 
     }
@@ -30,7 +30,7 @@ class Infringement_classificationsController extends Controller{
         $name = $_POST['name'];
         $created_at =date("Y,m,d,g,i,s");
         $updated_at=date("Y,m,d,g,i,s");
-        $res = $this->infringement->create([
+        $res = $this->infringement_classification->create([
             'name' => $name,
             'created_at' => $created_at,
             'updated_at' => $updated_at
@@ -43,8 +43,8 @@ class Infringement_classificationsController extends Controller{
     public function show($param = null)
     {
         $id =$param[0];
-        $res= $this->infringement->find($id);
-        echo json_encode($res);
+        $infringement_classification= $this->infringement_classification->find($id);
+        echo json_encode($infringement_classification);
         
     }
 
@@ -54,7 +54,7 @@ class Infringement_classificationsController extends Controller{
         $id = $param[0];
         $name = $_POST['name'];
         $updated_at= date("Y,m,d,g,i,s");
-        $res = $this->infringement->update([
+        $res = $this->infringement_classification->update([
             'id' => $id,
             'name' => $name,
             'updated_at' => $updated_at
@@ -66,7 +66,7 @@ class Infringement_classificationsController extends Controller{
     public function destroy($param = null)
     {
         $id = $param[0];
-        $res = $this->infringement->delete($id);
+        $res = $this->infringement_classification->delete($id);
         echo json_encode($res);
         
     }
