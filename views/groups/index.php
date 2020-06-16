@@ -48,77 +48,81 @@
       </div>
       <div class="modal-body">
         <form action="" method="post" id="form">
-          <div class="form-group">
-            <div class="row">
-              <div class="col">
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
                 <label for="code_tab">Codigo tabla</label>
                 <input type="text" name="code_tab" id="code_tab" class="form-control">
-                <div class="invalid-feedback" id="codeMessage">
-
-                </div>
-              </div>
-              <div class="col">
-                <label for="code_tab">Modalidad</label>
-                <select name="modality_id" id="modality_id" class="form-control"></select>
-
+                <div class="invalid-feedback" id="codeMessage"></div>
               </div>
             </div>
-            <div class="row">
-              <div class="col">
+            <div class="col">
+              <div class="form-group">
+                <label for="code_tab">Modalidad</label>
+                <select name="modality_id" id="modality_id" class="form-control"></select>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
                 <label for="code_tab">Programa de formacion</label>
                 <select name="formation_program_id" id="formation_program_id" class="form-control"></select>
               </div>
-
             </div>
-            <div class="row">
-              <div class="col">
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
                 <label for="quantity_learners">Cantidad aprendices</label>
                 <input type="number" name="quantity_learners" id="quantity_learners" class="form-control">
-                <div class="invalid-feedback" id="quantityMessage">
-
-                </div>
-              </div>
-              <div class="col">
-                <label for="active_learners">Aprendices activos</label>
-                <input type="number" name="active_learners" id="active_learners" class="form-control" value="">
-                <div class="invalid-feedback" id="activeMessage">
-
-                </div>
+                <div class="invalid-feedback" id="quantityMessage"></div>
               </div>
             </div>
-
-            <div class="row">
-              <div class="col">
+            <div class="col">
+              <div class="form-group">
+                <label for="active_learners">Aprendices activos</label>
+                <input type="number" name="active_learners" id="active_learners" class="form-control" value="">
+                <div class="invalid-feedback" id="activeMessage"></div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
                 <label for="code_tab">Inicio etapa lectiva</label>
                 <input type="date" name="elective_start_date" id="elective_start_date" class="form-control">
               </div>
-              <div class="col">
+            </div>
+            <div class="col">
+              <div class="form-group">
                 <label for="code_tab">Fin etapa lectiva</label>
                 <input type="date" name="elective_end_date" id="elective_end_date" class="form-control">
               </div>
             </div>
-
-            <div class="row">
-              <div class="col">
+          </div>
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
                 <label for="code_tab">Inicio practica</label>
                 <input type="date" name="practice_start_date" id="practice_start_date" class="form-control">
               </div>
-              <div class="col">
+            </div>
+            <div class="col">
+              <div class="form-group">
                 <label for="code_tab">Fin practica</label>
                 <input type="date" name="practice_end_date" id="practice_end_date" class="form-control">
               </div>
             </div>
-
-
-
           </div>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="submit" form="form" id="btnForm"  class="btn btn-primary"><i class="far fa-save"></i> Guardar</button>
+        <button type="submit" form="form" id="btnForm" class="btn btn-primary"><i class="far fa-save"></i> Guardar</button>
       </div>
     </div>
   </div>
 </div>
-
+</div>
 <?php require_once('views/layouts/footer.php') ?>

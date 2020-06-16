@@ -1,5 +1,25 @@
 const app = {
-    url: document.getElementById("url").content,
+	url: document.getElementById("url").content,
+	complainers:null,
+	learners:null,
+	getComplainers:async function () {
+		try {
+			let res = await fetch(`${this.url}formative_measure_responsibles/index`);
+			let data = await res.json();
+			this.complainers = data[0].formative_measure_responsibles;
+		} catch (error) {
+			console.log(error);
+		}
+	},
+	getLeaners: async function () {
+		try {
+			let res = await fetch(`${this.url}learners/index`);
+			let data = await res.json();
+			this.learners = data[0].learners;
+		} catch (error) {
+			console.log(error);
+		}
+	},
     get: async function () {
         try {
             let res = await fetch(`${this.url}committees/index`);
@@ -136,10 +156,27 @@ const app = {
 	},
 };
 
+function selectComplainer(value) {
+	document.getElementById('name_or_id').value = value;
+	document.getElementById('content-complainer').innerHTML = "";
+}
+
+function formComplainer() {
+	document.getElementById('name_or_id').placeholder = "Nombre del quejoso";
+	document.getElementById('content-complainer').innerHTML = `
+		<div class="form-group mt-3">
+			<input type="text" class="form-control" name="identification" placeholder="Identificacion" />
+		</div>
+		<button class="btn btn-sm btn-primary">Agregar</button>
+    `
+}
+function selectLearner(value) {
+	document.getElementById('leaner_name_id').value = value;
+	document.getElementById('content-learner').innerHTML = "";
+}
+
 $(document).ready(async function () {
-	await app.getSubdirector();
-	let editor = null;
-    document.getElementById("data-committees").innerHTML = `
+	document.getElementById("data-committees").innerHTML = `
 	<div class="col-6 mx-auto text-center text-primary">
 		<h6>Cargando los datos</h6>
 		<div class="spinner-border" role="status">
@@ -147,6 +184,10 @@ $(document).ready(async function () {
 		</div>
     </div>
 	`;
+	await app.getLeaners();
+	await app.getSubdirector();
+	await app.getComplainers();
+	let editor = null;
 	await app.get();
 	document.getElementById('form').onsubmit = async function (e) {
 		e.preventDefault();
@@ -156,7 +197,6 @@ $(document).ready(async function () {
 		fd.append('subdirector_name', subdirector.name);
 		await app.create(fd);
 	}
-	
 
     ClassicEditor.create(document.querySelector("#assistants"), {
         language: "es",
@@ -179,7 +219,8 @@ $(document).ready(async function () {
                 <div class="form-group">
                     <label for="learner_name_id">Aprendiz</label>
                     <input type="hidden" name="leaner_id">
-                    <input type="text" id="leaner_name_id" placeholder="Busca aqui..." class="form-control">
+					<input type="text" id="leaner_name_id" placeholder="Busca aqui..." class="form-control">
+					<div id="content-learner"></div>
                 </div>
                 <div class="form-group">
                     <label for="stimulus">Estimulo</label>
@@ -191,6 +232,25 @@ $(document).ready(async function () {
                 </div>
             </form>
 			`;
+			document.getElementById('leaner_name_id').oninput = function(){
+				let matches = app.learners.filter(learner => {
+					const rgex = new RegExp(`^${this.value}`, 'gi');
+					return learner.username.match(rgex) || learner.document.match(rgex);
+				});
+				if(this.value.length === 0){
+					matches=[];
+				}
+				let html = '<ul class="list-group">';
+                if(matches.length > 0){
+                    matches.forEach(match => {
+                        html+=`<p onclick="selectLearner('${match.username}')" class="list-group-item list-group-item-action">${match.username}</p>`
+                    });
+                    html+="</ul>";
+                    document.getElementById('content-learner').innerHTML = html;
+                }else{
+                    document.getElementById('content-learner').innerHTML = "<p class='mt-3'>¿No esta? <a href='#' onclick='formComplainer()'>Registralo</a></p>";
+                }
+			}
 		}
 		if(this.value==2){
 			document.getElementById('content').innerHTML = `
@@ -242,10 +302,10 @@ $(document).ready(async function () {
                         <div class="card">
                             <div class="card-body">
                                 Quejoso
-                                <div class="form-group mt-3">
+                                <div class="form-group my-3">
                                     <label class="text-muted">Nombre o identificacion</label>
                                     <input type="text" name="name_or_id" id="name_or_id" class="form-control">
-                                    <div class="content-complainer"></div>
+                                    <div id="content-complainer"></div>
                                 </div>
                             </div>
                         </div>
@@ -253,8 +313,29 @@ $(document).ready(async function () {
                 </div>
             </form>
 			`;
+			document.getElementById('name_or_id').oninput = async function () {
+				let matches = app.complainers.filter(complainer => {
+					const rgex = new RegExp(`^${this.value}`, 'gi');
+					return complainer.username.match(rgex) || complainer.document.match(rgex);
+				});
+				if(this.value.length === 0){
+					matches=[];
+				}
+				let html = '<ul class="list-group">';
+                if(matches.length > 0){
+                    matches.forEach(match => {
+                        html+=`<p onclick="selectComplainer('${match.username}')" class="list-group-item list-group-item-action">${match.username}</p>`
+                    });
+                    html+="</ul>";
+                    document.getElementById('content-complainer').innerHTML = html;
+                }else{
+                    document.getElementById('content-complainer').innerHTML = "<p class='mt-3'>¿No esta? <a href='#' onclick='formComplainer()'>Registralo</a></p>";
+                }
+			}
 		}
-	})
+	});
+
+	
 
     document.getElementById("btn-create").onclick = function () {
         $("#modal-create").modal("toggle");

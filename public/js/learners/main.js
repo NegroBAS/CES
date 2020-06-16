@@ -5,8 +5,7 @@ const app = {
             let res = await fetch(`${this.url}learners/index`);
             let data = await res.json();
             let html = "";
-            console.log(data.learners);
-            data.learners.learners.forEach((learner) => {
+            data[0].learners.forEach((learner) => {
                 html += `
                 <tr data-id="${learner.id}">
                     <td>${learner.username}</td>
@@ -24,15 +23,14 @@ const app = {
             document.getElementById("data-learners").innerHTML = html;
 
             html = "";
-            data.document_types.forEach((document) => {
+            data[1].document_types.forEach((document) => {
                 html += `
              <option value="${document.id}">${document.name}</option>
                 `;
             });
             document.getElementById("document_type_id").innerHTML = html;
-
             html = "";
-            data.groups.forEach((group) => {
+            data[2].groups.forEach((group) => {
                 html += `
              <option value="${group.id}">${group.code_tab}</option>
                 `;

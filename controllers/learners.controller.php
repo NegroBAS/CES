@@ -20,14 +20,13 @@ class LearnersController extends Controller{
 
     public function index()
     {
-        $response = $this->learner->all();
-        $res1 = $this->document_types->all();
-        $res2 = $this->groups->all();
+        $leaners = $this->learner->all();
+        $document_types = $this->document_types->all();
+        $groups = $this->groups->all();
         echo json_encode([
-            'learners' => $response,
-            'document_types' => $res1,
-            'groups' => $res2,
-            'status'=>200
+            $leaners,
+            $document_types,
+            $groups
         ]);
     }
 

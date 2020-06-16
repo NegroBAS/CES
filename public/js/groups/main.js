@@ -2,44 +2,35 @@ const app = {
     url: document.getElementById('url').content,
     edit: false,
     get: async function () {
-        let resp = await fetch(`${this.url}groups/index`);
-        let res = await resp.json();
-
-        let group = res.groups;
+        let res = await fetch(`${this.url}groups/index`);
+        let data = await res.json();
         let html = '';
-        group.forEach(group => {
+        data[0].groups.forEach(group => {
             html += `
             <tr data-id="${group.id}">
-            <td>${group.code_tab}</td>
-            <td>${group.name_modalities}</td>
-            <td>${group.name_formation}</td>
-            <td>${group.quantity_learners}</td>
-            <td>
-
-            <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
-            <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
-
-            </td>
-            
+                <td>${group.code_tab}</td>
+                <td>${group.name_modalities}</td>
+                <td>${group.name_formation}</td>
+                <td>${group.quantity_learners}</td>
+                <td>
+                    <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
+                    <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
+                </td>
             </tr>
      `
         });
         document.getElementById('data-groups').innerHTML = html;
-
-        let formation_programs = res.formation_programs;
          html = '';
-        formation_programs.forEach(formation_programs => {
+        data[2].formation_programs.forEach(formation_programs => {
             html += `
             <option value="${formation_programs.id}">${formation_programs.name}</option>
              `
         });
         document.getElementById('formation_program_id').innerHTML = html;
-
-        let modalities = res.modalities;
          html = '';
-        modalities.forEach(modalities => {
+        data[1].modalities.forEach(modality => {
             html += `
-            <option value="${modalities.id}">${modalities.name}</option>
+            <option value="${modality.id}">${modality.name}</option>
              `
         });
         document.getElementById('modality_id').innerHTML = html;

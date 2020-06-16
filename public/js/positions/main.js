@@ -25,30 +25,24 @@ const app = {
     getByApi: async function () {
         try {
             let token = await this.authenticate();
-            let res = await fetch('https://cronode.herokuapp.com/api/ces/positions', {
-                headers:{
-                    'Authorization':`Bearer ${token}`
+            let res = await fetch(
+                "https://cronode.herokuapp.com/api/ces/positions",
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
                 }
-            });
+            );
             let data = await res.json();
-            console.log(data.positions);
             let fd = new FormData();
-            fd.append('positions', JSON.stringify(data.positions));
-            document.getElementById('data-positions').innerHTML = `
-            <div class="col-6 mx-auto text-center text-primary">
-                <h6>Actualizando los datos</h6>
-                <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
-                </div>
-            </div>
-            `;
+            fd.append("positions", JSON.stringify(data.positions));
             res = await fetch(`${this.url}positions/masive`, {
-                method:'POST',
-                body:fd
+                method: "POST",
+                body: fd,
             });
             data = await res.json();
-            toastr.success('', data.message, {
-                closeButton:true
+            toastr.success("", data.message, {
+                closeButton: true,
             });
             app.get();
         } catch (error) {
@@ -86,36 +80,36 @@ const app = {
             let res = await fetch(`${this.url}positions/show/${id}`);
             let data = await res.json();
             console.log(data);
-            if(data.status===200){
-                $('.modal #form').trigger('reset');
-                $('.modal').modal('toggle');
-                $('.modal').find('.modal-title').text('Editar Cargo');
-                document.getElementById('name').value = data.positions.name
-                document.getElementById('type').value = data.positions.type
+            if (data.status === 200) {
+                $(".modal #form").trigger("reset");
+                $(".modal").modal("toggle");
+                $(".modal").find(".modal-title").text("Editar Cargo");
+                document.getElementById("name").value = data.positions.name;
+                document.getElementById("type").value = data.positions.type;
             }
         } catch (error) {
             console.log(error);
         }
     },
-    create:async function(form){
+    create: async function (form) {
         try {
             let res = await fetch(`${this.url}positions/store`, {
-                method:'POST',
-                body: new FormData(form)
+                method: "POST",
+                body: new FormData(form),
             });
             let data = await res.json();
             console.log(data);
-            if(data.status===200){
-                $('.modal').modal('toggle');
+            if (data.status === 200) {
+                $(".modal").modal("toggle");
                 app.get();
-                toastr.success('', data.message, {
-                    closeButton:true
+                toastr.success("", data.message, {
+                    closeButton: true,
                 });
             }
-            if(data.status===500){
+            if (data.status === 500) {
                 console.log(data.error);
-                toastr.error('', data.error.errorInfo[2], {
-                    closeButton: true
+                toastr.error("", data.error.errorInfo[2], {
+                    closeButton: true,
                 });
             }
         } catch (error) {
@@ -124,15 +118,15 @@ const app = {
     },
     delete: async function (id) {
         try {
-            let res  = await fetch(`${this.url}positions/destroy/${id}`);
+            let res = await fetch(`${this.url}positions/destroy/${id}`);
             let data = await res.json();
-            if(data.status === 200){
-                toastr.success('', data.message, {
-                    closeButton:true
+            if (data.status === 200) {
+                toastr.success("", data.message, {
+                    closeButton: true,
                 });
                 this.get();
             }
-            if(data.status===500){
+            if (data.status === 500) {
                 console.log(data.error);
             }
         } catch (error) {
@@ -142,51 +136,67 @@ const app = {
     update: async function (form, id) {
         try {
             let res = await fetch(`${this.url}positions/edit/${id}`, {
-                method:'POST',
-                body:new FormData(form)
+                method: "POST",
+                body: new FormData(form),
             });
             let data = await res.json();
             console.log(data);
-            if(data.status===200){
-                toastr.success('', data.message, {
-                    closeButton: true
+            if (data.status === 200) {
+                toastr.success("", data.message, {
+                    closeButton: true,
                 });
                 app.get();
-                $('.modal').modal('toggle');
+                $(".modal").modal("toggle");
                 this.edit = false;
             }
-            if(data.status===500){
+            if (data.status === 500) {
                 console.log(data.error);
             }
         } catch (error) {
             console.log(error);
         }
-    }
-}
+    },
+};
 
 $(document).ready(async function () {
     let id = null;
+    document.getElementById("data-positions").innerHTML = `
+            <div class="col-6 mx-auto text-center text-primary">
+                <h6>Actualizando los datos</h6>
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            `;
     await app.get();
-    document.getElementById('update').onclick = function () {
-        app.getByApi();
-    }
-    document.getElementById('btn-create').onclick = function(){
-        $('.modal #form').trigger('reset');
-        $('.modal').modal('toggle');
-        $('.modal').find('.modal-title').text('Crear Cargo');
+    document.getElementById("update").onclick = async function () {
+        document.getElementById("data-positions").innerHTML = `
+            <div class="col-6 mx-auto text-center text-primary">
+                <h6>Actualizando los datos</h6>
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            `;
+        await app.getByApi();
+    };
+    document.getElementById("btn-create").onclick = function () {
+        $(".modal #form").trigger("reset");
+        $(".modal").modal("toggle");
+        $(".modal").find(".modal-title").text("Crear Cargo");
         val.limpiar();
         val.validaciones();
-    }
-    document.getElementById('form').onsubmit = function(e){
+    };
+    document.getElementById("form").onsubmit = function (e) {
         e.preventDefault();
-        if(app.edit){
+        if (app.edit) {
             app.update(this, id);
-        }else{
+        } else {
             app.create(this);
         }
-    }
-    $(document).on('click', '.delete', function () {
-        id = $(this.parentElement.parentElement).data('id');
+    };
+    $(document).on("click", ".delete", function () {
+        id = $(this.parentElement.parentElement).data("id");
         Swal.fire({
             title: "¿Estas seguro?",
             text: "No podras revertir esto!",
@@ -196,102 +206,98 @@ $(document).ready(async function () {
             cancelButtonColor: "#d33",
             cancelButtonText: "Cancelar",
             confirmButtonText: "Si, eliminar",
-          }).then((result) => {
+        }).then((result) => {
             if (result.value) {
-              Swal.fire("Eliminado!", "El aprendiz ha sido eliminado.", "success");
-              let id = $($(this)[0].parentElement.parentElement).data("id");
-              app.delete(id);
-              app.get();
+                Swal.fire(
+                    "Eliminado!",
+                    "El aprendiz ha sido eliminado.",
+                    "success"
+                );
+                let id = $($(this)[0].parentElement.parentElement).data("id");
+                app.delete(id);
+                app.get();
             }
-          });
-
+        });
     });
-    $(document).on('click', '.edit', function () {
-        id = $(this.parentElement.parentElement).data('id');
+    $(document).on("click", ".edit", function () {
+        id = $(this.parentElement.parentElement).data("id");
         app.edit = true;
         val.limpiar();
         val.validaciones();
         app.getOne(id);
-    })
-
+    });
 });
 
 const val = {
-     validaciones() {
+    validaciones() {
         let name = document.getElementById("name");
         let type = document.getElementById("type");
-    
+
         let letrasRegex = /^[a-zA-ZÀ-ÿ\u00E0-\u00FC]+(\s*[a-zA-ZÀ-ÿ\u00E0-\u00FC]*)*[a-zA-ZÀ-ÿ\u00E0-\u00FC]+$/;
         let btn = document.getElementById("btnForm");
 
         btn.setAttribute("disabled", "disabled");
-    
-        name.oninput = function () {
-          if (letrasRegex.test(this.value)) {
-            this.classList.remove("is-invalid");
-            this.classList.add("is-valid");
-          } else {
-            this.classList.remove("is-valid");
-            this.classList.add("is-invalid");
-            document.getElementById("nameMessage").innerHTML =
-              "Este campo es requerido";
-          }
-    
-          if (this.value === "") {
-            console.log("campo requerido");
-            document.getElementById("nameMessage").innerHTML =
-              "Este campo es requerido";
-            this.classList.add("is-invalid");
-          }
-    
-          if (letrasRegex.test(this.value) && letrasRegex.test(type.value)) {
-            btn.removeAttribute("disabled");
-          } else {
-            btn.setAttribute("disabled", "disabled");
-          }
-        };
-    
-        type.oninput = function () {
-          if (letrasRegex.test(this.value)) {
-            this.classList.remove("is-invalid");
-            this.classList.add("is-valid");
-          } else {
-            this.classList.remove("is-valid");
-            this.classList.add("is-invalid");
-            document.getElementById("typeMessage").innerHTML =
-              "Este campo es requerido";
-          }
-    
-          if (this.value === "") {
-            console.log("campo requerido");
-            document.getElementById("typeMessage").innerHTML =
-              "Este campo es requerido";
-            this.classList.add("is-invalid");
-          }
-    
-          if (letrasRegex.test(this.value) && letrasRegex.test(name.value)) {
-            btn.removeAttribute("disabled");
-          } else {
-            btn.setAttribute("disabled", "disabled");
-          }
-        };
-      },
 
-      limpiar(){
+        name.oninput = function () {
+            if (letrasRegex.test(this.value)) {
+                this.classList.remove("is-invalid");
+                this.classList.add("is-valid");
+            } else {
+                this.classList.remove("is-valid");
+                this.classList.add("is-invalid");
+                document.getElementById("nameMessage").innerHTML =
+                    "Este campo es requerido";
+            }
+
+            if (this.value === "") {
+                console.log("campo requerido");
+                document.getElementById("nameMessage").innerHTML =
+                    "Este campo es requerido";
+                this.classList.add("is-invalid");
+            }
+
+            if (letrasRegex.test(this.value) && letrasRegex.test(type.value)) {
+                btn.removeAttribute("disabled");
+            } else {
+                btn.setAttribute("disabled", "disabled");
+            }
+        };
+
+        type.oninput = function () {
+            if (letrasRegex.test(this.value)) {
+                this.classList.remove("is-invalid");
+                this.classList.add("is-valid");
+            } else {
+                this.classList.remove("is-valid");
+                this.classList.add("is-invalid");
+                document.getElementById("typeMessage").innerHTML =
+                    "Este campo es requerido";
+            }
+
+            if (this.value === "") {
+                console.log("campo requerido");
+                document.getElementById("typeMessage").innerHTML =
+                    "Este campo es requerido";
+                this.classList.add("is-invalid");
+            }
+
+            if (letrasRegex.test(this.value) && letrasRegex.test(name.value)) {
+                btn.removeAttribute("disabled");
+            } else {
+                btn.setAttribute("disabled", "disabled");
+            }
+        };
+    },
+
+    limpiar() {
         let name = document.getElementById("name");
         let type = document.getElementById("type");
-        
 
         console.log("limpiando");
-        name.classList.remove("is-invalid");    
+        name.classList.remove("is-invalid");
         name.classList.remove("is-valid");
 
         type.classList.remove("is-invalid");
         type.classList.remove("is-valid");
-
-      }
-
-
-}
-
-
+    },
+};

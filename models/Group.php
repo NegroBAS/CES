@@ -47,7 +47,10 @@ class Group extends Model{
                 $group->name_formation = $row['name_formation'];
                 array_push($groups, $group);
             }
-            return $groups;
+            return [
+                'status'=>200,
+                'groups'=>$groups
+            ];
 
         } catch (PDOException $e) {
             return [
