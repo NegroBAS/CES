@@ -53,7 +53,6 @@ const app = {
         try {
             let res = await fetch(`${this.url}formative_measure_responsibles/index`);
             let data = await res.json();
-            console.log(data);
             if(data[0].status==200){
                 if(data[0].formative_measure_responsibles.length>0){
                     let html = '';
@@ -203,7 +202,7 @@ $(document).ready(async function () {
     let id = null;
     await app.get();
     document.getElementById('update').onclick = function () {
-        app.getByApi();
+      app.getByApi();
     }
     document.getElementById('btn-create').onclick = function(){
         $('.modal #form').trigger('reset');
@@ -271,7 +270,7 @@ const val = {
 
         let emailRegex = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
         let numberRegex = /^([0-9])*$/;
-        let letrasRegex = /^[a-zA-ZÀ-ÿ\u00E0-\u00FC]+(\s*[a-zA-ZÀ-ÿ\u00E0-\u00FC]*)*[a-zA-ZÀ-ÿ\u00E0-\u00FC]+$/;
+        let letrasRegex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\u00E0-\u00FC\s]+$/;
         let btnForm = document.getElementById('btnForm');
         let estado = new Array(5);
 
