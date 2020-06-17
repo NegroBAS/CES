@@ -184,7 +184,7 @@ const app = {
 
                 let name = document.getElementById('name');
                 let content = document.getElementById('content');
-                let letrasRegex = /^[a-zA-ZÀ-ÿ\u00E0-\u00FC]+(\s*[a-zA-ZÀ-ÿ\u00E0-\u00FC]*)*[a-zA-ZÀ-ÿ\u00E0-\u00FC]+$/;
+                let letrasRegex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\u00E0-\u00FC\s]+$/;
                 let btn = document.getElementById('btnForm');
         
                 btn.setAttribute('disabled', 'disabled');

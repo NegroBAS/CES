@@ -46,10 +46,11 @@ class Formative_measure_responsiblesController extends Controller{
                 'gender' => $instructor->gender,
                 'birthdate' => date('Y-m-d H:i:s', strtotime($instructor->birthdate)),
                 'phone' => $instructor->phone,
+                'phone_ip' => $instructor->phone_ip,
                 'position_id' => $instructor->positionId,
                 'contract_type_id' => $instructor->contractTypeId,
                 'state' => $instructor->state,
-                'document_type_id' => 4,
+                'document_type_id' => 2,
                 'type'=>'Instructor'
             ]);
         }
