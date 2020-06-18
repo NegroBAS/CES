@@ -10,7 +10,7 @@ const app = {
                 if (data.novelty_types.length > 0) {
                     data.novelty_types.forEach((novelty_type) => {
                         html += `
-                        <div class="col-12 col-md-3 mb-3">
+                        <div class="col-12 col-md-4 mb-3">
                             <div class="card" data-id="${novelty_type.id}">
                                 <div class="card-header bg-primary"></div>
                                 <div class="card-body text-center">

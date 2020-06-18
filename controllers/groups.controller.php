@@ -13,7 +13,8 @@ class GroupsController extends Controller
         $this->view->user = $_SESSION['user'];
 
         $this->view->scripts = [
-            '/js/groups/main.js'
+            '/js/groups/main.js',
+            '/js/sweetalert.js'
         ];
         $this->group = $this->loadModel('Group');
         $this->modality = $this->loadModel('Modality');
