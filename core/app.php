@@ -9,7 +9,7 @@ class App
 {
     function __construct()
     {
-        if($this->seedData()){
+        if ($this->verifyDatabase()) {
             date_default_timezone_set("America/Bogota");
             $url = isset($_GET['url']) ? $_GET['url'] : null;
             $url = rtrim($url, '/');
@@ -27,7 +27,7 @@ class App
                 $name_controller = $url[0] . "Controller";
                 $controller = new $name_controller;
                 $nparam = sizeof($url);
-    
+
                 if ($nparam > 1) {
                     if ($nparam > 2) {
                         $param = [];
@@ -48,16 +48,16 @@ class App
         }
     }
 
-    public function seedData()
+    public function verifyDatabase()
     {
-            $db = new Database();
-            $pdo = $db->connect();
-            if(method_exists($pdo, 'getCode')){
-                $controller = new Database_errorController();
-                $controller->view->message = 'No pudimos comunicarnos con la base de datos, revisa las configuraciones';
-                $controller->render();
-                return false;
-            }
-            return true;
+        $db = new Database();
+        $pdo = $db->connect();
+        if (method_exists($pdo, 'getCode')) {
+            $controller = new Database_errorController();
+            $controller->view->message = 'No pudimos comunicarnos con la base de datos, revisa las configuraciones';
+            $controller->render();
+            return false;
+        }
+        return true;
     }
 }
