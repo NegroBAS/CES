@@ -71,7 +71,7 @@ class Contract_typesController extends Controller{
     {
         $contract_types = json_decode($_POST['contract_types']);
         foreach ($contract_types as $contract_type) {
-            $this->contract->create([
+            $this->contract_type->create([
                 'name'=>$contract_type->name
             ]);
         }
