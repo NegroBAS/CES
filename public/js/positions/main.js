@@ -53,23 +53,33 @@ const app = {
         try {
             let res = await fetch(`${this.url}positions/index`);
             let data = await res.json();
-            let html = "";
-            if (data.positions.length > 0) {
-                data.positions.forEach((position) => {
-                    html += `
-                    <div class="col-3 mb-2">
-                        <div class="card" data-id="${position.id}">
-                            <div class="card-header bg-primary"></div>
-                            <div class="card-body text-center">
-                                <h5>${position.name}</h5>
-                                <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
-                                <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
+            if(data.status==200){
+                let html = "";
+                if (data.positions.length > 0) {
+                    data.positions.forEach((position) => {
+                        html += `
+                        <div class="col-3 mb-2">
+                            <div class="card" data-id="${position.id}">
+                                <div class="card-header bg-primary"></div>
+                                <div class="card-body text-center">
+                                    <h5>${position.name}</h5>
+                                    <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
+                                    <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
+                                </div>
                             </div>
                         </div>
+                        `;
+                    });
+                }else{
+                    html+=`
+                    <div class="col">
+                        <h6>No hay datos</h6>
                     </div>
                     `;
-                });
-                document.getElementById("data-positions").innerHTML = html;
+                }
+                document.getElementById('data-positions').innerHTML = html;
+            }else{
+                console.log(data);
             }
         } catch (error) {
             console.log(error);
@@ -162,7 +172,7 @@ $(document).ready(async function () {
     let id = null;
     document.getElementById("data-positions").innerHTML = `
             <div class="col-6 mx-auto text-center text-primary">
-                <h6>Actualizando los datos</h6>
+                <h6>Cargando los datos</h6>
                 <div class="spinner-border" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>

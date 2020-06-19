@@ -2,11 +2,40 @@ const app = {
 	url: document.getElementById("url").content,
 	complainers:null,
 	learners:null,
+	document_types:null,
+	getDocumentTypes:async function () {
+		try {
+			let res = await fetch(`${this.url}document_types/index`);
+			let data = await res.json();
+			this.document_types = data.document_types;
+		} catch (error) {
+			console.log(error);
+		}
+	},
 	getComplainers:async function () {
 		try {
 			let res = await fetch(`${this.url}formative_measure_responsibles/index`);
 			let data = await res.json();
 			this.complainers = data[0].formative_measure_responsibles;
+			res = await fetch(`${this.url}complainers/index`);
+			data = await res.json();
+			this.complainers.push(...data.complainers);
+		} catch (error) {
+			console.log(error);
+		}
+	},
+	addComplainer:async function (data) {
+		try {
+			let fd = new FormData();
+			fd.append('name', data.name);
+			fd.append('document_type_id', data.document_type_id);
+			fd.append('document', data.document);
+			let res = await fetch(`${this.url}complainers/store`, {
+				body:fd,
+				method:'POST'
+			});
+			let r = await res.json();
+			console.log(r);
 		} catch (error) {
 			console.log(error);
 		}
@@ -25,8 +54,8 @@ const app = {
             let res = await fetch(`${this.url}committees/index`);
             let data = await res.json();
             if (data.status === 200) {
+				let html = "";
                 if (data.committees.length > 0) {
-                    let html = "";
                     data.committees.forEach((committee) => {
                         html += `
 						<div class="col-4 mb-3">
@@ -86,8 +115,14 @@ const app = {
 						</div>
 						`;
                     });
-                    document.getElementById("data-committees").innerHTML = html;
-                }
+                }else{
+					html = `
+					<div class="col">
+						<h5>No hay comites</h5>
+					</col>
+					`;
+				}
+				document.getElementById("data-committees").innerHTML = html;
             }
         } catch (error) {
             console.log(error);
@@ -165,10 +200,26 @@ function formComplainer() {
 	document.getElementById('name_or_id').placeholder = "Nombre del quejoso";
 	document.getElementById('content-complainer').innerHTML = `
 		<div class="form-group mt-3">
-			<input type="text" class="form-control" name="identification" placeholder="Identificacion" />
+			<select id="document_type_id" name="document_type_id" class="form-control">
+			</select>
 		</div>
-		<button class="btn btn-sm btn-primary">Agregar</button>
-    `
+		<div class="form-group mt-3">
+			<input type="text" class="form-control" id="document" name="document" placeholder="Identificacion" />
+		</div>
+		<button type="button" class="btn btn-sm btn-primary" id="btnAddComplainer">Agregar</button>
+	`;
+	let html = "<option value='0'>Seleccione una</option>";
+	app.document_types.forEach(document_type=>{
+		html+=`<option value='${document_type.id}'>${document_type.name}</option>`
+	});
+	document.getElementById('document_type_id').innerHTML = html;
+	document.getElementById('btnAddComplainer').onclick = async function(){
+		await app.addComplainer({
+			name: document.getElementById('name_or_id').value,
+			document_type_id: document.getElementById('document_type_id').value,
+			document: document.getElementById('document').value
+		});
+	}
 }
 function selectLearner(value) {
 	document.getElementById('leaner_name_id').value = value;
@@ -184,11 +235,12 @@ $(document).ready(async function () {
 		</div>
     </div>
 	`;
+	await app.get();
+	await app.getDocumentTypes();
 	await app.getLeaners();
 	await app.getSubdirector();
 	await app.getComplainers();
 	let editor = null;
-	await app.get();
 	document.getElementById('form').onsubmit = async function (e) {
 		e.preventDefault();
 		let subdirector = await app.getSubdirector();
@@ -213,6 +265,7 @@ $(document).ready(async function () {
 	});
 
 	$(document).on('click', '.form-check-input', async function () {
+		console.log(this.value);
 		if(this.value==1){
 			document.getElementById('content').innerHTML = `
 			<form id="form">
@@ -316,8 +369,9 @@ $(document).ready(async function () {
 			document.getElementById('name_or_id').oninput = async function () {
 				let matches = app.complainers.filter(complainer => {
 					const rgex = new RegExp(`^${this.value}`, 'gi');
-					return complainer.username.match(rgex) || complainer.document.match(rgex);
+					return complainer.username.match(rgex) || complainer.document.match(rgex) || complainer.name.match(rgex);
 				});
+				console.log(matches);
 				if(this.value.length === 0){
 					matches=[];
 				}

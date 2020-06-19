@@ -64,9 +64,7 @@ class CommitteeSessionType extends Model{
         try {
             $query = $this->db->connect()->prepare('INSERT INTO committee_session_types(name,created_at,updated_at) VALUES (:name, :created_at, :updated_at) ');
             if ($query->execute([
-                'name' => $data['name'],
-                'created_at' => $data['created_at'],
-                'updated_at' => $data['updated_at']
+                'name' => $data['name']
             ])) {
                 return [
                     'status' => 200,

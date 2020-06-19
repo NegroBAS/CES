@@ -26,35 +26,35 @@ const app = {
         try {
             let token = await this.authenticate();
             let res = await fetch('https://cronode.herokuapp.com/api/ces/contractTypes', {
-                headers:{
-                    'Authorization':`Bearer ${token}`
+                headers: {
+                    'Authorization': `Bearer ${token}`
                 }
             });
             let data = await res.json();
             let fd = new FormData();
             fd.append('contract_types', JSON.stringify(data.contractTypes));
             res = await fetch(`${this.url}contract_types/masive`, {
-                method:'POST',
-                body:fd
+                method: 'POST',
+                body: fd
             });
             data = await res.json();
-            if(data.status===200){
+            if (data.status === 200) {
                 toastr.success('', data.message, {
-                    closeButton:true
+                    closeButton: true
                 });
-                app.get();
+                await app.get();
             }
         } catch (error) {
             console.log(error);
         }
     },
-    get:async function () {
+    get: async function () {
         try {
             let res = await fetch(`${this.url}contract_types/index`);
             let data = await res.json();
-            if(data.status===200){
-                if(data.contract_types.length>0){
-                    let html = '';
+            if (data.status === 200) {
+                let html = '';
+                if (data.contract_types.length > 0) {
                     data.contract_types.forEach(contract_type => {
                         html += `
                         <div class="col-3 mb-2">
@@ -69,8 +69,14 @@ const app = {
                         </div>
                         `;
                     });
-                    document.getElementById('data-contract-types').innerHTML = html;
+                }else{
+                    html+=`
+                    <div class="col">
+                        <h6>No hay datos</h6>
+                    </div>
+                    `;    
                 }
+                document.getElementById('data-contract-types').innerHTML = html;
             }
         } catch (error) {
             console.log(error);
@@ -81,7 +87,7 @@ const app = {
             let res = await fetch(`${this.url}contract_types/show/${id}`);
             let data = await res.json();
             console.log(data);
-            if(data.status===200){
+            if (data.status === 200) {
                 $('.modal #form').trigger('reset');
                 $('.modal').modal('toggle');
                 $('.modal').find('.modal-title').text('Editar tipo de contrato');
@@ -92,22 +98,22 @@ const app = {
             console.log(error);
         }
     },
-    create:async function(form){
+    create: async function (form) {
         try {
             let res = await fetch(`${this.url}contract_types/store`, {
-                method:'POST',
+                method: 'POST',
                 body: new FormData(form)
             });
             let data = await res.json();
             console.log(data);
-            if(data.status===200){
+            if (data.status === 200) {
                 $('.modal').modal('toggle');
                 app.get();
                 toastr.success('', data.message, {
-                    closeButton:true
+                    closeButton: true
                 });
             }
-            if(data.status===500){
+            if (data.status === 500) {
                 console.log(data.error);
                 toastr.error('', data.error.errorInfo[2], {
                     closeButton: true
@@ -119,15 +125,15 @@ const app = {
     },
     delete: async function (id) {
         try {
-            let res  = await fetch(`${this.url}contract_types/destroy/${id}`);
+            let res = await fetch(`${this.url}contract_types/destroy/${id}`);
             let data = await res.json();
-            if(data.status === 200){
+            if (data.status === 200) {
                 toastr.success('', data.message, {
-                    closeButton:true
+                    closeButton: true
                 });
                 this.get();
             }
-            if(data.status===500){
+            if (data.status === 500) {
                 console.log(data.error);
             }
         } catch (error) {
@@ -137,12 +143,12 @@ const app = {
     update: async function (form, id) {
         try {
             let res = await fetch(`${this.url}contract_types/edit/${id}`, {
-                method:'POST',
-                body:new FormData(form)
+                method: 'POST',
+                body: new FormData(form)
             });
             let data = await res.json();
             console.log(data.status);
-            if(data.status===200){
+            if (data.status === 200) {
                 toastr.success('', data.message, {
                     closeButton: true
                 });
@@ -150,7 +156,7 @@ const app = {
                 $('.modal').modal('toggle');
                 this.edit = false;
             }
-            if(data.status===500){
+            if (data.status === 500) {
                 console.log(data.error);
             }
         } catch (error) {
@@ -159,9 +165,17 @@ const app = {
     }
 }
 
-$(document).ready(function () {
+$(document).ready(async function () {
+    document.getElementById('data-contract-types').innerHTML = `
+        <div class="col-6 mx-auto text-center text-primary">
+            <h6>Cargando los datos</h6>
+            <div class="spinner-border" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        `;
     let id = null;
-    app.get();
+    await app.get();
     document.getElementById('update').onclick = async function () {
         document.getElementById('data-contract-types').innerHTML = `
         <div class="col-6 mx-auto text-center text-primary">
@@ -173,21 +187,18 @@ $(document).ready(function () {
         `;
         await app.getByApi();
     }
-    document.getElementById('update').onclick = function () {
-        app.getByApi();
-    }
-    document.getElementById('btn-create').onclick = function(){
+    document.getElementById('btn-create').onclick = function () {
         $('.modal #form').trigger('reset');
         $('.modal').modal('toggle');
         $('.modal').find('.modal-title').text('Crear tipo de contrato');
         val.limpiar();
         val.validaciones();
     }
-    document.getElementById('form').onsubmit = function(e){
+    document.getElementById('form').onsubmit = function (e) {
         e.preventDefault();
-        if(app.edit){
+        if (app.edit) {
             app.update(this, id);
-        }else{
+        } else {
             app.create(this);
         }
     }
@@ -202,14 +213,14 @@ $(document).ready(function () {
             cancelButtonColor: "#d33",
             cancelButtonText: "Cancelar",
             confirmButtonText: "Si, eliminar",
-          }).then((result) => {
+        }).then((result) => {
             if (result.value) {
-              Swal.fire("Eliminado!", "Tipo de contrato eliminado.", "success");
-              let id = $($(this)[0].parentElement.parentElement).data("id");
-              app.delete(id);
-              app.get();
+                Swal.fire("Eliminado!", "Tipo de contrato eliminado.", "success");
+                let id = $($(this)[0].parentElement.parentElement).data("id");
+                app.delete(id);
+                app.get();
             }
-          });
+        });
 
     });
     $(document).on('click', '.edit', function () {
@@ -223,51 +234,51 @@ $(document).ready(function () {
 });
 
 const val = {
-     validaciones() {
+    validaciones() {
         let name = document.getElementById("name");
-    
+
         let letrasRegex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\u00E0-\u00FC\s]+$/;
         let btn = document.getElementById("btnForm");
 
         btn.setAttribute("disabled", "disabled");
-    
-        name.oninput = function () {
-          if (letrasRegex.test(this.value)) {
-            this.classList.remove("is-invalid");
-            this.classList.add("is-valid");
-          } else {
-            this.classList.remove("is-valid");
-            this.classList.add("is-invalid");
-            document.getElementById("nameMessage").innerHTML =
-              "Este campo es requerido";
-          }
-    
-          if (this.value === "") {
-            console.log("campo requerido");
-            document.getElementById("nameMessage").innerHTML =
-              "Este campo es requerido";
-            this.classList.add("is-invalid");
-          }
-    
-          if (letrasRegex.test(this.value)) {
-            btn.removeAttribute("disabled");
-          } else {
-            btn.setAttribute("disabled", "disabled");
-          }
-        };
-    
-      },
 
-      limpiar(){
+        name.oninput = function () {
+            if (letrasRegex.test(this.value)) {
+                this.classList.remove("is-invalid");
+                this.classList.add("is-valid");
+            } else {
+                this.classList.remove("is-valid");
+                this.classList.add("is-invalid");
+                document.getElementById("nameMessage").innerHTML =
+                    "Este campo es requerido";
+            }
+
+            if (this.value === "") {
+                console.log("campo requerido");
+                document.getElementById("nameMessage").innerHTML =
+                    "Este campo es requerido";
+                this.classList.add("is-invalid");
+            }
+
+            if (letrasRegex.test(this.value)) {
+                btn.removeAttribute("disabled");
+            } else {
+                btn.setAttribute("disabled", "disabled");
+            }
+        };
+
+    },
+
+    limpiar() {
         let name = document.getElementById("name");
         let type = document.getElementById("type");
-        
+
 
         console.log("limpiando");
-        name.classList.remove("is-invalid");    
+        name.classList.remove("is-invalid");
         name.classList.remove("is-valid");
 
-      }
+    }
 
 
 }

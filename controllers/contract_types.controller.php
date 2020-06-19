@@ -62,21 +62,25 @@ class Contract_typesController extends Controller{
     public function destroy($param = null)
     {
         $id = $param[0];
-        $res = $this->contract_type->Delete($id);
+        $res = $this->contract_type->delete($id);
         echo json_encode($res);
         
     }
 
     public function masive()
     {
+
         $contract_types = json_decode($_POST['contract_types']);
+        $responses = [];
         foreach ($contract_types as $contract_type) {
             $this->contract_type->create([
                 'name'=>$contract_type->name
             ]);
+            array_push($contract_types, $contract_type);
         }
         echo json_encode([
             'status'=>200,
+            'responses'=>$responses,
             'message'=>'Tipos de contratos actualizados'
         ]);
     }

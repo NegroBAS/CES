@@ -1,5 +1,6 @@
 const app = {
     url: document.getElementById("url").content,
+    groups: null,
     getData: async function () {
         try {
             let res = await fetch(`${this.url}learners/index`);
@@ -129,15 +130,52 @@ const app = {
             console.log(error);
         }
     },
+    getGroups: async function(){
+        try {
+			let res = await fetch(`${this.url}groups/index`);
+            let data = await res.json();
+            console.log('SI');
+            console.log(data);
+			this.groups = data[0].groups;
+		} catch (error) {
+			console.log(error);
+		}
+	}
 };
+
+function selectGroup(value) {
+    document.getElementById('group_id').value = value;
+    document.getElementById('content-group').innerHTML = "";
+}
 $(document).ready(async function () {
     await app.getData();
+    await app.getGroups();
     $("#learners").DataTable({
         language: {
             url:
                 "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
         },
     });
+
+    document.getElementById('group_id').oninput = function(){
+        let matches = app.groups.filter(group => {
+            const rgex = new RegExp(`^${this.value}`, 'gi');
+            return group.code_tab.match(rgex);
+        });
+        if(this.value.length === 0){
+            matches=[];
+        }
+        let html = '<ul class="list-group">';
+        if(matches.length > 0){
+            matches.forEach(match => {
+                html+=`<p onclick="selectGroup('${match.code_tab}')" class="list-group-item list-group-item-action">${match.code_tab}</p>`
+            });
+            html+="</ul>";
+            document.getElementById('content-group').innerHTML = html;
+        }else{
+            document.getElementById('content-group').innerHTML = "<p class='mt-3'>El registro no existe</p>";
+        }
+    }
 
     document.getElementById("btn-create").onclick = function () {
         $(".modal #form").trigger("reset");
@@ -154,6 +192,8 @@ $(document).ready(async function () {
             app.create(this);
         }
     };
+
+
     $(document).on("click", ".delete", function () {
         id = $(this.parentElement.parentElement).data("id");
         Swal.fire({
