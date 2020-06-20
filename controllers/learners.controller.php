@@ -32,15 +32,50 @@ class LearnersController extends Controller{
 
     public function store()
     {
-        date_default_timezone_set("America/Bogota");
-     $username = $_POST['username'];
+      
+        $url_photo = "public/photos/";
+        $username = $_POST['username'];
        $document_type_id = $_POST['document_type_id'];
        $document = $_POST['document'];
        $phone = $_POST['phone'];
        $email = $_POST['email'];
        $group_id = $_POST['group_id'];
        $birthdate = $_POST['birthdate'];
-       $photo = "VACIO";//$_POST['photo'];
+
+       $photo = $url_photo. basename($_FILES["photo"]["name"]);
+       $typeFile = strtolower(pathinfo($photo, PATHINFO_EXTENSION));
+
+       if(isset($_FILES['photo'])){
+            if (is_uploaded_file($_FILES['photo']['tmp_name'])) {   
+
+                    $rutaA1=$_FILES['photo']['tmp_name'];
+
+                    if($typeFile == "jpg" || $typeFile == "jpeg"){
+
+
+                        if(is_uploaded_file($rutaA1)){
+                            $destinoA1= $url_photo.$username."_".$document.".".$typeFile;
+                            copy($rutaA1,$destinoA1);
+                        }else{
+                            echo "debe selecionar una imagen 1";
+                        }
+    
+    
+                    }else{
+                        echo "solo se admiten archivos jpg o jpeg";
+                    }
+                    
+                    
+            
+            }else{
+        
+                $destinoA1=$photo;             
+            
+            }
+        
+        }
+
+
        $res = $this->learner->create([
            'username' => $username,
            'document_type_id' => $document_type_id,
@@ -51,6 +86,7 @@ class LearnersController extends Controller{
            'birthdate' => $birthdate,
            'photo' => $photo
        ]);
+
        echo json_encode($res);
        return;
         
@@ -66,6 +102,8 @@ class LearnersController extends Controller{
 
     public function edit($param = null)
     {
+        $url_photo = "public/photos/";
+
         $id = $param[0];
         $username = $_POST['username'];
         $document_type_id = $_POST['document_type_id'];
@@ -74,7 +112,51 @@ class LearnersController extends Controller{
         $email = $_POST['email'];
         $group_id = $_POST['group_id'];
         $birthdate = $_POST['birthdate'];
-        $photo = "vacio";//$_POST['photo'];
+
+        if(!isset($_FILES["photo"]["name"])){
+            $photo = $url_photo.$username."_".$document.".jpg";
+            // $photo = $_POST["photo_2"];
+
+        }else{
+
+            $photo = $url_photo. basename($_FILES["photo"]["name"]);
+            $typeFile = strtolower(pathinfo($photo, PATHINFO_EXTENSION));
+     
+            if(isset($_FILES['photo'])){
+                 if (is_uploaded_file($_FILES['photo']['tmp_name'])) {   
+     
+                         $rutaA1=$_FILES['photo']['tmp_name'];
+     
+                         if($typeFile == "jpg" || $typeFile == "jpeg"){
+     
+     
+                             if(is_uploaded_file($rutaA1)){
+                                 $destinoA1= $url_photo.$username."_".$document.".".$typeFile;
+                                 copy($rutaA1,$destinoA1);
+                             }else{
+                                 echo "debe selecionar una imagen 1";
+                             }
+         
+         
+                         }else{
+                             echo "solo se admiten archivos jpg o jpeg";
+                         }
+                         
+                         
+                 
+                 }else{
+             
+                     $destinoA1=$url_photo.$username."_".$document.".jpg";
+                     
+                 
+                 }
+             
+             }
+
+        }
+       
+        $photo = $url_photo.$username."_".$document.".jpg";
+
         $res = $this->learner->update([
             'id' => $id,
             'username' => $username,

@@ -48,7 +48,7 @@
             </div>
             <div class="modal-body">
 
-                <form action="" method="post" id="form">
+                <form enctype="multipart/form-data" method="post" id="form" >
                     <div class="form-row">
                         <div class="col">
                                 <div class="form-group">
@@ -116,26 +116,28 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="form-row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="photo">Fotografia</label>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">Subir</span>
-                                    </div>
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" id="photo"  lang="es"  >
-                                        <label class="custom-file-label" for="photo"  data-browse="Buscar">Seleccionar Archivo</label>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    
-                    </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="photo">Fotografia</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Subir</span>
+                                        </div>
 
+                                        <div class="custom-file">                        
+                                            <input type="file" class="custom-file-input" id="photo" name="photo"  lang="es"  >
+                                            <label class="custom-file-label" for="photo"  data-browse="Buscar">Seleccionar Archivo</label>
+                                        </div>
+
+                                        <input type="text" hidden id="photo_2" norme="photo_2" value="">
+
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        
+                        </div>
 
 
                 </form>

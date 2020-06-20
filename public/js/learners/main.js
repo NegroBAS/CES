@@ -6,8 +6,9 @@ const app = {
             let res = await fetch(`${this.url}learners/index`);
             let data = await res.json();
             let html = "";
-            console.log(data);
             data[0].learners.forEach((learner) => {
+                //fila de td para imagen
+                // <td class="text-center"><img class="img-fluid img-thumbnail" width="200" height="200" src="${learner.photo}"></td>
                 html += `
                 <tr data-id="${learner.id}">
                     <td>${learner.username}</td>
@@ -59,6 +60,8 @@ const app = {
                 document.getElementById("document_type_id").value = data.learner.document_type_id;
                 document.getElementById("group_id").value = data.learner.group_id;
                 document.getElementById("birthdate").value = data.learner.birthdate;
+                document.getElementById("photo").value = data.learner.photo;
+                document.getElementById("photo_2").value = data.learner.photo;
             }
         } catch (error) {
             console.log(error);
@@ -71,8 +74,9 @@ const app = {
                 method: "POST",
                 body: new FormData(form),
             });
+            console.log(res);
             let data = await res.json();
-            console.log(data.status);
+            console.log(data);
             if (data.status === 200) {
                 $(".modal").modal("toggle");
                 app.getData();
@@ -214,7 +218,7 @@ $(document).ready(async function () {
                 );
                 let id = $($(this)[0].parentElement.parentElement).data("id");
                 app.delete(id);
-                app.getDate();
+                app.getData();
             }
         });
     });
