@@ -147,10 +147,12 @@ const app = {
 	}
 };
 
-function selectGroup(value) {
+function selectGroup(value,name) {
     document.getElementById('group_id').value = value;
+    document.getElementById('group_name').value = name;
     document.getElementById('content-group').innerHTML = "";
 }
+
 $(document).ready(async function () {
     await app.getData();
     await app.getGroups();
@@ -161,7 +163,7 @@ $(document).ready(async function () {
         },
     });
 
-    document.getElementById('group_id').oninput = function(){
+    document.getElementById('group_name').oninput = function(){
         let matches = app.groups.filter(group => {
             const rgex = new RegExp(`^${this.value}`, 'gi');
             return group.code_tab.match(rgex)
@@ -172,7 +174,7 @@ $(document).ready(async function () {
         let html = '<ul class="list-group">';
         if(matches.length > 0){
             matches.forEach(match => {
-                html+=`<p onclick="selectGroup('${match.id}')" class="list-group-item list-group-item-action">${match.code_tab}</p>`
+                html+=`<p onclick="selectGroup('${match.id}','${match.code_tab}')" class="list-group-item list-group-item-action">${match.code_tab}</p>`
             });
             html+="</ul>";
             document.getElementById('content-group').innerHTML = html;

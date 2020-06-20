@@ -104,7 +104,8 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="group_id">Grupo</label>
-                                <input type="text" name="group_id" id="group_id" class="form-control" placeholder="Busca aqui...">
+                                <input type="text" name="group_name" id="group_name" class="form-control" placeholder="Busca aqui...">
+                                <input type="hidden" name="group_id" id="group_id">
                                 <div id="content-group">
                                 </div>
                             </div>
