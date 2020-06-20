@@ -164,7 +164,7 @@ $(document).ready(async function () {
     document.getElementById('group_id').oninput = function(){
         let matches = app.groups.filter(group => {
             const rgex = new RegExp(`^${this.value}`, 'gi');
-            return group.code_tab.match(rgex);
+            return group.code_tab.match(rgex)
         });
         if(this.value.length === 0){
             matches=[];
@@ -172,7 +172,7 @@ $(document).ready(async function () {
         let html = '<ul class="list-group">';
         if(matches.length > 0){
             matches.forEach(match => {
-                html+=`<p onclick="selectGroup('${match.code_tab}')" class="list-group-item list-group-item-action">${match.code_tab}</p>`
+                html+=`<p onclick="selectGroup('${match.id}')" class="list-group-item list-group-item-action">${match.code_tab}</p>`
             });
             html+="</ul>";
             document.getElementById('content-group').innerHTML = html;
