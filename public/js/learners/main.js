@@ -50,7 +50,7 @@ const app = {
             if (data.status === 200) {
                 $(".modal #form").trigger("reset");
                 $(".modal").modal("toggle");
-                $(".modal").find(".modal-title").text("Editar Cargo");
+                $(".modal").find(".modal-title").text("Editar aprendiz");
                 document.getElementById("username").value =
                     data.learner.username;
                 document.getElementById("document").value =
@@ -184,7 +184,7 @@ $(document).ready(async function () {
     document.getElementById("btn-create").onclick = function () {
         $(".modal #form").trigger("reset");
         $(".modal").modal("toggle");
-        $(".modal").find(".modal-title").text("Crear Cargo");
+        $(".modal").find(".modal-title").text("Crear aprendiz");
         limpiar();
         validaciones();
     };
