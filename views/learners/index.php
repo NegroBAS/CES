@@ -48,7 +48,7 @@
             </div>
             <div class="modal-body">
 
-                <form enctype="multipart/form-data" method="post" id="form" >
+                <form enctype="multipart/form-data" method="post" id="form" autocomplete="off">
                     <div class="form-row">
                         <div class="col">
                                 <div class="form-group">
