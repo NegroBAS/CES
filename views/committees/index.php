@@ -96,7 +96,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary" form="form"><i class="far fa-save"></i> Guardar</button>
+                <button type="submit" id="btnCommitteeCreate" class="btn btn-primary" form="form"><i class="far fa-save"></i> Guardar</button>
             </div>
         </div>
     </div>
