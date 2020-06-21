@@ -10,8 +10,8 @@ class LearnersController extends Controller{
 
         $this->view->user = $_SESSION['user'];
         $this->view->scripts = [
-            '/js/sweetalert.js',
-            '/js/learners/main.js'
+            '/js/learners/main.js',
+            '/js/sweetalert.js'
         ];
         $this->learner = $this->loadModel('Learner');
         $this->document_type = $this->loadModel('DocumentType');
@@ -44,17 +44,20 @@ class LearnersController extends Controller{
 
        $photo = $url_photo. basename($_FILES["photo"]["name"]);
        $typeFile = strtolower(pathinfo($photo, PATHINFO_EXTENSION));
+       $token = uniqid();
 
        if(isset($_FILES['photo'])){
             if (is_uploaded_file($_FILES['photo']['tmp_name'])) {   
 
                     $rutaA1=$_FILES['photo']['tmp_name'];
 
-                    if($typeFile == "jpg" || $typeFile == "jpeg"){
+                    if($typeFile == "jpg" || $typeFile == "jpeg" || $typeFile == "png"){
 
-
+                        
+                       
                         if(is_uploaded_file($rutaA1)){
-                            $destinoA1= $url_photo.$username."_".$document.".".$typeFile;
+                            $destinoA1= $url_photo.$token.".".$typeFile;
+                            $photo=$destinoA1;
                             copy($rutaA1,$destinoA1);
                         }else{
                             echo "debe selecionar una imagen 1";
@@ -88,6 +91,8 @@ class LearnersController extends Controller{
        ]);
 
        echo json_encode($res);
+
+       
        return;
         
     }
@@ -112,26 +117,30 @@ class LearnersController extends Controller{
         $email = $_POST['email'];
         $group_id = $_POST['group_id'];
         $birthdate = $_POST['birthdate'];
+        
+       
+            //si hay una nueva foto//
+        if($_FILES['photo']['name']){
 
-        if(!isset($_FILES["photo"]["name"])){
-            $photo = $url_photo.$username."_".$document.".jpg";
-            // $photo = $_POST["photo_2"];
-
-        }else{
 
             $photo = $url_photo. basename($_FILES["photo"]["name"]);
             $typeFile = strtolower(pathinfo($photo, PATHINFO_EXTENSION));
      
+
             if(isset($_FILES['photo'])){
+
                  if (is_uploaded_file($_FILES['photo']['tmp_name'])) {   
      
                          $rutaA1=$_FILES['photo']['tmp_name'];
      
-                         if($typeFile == "jpg" || $typeFile == "jpeg"){
+                         if($typeFile == "jpg" || $typeFile == "jpeg" || $typeFile == "png"){
      
      
                              if(is_uploaded_file($rutaA1)){
-                                 $destinoA1= $url_photo.$username."_".$document.".".$typeFile;
+                                //  $destinoA1= $url_photo.$username."_".$document.".".$typeFile;
+                                    $url_back = $_POST['photo_2'];
+                                 $destinoA1= $url_back;
+                                 $photo= $destinoA1;
                                  copy($rutaA1,$destinoA1);
                              }else{
                                  echo "debe selecionar una imagen 1";
@@ -146,16 +155,16 @@ class LearnersController extends Controller{
                  
                  }else{
              
-                     $destinoA1=$url_photo.$username."_".$document.".jpg";
+                     $destinoA1=$_POST['photo_2'];
                      
                  
                  }
              
              }
-
+        }else{
+            $photo = $_POST['photo_2'];
         }
-       
-        $photo = $url_photo.$username."_".$document.".jpg";
+
 
         $res = $this->learner->update([
             'id' => $id,

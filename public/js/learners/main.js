@@ -12,7 +12,7 @@ const app = {
                 html += `
                 <tr data-id="${learner.id}">
                     <td>${learner.username}</td>
-                    <td>${learner.document_type_id}</td>
+                    <td>${learner.document_type_id}</td>                   
                     <td>${learner.document}</td>
                     <td>${learner.phone}</td>
                     <td>${learner.email}</td>
@@ -50,7 +50,7 @@ const app = {
             if (data.status === 200) {
                 $(".modal #form").trigger("reset");
                 $(".modal").modal("toggle");
-                $(".modal").find(".modal-title").text("Editar aprendiz");
+                $(".modal").find(".modal-title").text("Editar Cargo");
                 document.getElementById("username").value =
                     data.learner.username;
                 document.getElementById("document").value =
@@ -60,7 +60,6 @@ const app = {
                 document.getElementById("document_type_id").value = data.learner.document_type_id;
                 document.getElementById("group_id").value = data.learner.group_id;
                 document.getElementById("birthdate").value = data.learner.birthdate;
-                document.getElementById("photo").value = data.learner.photo;
                 document.getElementById("photo_2").value = data.learner.photo;
             }
         } catch (error) {
@@ -138,8 +137,6 @@ const app = {
         try {
 			let res = await fetch(`${this.url}groups/index`);
             let data = await res.json();
-            console.log('SI');
-            console.log(data);
 			this.groups = data[0].groups;
 		} catch (error) {
 			console.log(error);
@@ -186,7 +183,7 @@ $(document).ready(async function () {
     document.getElementById("btn-create").onclick = function () {
         $(".modal #form").trigger("reset");
         $(".modal").modal("toggle");
-        $(".modal").find(".modal-title").text("Crear aprendiz");
+        $(".modal").find(".modal-title").text("Crear Cargo");
         limpiar();
         validaciones();
     };
