@@ -138,8 +138,6 @@ const app = {
         try {
 			let res = await fetch(`${this.url}groups/index`);
             let data = await res.json();
-            console.log('SI');
-            console.log(data);
 			this.groups = data[0].groups;
 		} catch (error) {
 			console.log(error);

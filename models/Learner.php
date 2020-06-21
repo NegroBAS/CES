@@ -76,6 +76,11 @@ class Learner extends Model{
         }
     }
 
+    public function findview($id)
+    {
+        
+    }
+
     public function create($data)
     {
         try {
