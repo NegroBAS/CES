@@ -1,11 +1,13 @@
 <?php
 
-class LearnersController extends Controller{
-    public function __construct() {
+class LearnersController extends Controller
+{
+    public function __construct()
+    {
         parent::__construct();
         session_start();
-        if(!isset($_SESSION['user'])){
-            header('Location:'.constant('URL'));
+        if (!isset($_SESSION['user'])) {
+            header('Location:' . constant('URL'));
         }
 
         $this->view->user = $_SESSION['user'];
@@ -32,29 +34,28 @@ class LearnersController extends Controller{
 
     public function store()
     {
-      
+
         $url_photo = "public/photos/";
         $username = $_POST['username'];
-       $document_type_id = $_POST['document_type_id'];
-       $document = $_POST['document'];
-       $phone = $_POST['phone'];
-       $email = $_POST['email'];
-       $group_id = $_POST['group_id'];
-       $birthdate = $_POST['birthdate'];
+        $document_type_id = $_POST['document_type_id'];
+        $document = $_POST['document'];
+        $phone = $_POST['phone'];
+        $email = $_POST['email'];
+        $group_id = $_POST['group_id'];
+        $birthdate = $_POST['birthdate'];
 
        $photo = $url_photo. basename($_FILES["photo"]["name"]);
        $typeFile = strtolower(pathinfo($photo, PATHINFO_EXTENSION));
        $token = uniqid();
 
-       if(isset($_FILES['photo'])){
-            if (is_uploaded_file($_FILES['photo']['tmp_name'])) {   
 
-                    $rutaA1=$_FILES['photo']['tmp_name'];
+        if (isset($_FILES['photo'])) {
+            if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
+
+                $rutaA1 = $_FILES['photo']['tmp_name'];
 
                     if($typeFile == "jpg" || $typeFile == "jpeg" || $typeFile == "png"){
 
-                        
-                       
                         if(is_uploaded_file($rutaA1)){
                             $destinoA1= $url_photo.$token.".".$typeFile;
                             $photo=$destinoA1;
@@ -66,22 +67,19 @@ class LearnersController extends Controller{
     
                     }else{
                         echo "solo se admiten archivos jpg o jpeg";
-                    }
-                    
-                    
-            
-            }else{
-        
-                $destinoA1=$photo;             
-            
+
+                }
+            } else {
+
+                $destinoA1 = $photo;
             }
-        
         }
+
 
 
        $res = $this->learner->create([
            'username' => $username,
-           'document_type_id' => $document_type_id,
+            'document_type_id' => $document_type_id,
            'document' => $document,
            'phone' => $phone,
            'email' => $email,
@@ -95,14 +93,14 @@ class LearnersController extends Controller{
        
        return;
         
+
     }
 
     public function show($param = null)
     {
         $id = $param[0];
-        $res= $this->learner->find($id);
+        $res = $this->learner->find($id);
         echo json_encode($res);
-        
     }
 
     public function edit($param = null)
@@ -122,11 +120,10 @@ class LearnersController extends Controller{
             //si hay una nueva foto//
         if($_FILES['photo']['name']){
 
-
-            $photo = $url_photo. basename($_FILES["photo"]["name"]);
+            $photo = $url_photo . basename($_FILES["photo"]["name"]);
             $typeFile = strtolower(pathinfo($photo, PATHINFO_EXTENSION));
-     
 
+     
             if(isset($_FILES['photo'])){
 
                  if (is_uploaded_file($_FILES['photo']['tmp_name'])) {   
@@ -166,6 +163,7 @@ class LearnersController extends Controller{
         }
 
 
+
         $res = $this->learner->update([
             'id' => $id,
             'username' => $username,
@@ -179,15 +177,13 @@ class LearnersController extends Controller{
         ]);
         echo json_encode($res);
         return;
-        
     }
 
-    public function destroy($param=null)
+    public function destroy($param = null)
     {
         $id = $param[0];
         $res = $this->learner->Delete($id);
         echo json_encode($res);
-        
     }
 
     public function render()
