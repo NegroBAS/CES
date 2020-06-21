@@ -12,7 +12,7 @@ const app = {
                 html += `
                 <tr data-id="${learner.id}">
                     <td>${learner.username}</td>
-                    <td>${learner.document_type_id}</td>
+                    <td>${learner.document_type_id}</td>                   
                     <td>${learner.document}</td>
                     <td>${learner.phone}</td>
                     <td>${learner.email}</td>
@@ -60,7 +60,6 @@ const app = {
                 document.getElementById("document_type_id").value = data.learner.document_type_id;
                 document.getElementById("group_id").value = data.learner.group_id;
                 document.getElementById("birthdate").value = data.learner.birthdate;
-                document.getElementById("photo").value = data.learner.photo;
                 document.getElementById("photo_2").value = data.learner.photo;
             }
         } catch (error) {

@@ -52,7 +52,7 @@
                     <div class="form-row">
                         <div class="col">
                                 <div class="form-group">
-                                <label for="username">Nombre</label>
+                                <label for="username">Nombre</label>                              
                                 <input type="text" name="username" id="username" class="form-control">
                                 <div class="invalid-feedback" id="nameMessage">
 
@@ -105,7 +105,7 @@
                             <div class="form-group">
                                 <label for="group_id">Grupo</label>
                                 <input type="text" name="group_name" id="group_name" class="form-control" placeholder="Busca aqui...">
-                                <input type="hidden" name="group_id" id="group_id">
+                                <input type="text" hidden name="group_id" id="group_id" value="">                                                        
                                 <div id="content-group">
                                 </div>
                             </div>
@@ -117,6 +117,7 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="form-row">
                             <div class="col">
                                 <div class="form-group">
@@ -127,11 +128,11 @@
                                         </div>
 
                                         <div class="custom-file">                        
-                                            <input type="file" class="custom-file-input" id="photo" name="photo"  lang="es"  >
+                                            <input type="file" class="custom-file-input" id="photo" name="photo"  lang="es" value="" >
                                             <label class="custom-file-label" for="photo"  data-browse="Buscar">Seleccionar Archivo</label>
                                         </div>
-
-                                        <input type="text" hidden id="photo_2" norme="photo_2" value="">
+                                        <!-- //link photo hidden -->
+                                        <input type="text" hidden name="photo_2" id="photo_2" value=""> 
 
                                     </div>
                                     
@@ -140,6 +141,7 @@
                         
                         </div>
 
+                        
 
                 </form>
 

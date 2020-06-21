@@ -12,8 +12,8 @@ class LearnersController extends Controller
 
         $this->view->user = $_SESSION['user'];
         $this->view->scripts = [
-            '/js/sweetalert.js',
-            '/js/learners/main.js'
+            '/js/learners/main.js',
+            '/js/sweetalert.js'
         ];
         $this->learner = $this->loadModel('Learner');
         $this->document_type = $this->loadModel('DocumentType');
@@ -44,25 +44,30 @@ class LearnersController extends Controller
         $group_id = $_POST['group_id'];
         $birthdate = $_POST['birthdate'];
 
-        $photo = $url_photo . basename($_FILES["photo"]["name"]);
-        $typeFile = strtolower(pathinfo($photo, PATHINFO_EXTENSION));
+       $photo = $url_photo. basename($_FILES["photo"]["name"]);
+       $typeFile = strtolower(pathinfo($photo, PATHINFO_EXTENSION));
+       $token = uniqid();
+
 
         if (isset($_FILES['photo'])) {
             if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
 
                 $rutaA1 = $_FILES['photo']['tmp_name'];
 
-                if ($typeFile == "jpg" || $typeFile == "jpeg") {
+                    if($typeFile == "jpg" || $typeFile == "jpeg" || $typeFile == "png"){
 
+                        if(is_uploaded_file($rutaA1)){
+                            $destinoA1= $url_photo.$token.".".$typeFile;
+                            $photo=$destinoA1;
+                            copy($rutaA1,$destinoA1);
+                        }else{
+                            echo "debe selecionar una imagen 1";
+                        }
+    
+    
+                    }else{
+                        echo "solo se admiten archivos jpg o jpeg";
 
-                    if (is_uploaded_file($rutaA1)) {
-                        $destinoA1 = $url_photo . $username . "_" . $document . "." . $typeFile;
-                        copy($rutaA1, $destinoA1);
-                    } else {
-                        echo "debe selecionar una imagen 1";
-                    }
-                } else {
-                    echo "solo se admiten archivos jpg o jpeg";
                 }
             } else {
 
@@ -71,19 +76,24 @@ class LearnersController extends Controller
         }
 
 
-        $res = $this->learner->create([
-            'username' => $username,
-            'document_type_id' => $document_type_id,
-            'document' => $document,
-            'phone' => $phone,
-            'email' => $email,
-            'group_id' => $group_id,
-            'birthdate' => $birthdate,
-            'photo' => $photo
-        ]);
 
-        echo json_encode($res);
-        return;
+       $res = $this->learner->create([
+           'username' => $username,
+            'document_type_id' => $document_type_id,
+           'document' => $document,
+           'phone' => $phone,
+           'email' => $email,
+           'group_id' => $group_id,
+           'birthdate' => $birthdate,
+           'photo' => $photo
+       ]);
+
+       echo json_encode($res);
+
+       
+       return;
+        
+
     }
 
     public function show($param = null)
@@ -112,41 +122,54 @@ class LearnersController extends Controller
         $email = $_POST['email'];
         $group_id = $_POST['group_id'];
         $birthdate = $_POST['birthdate'];
-
-        if (!isset($_FILES["photo"]["name"])) {
-            $photo = $url_photo . $username . "_" . $document . ".jpg";
-            // $photo = $_POST["photo_2"];
-
-        } else {
+        
+       
+            //si hay una nueva foto//
+        if($_FILES['photo']['name']){
 
             $photo = $url_photo . basename($_FILES["photo"]["name"]);
             $typeFile = strtolower(pathinfo($photo, PATHINFO_EXTENSION));
 
-            if (isset($_FILES['photo'])) {
-                if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
+     
+            if(isset($_FILES['photo'])){
 
-                    $rutaA1 = $_FILES['photo']['tmp_name'];
-
-                    if ($typeFile == "jpg" || $typeFile == "jpeg") {
-
-
-                        if (is_uploaded_file($rutaA1)) {
-                            $destinoA1 = $url_photo . $username . "_" . $document . "." . $typeFile;
-                            copy($rutaA1, $destinoA1);
-                        } else {
-                            echo "debe selecionar una imagen 1";
-                        }
-                    } else {
-                        echo "solo se admiten archivos jpg o jpeg";
-                    }
-                } else {
-
-                    $destinoA1 = $url_photo . $username . "_" . $document . ".jpg";
-                }
-            }
+                 if (is_uploaded_file($_FILES['photo']['tmp_name'])) {   
+     
+                         $rutaA1=$_FILES['photo']['tmp_name'];
+     
+                         if($typeFile == "jpg" || $typeFile == "jpeg" || $typeFile == "png"){
+     
+     
+                             if(is_uploaded_file($rutaA1)){
+                                //  $destinoA1= $url_photo.$username."_".$document.".".$typeFile;
+                                    $url_back = $_POST['photo_2'];
+                                 $destinoA1= $url_back;
+                                 $photo= $destinoA1;
+                                 copy($rutaA1,$destinoA1);
+                             }else{
+                                 echo "debe selecionar una imagen 1";
+                             }
+         
+         
+                         }else{
+                             echo "solo se admiten archivos jpg o jpeg";
+                         }
+                         
+                         
+                 
+                 }else{
+             
+                     $destinoA1=$_POST['photo_2'];
+                     
+                 
+                 }
+             
+             }
+        }else{
+            $photo = $_POST['photo_2'];
         }
 
-        $photo = $url_photo . $username . "_" . $document . ".jpg";
+
 
         $res = $this->learner->update([
             'id' => $id,
