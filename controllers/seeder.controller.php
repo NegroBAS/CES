@@ -28,12 +28,8 @@ class SeederController extends Controller
         ];
         $responses = [];
         for ($i = 0; $i < count($data); $i++) {
-            foreach ($data[$i] as $key => $value) {
-                $response = $this->document_type->create([
-                    "$key" => $value
-                ]);
-                array_push($responses, $response);
-            }
+            $response = $this->document_type->create($data[$i]);
+            array_push($responses, $response);
         }
     }
     public function seed_committee_session_types()
@@ -51,12 +47,8 @@ class SeederController extends Controller
         ];
         $responses = [];
         for ($i = 0; $i < count($data); $i++) {
-            foreach ($data[$i] as $key => $value) {
-                $response = $this->committee_session_type->create([
-                    "$key" => $value
-                ]);
-                array_push($responses, $response);
-            }
+            $response = $this->committee_session_type->create($data[$i]);
+            array_push($responses, $response);
         }
     }
     public function seed_formative_measures()
@@ -77,12 +69,8 @@ class SeederController extends Controller
         ];
         $responses = [];
         for ($i = 0; $i < count($data); $i++) {
-            foreach ($data[$i] as $key => $value) {
-                $response = $this->formative_measure->create([
-                    "$key" => $value
-                ]);
-                array_push($responses, $response);
-            }
+            $response = $this->formative_measure->create($data[$i]);
+            array_push($responses, $response);
         }
     }
     public function seed_infringement_classifications()
@@ -100,12 +88,8 @@ class SeederController extends Controller
         ];
         $responses = [];
         for ($i = 0; $i < count($data); $i++) {
-            foreach ($data[$i] as $key => $value) {
-                $response = $this->infringement_classification->create([
-                    "$key" => $value
-                ]);
-                array_push($responses, $response);
-            }
+            $response = $this->infringement_classification->create($data[$i]);
+            array_push($responses, $response);
         }
     }
     public function seed_infringement_types()
@@ -120,12 +104,8 @@ class SeederController extends Controller
         ];
         $responses = [];
         for ($i = 0; $i < count($data); $i++) {
-            foreach ($data[$i] as $key => $value) {
-                $response = $this->infringement_type->create([
-                    "$key" => $value
-                ]);
-                array_push($responses, $response);
-            }
+            $response = $this->infringement_type->create($data[$i]);
+            array_push($responses, $response);
         }
     }
     public function seed_novelty_types()
@@ -149,12 +129,8 @@ class SeederController extends Controller
         ];
         $responses = [];
         for ($i = 0; $i < count($data); $i++) {
-            foreach ($data[$i] as $key => $value) {
-                $response = $this->novelty_type->create([
-                    "$key" => $value
-                ]);
-                array_push($responses, $response);
-            }
+            $response = $this->novelty_type->create($data[$i]);
+            array_push($responses, $response);
         }
     }
 
@@ -173,12 +149,8 @@ class SeederController extends Controller
         ];
         $responses = [];
         for ($i = 0; $i < count($data); $i++) {
-            foreach ($data[$i] as $key => $value) {
-                $response = $this->rol->create([
-                    "$key" => $value
-                ]);
-                array_push($responses, $response);
-            }
+            $response = $this->rol->create($data[$i]);
+            array_push($responses, $response);
         }
     }
 
@@ -197,12 +169,8 @@ class SeederController extends Controller
         ];
         $responses = [];
         for ($i = 0; $i < count($data); $i++) {
-            foreach ($data[$i] as $key => $value) {
-                $response = $this->sanction->create([
-                    "$key" => $value
-                ]);
-                array_push($responses, $response);
-            }
+            $response = $this->sanction->create($data[$i]);
+            array_push($responses, $response);
         }
     }
     public function seed_users()

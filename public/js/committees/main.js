@@ -169,8 +169,13 @@ const app = {
 		try {
 			let res = await fetch(`${this.url}users/findSubdirector`);
 			let data = await res.json();
-			document.getElementById('subdirector-name').innerHTML = `Este comité se realizara en nombre del subdirector <span class="text-primary">${data.user.name}</div>`;
-			return data.user;
+			if(data.user){
+				document.getElementById('subdirector-name').innerHTML = `Este comité se realizara en nombre del subdirector <span class="text-primary">${data.user.name}</span>`;
+				return data.user;
+			}else{
+				document.getElementById('subdirector-name').innerHTML = `<span class="text-primary">${data.message}</span>`;
+				document.getElementById('btnCommitteeCreate').setAttribute('disabled', true);
+			}
 		} catch (error) {
 			console.log(error);
 		}

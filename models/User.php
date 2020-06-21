@@ -69,13 +69,19 @@ class User extends Model
     public function findSubdirector()
     {
         try {
-            $query = $this->db->connect()->query("SELECT users.id, users.name, users.email, users.rol_id FROM users INNER JOIN rols ON rols.name = 'Subdirector'");
+            $query = $this->db->connect()->query("SELECT * FROM users WHERE rol_id = 3");
             while($row = $query->fetch()){
                 $user = new User();
                 $user->id = $row['id'];
                 $user->name = $row['name'];
                 $user->email = $row['email'];
                 $user->rol_id = $row['rol_id'];
+            }
+            if(!isset($user)){
+                return [
+                    'status'=>400,
+                    'message'=>'No existe un coordinador en el sistema'
+                ];
             }
             return [
                 'status'=>200,

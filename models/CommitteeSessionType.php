@@ -62,7 +62,7 @@ class CommitteeSessionType extends Model{
     public function create($data)
     {
         try {
-            $query = $this->db->connect()->prepare('INSERT INTO committee_session_types(name,created_at,updated_at) VALUES (:name, :created_at, :updated_at) ');
+            $query = $this->db->connect()->prepare('INSERT INTO committee_session_types(name) VALUES (:name) ');
             if ($query->execute([
                 'name' => $data['name']
             ])) {
