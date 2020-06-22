@@ -190,6 +190,20 @@ class SeederController extends Controller
         }
     }
 
+    public function seed_learners()
+    {
+        $data = [
+            [
+                'username'=>'Santiago Bedoya Arcila',
+                'document_type_id'=>1,
+                'document'=>2131231231,
+                'phone'=>3123213212,
+                'email'=>'santiago@email.com',
+                'group_id'=>1
+            ]
+        ];
+    }
+
     public function render()
     {
         $this->view->title = 'Seeder';

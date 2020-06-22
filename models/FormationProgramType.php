@@ -75,8 +75,9 @@ class FormationProgramType extends Model
     public function create($data)
     {
         try {
-            $query = $this->db->connect()->prepare('INSERT INTO formation_program_types(name,elective_months,practice_months,created_at,updated_at) VALUES (:name,:elective_months,:practice_months,:created_at,:updated_at)');
+            $query = $this->db->connect()->prepare('INSERT INTO formation_program_types(id, name,elective_months,practice_months,created_at,updated_at) VALUES (:id, :name,:elective_months,:practice_months,:created_at,:updated_at)');
             if ($query->execute([
+                'id'=>$data['id']?$data['id']:null,
                 'name' => $data['name'],
                 'elective_months' => $data['elective_months'],
                 'practice_months' => $data['practice_months'],

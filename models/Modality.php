@@ -69,8 +69,9 @@ class Modality extends Model
     public function create($data)
     {
         try {
-            $query = $this->db->connect()->prepare('INSERT INTO modalities(name,created_at,updated_at) VALUES (:name, :created_at, :updated_at) ');
+            $query = $this->db->connect()->prepare('INSERT INTO modalities(id, name,created_at,updated_at) VALUES (:id, :name, :created_at, :updated_at) ');
             if ($query->execute([
+                'id'=>$data['id']?$data['id']:null,
                 'name' => $data['name'],
                 'created_at' => $data['created_at'],
                 'updated_at' => $data['updated_at']

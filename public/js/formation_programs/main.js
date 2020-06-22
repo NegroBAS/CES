@@ -1,6 +1,54 @@
 const app = {
     url: document.getElementById("url").content,
     edit: false,
+    authenticate: async function () {
+        try {
+            let res = await fetch(
+                "https://cronode.herokuapp.com/api/authenticate",
+                {
+                    method: "POST",
+                    headers: {
+                        accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        misena_email: "consulta@misena.edu.co",
+                        password: "123456789110",
+                    }),
+                }
+            );
+            let data = await res.json();
+            return data.token;
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    getByApi: async function () {
+        try {
+            let token = await this.authenticate();
+            let res = await fetch('https://cronode.herokuapp.com/api/ces/formationPrograms', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            let data = await res.json();
+            let fd = new FormData();
+            fd.append('formation_programs', JSON.stringify(data.formationPrograms));
+            res = await fetch(`${this.url}formation_programs/masive`, {
+                body:fd,
+                method:'POST'
+            });
+            data = await res.json();
+            if(data.status===200){
+                await app.get();
+                toastr.success('', data.message, {
+                    closeButton: true
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    },
     get: async function () {
         let resp = await fetch(`${this.url}formation_programs/index`);
         let res = await resp.json();
@@ -136,6 +184,14 @@ $(document).ready(async function () {
         $(".modal").modal("toggle");
         $(".modal").find(".modal-title").text("Crear programa de formacion");
     };
+    document.getElementById('btnUpdate').onclick = async function(){
+        document.getElementById('data-formation_programs').innerHTML = `
+        <div class="col">
+            <h6>Cargando ...</h6>
+        </div>
+        `;
+        await app.getByApi();
+    }
     document.getElementById("form").onsubmit = function (e) {
         e.preventDefault();
         if (app.edit) {

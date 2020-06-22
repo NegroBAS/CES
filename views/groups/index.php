@@ -9,19 +9,27 @@
       <h4>Grupos</h4>
     </div>
     <div class="col-2 text-right">
-      <button class="btn btn-success btn-sm" id="btn-create"><i class="fa fa-plus"></i> Crear</button>
+      <div class="dropdown">
+        <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Opciones
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#" id="btn-create"><i class="fa fa-plus"></i> Crear</a>
+          <a class="dropdown-item" href="#" id="btnUpdate"><i class="fas fa-sync-alt"></i> Actualizar</a>
+        </div>
+      </div>
     </div>
   </div>
 
   <div class="row mt-3">
     <div class="col">
-      <table class="table table-striped " id="group">
+      <table class="table table-striped " id="group" width="100%">
         <thead>
           <tr>
-            <th scope="col">Codigo</th>
-            <th scope="col">Modalidad</th>
-            <th scope="col">Programa</th>
-            <th scope="col">Cantidad de Aprendices</th>
+            <th>Ficha</th>
+            <th>Programa</th>
+            <th>Modalidad</th>
+            <th>Cantidad de Aprendices</th>
             <th>Opciones</th>
           </tr>
         </thead>

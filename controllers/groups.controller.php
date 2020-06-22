@@ -68,6 +68,33 @@ class GroupsController extends Controller
         return;
     }
 
+    public function masive()
+    {
+        $groups = json_decode($_POST['groups']);
+        $responses = [];
+        foreach ($groups as $group) {
+            $response = $this->group->create([
+                'code_tab'=>$group->codeTab,
+                'modality_id'=>$group->modalityId,
+                'formation_program_id'=>$group->formationProgramId,
+                'quantity_learners'=>$group->quantityLearners,
+                'active_learners'=>$group->activeLearners,
+                'elective_start_date'=>date("Y,m,d,g,i,s", strtotime($group->electiveStartDate)),
+                'elective_end_date'=>date("Y,m,d,g,i,s", strtotime($group->electiveEndDate)),
+                'practice_start_date' => date("Y,m,d,g,i,s", strtotime($group->practiceStartDate)),
+                'practice_end_date' => date("Y,m,d,g,i,s", strtotime($group->practiceStartDate)),
+                'created_at'=>date("Y,m,d,g,i,s"),
+                'updated_at'=>date("Y,m,d,g,i,s")
+            ]);
+            array_push($responses, $response);
+        }
+        echo json_encode([
+            'status'=>200,
+            'message'=>'Grupos actualizados',
+            'responses'=>$responses
+        ]);
+    }
+
     public function show($param = null)
     {
         $id = $param[0];

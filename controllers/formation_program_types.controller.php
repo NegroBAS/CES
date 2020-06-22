@@ -23,6 +23,28 @@ class Formation_program_typesController extends Controller{
         return;
     }
 
+    public function masive()
+    {
+        $formation_program_types = json_decode($_POST['formation_program_types']);
+        $responses = [];
+        foreach ($formation_program_types as $formation_program_type) {
+            $response = $this->formation_program_type->create([
+                'id'=>$formation_program_type->id,
+                'name'=>$formation_program_type->name,
+                'elective_months'=>$formation_program_type->electiveMonths,
+                'practice_months'=>$formation_program_type->practiceMonths,
+                'created_at'=>date("Y,m,d,g,i,s"),
+                'updated_at'=>date("Y,m,d,g,i,s")
+            ]);
+            array_push($responses, $response);
+        }
+        echo json_encode([
+            'status'=>200,
+            'message'=>'Programas de formacion actualizados',
+            'responses'=>$responses
+        ]);
+    }
+
     public function store()
     {
         date_default_timezone_set("America/Bogota");
