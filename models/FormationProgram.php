@@ -1,6 +1,7 @@
 <?php
 
-class FormationProgram extends Model{
+class FormationProgram extends Model
+{
 
     public $id;
     public $name;
@@ -9,7 +10,8 @@ class FormationProgram extends Model{
     public $created_at;
     public $updated_at;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -34,13 +36,13 @@ class FormationProgram extends Model{
                 array_push($formation_programs, $formation_program);
             }
             return [
-                'status'=>200,
-                'formation_programs'=>$formation_programs
+                'status' => 200,
+                'formation_programs' => $formation_programs
             ];
         } catch (PDOException $e) {
             return [
-                'status'=>500,
-                'error'=>$e
+                'status' => 500,
+                'error' => $e
             ];
         }
     }
@@ -48,9 +50,9 @@ class FormationProgram extends Model{
     public function find($id)
     {
         try {
-            $formation_program=[];
+            $formation_program = [];
             $query = $this->db->connect()->prepare('SELECT * FROM formation_programs WHERE id=:id');
-            $query->bindParam('id',$id);
+            $query->bindParam('id', $id);
             $query->execute();
 
             while ($row = $query->fetch()) {
@@ -61,12 +63,11 @@ class FormationProgram extends Model{
                 $formation_program->formation_program_type_id = $row['formation_program_type_id'];
                 $formation_program->created_at = $row['created_at'];
                 $formation_program->updated_at = $row['updated_at'];
-                
             }
             return [
                 'formation_program' => $formation_program,
                 'status' => 200
-                
+
             ];
         } catch (PDOException $e) {
             return [
@@ -79,23 +80,24 @@ class FormationProgram extends Model{
     public function create($data)
     {
         try {
-            $query = $this->db->connect()->prepare('INSERT INTO formation_programs(code,name,formation_program_type_id,created_at,updated_at) VALUES (:code, :name, :formation_program_type_id, :created_at, :updated_at) ');
+            $query = $this->db->connect()->prepare('INSERT INTO formation_programs(id, code,name,formation_program_type_id,created_at,updated_at) VALUES (:id, :code, :name, :formation_program_type_id, :created_at, :updated_at) ');
             if ($query->execute([
+                'id' => $data['id'] ? $data['id'] : null,
                 'code' => $data['code'],
                 'name' => $data['name'],
                 'formation_program_type_id' => $data['formation_program_type_id'],
                 'created_at' => $data['created_at'],
                 'updated_at' => $data['updated_at']
-            ])){
+            ])) {
                 return [
                     'status' => 200,
                     'message' => 'Nuevo Programa de Formacion Creado'
                 ];
-            } 
+            }
         } catch (PDOException $e) {
             return [
-                'status'=>500,
-                'error'=>$e
+                'status' => 500,
+                'error' => $e
             ];
         }
     }
@@ -104,22 +106,22 @@ class FormationProgram extends Model{
         try {
             $query = $this->db->connect()->prepare('UPDATE formation_programs SET code=:code, name=:name, formation_program_type_id=:formation_program_type_id, updated_at=:updated_at  WHERE id=:id ');
             if ($query->execute([
-                'code' =>$data['code'],
-                'name' =>$data['name'],
-                'formation_program_type_id' =>$data['formation_program_type_id'],
+                'code' => $data['code'],
+                'name' => $data['name'],
+                'formation_program_type_id' => $data['formation_program_type_id'],
                 'updated_at' => $data['updated_at'],
                 'id' => $data['id']
-                
-            ])){
+
+            ])) {
                 return [
                     'status' => 200,
                     'message' => 'Programa Actualizado '
                 ];
-            } 
+            }
         } catch (PDOException $e) {
             return [
-                'status'=>500,
-                'error'=>$e
+                'status' => 500,
+                'error' => $e
             ];
         }
     }
@@ -129,16 +131,16 @@ class FormationProgram extends Model{
         try {
             $query = $this->db->connect()->prepare('DELETE FROM formation_programs   WHERE id=:id ');
             if ($query->execute([
-                'id' =>$id
-            ])){
+                'id' => $id
+            ])) {
                 return [
                     'status' => 200,
                     'message' => 'Programa Eliminado '
                 ];
-            }  
+            }
         } catch (PDOException $e) {
             return [
-                'status'=>500,
+                'status' => 500,
                 'error' => $e
             ];
         }

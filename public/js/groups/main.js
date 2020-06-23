@@ -1,6 +1,55 @@
 const app = {
     url: document.getElementById('url').content,
     edit: false,
+    authenticate: async function () {
+        try {
+            let res = await fetch(
+                "https://cronode.herokuapp.com/api/authenticate",
+                {
+                    method: "POST",
+                    headers: {
+                        accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        misena_email: "consulta@misena.edu.co",
+                        password: "123456789110",
+                    }),
+                }
+            );
+            let data = await res.json();
+            return data.token;
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    getByApi: async function () {
+        try {
+            let token = await this.authenticate();
+            let res = await fetch('https://cronode.herokuapp.com/api/ces/groups', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            let data = await res.json();
+            console.log(data);
+            let fd = new FormData();
+            fd.append('groups', JSON.stringify(data.groups));
+            res = await fetch(`${this.url}groups/masive`, {
+                method:'POST',
+                body:fd
+            });
+            data = await res.json();
+            if(data.status===200){
+                await app.get();
+                toastr.success('', data.message, {
+                    closeButton: true
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    },
     get: async function () {
         let res = await fetch(`${this.url}groups/index`);
         let data = await res.json();
@@ -9,8 +58,8 @@ const app = {
             html += `
             <tr data-id="${group.id}">
                 <td>${group.code_tab}</td>
-                <td>${group.name_modalities}</td>
                 <td>${group.name_formation}</td>
+                <td>${group.name_modalities}</td>
                 <td>${group.quantity_learners}</td>
                 <td>
                     <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
@@ -33,12 +82,7 @@ const app = {
             <option value="${modality.id}">${modality.name}</option>
              `
         });
-        document.getElementById('modality_id').innerHTML = html;
-
-
-
-
-        
+        document.getElementById('modality_id').innerHTML = html;        
     },
     getOne: async function (id) {
         try {
@@ -131,6 +175,11 @@ const app = {
 $(document).ready(async function () {
     let id = null;
     await app.get();
+    $('#group').DataTable({
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+        }
+    });
     document.getElementById('btn-create').onclick = function(){
         console.log("modal crear")
         $('.modal #form').trigger('reset');
@@ -138,6 +187,10 @@ $(document).ready(async function () {
         $('.modal').find('.modal-title').text('Crear grupo');
         val.limpiar();
         val.validaciones();
+    }
+    document.getElementById('btnUpdate').onclick=async function(){
+        document.getElementById('data-groups').innerHTML = 'Cargando ...'
+        await app.getByApi();
     }
     document.getElementById('form').onsubmit = function(e){
         e.preventDefault();
@@ -177,12 +230,6 @@ $(document).ready(async function () {
     })
 
 });
-
-    $('#group').DataTable({
-        "language": {
-            "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
-        }
-    });
     
     // validaciones
     const val ={

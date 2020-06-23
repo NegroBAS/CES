@@ -49,6 +49,28 @@ class Formation_programsController extends Controller
         return;
     }
 
+    public function masive()
+    {
+        $formation_programs = json_decode($_POST['formation_programs']);
+        $responses = [];
+        foreach ($formation_programs as $formation_program) {
+            $response = $this->formation_program->create([
+                'id' => $formation_program->id,
+                'code' => $formation_program->code,
+                'name'=>$formation_program->name,
+                'formation_program_type_id' => $formation_program->formationTypeId,
+                'created_at' => date("Y,m,d,g,i,s"),
+                'updated_at' => date("Y,m,d,g,i,s")
+            ]);
+            array_push($responses, $response);
+        }
+        echo json_encode([
+            'status'=>200,
+            'message'=>'Programas de formacion actualizados',
+            'responses'=>$responses
+        ]);
+    }
+
     public function show($param = null)
     {
         $id = $param[0];

@@ -9,18 +9,24 @@
     </div>
     <div class="col-2 text-right">
       <div class="dropdown">
-        <button class="btn btn-success btn-sm text-white" id="btn-create"><i class="fa fa-plus"></i> Crear</button>
+        <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Opciones
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#" id="btn-create"><i class="fa fa-plus"></i> Crear</a>
+          <a class="dropdown-item" href="#" id="btnUpdate"><i class="fas fa-sync-alt"></i> Actualizar</a>
+        </div>
       </div>
     </div>
   </div>
   <div class="row mt-3">
     <div class="col">
-      <table class="table table-striped text-center" id="tabla">
+      <table class="table table-sm table-striped" id="tabla">
         <thead>
           <tr>
             <th scope="col">Codigo</th>
             <th scope="col">Nombre</th>
-            <th scope="col">Nombre Tipo de Programa</th>
+            <th scope="col">Tipo de programa</th>
             <th scope="col"></th>
           </tr>
         </thead>

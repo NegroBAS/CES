@@ -3,19 +3,25 @@
 
 
 <div class="container my-5">
-    <div class="row">
-        <div class="col">
-            <h4>Modalidades</h4>
-        </div>
-        <div class="col-2 text-right">
-            <div class="dropdown">
-            <button class="btn btn-success btn-sm"  id="btn-create"><i class="fa fa-plus"></i> Crear</button>
-            </div>
-        </div>
+  <div class="row">
+    <div class="col">
+      <h4>Modalidades</h4>
     </div>
-    <div class="row my-3" id="data-modalities">
-        
+    <div class="col-2 text-right">
+      <div class="dropdown">
+        <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Opciones
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#" id="btn-create"><i class="fa fa-plus"></i> Crear</a>
+          <a class="dropdown-item" href="#" id="btnUpdate"><i class="fas fa-sync-alt"></i> Actualizar</a>
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="row my-3" id="data-modalities">
+
+  </div>
 </div>
 
 
@@ -30,21 +36,21 @@
         </button>
       </div>
       <div class="modal-body">
-                        <form action="" method="post" id="form">
-                            <div class="form-group">
-                                <label for="name">Nombre</label>
-                                <input type="text" name="name" id="name" class="form-control">
-                                <div class="invalid-feedback" id="nameMessage">
+        <form action="" method="post" id="form">
+          <div class="form-group">
+            <label for="name">Nombre</label>
+            <input type="text" name="name" id="name" class="form-control">
+            <div class="invalid-feedback" id="nameMessage">
 
-                               </div>
-                            </div>
-                        </form>
+            </div>
+          </div>
+        </form>
         <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="submit" form="form" id="btnForm" class="btn btn-primary"><i class="far fa-save"></i> Guardar</button>
-        </div>                           
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" form="form" id="btnForm" class="btn btn-primary"><i class="far fa-save"></i> Guardar</button>
         </div>
+      </div>
     </div>
-</div>
+  </div>
 
-<?php require_once('views/layouts/footer.php') ?>
+  <?php require_once('views/layouts/footer.php') ?>

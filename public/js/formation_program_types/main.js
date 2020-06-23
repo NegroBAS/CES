@@ -1,6 +1,55 @@
 const app = {
     url: document.getElementById('url').content,
     edit: false,
+    authenticate: async function () {
+        try {
+            let res = await fetch(
+                "https://cronode.herokuapp.com/api/authenticate",
+                {
+                    method: "POST",
+                    headers: {
+                        accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        misena_email: "consulta@misena.edu.co",
+                        password: "123456789110",
+                    }),
+                }
+            );
+            let data = await res.json();
+            return data.token;
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    getByApi: async function () {
+        try {
+            let token = await this.authenticate();
+            let res = await fetch('https://cronode.herokuapp.com/api/ces/formationProgramTypes', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            let data = await res.json();
+            let fd = new FormData();
+            fd.append('formation_program_types', JSON.stringify(data.formationProgramTypes));
+            res = await fetch(`${this.url}formation_program_types/masive`, {
+                method:'POST',
+                body: fd
+            });
+            data = await res.json();
+            console.log(data);
+            if(data.status===200){
+                await app.get();
+                toastr.success('', data.message, {
+                    closeButton: true
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    },
     get: async function () {
         let resp = await fetch(`${this.url}formation_program_types/index`);
         let res = await resp.json();
@@ -9,11 +58,11 @@ const app = {
         let html = '';
         formation_program_types.forEach(formation_program_type => {
             html += `
-            <div class="col-3 mb-2">
+            <div class="col-4 mb-2">
                     <div class="card" data-id="${formation_program_type.id}">
                         <div class="card-header bg-primary"></div>
                         <div class="card-body text-center">
-                            <h3>${formation_program_type.name}</h3>
+                            <h5>${formation_program_type.name}</h5>
                             <p>Meses Lectivos ${formation_program_type.elective_months} <br>
                              Meses Practicos  ${formation_program_type.practice_months}</p>
                              <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
@@ -117,6 +166,14 @@ $(document).ready(async function () {
         $('.modal').find('.modal-title').text('Crear tipo de programa');
         val.limpiar();
         val.validaciones();
+    }
+    document.getElementById('btnUpdate').onclick = async function(){
+        document.getElementById('data-formation_program_types').innerHTML = `
+        <div class="col">
+            <h6>Cargando ...</h6>
+        </div>
+        `;
+        await app.getByApi();
     }
     document.getElementById('form').onsubmit = function(e){
         e.preventDefault();
