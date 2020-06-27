@@ -10,7 +10,8 @@ class CommitteesController extends Controller
             header('Location:' . constant('URL'));
         }
         $this->view->scripts = [
-            '/js/committees/main.js'
+            '/js/committees/main.js',
+            '/js/sweetalert.js'
         ];
 
         $this->view->user = $_SESSION['user'];
@@ -52,13 +53,12 @@ class CommitteesController extends Controller
     public function show($param = null)
     {
         $id = $param[0];
-        $res= $this->comitte->find($id);
+        $res= $this->committee->find($id);
         echo json_encode($res);
     }
 
     public function edit($param = null)
     {
-        date_default_timezone_set("America/Bogota");
         $id = $param[0];
         $date = $_POST['date'];
         $start_hour = $_POST['start_hour'];
@@ -68,8 +68,7 @@ class CommitteesController extends Controller
         $formation_center = $_POST['formation_center'];
         $assistants = $_POST['assistants'];
         $qourum = $_POST['qourum'] == "on" ? 1 : 0;
-        $subdirector_name = $_POST['subdirector_name'];
-        $res = $this->comitte->update([
+        $res = $this->committee->update([
             'id' => $id,
             'date'=>$date,
             'start_hour'=>$start_hour,
@@ -79,7 +78,6 @@ class CommitteesController extends Controller
             'formation_center'=>$formation_center,
             'assistants'=>$assistants,
             'qourum'=>$qourum,
-            'subdirector_name'=>$subdirector_name
         ]);
         echo json_encode($res);
     }
@@ -87,7 +85,7 @@ class CommitteesController extends Controller
     public function destroy($param = null)
     {
         $id = $param[0];
-        $res = $this->comitte->delete($id);
+        $res = $this->committee->delete($id);
         echo json_encode($res);
     }
 
