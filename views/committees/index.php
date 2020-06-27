@@ -82,8 +82,8 @@
                     <div class="form-row">
                         <div class="col">
                             <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="switch1" name="qourum">
-                                <label class="custom-control-label" for="switch1">Existe Qourum</label>
+                                <input type="checkbox" class="custom-control-input" id="qourum" name="qourum">
+                                <label class="custom-control-label" for="qourum">Existe Qourum</label>
                             </div>
                         </div>
                     </div>
@@ -112,6 +112,7 @@
                 </button>
             </div>
             <div class="modal-body">
+                <input type="hidden" name="committee_id" id="committee_id">
                 <div class="row">
                     <div class="col">
                         <h6>¿Que caso se va tratar?</h6>
@@ -126,7 +127,129 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary" form="form">Guardar</button>
+                <button type="submit" class="btn btn-primary" id="btnAddSession">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Cases -->
+<div class="modal fade" id="modal-cases" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col" id="stimulus">
+                    </div>
+                    <div class="col" id="novelties">
+                    </div>
+                    <div class="col" id="academics">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Detail -->
+<div class="modal fade" id="modal-detail" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col border-right">
+                        <div class="row">
+                            <div class="col">
+                                <h6>Fecha</h6>
+                            </div>
+                            <div class="col">
+                                <h6>Hora inicio</h6>
+                            </div>
+                            <div class="col">
+                                <h6>Hora fin</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-muted" id="date"></p>
+                            </div>
+                            <div class="col">
+                                <p class="text-muted" id="start_hour"></p>
+                            </div>
+                            <div class="col">
+                                <p class="text-muted" id="end_hour"></p>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <h6>Numero de acta</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-muted" id="record_number"></p>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col">
+                                <h6>Lugar</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-muted" id="place"></p>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col">
+                                <h6>Centro de formacion</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-muted" id="formation_center"></p>
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col">
+                                <h6>¿Existe Quorum?</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-muted" id="qourum"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <h6>Asistentes</h6>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col text-muted" id="assistants">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
