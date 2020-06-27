@@ -12,7 +12,8 @@
             </button>
             <div class="dropdown-menu dropdown-menu-right">
                 <a href="#" class="dropdown-item" id="btn-create">Agregar</a>
-                <a href="#" class="dropdown-item">Subir Excel</a>
+                <a href="#" class="dropdown-item" id="btn-update">Subir Excel</a>
+                
             </div>
         </div>
     </div>
@@ -37,7 +38,7 @@
 
 
 <!-- Modal CREATE -->
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -152,5 +153,69 @@
             </div>
         </div>
     </div>
+</div>
+
+    <!-- Modal CSV -->
+<div class="modal fade" id="filecsv" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <form id="form_csv" enctype="multipart/form-data" method="post" autocomplete="off">   
+                    <div class="form-row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="group_id_csv">Grupo</label>
+                                <input type="text" name="group_name_csv" id="group_name_csv" class="form-control" placeholder="Busca aqui...">
+                                <input type="text" hidden name="group_id_csv" id="group_id_csv" value="">                                                        
+                                <div id="content_group_csv">
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>           
+                   <div class="form-row">
+                           <div class="col">
+                               <div class="form-group">
+                                   <label for="archivo">arvhivo csv</label>
+                                   <div class="input-group mb-3">
+                                       <div class="input-group-prepend">
+                                           <span class="input-group-text">Subir</span>
+                                       </div>
+
+                                       <div class="custom-file">                        
+                                           <input type="file" class="custom-file-input" id="archivo" name="archivo"  lang="es" value="" >
+                                           <label class="custom-file-label" for="archivo"  data-browse="Buscar">Seleccionar Archivo</label>
+                                       </div>
+                                       <!-- //link photo hidden -->
+                                       <!-- <input type="text" hidden name="photo_2" id="photo_2" value="">  -->
+
+                                   </div>
+                                   
+                               </div>
+                           </div>
+                       
+                       </div>               
+            </form>
+
+               <div class="modal-footer">
+                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                   <button type="submit" form="form" id="btnFormCsv"  class="btn btn-primary"><i class="far fa-save"></i> Guardar</button>
+               </div>
+      </div>
+ 
+    </div>
+  </div>
+</div>
+
+
+
+
+  
 
 <?php require_once('views/layouts/footer.php') ?>

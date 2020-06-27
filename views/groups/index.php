@@ -29,7 +29,7 @@
             <th>Ficha</th>
             <th>Programa</th>
             <th>Modalidad</th>
-            <th>Cantidad de Aprendices</th>
+            <th>Aprendices</th>
             <th>Opciones</th>
           </tr>
         </thead>

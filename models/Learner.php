@@ -101,6 +101,31 @@ class Learner extends Model{
             ];
         }
     }
+
+    public function create_csv($data)
+    {
+        try {
+            $query = $this->db->connect()->prepare('INSERT INTO learners(username, document_type_id, document, phone, email, group_id) VALUES (:username, :document_type_id, :document, :phone, :email, :group_id)');
+            $query->execute([
+                'username' => $data['username'],
+                'document_type_id' => $data['document_type_id'],
+                'document' => $data['document'],
+                'phone' => $data['phone'],
+                'email' => $data['email'],
+                'group_id' => $data['group_id']
+            ]);
+            return [
+                'status' => 200,
+                'message' => 'Aprendices agregados por CSV'
+            ];
+        } catch (PDOException $e) {
+            return [
+                'status'=>500,
+                'error'=>$e
+            ];
+        }
+    }
+
     public function update($data)
     {
         try {

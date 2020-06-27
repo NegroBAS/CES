@@ -176,9 +176,10 @@ $(document).ready(async function () {
     let id = null;
     await app.get();
     $('#group').DataTable({
-        "language": {
-            "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
-        }
+        language: {
+            url:
+             "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
+        },
     });
     document.getElementById('btn-create').onclick = function(){
         console.log("modal crear")

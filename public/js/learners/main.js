@@ -39,6 +39,7 @@ const app = {
                 `;
             });
             document.getElementById("group_id").innerHTML = html;
+            document.getElementById("group_id_csv").innerHTML = html;
         } catch (error) {
             console.log(error);
         }
@@ -59,6 +60,7 @@ const app = {
                 document.getElementById("email").value = data.learner.email;
                 document.getElementById("document_type_id").value = data.learner.document_type_id;
                 document.getElementById("group_id").value = data.learner.group_id;
+                document.getElementById("group_id_csv").value = data.learner.group_id;
                 document.getElementById("birthdate").value = data.learner.birthdate;
                 document.getElementById("photo_2").value = data.learner.photo;
             }
@@ -133,6 +135,33 @@ const app = {
             console.log(error);
         }
     },
+    csv: async function () {
+        try {
+            console.log("csv");
+            let res = await fetch(`${this.url}learners/csv`, {
+                method: "POST",
+                body: new FormData(form_csv),
+            });
+            console.log(res);
+            let data = await res.json();
+            console.log(data);
+            if (data.status === 200) {
+                $("#filecsv").modal("toggle");
+                app.getData();
+                toastr.success("", data.message, {
+                    closeButton: true,
+                });
+            }
+            if (data.status === 500) {
+                console.log(data.error);
+                toastr.error("", data.error.errorInfo[2], {
+                    closeButton: true,
+                });
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    },
     getGroups: async function(){
         try {
 			let res = await fetch(`${this.url}groups/index`);
@@ -148,6 +177,9 @@ function selectGroup(value,name) {
     document.getElementById('group_id').value = value;
     document.getElementById('group_name').value = name;
     document.getElementById('content-group').innerHTML = "";
+    document.getElementById('group_id_csv').value = value;
+    document.getElementById('group_name_csv').value = name;
+    document.getElementById('content_group_csv').innerHTML = "";
 }
 
 $(document).ready(async function () {
@@ -180,10 +212,30 @@ $(document).ready(async function () {
         }
     }
 
+    document.getElementById('group_name_csv').oninput = function(){
+        let matches = app.groups.filter(group => {
+            const rgex = new RegExp(`^${this.value}`, 'gi');
+            return group.code_tab.match(rgex)
+        });
+        if(this.value.length === 0){
+            matches=[];
+        }
+        let html = '<ul class="list-group">';
+        if(matches.length > 0){
+            matches.forEach(match => {
+                html+=`<p onclick="selectGroup('${match.id}','${match.code_tab}')" class="list-group-item list-group-item-action">${match.code_tab}</p>`
+            });
+            html+="</ul>";
+            document.getElementById('content_group_csv').innerHTML = html;
+        }else{
+            document.getElementById('content_group_csv').innerHTML = "<p class='mt-3'>El registro no existe</p>";
+        }
+    }
+
     document.getElementById("btn-create").onclick = function () {
-        $(".modal #form").trigger("reset");
-        $(".modal").modal("toggle");
-        $(".modal").find(".modal-title").text("Crear Cargo");
+        $("#createModal").trigger("reset");
+        $("#createModal").modal("toggle");
+        $("#createModal").find(".modal-title").text("Crear Cargo");
         limpiar();
         validaciones();
     };
@@ -194,6 +246,15 @@ $(document).ready(async function () {
         } else {
             app.create(this);
         }
+    };
+    document.getElementById("btn-update").onclick = function () {
+        $("#filecsv").trigger("reset");
+        $("#filecsv").modal("toggle");
+        $("#filecsv").find(".modal-title").text("subir archivo");
+    };
+    document.getElementById("btnFormCsv").onclick = function (e) {
+        e.preventDefault();
+        app.csv(this);
     };
 
 
@@ -267,7 +328,7 @@ $(document).ready(async function () {
                 this.classList.remove("is-valid");
                 this.classList.add("is-invalid");
                 document.getElementById("documentMessage").innerHTML =
-                    "Este campo es requerido";
+                    "Ingrese un documento valido";
                 estado[0] = "no";
             }
         };
@@ -294,7 +355,7 @@ $(document).ready(async function () {
                 this.classList.remove("is-valid");
                 this.classList.add("is-invalid");
                 document.getElementById("nameMessage").innerHTML =
-                    "Este campo es requerido";
+                    "Ingrese un nombre valido";
             }
         };
 
@@ -306,7 +367,7 @@ $(document).ready(async function () {
                 estado[2] = "si";
             } else {
                 document.getElementById("emailMessage").innerHTML =
-                    "Este campo es requerido";
+                    "Ingrese un correo valido";
                 this.classList.add("is-invalid");
                 btnForm.setAttribute("disabled", "disabled");
                 estado[2] = "no";
