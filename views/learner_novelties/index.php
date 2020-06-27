@@ -3,7 +3,7 @@
 
 <div class="container my-5">
     <div class="row">
-        <div class="col">
+        <div class="col col-7 col-md-10">
             <h4>Novedades Aprendices</h4>
         </div>
         <div class="col-2 text-md-right">
@@ -12,7 +12,7 @@
     </div>
     <div class="row mt-3">
         <div class="col">
-            <table id="requestab" class="table table-bordered">
+            <table id="requestab" class="table table-bordered display nowrap" style="width:100%">
                                 <thead>
                                         <tr>
                                         <th scope="col">Aprendiz</th>
@@ -46,13 +46,13 @@
       <div class="modal-body">
                         <form action="" method="post" id="form">
                         <div class="form-row">
-                                <div class="col-6">
+                                <div class="col-12 col-md-6 col-xl-6">
                                  <div class="form-group">
                                         <label for="learner_id">Aprendiz</label>
                                         <select  name="learner_id" id="learner_id" class="form-control"></select>
                                  </div>                              
                                 </div>
-                                <div class="col-6">
+                                <div class="col-12 col-md-6 col-xl-6">
                                         <div class="form-group">
                                                 <label for="committee_id">Comite</label>
                                                 <select  name="committee_id" id="committee_id" class="form-control"></select>
@@ -61,13 +61,13 @@
                         </div>
 
                         <div class="form-row">
-                                <div class="col-6">
+                                <div class="col-12 col-md-6 col-xl-6">
                                  <div class="form-group">
                                         <label for="novelty_type_id">Novedad</label>
                                         <select  name="novelty_type_id" id="novelty_type_id" class="form-control"></select>
                                  </div>                              
                                 </div>
-                                <div class="col-6">
+                                <div class="col-12 col-md-6 col-xl-6">
                                         <div class="form-group">
                                                 <label for="reply_date">Fecha respuesta</label>
                                                 <input type="date"  name="reply_date" id="reply_date" class="form-control">

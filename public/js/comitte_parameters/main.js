@@ -170,6 +170,12 @@ const app = {
     });
 
         $('#tabla').DataTable({
+            responsive: true,
+            info: false,
+            columnDefs: [
+                { responsivePriority: 1, targets: 0 },
+                { responsivePriority: 2, targets: -1 }
+            ],
             "language": {
                 "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
             }

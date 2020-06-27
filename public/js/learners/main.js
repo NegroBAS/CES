@@ -154,6 +154,12 @@ $(document).ready(async function () {
     await app.getData();
     await app.getGroups();
     $("#learners").DataTable({
+        responsive: true,
+        info: false,
+        columnDefs: [
+            { responsivePriority: 1, targets: 2 },
+            { responsivePriority: 2, targets: -1 }
+        ],
         language: {
             url:
                 "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
@@ -183,7 +189,7 @@ $(document).ready(async function () {
     document.getElementById("btn-create").onclick = function () {
         $(".modal #form").trigger("reset");
         $(".modal").modal("toggle");
-        $(".modal").find(".modal-title").text("Crear Cargo");
+        $(".modal").find(".modal-title").text("Crear Aprendiz");
         limpiar();
         validaciones();
     };

@@ -16,7 +16,7 @@ const app = {
                                 <div class="card-body text-center">
                                     <h5>${novelty_type.name}</h5>
                                     <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
-                <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
                                 </div>
                             </div>
                         </div>

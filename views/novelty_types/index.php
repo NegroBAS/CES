@@ -1,8 +1,9 @@
 <?php require_once('views/layouts/header.php') ?>
 <?php require_once('views/partials/navbar.php') ?>
+
 <div class="container my-5">
     <div class="row">
-        <div class="col">
+        <div class="col col-8 col-md-10">
             <h4>Tipos de novedades</h4>
         </div>
         <div class="col-2 text-right">

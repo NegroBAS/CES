@@ -19,6 +19,32 @@
         *{
             font-family: 'Questrial', sans-serif;
         }
+        @media (min-width: 200px) { 
+            h4{
+                font-size: 16px;
+            }
+            h5{
+                font-size: 15px;
+            }
+         }
+        @media (min-width: 576px) { 
+            h4{
+                font-size: 20px;
+            }
+            h5{
+                font-size: 19px;
+            }
+         }
+        @media (min-width: 768px) { 
+            h4{
+                font-size: 23px;
+            }
+            h5{
+                font-size: 20px;
+            }
+         }
+        @media (min-width: 1024px) { }
+        @media (min-width: 1200px) { }
     </style>
 </head>
 

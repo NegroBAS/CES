@@ -58,7 +58,7 @@ const app = {
                 if (data.committees.length > 0) {
                     data.committees.forEach((committee) => {
                         html += `
-						<div class="col-4 mb-3">
+						<div class="col-12 col-md-6 mb-3">
 							<div class="card">
 								<div class="card-header bg-primary"></div>
 								<div class="card-body">

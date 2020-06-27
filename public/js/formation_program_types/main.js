@@ -58,7 +58,7 @@ const app = {
         let html = '';
         formation_program_types.forEach(formation_program_type => {
             html += `
-            <div class="col-4 mb-2">
+            <div class="col-12 col-md-4 mb-2">
                     <div class="card" data-id="${formation_program_type.id}">
                         <div class="card-header bg-primary"></div>
                         <div class="card-body text-center">
