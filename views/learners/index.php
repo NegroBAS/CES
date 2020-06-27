@@ -3,7 +3,7 @@
 
 <div class="container my-5">
     <div class="row">
-        <div class="col">
+        <div class="col col-7 col-md-10">
             <h4>Aprendices</h4>
         </div>
         <div class="col-2 text-right">
@@ -19,7 +19,7 @@
     </div>
     <div class="row mt-3">
         <div class="col">
-            <table id="learners" class="table table-bordered">
+            <table id="learners" class="table table-bordered display nowrap" style="width:100%">
                 <thead>
                     <th>Nombre</th>
                     <th>Tipo de documento</th>
@@ -63,13 +63,13 @@
                     </div>
                     
                     <div class="form-row">
-                        <div class="col-6">
+                        <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="document_type_id">Tipo Documento</label>
                                 <select name="document_type_id" id="document_type_id" class="form-control"></select>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="document">Documento</label>
                                 <input type="number" name="document" id="document" class="form-control">
@@ -81,7 +81,7 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="col-6">
+                        <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="phone">Telefono</label>
                                 <input type="number" name="phone" id="phone" class="form-control">
@@ -90,7 +90,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="email">Correo</label>
                                 <input type="email" name="email" id="email" class="form-control" placeholder="@example">
@@ -102,7 +102,7 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="col-6">
+                        <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="group_id">Grupo</label>
                                 <input type="text" name="group_name" id="group_name" class="form-control" placeholder="Busca aqui...">
@@ -111,7 +111,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="birthdate">Fecha Nacimiento</label>
                                 <input type="date" name="birthdate" id="birthdate" class="form-control">

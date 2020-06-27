@@ -3,7 +3,7 @@
 
 <div class="container my-5">
     <div class="row">
-        <div class="col">
+        <div class="col col-8 col-md-10">
             <h4>Usuarios</h4>
         </div>
         <div class="col-2 text-right">
@@ -12,7 +12,7 @@
     </div>
     <div class="row mt-3">
         <div class="col">
-            <table class="table table-bordered" id="users">
+            <table class="table table-bordered display nowrap" style="width:100%" id="users">
                 <thead>
                     <th>Nombre</th>
                     <th>Correo</th>
@@ -54,8 +54,8 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" form="form" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="submit" form="form" class="btn btn-primary">Guardar</button>
       </div>
     </div>
   </div>

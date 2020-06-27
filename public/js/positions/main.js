@@ -58,7 +58,7 @@ const app = {
                 if (data.positions.length > 0) {
                     data.positions.forEach((position) => {
                         html += `
-                        <div class="col-3 mb-2">
+                        <div class="col-12 col-md-4 mb-2">
                             <div class="card" data-id="${position.id}">
                                 <div class="card-header bg-primary"></div>
                                 <div class="card-body text-center">

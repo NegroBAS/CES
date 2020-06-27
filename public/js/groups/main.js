@@ -176,10 +176,22 @@ $(document).ready(async function () {
     let id = null;
     await app.get();
     $('#group').DataTable({
+<<<<<<< HEAD
         language: {
             url:
              "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
         },
+=======
+        responsive: true,
+        info: false,
+        columnDefs: [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+        }
+>>>>>>> 6ba02e2e674db9851c121a3b74a4c0cfb5ef72ab
     });
     document.getElementById('btn-create').onclick = function(){
         console.log("modal crear")

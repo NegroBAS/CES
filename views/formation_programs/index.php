@@ -4,7 +4,7 @@
 <div class="container my-5">
 
   <div class="row">
-    <div class="col">
+    <div class="col col-7 col-md-10">
       <h4>Programas de Formacion</h4>
     </div>
     <div class="col-2 text-right">
@@ -21,7 +21,7 @@
   </div>
   <div class="row mt-3">
     <div class="col">
-      <table class="table table-sm table-striped" id="tabla">
+      <table class="table table-striped display nowrap" style="width:100%" id="tabla">
         <thead>
           <tr>
             <th scope="col">Codigo</th>
@@ -51,14 +51,14 @@
       <div class="modal-body">
         <form action="" method="post" id="form">
           <div class="form-row">
-            <div class="col">
+            <div class="col-12 col-md-6">
               <div class="form-group">
                 <label for="code">Codigo</label>
                 <input type="text" name="code" id="code" class="form-control">
                 <div class="invalid-feedback" id="codeMessage"></div>
               </div>
             </div>
-            <div class="col">
+            <div class="col-12 col-md-6">
               <div class="form-group">
                 <label for="formation_program_type_id">Tipo de programa</label>
                 <select name="formation_program_type_id" id="formation_program_type_id" class="form-control"></select>

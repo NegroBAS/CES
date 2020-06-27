@@ -3,7 +3,7 @@
 
 <div class="container my-5">
   <div class="row">
-    <div class="col">
+    <div class="col col-7 col-md-10">
       <h4>Tipos de programas de formacion</h4>
     </div>
     <div class="col-2 text-md-right">
@@ -52,7 +52,7 @@
           </div>
 
           <div class="form-row">
-            <div class="col">
+            <div class="col-12 col-md-6">
               <div class="form-group">
                 <label for="name">Meses lectivos </label>
                 <input type="number" name="elective_months" id="elective_months" class="form-control">
@@ -61,7 +61,7 @@
                 </div>
               </div>
             </div>
-            <div class="col">
+            <div class="col-12 col-md-6">
               <div class="form-group">
                 <label for="name">Meses practicos</label>
                 <input type="number" name="practice_months" id="practice_months" class="form-control">

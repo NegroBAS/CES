@@ -5,7 +5,7 @@
 <div class="container my-5">
 
   <div class="row">
-    <div class="col">
+    <div class="col col-6 col-md-10">
       <h4>Grupos</h4>
     </div>
     <div class="col-2 text-right">
@@ -23,7 +23,7 @@
 
   <div class="row mt-3">
     <div class="col">
-      <table class="table table-striped " id="group" width="100%">
+      <table class="table table-striped display nowrap" style="width:100%" id="group">
         <thead>
           <tr>
             <th>Ficha</th>
@@ -57,14 +57,14 @@
       <div class="modal-body">
         <form action="" method="post" id="form">
           <div class="form-row">
-            <div class="col">
+            <div class="col-12 col-md-6">
               <div class="form-group">
                 <label for="code_tab">Ficha</label>
                 <input type="text" name="code_tab" id="code_tab" class="form-control">
                 <div class="invalid-feedback" id="codeMessage"></div>
               </div>
             </div>
-            <div class="col">
+            <div class="col-12 col-md-6">
               <div class="form-group">
                 <label for="code_tab">Modalidad</label>
                 <select name="modality_id" id="modality_id" class="form-control"></select>
@@ -80,14 +80,14 @@
             </div>
           </div>
           <div class="form-row">
-            <div class="col">
+            <div class="col-12 col-md-6">
               <div class="form-group">
                 <label for="quantity_learners">Cantidad aprendices</label>
                 <input type="number" name="quantity_learners" id="quantity_learners" class="form-control">
                 <div class="invalid-feedback" id="quantityMessage"></div>
               </div>
             </div>
-            <div class="col">
+            <div class="col-12 col-md-6">
               <div class="form-group">
                 <label for="active_learners">Aprendices activos</label>
                 <input type="number" name="active_learners" id="active_learners" class="form-control" value="">

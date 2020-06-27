@@ -3,7 +3,7 @@
 
 <div class="container my-5">
     <div class="row">
-        <div class="col">
+        <div class="col col-8 col-md-10">
             <h4>Tipos de Falta</h4>
         </div>
         <div class="col-2 text-md-right">

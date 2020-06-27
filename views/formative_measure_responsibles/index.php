@@ -3,7 +3,7 @@
 
 <div class="container my-5">
     <div class="row">
-        <div class="col">
+        <div class="col col-7 col-md-10">
             <h4>Responsables de medidas formativas</h4>
         </div>
         <div class="col-2 text-right">
@@ -19,8 +19,8 @@
         </div>
     </div>
     <div class="row mt-3">
-        <div class="col">
-            <table class="table table-bordered" id="formative-measure-responsibles">
+        <div class="col col-10 col-md-12 col-lg-12">
+            <table class="table table-bordered display nowrap" style="width:100%" id="formative-measure-responsibles">
                 <thead>
                     <th>Nombre</th>
                     <th>Correo Misena</th>
@@ -74,13 +74,13 @@
                             </div>
                         </div>
                     <div class="form-row">
-                        <div class="col-6">
+                        <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="document_type_id">Tipo Documento</label>
                                 <select name="document_type_id" id="document_type_id" class="form-control"></select>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="document">Documento</label>
                                 <input type="number" name="document" id="document" class="form-control">
@@ -93,13 +93,13 @@
 
                     <!-- //fecha y genero// -->
                     <div class="form-row">
-                                <div class="col-6">
+                                <div class="col-12 col-md-6">
                                     <div class="form-group">
                                             <label for="birthdate">Fecha Nacimiento</label>
                                             <input type="date" name="birthdate" id="birthdate" class="form-control">
                                         </div>
                                 </div>                                    
-                                    <div class="col-6">
+                                <div class="col-12 col-md-6">
                                             <div class="form-group">
                                                     <label for="gender">Genero</label>
                                                     <select name="gender" id="gender" class="form-control">
@@ -114,7 +114,7 @@
 
                     <!-- //telefonos// -->
                     <div class="form-row">
-                        <div class="col-6">
+                        <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="phone">Celular</label>
                                 <input type="number" name="phone" id="phone" class="form-control">
@@ -123,7 +123,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="phone_ip">Telefono fijo</label>
                                 <input type="number" name="phone_ip" id="phone_ip" class="form-control">
@@ -141,14 +141,14 @@
 
                          <!-- //correos  // -->
                             <div class="form-row">
-                                    <div class="col-6">
+                                <div class="col-12 col-md-6">
                                     <div class="form-group">
                                         <label for="misena_email">Correo misena</label>
                                         <input type="email" name="misena_email" id="misena_email" class="form-control" placeholder="@example">
                                         <div class="invalid-feedback" id="misena_emailMessage"></div>
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-12 col-md-6">
                                         <div class="form-group">
                                             <label for="institutional_email">Correo institucional</label>
                                             <input type="email" name="institutional_email" id="institutional_email" class="form-control" placeholder="@example">
@@ -163,13 +163,13 @@
 
                             <!-- //tipo contrato y cargo// -->
                             <div class="form-row">
-                                <div class="col-8">
+                                <div class="col-6 col-12 col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label for="contract_type_id">Tipo de contrato</label>
                                         <select name="contract_type_id" id="contract_type_id" class="form-control"></select>
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-6 col-12 col-md-6 col-lg-6">
                                 <div class="form-group">
                                         <label for="state">Estado</label>
                                         <select name="state" id="state" class="form-control">
@@ -182,13 +182,13 @@
 
                             <!-- //tipo y cargo// -->
                             <div class="form-row">                               
-                                <div class="col-8">
+                                <div class="col-6 col-12 col-md-6 col-lg-6 col-lx-8">
                                 <div class="form-group">
                                         <label for="position_id">Cargo</label>
                                         <select name="position_id" id="position_id" class="form-control"></select>
                                     </div>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-6 col-12 col-md-6 col-lg-6 col-lx-4">
                                     <div class="form-group">
                                         <label for="type">Tipo</label>
                                         <input type="text" name="type" id="type" class="form-control"></input>
