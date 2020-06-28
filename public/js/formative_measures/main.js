@@ -8,10 +8,10 @@ const app = {
         let html = '';
         formative_measures.forEach(formative_measure => {
             html += `
-            <div class="col-12 col-md-4 mb-2">
+            <div class="col-12 col-md-6 col-xl-6 mb-2">
                 <div class="card" data-id="${formative_measure.id}">
                     <div class="card-header bg-primary"></div>
-                    <div class="card-body text-center">
+                    <div class="card-body text-center text-truncate">
                         <h5>${formative_measure.name}</h5>
                         <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
                         <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>

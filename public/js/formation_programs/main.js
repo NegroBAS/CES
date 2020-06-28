@@ -177,8 +177,8 @@ $(document).ready(async function () {
         responsive: true,
         info: false,
         columnDefs: [
-            { responsivePriority: 1, targets: 0 },
-            { responsivePriority: 2, targets: -1 }
+            { responsivePriority: 1, targets: 1 },
+            { responsivePriority: 2, targets: 2 }
         ],
         language: {
             url:

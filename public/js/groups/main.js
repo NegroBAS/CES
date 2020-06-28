@@ -64,6 +64,7 @@ const app = {
                 <td>
                     <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
                     <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
+                    <button class="btn btn-sm btn-outline-primary view"><i class="far fa-eye"></i></button>
                 </td>
             </tr>
      `
@@ -176,22 +177,19 @@ $(document).ready(async function () {
     let id = null;
     await app.get();
     $('#group').DataTable({
-<<<<<<< HEAD
+        responsive: true,
+        info: false,
+        columnDefs: [
+            { responsivePriority: 1, targets: 1 },
+            { responsivePriority: 2, targets: 0 },
+            { responsivePriority: 3, targets: 2 },
+            { responsivePriority: 4, targets: 3 },
+            { responsivePriority: 5, targets: 4 }
+        ],
         language: {
             url:
              "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
         },
-=======
-        responsive: true,
-        info: false,
-        columnDefs: [
-            { responsivePriority: 1, targets: 0 },
-            { responsivePriority: 2, targets: -1 }
-        ],
-        "language": {
-            "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
-        }
->>>>>>> 6ba02e2e674db9851c121a3b74a4c0cfb5ef72ab
     });
     document.getElementById('btn-create').onclick = function(){
         console.log("modal crear")
