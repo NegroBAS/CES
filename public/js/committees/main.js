@@ -47,18 +47,19 @@ const app = {
 	},
 	addNovelty: async function (form) {
 		try {
-			let res = await fetch(`${this.url}committee_sessions/storeStimulu`, {
+			let res = await fetch(`${this.url}committee_sessions/storeNovelty`, {
 				method: 'POST',
 				body: form
 			});
 			let data = await res.json();
-			if (data.status === 200) {
-				$('#modal-case').modal('toggle');
-				toastr.success('', data.message, {
-					closeButton: true
-				});
-				document.getElementById('content').innerHTML = '';
-			}
+			console.log(data);
+		} catch (error) {
+			console.log(error);
+		}
+	},
+	getCase:async function(id){
+		try {
+			console.log(id);
 		} catch (error) {
 			console.log(error);
 		}
@@ -87,7 +88,7 @@ const app = {
 											<button class="btn btn-sm btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											</button>
 											<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-											  <a class="dropdown-item" href="#"><i class="far fa-eye text-primary "></i> Detalle</a>
+											  <a class="dropdown-item case" href="#" data-id="${stimulu.id}"><i class="far fa-eye text-primary"></i> Detalle</a>
 											  <a class="dropdown-item" href="#"><i class="far fa-edit text-primary"></i> Editar</a>
 											  <a class="dropdown-item" href="#"><i class="far fa-trash-alt text-danger"></i> Eliminar</a>
 											</div>
@@ -104,6 +105,10 @@ const app = {
 					});
 				}
 				document.getElementById('stimulus').innerHTML = html;
+				$(document).on('click', '.case', async function(){
+					let id = $(this).data('id');
+					console.log(id);
+				});
 			}
 			if (data.data[1].status === 200) {
 				let html = '<h6>Novedades del aprendiz</h6>';
@@ -473,6 +478,8 @@ $(document).ready(async function () {
 		$('#modal-detail').find('.modal-title').text('Detalles del comité');
 		$('#modal-detail').modal('toggle');
 	});
+
+	
 
 	$(document).on('click', '.cases', async function () {
 		let id = $(this).data('id');

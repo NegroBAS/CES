@@ -74,7 +74,7 @@ class CommitteeSession extends Model
     public function allStimulus($committee_id)
     {
         try {
-            $query = $this->db->connect()->prepare("SELECT * FROM committee_sessions INNER JOIN learners ON learners.id = committee_sessions.learner_id WHERE committee_sessions.committee_id = :id AND committee_sessions.committee_session_type_id = '1'");
+            $query = $this->db->connect()->prepare("SELECT committee_sessions.*, learners.username FROM committee_sessions INNER JOIN learners ON learners.id = committee_sessions.learner_id WHERE committee_sessions.committee_id = :id AND committee_sessions.committee_session_type_id = '1'");
             $query->execute([
                 'id'=>$committee_id
             ]);
