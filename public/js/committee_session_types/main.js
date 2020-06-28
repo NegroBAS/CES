@@ -8,11 +8,7 @@ const app = {
       html = "";
       data.committee_session_types.forEach((committee_session_type) => {
         html += `
-<<<<<<< HEAD
                 <div class="col-12 col-md-4 mb-2">
-=======
-                <div class="col-4 mb-2">
->>>>>>> 0b5e2b5250e3119d69a0553fee263fc9d947eeeb
                     <div class="card" data-id="${committee_session_type.id}">
                         <div class="card-header bg-primary"></div>
                         <div class="card-body text-center">

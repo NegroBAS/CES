@@ -239,15 +239,9 @@ $(document).ready(async function () {
     }
 
     document.getElementById("btn-create").onclick = function () {
-<<<<<<< HEAD
         $("#createModal").trigger("reset");
         $("#createModal").modal("toggle");
         $("#createModal").find(".modal-title").text("Crear Cargo");
-=======
-        $(".modal #form").trigger("reset");
-        $(".modal").modal("toggle");
-        $(".modal").find(".modal-title").text("Crear Aprendiz");
->>>>>>> 6ba02e2e674db9851c121a3b74a4c0cfb5ef72ab
         limpiar();
         validaciones();
     };

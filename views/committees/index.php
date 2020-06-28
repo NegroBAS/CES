@@ -2,10 +2,10 @@
 <?php require('views/partials/navbar.php') ?>
 <div class="container my-5">
     <div class="row">
-        <div class="col col-9 col-md-10">
-            <h4>Comités</h4>
+        <div class="col">
+            <h3>Comités</h3>
         </div>
-        <div class="col-2 text-right">
+        <div class="col-3 text-right">
             <button class="btn btn-sm btn-success" id="btn-create"><i class="fa fa-plus"></i> Crear</button>
         </div>
     </div>
