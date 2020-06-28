@@ -240,9 +240,15 @@ $(document).ready(async function () {
     }
 
     document.getElementById("btn-create").onclick = function () {
+<<<<<<< HEAD
         $(".modal #form").trigger("reset");
         $(".modal").modal("toggle");
         $(".modal").find(".modal-title").text("Crear Aprendiz");
+=======
+        $("#createModal").trigger("reset");
+        $("#createModal").modal("toggle");
+        $("#createModal").find(".modal-title").text("Crear Cargo");
+>>>>>>> 1f6af3a287a127098b3c078df492263e4ca7181e
         limpiar();
         validaciones();
     };

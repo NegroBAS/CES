@@ -78,7 +78,22 @@ const app = {
 						html += `
 						<div class="card mb-1">
 							<div class="card-header">
-								${stimulu.start_hour} - ${stimulu.end_hour}
+								<div class="row">
+									<div class="col">
+										${stimulu.start_hour} - ${stimulu.end_hour}
+									</div>
+									<div className="col">
+										<div class="dropdown">
+											<button class="btn btn-sm btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											</button>
+											<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+											  <a class="dropdown-item" href="#"><i class="far fa-eye text-primary "></i> Detalle</a>
+											  <a class="dropdown-item" href="#"><i class="far fa-edit text-primary"></i> Editar</a>
+											  <a class="dropdown-item" href="#"><i class="far fa-trash-alt text-danger"></i> Eliminar</a>
+											</div>
+								  		</div>
+									</div>
+								</div>
 							</div>
 							<div class="card-body">
 								<div class="card-title">${stimulu.learner_name}</div>
@@ -159,7 +174,7 @@ const app = {
 			console.log(error);
 		}
 	},
-	selectCommittee:async function(id){
+	selectCommittee: async function (id) {
 		try {
 			let res = await fetch(`${this.url}committees/show/${id}`);
 			let data = await res.json();
@@ -169,7 +184,7 @@ const app = {
 			$('#modal-detail #record_number').text(data.record_number);
 			$('#modal-detail #place').text(data.place);
 			$('#modal-detail #formation_center').text(data.formation_center);
-			$('#modal-detail #qourum').text(data.qourum==1?'Si':'No');
+			$('#modal-detail #qourum').text(data.qourum == 1 ? 'Si' : 'No');
 			$('#modal-detail #assistants').html(data.assistants);
 		} catch (error) {
 			console.log(error);
@@ -202,10 +217,17 @@ const app = {
 			let data = await res.json();
 			if (data.status === 200) {
 				let html = "";
+<<<<<<< HEAD
                 if (data.committees.length > 0) {
                     data.committees.forEach((committee) => {
                         html += `
 						<div class="col-12 col-md-6 mb-3">
+=======
+				if (data.committees.length > 0) {
+					data.committees.forEach((committee) => {
+						html += `
+						<div class="col-12 col-md-6 col-lg-4 mb-3">
+>>>>>>> 1f6af3a287a127098b3c078df492263e4ca7181e
 							<div class="card">
 								<div class="card-header bg-primary"></div>
 								<div class="card-body">

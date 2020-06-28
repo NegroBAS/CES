@@ -177,6 +177,7 @@ $(document).ready(async function () {
     let id = null;
     await app.get();
     $('#group').DataTable({
+<<<<<<< HEAD
         responsive: true,
         info: false,
         columnDefs: [
@@ -186,6 +187,8 @@ $(document).ready(async function () {
             { responsivePriority: 4, targets: 3 },
             { responsivePriority: 5, targets: 4 }
         ],
+=======
+>>>>>>> 1f6af3a287a127098b3c078df492263e4ca7181e
         language: {
             url:
              "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
