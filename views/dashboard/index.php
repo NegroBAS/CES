@@ -14,7 +14,7 @@
                 <p class="lead">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nisi eaque esse eligendi vero eius quo pariatur! In, nisi quasi. Provident cumque maxime nobis earum voluptate quas soluta labore molestiae ab..</p>
                 <hr class="my-4">
                 <div class="row">
-                    <div class="col-12 col-md-6 mb-3">
+                    <div class="col-12 col-md-6 mb-3 col-xl-4">
                         <div class="card">
                             <div class="card-header bg-primary text-white">Gestiona tus recursos</div>
                             <div class="card-body">
@@ -27,7 +27,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6 mb-3">
+                    <div class="col col-12 col-md-6 mb-3 col-xl-4">
                     <div class="card">
                             <div class="card-header bg-primary text-white">Relacionados con la formacion</div>
                             <div class="card-body">
@@ -42,7 +42,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6 mb-3">
+                    <div class="col col-12 col-md-6 mb-3 col-xl-4">
                     <div class="card">
                             <div class="card-header bg-primary text-white">Vamos a comité</div>
                             <div class="card-body">

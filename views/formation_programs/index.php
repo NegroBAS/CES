@@ -4,7 +4,7 @@
 <div class="container my-5">
 
   <div class="row">
-    <div class="col col-7 col-md-10">
+    <div class="col col-8 col-md-10">
       <h4>Programas de Formacion</h4>
     </div>
     <div class="col-2 text-right">
@@ -21,7 +21,7 @@
   </div>
   <div class="row mt-3">
     <div class="col">
-      <table class="table table-striped display nowrap" style="width:100%" id="tabla">
+      <table class="table table-striped display" style="width:100%" id="tabla">
         <thead>
           <tr>
             <th scope="col">Codigo</th>

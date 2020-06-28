@@ -7,6 +7,7 @@
             <h4>Aprendices</h4>
         </div>
         <div class="col-2 text-right">
+        
             <button class="btn btn-success btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Opciones
             </button>
@@ -19,7 +20,7 @@
     </div>
     <div class="row mt-3">
         <div class="col">
-            <table id="learners" class="table table-bordered display nowrap" style="width:100%">
+            <table id="learners" class="table table-bordered display" style="width:100%">
                 <thead>
                     <th>Nombre</th>
                     <th>Tipo de documento</th>

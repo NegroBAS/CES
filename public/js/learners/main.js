@@ -19,6 +19,7 @@ const app = {
                     <td>
                     <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
                     <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
+                    <button class="btn btn-sm btn-outline-primary view"><i class="far fa-eye"></i></button>
                     </td>
                 </tr>
                 `;
@@ -189,8 +190,8 @@ $(document).ready(async function () {
         responsive: true,
         info: false,
         columnDefs: [
+            { responsivePriority: 1, targets: 0 },
             { responsivePriority: 1, targets: 2 },
-            { responsivePriority: 2, targets: -1 }
         ],
         language: {
             url:
@@ -239,9 +240,15 @@ $(document).ready(async function () {
     }
 
     document.getElementById("btn-create").onclick = function () {
+<<<<<<< HEAD
+        $(".modal #form").trigger("reset");
+        $(".modal").modal("toggle");
+        $(".modal").find(".modal-title").text("Crear Aprendiz");
+=======
         $("#createModal").trigger("reset");
         $("#createModal").modal("toggle");
         $("#createModal").find(".modal-title").text("Crear Cargo");
+>>>>>>> 1f6af3a287a127098b3c078df492263e4ca7181e
         limpiar();
         validaciones();
     };

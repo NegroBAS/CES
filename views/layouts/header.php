@@ -19,32 +19,35 @@
         *{
             font-family: 'Questrial', sans-serif;
         }
-        @media (min-width: 200px) { 
+        @media (max-width: 320px) { 
             h4{
                 font-size: 16px;
             }
             h5{
-                font-size: 15px;
+                font-size: 18px;
+            }
+            li.paginate_button.previous {
+                display: inline;
+            }
+        
+            li.paginate_button.next {
+                display: inline;
+            }
+        
+            li.paginate_button {
+                display: none;
             }
          }
-        @media (min-width: 576px) { 
+         @media (max-width: 768px) { 
             h4{
-                font-size: 20px;
+                font-size: 18px;
             }
             h5{
-                font-size: 19px;
-            }
-         }
-        @media (min-width: 768px) { 
-            h4{
-                font-size: 23px;
-            }
-            h5{
                 font-size: 20px;
             }
          }
-        @media (min-width: 1024px) { }
-        @media (min-width: 1200px) { }
+        @media (max-width: 1024px) {}
+        @media (max-width: 1200px) { }
     </style>
 </head>
 
