@@ -3,10 +3,10 @@
 
 <div class="container my-5">
   <div class="row">
-    <div class="col-7">
+    <div class="col">
       <h4>Tipos de programas de formacion</h4>
     </div>
-    <div class="col-3 col-md-5 ml-2 ml-md-0 text-md-right">
+    <div class="col-5 col-md-5 ml-2 ml-md-0 text-md-right">
       <div class="dropdown">
         <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Opciones

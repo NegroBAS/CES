@@ -7,7 +7,7 @@
         <div class="col col-8 col-md-10">
             <h4>Tipos de Documento</h4>
         </div>
-        <div class="col-2 ml-4 ml-md-0 text-right">
+        <div class="col-2 ml-3 ml-md-0 text-right">
             <div class="dropdown">
             <button class="btn btn-outline-primary" id="btn-create"><i class="fa fa-plus"></i> Crear</button>
             </div>

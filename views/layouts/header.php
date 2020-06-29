@@ -40,12 +40,12 @@
          }
          @media (max-width: 768px) { 
             h5{
-                font-size: 1.6vw !important;
+                font-size: 1.6vw;
             }
          }
          @media (max-width: 1024px) {
             h5{
-                font-size: 1.4vw;
+                font-size: 1.6vw;
             }
           }
           

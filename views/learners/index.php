@@ -3,17 +3,11 @@
 
 <div class="container my-5">
     <div class="row">
-        <div class="col col-7 col-md-10">
+        <div class="col col-7 col-md-9">
             <h4>Aprendices</h4>
         </div>
-<<<<<<< HEAD
-        <div class="col-2 ml-2 ml-md-0 text-right">
-            <button class="btn btn-success btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-=======
-        <div class="col-2 text-right">
-        
+        <div class="col-2 col-md-3 text-right">
             <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
->>>>>>> 15acb73119ae98c04307aea51d5e8655e97df3d3
                 Opciones
             </button>
             <div class="dropdown-menu dropdown-menu-right">

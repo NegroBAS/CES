@@ -2,21 +2,11 @@
 <?php require_once('views/partials/navbar.php') ?>
 
 <div class="container my-5">
-<<<<<<< HEAD
-    <div class="row">
-        <div class="col col-8 col-md-10">
-            <h4>Medida Formativa</h4>
-        </div>
-        <div class="col-2 ml-2 ml-md-0 text-md-right">
-                <button class="btn btn-success btn-sm" type="button" id="btn-create"><i class="fas fa-plus"></i> Agregar</button>
-        </div>
-=======
   <div class="row">
     <div class="col col-8 col-md-10">
       <h4>Medida Formativa</h4>
->>>>>>> 15acb73119ae98c04307aea51d5e8655e97df3d3
     </div>
-    <div class="col-2 text-md-right">
+    <div class="col-2 text-right">
       <button class="btn btn-outline-primary" type="button" id="btn-create"><i class="fas fa-plus"></i> Agregar</button>
     </div>
   </div>
