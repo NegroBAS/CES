@@ -181,10 +181,6 @@ $(document).ready(async function () {
         info: false,
         columnDefs: [
             { responsivePriority: 1, targets: 1 },
-            { responsivePriority: 2, targets: 0 },
-            { responsivePriority: 3, targets: 2 },
-            { responsivePriority: 4, targets: 3 },
-            { responsivePriority: 5, targets: 4 }
         ],
         language: {
             url:
