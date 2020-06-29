@@ -222,17 +222,10 @@ const app = {
 			let data = await res.json();
 			if (data.status === 200) {
 				let html = "";
-<<<<<<< HEAD
                 if (data.committees.length > 0) {
                     data.committees.forEach((committee) => {
                         html += `
 						<div class="col-12 col-md-6 mb-3">
-=======
-				if (data.committees.length > 0) {
-					data.committees.forEach((committee) => {
-						html += `
-						<div class="col-12 col-md-6 col-lg-4 mb-3">
->>>>>>> 1f6af3a287a127098b3c078df492263e4ca7181e
 							<div class="card">
 								<div class="card-header bg-primary"></div>
 								<div class="card-body">
