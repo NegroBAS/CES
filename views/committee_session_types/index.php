@@ -8,7 +8,7 @@
             <h4>Tipos de casos</h4>
         </div>
         <div class="col-2 text-md-right">
-                <button class="btn btn-success btn-sm" type="button" id="btn-create"><i class="fas fa-plus"></i> Agregar</button>
+            <button class="btn btn-outline-primary" type="button" id="btn-create"><i class="fas fa-plus"></i> Agregar</button>
         </div>
     </div>
     <div class="row mt-3" id="data-committee_types">

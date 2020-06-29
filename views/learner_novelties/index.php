@@ -7,7 +7,7 @@
             <h4>Novedades Aprendices</h4>
         </div>
         <div class="col-2 text-md-right">
-                <button class="btn btn-success btn-sm" type="button" id="btn-create"><i class="fa fa-plus"></i> Crear</button>
+                <button class="btn btn-outline-primary" type="button" id="btn-create"><i class="fa fa-plus"></i> Crear</button>
         </div>
     </div>
     <div class="row mt-3">

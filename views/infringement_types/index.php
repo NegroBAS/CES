@@ -8,7 +8,7 @@
         </div>
         <div class="col-2 text-md-right">
             <div class="dropdown">
-                <button class="btn btn-success btn-sm" type="button" id="btn-create" ><i class="fa fa-plus"></i> Agregar</button>
+                <button class="btn btn-outline-primary" type="button" id="btn-create" ><i class="fa fa-plus"></i> Agregar</button>
 
             </div>
         </div>

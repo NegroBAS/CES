@@ -65,8 +65,8 @@ const app = {
                             <h5>${formation_program_type.name}</h5>
                             <p>Meses Lectivos ${formation_program_type.elective_months} <br>
                              Meses Practicos  ${formation_program_type.practice_months}</p>
-                             <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
-                             <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>                 
+                             <button class="btn btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
+                             <button class="btn btn-outline-primary edit"><i class="far fa-edit"></i></button>                 
                         </div>
                     </div> 
             </div>  `

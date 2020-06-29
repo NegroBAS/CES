@@ -9,7 +9,7 @@
     </div>
     <div class="col-2 text-right">
 
-        <button class="btn btn-success btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-outline-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Opciones
         </button>
         <div class="dropdown-menu dropdown-menu-right">

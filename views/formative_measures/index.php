@@ -2,17 +2,17 @@
 <?php require_once('views/partials/navbar.php') ?>
 
 <div class="container my-5">
-    <div class="row">
-        <div class="col col-8 col-md-10">
-            <h4>Medida Formativa</h4>
-        </div>
-        <div class="col-2 text-md-right">
-                <button class="btn btn-success btn-sm" type="button" id="btn-create"><i class="fas fa-plus"></i> Agregar</button>
-        </div>
+  <div class="row">
+    <div class="col col-8 col-md-10">
+      <h4>Medida Formativa</h4>
     </div>
-    <div class="row mt-3" id="data-formative_measures">
-        
+    <div class="col-2 text-md-right">
+      <button class="btn btn-outline-primary" type="button" id="btn-create"><i class="fas fa-plus"></i> Agregar</button>
     </div>
+  </div>
+  <div class="row mt-3" id="data-formative_measures">
+
+  </div>
 </div>
 
 
@@ -27,25 +27,25 @@
         </button>
       </div>
       <div class="modal-body">
-                        <form action="" method="post" id="form">
-                          <div class="form-row">
-                              <div class="col">
-                                  <div class="form-group">
-                                        <label for="name">Nombre</label>
-                                          <input type="text" name="name" id="name" class="form-control">
-                                          <div class="invalid-feedback"  id="nameMessage" >
-                                                              
-                                          </div>
-                                  </div>
-                              </div>
-                          </div>                           
-                        </form>
-        <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button type="submit" form="form" id="btnForm" class="btn btn-primary"><i class="far fa-save"></i> Guardar</button>
-        </div>                           
-        </div>
-    </div>
-</div>
+        <form action="" method="post" id="form">
+          <div class="form-row">
+            <div class="col">
+              <div class="form-group">
+                <label for="name">Nombre</label>
+                <input type="text" name="name" id="name" class="form-control">
+                <div class="invalid-feedback" id="nameMessage">
 
-<?php require_once('views/layouts/footer.php') ?>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+          <button type="submit" form="form" id="btnForm" class="btn btn-primary"><i class="far fa-save"></i> Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <?php require_once('views/layouts/footer.php') ?>

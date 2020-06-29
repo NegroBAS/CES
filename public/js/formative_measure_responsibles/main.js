@@ -1,5 +1,5 @@
 const app = {
-    url:document.getElementById('url').content,
+    url: document.getElementById('url').content,
     authenticate: async function () {
         try {
             let res = await fetch(
@@ -17,6 +17,7 @@ const app = {
                 }
             );
             let data = await res.json();
+            console.log(data);
             return data.token;
         } catch (error) {
             console.log(error);
@@ -26,38 +27,41 @@ const app = {
         try {
             let token = await this.authenticate();
             let res = await fetch('https://cronode.herokuapp.com/api/ces/instructors', {
-                headers:{
-                    'Authorization':`Bearer ${token}`
+                headers: {
+                    'Authorization': `Bearer ${token}`
                 }
             });
             let data = await res.json();
-            console.log(data.instructors);
             let fd = new FormData();
             fd.append('formative_measure_responsibles', JSON.stringify(data.instructors));
             res = await fetch(`${this.url}formative_measure_responsibles/masive`, {
-                method:'POST',
-                body:fd
+                method: 'POST',
+                body: fd
             });
             data = await res.json();
-            if(data.status===200){
+            console.log(data);
+            if (data.status === 200) {
                 toastr.success('', data.message, {
-                    closeButton:true
+                    closeButton: true
                 });
-                app.get();
+                await app.get();
             }
         } catch (error) {
+            toastr.error('', 'Error: Intenta mas tarde', {
+                closeButton: true
+            });
             console.log(error);
         }
     },
-    get:async function () {
+    get: async function () {
         try {
             let res = await fetch(`${this.url}formative_measure_responsibles/index`);
             let data = await res.json();
-            if(data[0].status==200){
-                if(data[0].formative_measure_responsibles.length>0){
+            if (data[0].status == 200) {
+                if (data[0].formative_measure_responsibles.length > 0) {
                     let html = '';
                     data[0].formative_measure_responsibles.forEach(formative_measure_responsible => {
-                        html+=`
+                        html += `
                         <tr data-id="${formative_measure_responsible.id}">
                             <td>${formative_measure_responsible.username}</td>
                             <td>${formative_measure_responsible.misena_email}</td>
@@ -74,18 +78,18 @@ const app = {
                 }
             }
 
-             html = '';
-                    data[2].document_types.forEach(document_type => {
-                        html+=`
+            html = '';
+            data[2].document_types.forEach(document_type => {
+                html += `
                        <option value="${document_type.id}">${document_type.name}</option>
                         `;
-                    });
-                    document.getElementById('document_type_id').innerHTML = html;
+            });
+            document.getElementById('document_type_id').innerHTML = html;
 
 
             html = '';
             data[1].contract_types.forEach(contract_type => {
-                html+=`
+                html += `
                 <option value="${contract_type.id}">${contract_type.name}</option>
                 `;
             });
@@ -93,7 +97,7 @@ const app = {
 
             html = '';
             data[3].positions.forEach(position => {
-                html+=`
+                html += `
                 <option value="${position.id}">${position.name}</option>
                 `;
             });
@@ -108,7 +112,7 @@ const app = {
             let res = await fetch(`${this.url}formative_measure_responsibles/show/${id}`);
             let data = await res.json();
             console.log(data);
-            if(data.status===200){
+            if (data.status === 200) {
                 $('.modal #form').trigger('reset');
                 $('.modal').modal('toggle');
                 $('.modal').find('.modal-title').text('Editar responsable');
@@ -131,22 +135,22 @@ const app = {
             console.log(error);
         }
     },
-    create:async function(form){
+    create: async function (form) {
         try {
             let res = await fetch(`${this.url}formative_measure_responsibles/store`, {
-                method:'POST',
+                method: 'POST',
                 body: new FormData(form)
             });
             let data = await res.json();
             console.log(data);
-            if(data.status===200){
+            if (data.status === 200) {
                 $('.modal').modal('toggle');
                 app.get();
                 toastr.success('', data.message, {
-                    closeButton:true
+                    closeButton: true
                 });
             }
-            if(data.status===500){
+            if (data.status === 500) {
                 console.log(data.error);
                 toastr.error('', data.error.errorInfo[2], {
                     closeButton: true
@@ -158,15 +162,15 @@ const app = {
     },
     delete: async function (id) {
         try {
-            let res  = await fetch(`${this.url}formative_measure_responsibles/destroy/${id}`);
+            let res = await fetch(`${this.url}formative_measure_responsibles/destroy/${id}`);
             let data = await res.json();
-            if(data.status === 200){
+            if (data.status === 200) {
                 toastr.success('', data.message, {
-                    closeButton:true
+                    closeButton: true
                 });
                 this.get();
             }
-            if(data.status===500){
+            if (data.status === 500) {
                 console.log(data.error);
             }
         } catch (error) {
@@ -176,12 +180,12 @@ const app = {
     update: async function (form, id) {
         try {
             let res = await fetch(`${this.url}formative_measure_responsibles/edit/${id}`, {
-                method:'POST',
-                body:new FormData(form)
+                method: 'POST',
+                body: new FormData(form)
             });
             let data = await res.json();
             console.log(data);
-            if(data.status===200){
+            if (data.status === 200) {
                 toastr.success('', data.message, {
                     closeButton: true
                 });
@@ -189,7 +193,7 @@ const app = {
                 $('.modal').modal('toggle');
                 this.edit = false;
             }
-            if(data.status===500){
+            if (data.status === 500) {
                 console.log(data.error);
             }
         } catch (error) {
@@ -201,21 +205,37 @@ const app = {
 $(document).ready(async function () {
     let id = null;
     await app.get();
+    $("#formative-measure-responsibles").DataTable({
+        responsive: true,
+        info: false,
+        columnDefs: [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 2, targets: -1 }
+        ],
+        language: {
+            url:
+                "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
+        },
+    });
     document.getElementById('update').onclick = function () {
-      app.getByApi();
+        document.getElementById('data-formative-measure-responsible').innerHTML = `
+        <tr>
+            <td colspan="5" class="text-center">Cargando ... </td>
+        </tr>`;
+        app.getByApi();
     }
-    document.getElementById('btn-create').onclick = function(){
+    document.getElementById('btn-create').onclick = function () {
         $('.modal #form').trigger('reset');
         $('.modal').modal('toggle');
         $('.modal').find('.modal-title').text('Crear responsable');
         val.limpiar();
         val.validaciones();
     }
-    document.getElementById('form').onsubmit = function(e){
+    document.getElementById('form').onsubmit = function (e) {
         e.preventDefault();
-        if(app.edit){
+        if (app.edit) {
             app.update(this, id);
-        }else{
+        } else {
             app.create(this);
         }
     }
@@ -230,14 +250,14 @@ $(document).ready(async function () {
             cancelButtonColor: "#d33",
             cancelButtonText: "Cancelar",
             confirmButtonText: "Si, eliminar",
-          }).then((result) => {
+        }).then((result) => {
             if (result.value) {
-              Swal.fire("Eliminado!", "El responsable ha sido eliminado.", "success");
-              let id = $($(this)[0].parentElement.parentElement).data("id");
-              app.delete(id);
-              app.get();
+                Swal.fire("Eliminado!", "El responsable ha sido eliminado.", "success");
+                let id = $($(this)[0].parentElement.parentElement).data("id");
+                app.delete(id);
+                app.get();
             }
-          });
+        });
 
     });
     $(document).on('click', '.edit', function () {
@@ -250,21 +270,10 @@ $(document).ready(async function () {
 
 });
 
-$("#formative-measure-responsibles").DataTable({
-    responsive: true,
-    info: false,
-    columnDefs: [
-        { responsivePriority: 1, targets: 0 },
-        { responsivePriority: 2, targets: -1 }
-    ],
-    language: {
-        url:
-            "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
-    },
-});
+
 
 const val = {
-     validaciones() {
+    validaciones() {
         let documento = document.getElementById('document');
         let username = document.getElementById('username');
         let misena_email = document.getElementById('misena_email');
@@ -424,19 +433,19 @@ const val = {
 
 
         }
-      },
+    },
 
-      limpiar(){
+    limpiar() {
         let documento = document.getElementById('document');
         let username = document.getElementById('username');
         let misena_email = document.getElementById('misena_email');
         let institutional_email = document.getElementById('institutional_email');
         let phone = document.getElementById('phone');
         let phone_ip = document.getElementById('phone_ip');
-        
+
 
         console.log("limpiando");
-        username.classList.remove("is-invalid");    
+        username.classList.remove("is-invalid");
         username.classList.remove("is-valid");
 
         documento.classList.remove("is-invalid");
@@ -454,7 +463,7 @@ const val = {
         phone.classList.remove("is-invalid");
         phone.classList.remove("is-valid");
 
-      }
+    }
 
 
 }
@@ -464,4 +473,3 @@ const val = {
 
 
 
-    

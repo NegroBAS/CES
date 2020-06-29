@@ -6,7 +6,7 @@
             <h3>Comités</h3>
         </div>
         <div class="col-3 text-right">
-            <button class="btn btn-sm btn-success" id="btn-create"><i class="fa fa-plus"></i> Crear</button>
+            <button class="btn btn-outline-primary" id="btn-create"><i class="fa fa-plus"></i> Crear</button>
         </div>
     </div>
     <div class="row mt-3" id="data-committees">
