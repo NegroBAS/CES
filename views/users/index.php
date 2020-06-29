@@ -3,7 +3,7 @@
 
 <div class="container my-5">
     <div class="row">
-        <div class="col col-8 col-md-10">
+        <div class="col col-9 col-md-10">
             <h4>Usuarios</h4>
         </div>
         <div class="col-2 text-right">
