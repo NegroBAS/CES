@@ -12,7 +12,7 @@ const app = {
                     <div class="card" data-id="${committee_session_type.id}">
                         <div class="card-header bg-primary"></div>
                         <div class="card-body text-center">
-                            <h5>${committee_session_type.name}</h5>
+                            <h4>${committee_session_type.name}</h4>
                             <button class="btn  btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
                             <button class="btn  btn-outline-primary edit"><i class="far fa-edit"></i></button>
                         </div>
