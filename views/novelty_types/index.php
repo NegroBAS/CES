@@ -7,7 +7,7 @@
             <h4>Tipos de novedades</h4>
         </div>
         <div class="col-2 text-right">
-            <button class="btn btn-sm btn-success" id="btn-create">Agregar</button>
+            <button class="btn btn-outline-primary" id="btn-create">Agregar</button>
         </div>
     </div>
     <div class="row mt-3" id="data-novelty-types">

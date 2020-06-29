@@ -7,8 +7,13 @@
         <div class="col col-8 col-md-10">
             <h4>Tipos de casos</h4>
         </div>
+<<<<<<< HEAD
         <div class="col-2 ml-2 ml-md-0 text-md-right">
                 <button class="btn btn-success btn-sm" type="button" id="btn-create"><i class="fas fa-plus"></i> Agregar</button>
+=======
+        <div class="col-2 text-md-right">
+            <button class="btn btn-outline-primary" type="button" id="btn-create"><i class="fas fa-plus"></i> Agregar</button>
+>>>>>>> 15acb73119ae98c04307aea51d5e8655e97df3d3
         </div>
     </div>
     <div class="row mt-3" id="data-committee_types">

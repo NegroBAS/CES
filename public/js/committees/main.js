@@ -225,7 +225,7 @@ const app = {
                 if (data.committees.length > 0) {
                     data.committees.forEach((committee) => {
                         html += `
-						<div class="col-12 col-md-6 mb-3">
+						<div class="col-12 col-md-6 col-lg-4 mb-3">
 							<div class="card">
 								<div class="card-header bg-primary"></div>
 								<div class="card-body">
@@ -264,7 +264,7 @@ const app = {
 									<div class="row">
 										<div class="col">
 											<div class="dropdown d-inline">
-												<button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 												  Opciones
 												</button>
 												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -274,7 +274,7 @@ const app = {
 												  <a class="dropdown-item p-2 delete" data-id="${committee.id}" href="#"><i class="far fa-trash-alt text-danger"></i> Eliminar</a>
 												</div>
 									  		</div>
-									  		<button class="btn btn-sm btn-success btn-add-case" data-id="${committee.id}" >Agregar caso</button>
+									  		<button class="btn btn-outline-success btn-add-case" data-id="${committee.id}" >Agregar caso</button>
 										</div>
 									</div>
 								</div>

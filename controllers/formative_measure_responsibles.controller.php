@@ -38,11 +38,14 @@ class Formative_measure_responsiblesController extends Controller{
     {
         $data = $_POST['formative_measure_responsibles'];
         $data = json_decode($data);
-        foreach ($data->instructors as $instructor) {
-            $res = $this->formative_measure_responsible->create([
+        $responses = [];
+        foreach ($data as $instructor) {
+            $response = $this->formative_measure_responsible->create([
                 'username' => $instructor->username,
-                'document' => $instructor->document,
                 'misena_email' => $instructor->misena_email,
+                'institutional_email'=>$instructor->institutional_email,
+                'document_type_id' => 1,
+                'document' => $instructor->document,
                 'gender' => $instructor->gender,
                 'birthdate' => date('Y-m-d H:i:s', strtotime($instructor->birthdate)),
                 'phone' => $instructor->phone,
@@ -50,11 +53,16 @@ class Formative_measure_responsiblesController extends Controller{
                 'position_id' => $instructor->positionId,
                 'contract_type_id' => $instructor->contractTypeId,
                 'state' => $instructor->state,
-                'document_type_id' => 2,
                 'type'=>'Instructor'
             ]);
+            array_push($responses, $response);
         }
-        echo json_encode(['message' => $res]);
+        echo json_encode([
+            'status'=>200,
+            'message'=>'Responsables actualizados',
+            'responses'=>$responses
+        ]);
+        // echo json_encode($data);
     }
 
     public function store()

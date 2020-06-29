@@ -9,7 +9,7 @@
         </div>
         <div class="col-2 ml-4 ml-md-0 text-right">
             <div class="dropdown">
-            <button class="btn btn-success btn-sm" id="btn-create"><i class="fa fa-plus"></i> Crear</button>
+            <button class="btn btn-outline-primary" id="btn-create"><i class="fa fa-plus"></i> Crear</button>
             </div>
         </div>
     </div>
