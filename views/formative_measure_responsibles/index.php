@@ -6,7 +6,7 @@
         <div class="col col-7 col-md-10">
             <h4>Responsables de medidas formativas</h4>
         </div>
-        <div class="col-2 text-right">
+        <div class="col-2 ml-2 ml-md-0 text-right">
             <div class="dropdown">
                 <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Opciones

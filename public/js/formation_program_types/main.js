@@ -61,7 +61,7 @@ const app = {
             <div class="col-12 col-md-6 col-xl-6 mb-2">
                     <div class="card" data-id="${formation_program_type.id}">
                         <div class="card-header bg-primary"></div>
-                        <div class="card-body text-center text-truncate">
+                        <div class="card-body text-center">
                             <h5>${formation_program_type.name}</h5>
                             <p>Meses Lectivos ${formation_program_type.elective_months} <br>
                              Meses Practicos  ${formation_program_type.practice_months}</p>

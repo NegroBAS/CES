@@ -19,12 +19,12 @@
         *{
             font-family: 'Questrial', sans-serif;
         }
-        @media (max-width: 320px) { 
+        @media (max-width: 320px) {
             h4{
-                font-size: 16px;
+                font-size: 20px !important;
             }
             h5{
-                font-size: 18px;
+                font-size: 18px !important;
             }
             li.paginate_button.previous {
                 display: inline;
@@ -39,15 +39,16 @@
             }
          }
          @media (max-width: 768px) { 
-            h4{
-                font-size: 18px;
-            }
             h5{
-                font-size: 20px;
+                font-size: 1.6vw !important;
             }
          }
-        @media (max-width: 1024px) {}
-        @media (max-width: 1200px) { }
+         @media (max-width: 1024px) {
+            h5{
+                font-size: 1.4vw;
+            }
+          }
+          
     </style>
 </head>
 

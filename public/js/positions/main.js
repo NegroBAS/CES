@@ -61,10 +61,10 @@ const app = {
                         <div class="col-12 col-md-6 col-xl-6 mb-2">
                             <div class="card" data-id="${position.id}">
                                 <div class="card-header bg-primary"></div>
-                                <div class="card-body text-center text-truncate">
+                                <div class="card-body text-center">
                                     <h5>${position.name}</h5>
-                                    <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
-                                    <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
+                                    <button class="btn btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
+                                    <button class="btn btn-outline-primary edit"><i class="far fa-edit"></i></button>
                                 </div>
                             </div>
                         </div>

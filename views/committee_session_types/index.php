@@ -7,7 +7,7 @@
         <div class="col col-8 col-md-10">
             <h4>Tipos de casos</h4>
         </div>
-        <div class="col-2 text-md-right">
+        <div class="col-2 ml-2 ml-md-0 text-md-right">
                 <button class="btn btn-success btn-sm" type="button" id="btn-create"><i class="fas fa-plus"></i> Agregar</button>
         </div>
     </div>
