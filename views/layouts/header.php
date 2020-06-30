@@ -19,7 +19,13 @@
         *{
             font-family: 'Nunito', sans-serif;
         }
+        td.buttons{
+            width: 120px;
+        }
         @media (max-width: 320px) {
+            td.buttons{
+            width: 120px !important;
+            }
             h4{
                 font-size: 20px !important;
             }
@@ -38,16 +44,14 @@
                 display: none;
             }
          }
-         @media (max-width: 768px) { 
+         @media (max-width: 768px) {
+            td.buttons{
+            width: 120px;
+            }
             h5{
-                font-size: 1.6vw;
+                font-size: 24px;
             }
          }
-         @media (max-width: 1024px) {
-            h5{
-                font-size: 1.6vw;
-            }
-          }
           
     </style>
 </head>

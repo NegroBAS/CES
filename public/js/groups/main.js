@@ -61,7 +61,7 @@ const app = {
                 <td>${group.name_formation}</td>
                 <td>${group.name_modalities}</td>
                 <td>${group.quantity_learners}</td>
-                <td>
+                <td class="buttons">
                     <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
                     <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
                     <button class="btn btn-sm btn-outline-primary view"><i class="far fa-eye"></i></button>
@@ -181,6 +181,7 @@ $(document).ready(async function () {
         info: false,
         columnDefs: [
             { responsivePriority: 1, targets: 1 },
+            { responsivePriority: 1, targets: -1 }
         ],
         language: {
             url:

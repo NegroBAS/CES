@@ -16,7 +16,7 @@ const app = {
                     <td>${learner.document}</td>
                     <td>${learner.phone}</td>
                     <td>${learner.email}</td>
-                    <td>
+                    <td class="buttons">
                     <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
                     <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
                     <button class="btn btn-sm btn-outline-primary view"><i class="far fa-eye"></i></button>
@@ -191,7 +191,7 @@ $(document).ready(async function () {
         info: false,
         columnDefs: [
             { responsivePriority: 1, targets: 0 },
-            { responsivePriority: 1, targets: 2 },
+            { responsivePriority: 1, targets: -1 },
         ],
         language: {
             url:

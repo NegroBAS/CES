@@ -3,11 +3,11 @@
 
 <div class="container my-5">
     <div class="row">
-        <div class="col col-8 col-md-10">
+        <div class="col col-6 col-md-9 col-xl-10">
             <h4>Sanciones</h4>
         </div>
-        <div class="col-4 col-md-2 text-md-right">
-                <button class="btn btn-outline-primary" type="button" id="btn-create"><i class="fa fa-plus"></i> Crear</button>
+        <div class="col col-5 col-md col-xl ml-md-5 ml-xl-5 ml-4">
+            <button class="btn btn-outline-primary ml-xl-4 ml-3" type="button" id="btn-create"><i class="fa fa-plus"></i>&nbsp;  Crear</button>
         </div>
     </div>
     <div class="row mt-3" id="data-sanctions">
