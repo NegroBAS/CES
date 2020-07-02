@@ -49,9 +49,9 @@ const app = {
             let res = await fetch(`${this.url}learners/show/${id}`);
             let data = await res.json();
             if (data.status === 200) {
-                $(".modal #form").trigger("reset");
-                $(".modal").modal("toggle");
-                $(".modal").find(".modal-title").text("Editar Cargo");
+                $("#createModal").trigger("reset");
+                $("#createModal").modal("toggle");
+                $("#createModal").find(".modal-title").text("Editar Cargo");
                 document.getElementById("username").value =
                     data.learner.username;
                 document.getElementById("document").value =
@@ -79,7 +79,7 @@ const app = {
             let data = await res.json();
             console.log(data);
             if (data.status === 200) {
-                $(".modal").modal("toggle");
+                // $("#createModal").modal("toggle");
                 app.getData();
                 toastr.success("", data.message, {
                     closeButton: true,
@@ -239,17 +239,13 @@ $(document).ready(async function () {
     }
 
     document.getElementById("btn-create").onclick = function () {
-<<<<<<< HEAD
         $("#createModal").trigger("reset");
         $("#createModal").modal("toggle");
         $("#createModal").find(".modal-title").text("Crear Cargo");
-=======
-        $(".modal #form").trigger("reset");
-        $(".modal").modal("toggle");
-        $(".modal").find(".modal-title").text("Crear Aprendiz");
->>>>>>> 6ba02e2e674db9851c121a3b74a4c0cfb5ef72ab
+
         limpiar();
         validaciones();
+        loader();
     };
     document.getElementById("form").onsubmit = function (e) {
         e.preventDefault();
@@ -262,7 +258,7 @@ $(document).ready(async function () {
     document.getElementById("btn-update").onclick = function () {
         $("#filecsv").trigger("reset");
         $("#filecsv").modal("toggle");
-        $("#filecsv").find(".modal-title").text("subir archivo");
+        $("#filecsv").find(".modal-title").text("Cargar aprendices");
     };
     document.getElementById("btnFormCsv").onclick = function (e) {
         e.preventDefault();
@@ -309,6 +305,37 @@ $(document).ready(async function () {
             .addClass("selected")
             .html(fileName);
     });
+
+    function loader(){
+       
+    
+        var barra_estado = document.getElementById('barra_estado');
+        var span = document.getElementById('span');
+
+        //peticion
+        let peticion = new XMLHttpRequest();
+
+        //progreso
+        // console.log('loader entro');
+
+        peticion.upload.addEventListener("progress", (event) => {
+            let porcentaje = Math.round((event.loaded / event.total) * 100 );
+            
+            console.log(porcentaje);
+            console.log('cargando subida');
+            
+            barra_estado.style.width =porcentaje + '%';
+            span.innerHTML = porcentaje+'%';
+        });
+
+        //finalizado
+        peticion.addEventListener("load", () => {
+            barra_estado.classlist.add('bg-success');
+            span.innerHTML= "Proceso completado";
+        });
+          
+        
+    }
 
     function validaciones() {
         let documento = document.getElementById("document");
@@ -374,8 +401,7 @@ $(document).ready(async function () {
         email.oninput = function () {
             if (emailRegex.test(this.value)) {
                 this.classList.remove("is-invalid");
-                this.classList.add("is-valid");
-                btnForm.removeAttribute("disabled");
+                this.classList.add("is-valid");                
                 estado[2] = "si";
             } else {
                 document.getElementById("emailMessage").innerHTML =
@@ -408,6 +434,21 @@ $(document).ready(async function () {
                 estado[5] = "si";
             }
         };
+
+        
+        setInterval(input,3000);
+        function input(){
+            if(numberRegex.test(documento.value)){         
+                if(letrasRegex.test(username.value)){                   
+                    if(emailRegex.test(email.value)){
+                        if(phone.value.length > 9){
+                            btnForm.removeAttribute("disabled");
+                        }
+                    }             
+                }  
+            }
+        }
+        
     }
 
     function limpiar() {
@@ -416,17 +457,23 @@ $(document).ready(async function () {
         let email = document.getElementById("email");
         let phone = document.getElementById("phone");
 
-        console.log("limpiando");
         username.classList.remove("is-invalid");
         username.classList.remove("is-valid");
+        username.value ="";
 
         documento.classList.remove("is-invalid");
         documento.classList.remove("is-valid");
+        documento.value ="";
+
 
         email.classList.remove("is-invalid");
         email.classList.remove("is-valid");
+        email.value ="";
+
 
         phone.classList.remove("is-invalid");
         phone.classList.remove("is-valid");
+        phone.value ="";
+
     }
 });

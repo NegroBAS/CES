@@ -8,11 +8,7 @@ const app = {
       html = "";
       data.committee_session_types.forEach((committee_session_type) => {
         html += `
-<<<<<<< HEAD
                 <div class="col-12 col-md-4 mb-2">
-=======
-                <div class="col-4 mb-2">
->>>>>>> 0b5e2b5250e3119d69a0553fee263fc9d947eeeb
                     <div class="card" data-id="${committee_session_type.id}">
                         <div class="card-header bg-primary"></div>
                         <div class="card-body text-center">
@@ -32,7 +28,7 @@ const app = {
       try {
           let res = await fetch(`${this.url}committee_session_types/show/${id}`);
           let data = await res.json();
-          console.log(data);
+
           if(data.status===200){
               $('.modal #form').trigger('reset');
               $('.modal').modal('toggle');
@@ -50,7 +46,7 @@ const app = {
               body: new FormData(form)
           });
           let data = await res.json();
-          console.log(data);
+
           if(data.status===200){
               $('.modal').modal('toggle');
               app.get();
@@ -92,7 +88,6 @@ const app = {
               body:new FormData(form)
           });
           let data = await res.json();
-          console.log(data);
           if(data.status===200){
               toastr.success('', data.message, {
                   closeButton: true
@@ -181,7 +176,6 @@ const val = {
         }
   
         if (this.value === "") {
-          console.log("campo requerido");
           document.getElementById("nameMessage").innerHTML =
             "Este campo es requerido";
           this.classList.add("is-invalid");
@@ -193,15 +187,19 @@ const val = {
           btn.setAttribute("disabled", "disabled");
         }
       };
+
+      setInterval(input,3000);
+      function input(){       
+           if(letrasRegex.test(name.value)){                   
+              btn.removeAttribute("disabled");
+           }  
+      }
   
     },
 
     limpiar(){
       let name = document.getElementById("name");
 
-      
-
-      console.log("limpiando");
       name.classList.remove("is-invalid");    
       name.classList.remove("is-valid");
 

@@ -26,7 +26,6 @@ const app = {
             try {
                 let res = await fetch(`${this.url}infringement_classifications/show/${id}`);
                 let data = await res.json();
-                console.log(data);
                 if(data.status===200){
                     $('.modal #form').trigger('reset');
                     $('.modal').modal('toggle');
@@ -44,7 +43,6 @@ const app = {
                     body: new FormData(form)
                 });
                 let data = await res.json();
-                console.log(data);
                 if(data.status===200){
                     $('.modal').modal('toggle');
                     app.get();
@@ -86,7 +84,6 @@ const app = {
                     body:new FormData(form)
                 });
                 let data = await res.json();
-                console.log(data);
                 if(data.status===200){
                     toastr.success('', data.message, {
                         closeButton: true
@@ -170,11 +167,10 @@ const app = {
                 this.classList.remove("is-valid");
                 this.classList.add("is-invalid");
                 document.getElementById("nameMessage").innerHTML =
-                  "Este campo es requerido";
+                  "Este campo solo resibe caracteres";
               }
         
-              if (this.value === "") {
-                console.log("campo requerido");
+              if (this.value === "") {               
                 document.getElementById("nameMessage").innerHTML =
                   "Este campo es requerido";
                 this.classList.add("is-invalid");
@@ -186,14 +182,19 @@ const app = {
                 btn.setAttribute("disabled", "disabled");
               }
             };
+
+            setInterval(input,3000);
+            function input(){       
+                if(letrasRegex.test(name.value)){                   
+                    btn.removeAttribute("disabled");
+                }  
+            }
         
           },
     
           limpiar(){
             let name = document.getElementById("name");
-            
-    
-            console.log("limpiando");
+
             name.classList.remove("is-invalid");    
             name.classList.remove("is-valid");
     

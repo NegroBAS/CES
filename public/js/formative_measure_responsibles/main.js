@@ -289,18 +289,19 @@ const val = {
             if (numberRegex.test(this.value)) {
                 this.classList.remove('is-invalid');
                 this.classList.add('is-valid');
-                estado[0] = 'si';
+
             } else {
                 document.getElementById('documentMessage').innerHTML = "Este campo es requerido"
                 this.classList.add('is-invalid');
-                estado[0] = 'no';
+                btnForm.setAttribute('disabled', 'disabled');
+
             }
 
-            if (this.value.length < 7) {
+            if (this.value.length < 7 || this.value === "" || this.value == null) {
                 this.classList.remove('is-valid');
                 this.classList.add('is-invalid');
                 document.getElementById('documentMessage').innerHTML = "Este campo es requerido"
-                estado[0] = 'no';
+                btnForm.setAttribute('disabled', 'disabled');
             }
 
 
@@ -309,16 +310,15 @@ const val = {
 
         username.oninput = function () {
             if (this.value === "" || this.value == null) {
-                console.log("campo requerido");
                 document.getElementById('nameMessage').innerHTML = "Este campo es requerido"
+                btnForm.setAttribute('disabled', 'disabled');
                 this.classList.add('is-invalid');
-                estado[1] = 'no';
+              
             }
 
             if (this.value.length > 0) {
                 this.classList.remove('is-invalid');
                 this.classList.add('is-valid');
-                estado[1] = 'si';
             }
 
             if (letrasRegex.test(this.value)) {
@@ -328,7 +328,15 @@ const val = {
                 this.classList.remove('is-valid');
                 this.classList.add('is-invalid');
                 document.getElementById('nameMessage').innerHTML = "Este campo es requerido"
+                btnForm.setAttribute('disabled', 'disabled');
             }
+
+            // if (this.value.length == 0 || this.value == "" ) {
+            //     this.classList.remove('is-valid');
+            //     this.classList.add('is-invalid');
+            //     document.getElementById('documentMessage').innerHTML = "Este campo es requerido"
+            //     btnForm.setAttribute('disabled', 'disabled');
+            // }
 
         }
 
@@ -338,20 +346,18 @@ const val = {
             if (emailRegex.test(this.value)) {
                 this.classList.remove('is-invalid');
                 this.classList.add('is-valid');
-                btnForm.removeAttribute('disabled');
                 estado[2] = 'si';
             } else {
                 document.getElementById('misena_emailMessage').innerHTML = "Este campo es requerido"
                 this.classList.add('is-invalid');
                 btnForm.setAttribute('disabled', 'disabled');
-                estado[2] = 'no';
+
             }
 
             if (this.value === "" || this.value == null) {
-                console.log("campo requerido");
                 this.classList.add('is-invalid');
                 btnForm.setAttribute('disabled', 'disabled');
-                estado[2] = 'no';
+
             }
 
 
@@ -363,20 +369,17 @@ const val = {
             if (emailRegex.test(this.value)) {
                 this.classList.remove('is-invalid');
                 this.classList.add('is-valid');
-                btnForm.removeAttribute('disabled');
-                estado[2] = 'si';
             } else {
                 document.getElementById('institutional_emailMessage').innerHTML = "Este campo es requerido"
                 this.classList.add('is-invalid');
                 btnForm.setAttribute('disabled', 'disabled');
-                estado[2] = 'no';
+
             }
 
             if (this.value === "" || this.value == null) {
-                console.log("campo requerido");
+
                 this.classList.add('is-invalid');
                 btnForm.setAttribute('disabled', 'disabled');
-                estado[2] = 'no';
             }
 
 
@@ -387,18 +390,16 @@ const val = {
 
 
             if (this.value === "" || this.value < 9) {
-                console.log("campo requerido");
                 document.getElementById('phoneMessage').innerHTML = "Este campo es requerido"
+                btnForm.setAttribute('disabled', 'disabled');
                 this.classList.add('is-invalid');
-                estado[5] = 'no';
 
             }
 
             if (this.value.length > 9) {
                 this.classList.remove('is-invalid');
                 this.classList.add('is-valid');
-                estado[5] = 'si';
-
+   
             }
 
 
@@ -408,22 +409,39 @@ const val = {
 
 
             if (this.value === "" || this.value < 6) {
-                console.log("campo requerido");
                 document.getElementById('phone_ipMessage').innerHTML = "Este campo es requerido"
+                btnForm.setAttribute('disabled', 'disabled');
                 this.classList.add('is-invalid');
-                estado[5] = 'no';
+ 
 
             }
 
             if (this.value.length > 6) {
                 this.classList.remove('is-invalid');
                 this.classList.add('is-valid');
-                estado[5] = 'si';
 
             }
 
 
         }
+
+        setInterval(input,3000);
+        function input(){
+            if(numberRegex.test(documento.value) && documento.value != ""){         
+                if(letrasRegex.test(username.value)){                   
+                    if(emailRegex.test(misena_email.value)){
+                        if(emailRegex.test(institutional_email.value)){
+                            if(phone.value.length > 9  && phone.value != ""){
+                                if(phone_ip.value.length > 6 && phone_ip.value != ""){
+                                    btnForm.removeAttribute("disabled");
+                                }
+                            }
+                        }
+                    }             
+                }  
+            }
+        }
+
       },
 
       limpiar(){
@@ -435,7 +453,6 @@ const val = {
         let phone_ip = document.getElementById('phone_ip');
         
 
-        console.log("limpiando");
         username.classList.remove("is-invalid");    
         username.classList.remove("is-valid");
 

@@ -141,6 +141,15 @@
                             </div>
                         
                         </div>
+                        <div class="form-row">
+                                <div class="form-group">                               
+                                                <div id="loader" class="spinner-border text-primary" hidden="hidden" role="status">
+                                                     <span class="sr-only">Loading...</span>
+                                                 </div>  
+                                                                                                                                     
+                                    </div>
+                        </div>
+                        
 
                         
 
@@ -148,7 +157,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" form="form" id="btnForm"  class="btn btn-primary"><i class="far fa-save"></i> Guardar</button>
+                    <button type="submit"  form="form" id="btnForm"  class="btn btn-primary"><i class="far fa-save"></i> Guardar</button>
                 </div>
             </div>
         </div>
@@ -182,7 +191,7 @@
                    <div class="form-row">
                            <div class="col">
                                <div class="form-group">
-                                   <label for="archivo">arvhivo csv</label>
+                                   <label for="archivo">Archivo csv</label>
                                    <div class="input-group mb-3">
                                        <div class="input-group-prepend">
                                            <span class="input-group-text">Subir</span>
@@ -195,9 +204,15 @@
                                        <!-- //link photo hidden -->
                                        <!-- <input type="text" hidden name="photo_2" id="photo_2" value="">  -->
 
-                                   </div>
-                                   
+                                   </div>                                  
                                </div>
+                               <!-- <div class="form-group">
+                                        <div class="barra">
+                                            <div class="" id="barra_estado">
+                                                <span id="span"></span>
+                                            </div>
+                                        </div>
+                               </div> -->
                            </div>
                        
                        </div>               

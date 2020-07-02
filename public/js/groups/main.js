@@ -88,7 +88,6 @@ const app = {
         try {
             let res = await fetch(`${this.url}groups/show/${id}`);
             let data = await res.json();
-            console.log(data.groups);
             if(data.status===200){
                 $('.modal #form').trigger('reset');
                 $('.modal').modal('toggle');
@@ -176,12 +175,6 @@ $(document).ready(async function () {
     let id = null;
     await app.get();
     $('#group').DataTable({
-<<<<<<< HEAD
-        language: {
-            url:
-             "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
-        },
-=======
         responsive: true,
         info: false,
         columnDefs: [
@@ -191,10 +184,8 @@ $(document).ready(async function () {
         "language": {
             "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
         }
->>>>>>> 6ba02e2e674db9851c121a3b74a4c0cfb5ef72ab
     });
     document.getElementById('btn-create').onclick = function(){
-        console.log("modal crear")
         $('.modal #form').trigger('reset');
         $('.modal').modal('toggle');
         $('.modal').find('.modal-title').text('Crear grupo');
@@ -278,7 +269,6 @@ $(document).ready(async function () {
                     
         
                 if(this.value === "" || this.value.length < 4 ){
-                    console.log("campo requerido");
                     document.getElementById('codeMessage').innerHTML = "Este campo es requerido"
                     this.classList.add('is-invalid');
                     estado[5] = 'no';
@@ -304,7 +294,6 @@ $(document).ready(async function () {
                     
         
                 if(this.value === "" || this.value.length < 2 || this.value < 8  ){
-                    console.log("campo requerido");
                     document.getElementById('quantityMessage').innerHTML = "Este campo es requerido"
                     this.classList.add('is-invalid');
                     estado[5] = 'no';
@@ -332,7 +321,6 @@ $(document).ready(async function () {
                     
         
                 if(this.value === "" || this.value.length < 1 || this.value < 8 ){
-                    console.log("campo requerido");
                     document.getElementById('activeMessage').innerHTML = "Este campo es requerido"
                     this.classList.add('is-invalid');
                     btnForm.setAttribute('disabled','disabled');
@@ -341,6 +329,17 @@ $(document).ready(async function () {
                 }
         
         
+            }
+
+            setInterval(input,3000);
+            function input(){
+                if(numberRegex.test(codetab.value) && codetab.value > 0){         
+                    if(numberRegex.test(quantity_learners.value) && quantity_learners.value > 0){                   
+                        if(numberRegex.test(active_learners.value) && active_learners.value > 0){                           
+                             btnForm.removeAttribute("disabled");
+                        }             
+                    }  
+                }
             }
 
 
@@ -354,7 +353,6 @@ $(document).ready(async function () {
             let active_learners = document.getElementById('active_learners');
           
   
-          console.log("limpiando");
           codetab.classList.remove("is-invalid");    
           codetab.classList.remove("is-valid");
   

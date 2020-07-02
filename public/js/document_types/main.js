@@ -187,6 +187,13 @@ const val = {
             btn.setAttribute("disabled", "disabled");
           }
         };
+
+        setInterval(input,3000);
+        function input(){       
+             if(letrasRegex.test(name.value)){                   
+                btnForm.removeAttribute("disabled");
+             }  
+        }
       },
 
       limpiar(){

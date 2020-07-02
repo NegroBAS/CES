@@ -134,8 +134,10 @@ class LearnersController extends Controller
      
             if(isset($_FILES['photo'])){
 
-                 if (is_uploaded_file($_FILES['photo']['tmp_name'])) {   
-     
+                 if (is_uploaded_file($_FILES['photo']['tmp_name'])) { 
+
+                    $_SESSION["progreso"]= "cargando";
+
                          $rutaA1=$_FILES['photo']['tmp_name'];
      
                          if($typeFile == "jpg" || $typeFile == "jpeg" || $typeFile == "png"){
@@ -147,8 +149,10 @@ class LearnersController extends Controller
                                  $destinoA1= $url_back;
                                  $photo= $destinoA1;
                                  copy($rutaA1,$destinoA1);
+                                 $progreso = "si";
+                                 $_SESSION["progreso"] = $progreso;
                              }else{
-                                 echo "debe selecionar una imagen 1";
+                                 echo "debe selecionar una imagen";
                              }
          
          
