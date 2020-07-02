@@ -3,15 +3,15 @@
 
 <div class="container my-5">
   <div class="row">
-    <div class="col col-7 col-md-10">
+    <div class="col">
       <h4>Tipos de programas de formacion</h4>
     </div>
-    <div class="col-2 text-md-right">
+    <div class="col-5 col-md-5 ml-2 ml-md-0 text-md-right">
       <div class="dropdown">
-        <button class="btn btn-success btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Opciones
         </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
           <a class="dropdown-item" href="#" id="btn-create"><i class="fa fa-plus"></i> Crear</a>
           <a class="dropdown-item" href="#" id="btnUpdate"><i class="fas fa-sync-alt"></i> Actualizar</a>
         </div>

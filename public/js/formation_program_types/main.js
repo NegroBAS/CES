@@ -58,15 +58,15 @@ const app = {
         let html = '';
         formation_program_types.forEach(formation_program_type => {
             html += `
-            <div class="col-12 col-md-4 mb-2">
+            <div class="col-12 col-md-6 col-xl-6 mb-2">
                     <div class="card" data-id="${formation_program_type.id}">
                         <div class="card-header bg-primary"></div>
                         <div class="card-body text-center">
                             <h5>${formation_program_type.name}</h5>
                             <p>Meses Lectivos ${formation_program_type.elective_months} <br>
                              Meses Practicos  ${formation_program_type.practice_months}</p>
-                             <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
-                             <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>                 
+                             <button class="btn btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
+                             <button class="btn btn-outline-primary edit"><i class="far fa-edit"></i></button>                 
                         </div>
                     </div> 
             </div>  `

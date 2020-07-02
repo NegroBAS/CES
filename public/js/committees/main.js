@@ -47,18 +47,19 @@ const app = {
 	},
 	addNovelty: async function (form) {
 		try {
-			let res = await fetch(`${this.url}committee_sessions/storeStimulu`, {
+			let res = await fetch(`${this.url}committee_sessions/storeNovelty`, {
 				method: 'POST',
 				body: form
 			});
 			let data = await res.json();
-			if (data.status === 200) {
-				$('#modal-case').modal('toggle');
-				toastr.success('', data.message, {
-					closeButton: true
-				});
-				document.getElementById('content').innerHTML = '';
-			}
+			console.log(data);
+		} catch (error) {
+			console.log(error);
+		}
+	},
+	getCase:async function(id){
+		try {
+			console.log(id);
 		} catch (error) {
 			console.log(error);
 		}
@@ -78,7 +79,22 @@ const app = {
 						html += `
 						<div class="card mb-1">
 							<div class="card-header">
-								${stimulu.start_hour} - ${stimulu.end_hour}
+								<div class="row">
+									<div class="col">
+										${stimulu.start_hour} - ${stimulu.end_hour}
+									</div>
+									<div className="col">
+										<div class="dropdown">
+											<button class="btn btn-sm btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+											</button>
+											<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+											  <a class="dropdown-item case" href="#" data-id="${stimulu.id}"><i class="far fa-eye text-primary"></i> Detalle</a>
+											  <a class="dropdown-item" href="#"><i class="far fa-edit text-primary"></i> Editar</a>
+											  <a class="dropdown-item" href="#"><i class="far fa-trash-alt text-danger"></i> Eliminar</a>
+											</div>
+								  		</div>
+									</div>
+								</div>
 							</div>
 							<div class="card-body">
 								<div class="card-title">${stimulu.learner_name}</div>
@@ -89,6 +105,10 @@ const app = {
 					});
 				}
 				document.getElementById('stimulus').innerHTML = html;
+				$(document).on('click', '.case', async function(){
+					let id = $(this).data('id');
+					console.log(id);
+				});
 			}
 			if (data.data[1].status === 200) {
 				let html = '<h6>Novedades del aprendiz</h6>';
@@ -159,7 +179,7 @@ const app = {
 			console.log(error);
 		}
 	},
-	selectCommittee:async function(id){
+	selectCommittee: async function (id) {
 		try {
 			let res = await fetch(`${this.url}committees/show/${id}`);
 			let data = await res.json();
@@ -169,7 +189,7 @@ const app = {
 			$('#modal-detail #record_number').text(data.record_number);
 			$('#modal-detail #place').text(data.place);
 			$('#modal-detail #formation_center').text(data.formation_center);
-			$('#modal-detail #qourum').text(data.qourum==1?'Si':'No');
+			$('#modal-detail #qourum').text(data.qourum == 1 ? 'Si' : 'No');
 			$('#modal-detail #assistants').html(data.assistants);
 		} catch (error) {
 			console.log(error);
@@ -202,17 +222,10 @@ const app = {
 			let data = await res.json();
 			if (data.status === 200) {
 				let html = "";
-<<<<<<< HEAD
                 if (data.committees.length > 0) {
                     data.committees.forEach((committee) => {
                         html += `
-						<div class="col-12 col-md-6 mb-3">
-=======
-				if (data.committees.length > 0) {
-					data.committees.forEach((committee) => {
-						html += `
-						<div class="col-4 mb-3">
->>>>>>> 0b5e2b5250e3119d69a0553fee263fc9d947eeeb
+						<div class="col-12 col-md-6 col-lg-4 mb-3">
 							<div class="card">
 								<div class="card-header bg-primary"></div>
 								<div class="card-body">
@@ -251,7 +264,7 @@ const app = {
 									<div class="row">
 										<div class="col">
 											<div class="dropdown d-inline">
-												<button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 												  Opciones
 												</button>
 												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -261,7 +274,7 @@ const app = {
 												  <a class="dropdown-item p-2 delete" data-id="${committee.id}" href="#"><i class="far fa-trash-alt text-danger"></i> Eliminar</a>
 												</div>
 									  		</div>
-									  		<button class="btn btn-sm btn-success btn-add-case" data-id="${committee.id}" >Agregar caso</button>
+									  		<button class="btn btn-outline-success btn-add-case" data-id="${committee.id}" >Agregar caso</button>
 										</div>
 									</div>
 								</div>
@@ -465,6 +478,8 @@ $(document).ready(async function () {
 		$('#modal-detail').find('.modal-title').text('Detalles del comité');
 		$('#modal-detail').modal('toggle');
 	});
+
+	
 
 	$(document).on('click', '.cases', async function () {
 		let id = $(this).data('id');

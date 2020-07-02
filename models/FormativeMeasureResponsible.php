@@ -98,7 +98,7 @@ class FormativeMeasureResponsible extends Model{
     public function create($data)
     {
         try {
-            $query = $this->db->connect()->prepare('INSERT INTO formative_measure_responsibles(username, misena_email, institutional_email, document_type_id, document, birthdate,phone, phone_ip, gender, position_id,contract_type_id,type,photo,state) VALUES (:username, :misena_email, :institutional_email, :document_type_id, :document, :birthdate,:phone, :phone_ip, :gender, :position_id, :contract_type_id, :type, :photo, :state)');
+            $query = $this->db->connect()->prepare('INSERT INTO formative_measure_responsibles(username, misena_email, institutional_email, document_type_id, document, birthdate,phone, phone_ip, gender, position_id,contract_type_id,type,state) VALUES (:username, :misena_email, :institutional_email, :document_type_id, :document, :birthdate,:phone, :phone_ip, :gender, :position_id, :contract_type_id, :type, :state)');
             $query->execute([
                 'username' => $data['username'],
                 'misena_email' => $data['misena_email'],
@@ -112,7 +112,6 @@ class FormativeMeasureResponsible extends Model{
                 'position_id' => $data['position_id'],
                 'contract_type_id' => $data['contract_type_id'],
                 'type' => $data['type'],
-                'photo' => $data['photo'],
                 'state' => $data['state']
             ]);
             return [

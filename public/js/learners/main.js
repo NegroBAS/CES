@@ -16,9 +16,10 @@ const app = {
                     <td>${learner.document}</td>
                     <td>${learner.phone}</td>
                     <td>${learner.email}</td>
-                    <td>
+                    <td class="buttons">
                     <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
                     <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
+                    <button class="btn btn-sm btn-outline-primary view"><i class="far fa-eye"></i></button>
                     </td>
                 </tr>
                 `;
@@ -189,8 +190,8 @@ $(document).ready(async function () {
         responsive: true,
         info: false,
         columnDefs: [
-            { responsivePriority: 1, targets: 2 },
-            { responsivePriority: 2, targets: -1 }
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 1, targets: -1 },
         ],
         language: {
             url:
@@ -241,7 +242,7 @@ $(document).ready(async function () {
     document.getElementById("btn-create").onclick = function () {
         $("#createModal").trigger("reset");
         $("#createModal").modal("toggle");
-        $("#createModal").find(".modal-title").text("Crear Cargo");
+        $("#createModal").find(".modal-title").text("Crear aprendiz");
 
         limpiar();
         validaciones();

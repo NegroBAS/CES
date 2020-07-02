@@ -74,7 +74,7 @@ class CommitteeSession extends Model
     public function allStimulus($committee_id)
     {
         try {
-            $query = $this->db->connect()->prepare("SELECT * FROM committee_sessions INNER JOIN learners ON learners.id = committee_sessions.learner_id WHERE committee_sessions.committee_id = :id AND committee_sessions.committee_session_type_id = '1'");
+            $query = $this->db->connect()->prepare("SELECT committee_sessions.*, learners.username FROM committee_sessions INNER JOIN learners ON learners.id = committee_sessions.learner_id WHERE committee_sessions.committee_id = :id AND committee_sessions.committee_session_type_id = '1'");
             $query->execute([
                 'id'=>$committee_id
             ]);
@@ -118,6 +118,31 @@ class CommitteeSession extends Model
     {
         try {
             $query = $this->db->connect()->prepare('INSERT INTO committee_sessions(start_hour, end_hour, committee_session_type_id, stimulus, stimulus_justification, committee_id, learner_id) VALUES (:start_hour, :end_hour, :committee_session_type_id, :stimulus, :stimulus_justification, :committee_id, :learner_id)');
+            $query->execute([
+                'start_hour'=>$data['start_hour'],
+                'end_hour'=>$data['end_hour'],
+                'committee_session_type_id'=>$data['committee_session_type_id'],
+                'stimulus'=>$data['stimulus'],
+                'stimulus_justification'=>$data['stimulus_justification'],
+                'committee_id'=>$data['committee_id'],
+                'learner_id'=>$data['learner_id']
+            ]);
+            return [
+                'status'=>200,
+                'message'=>'Nuevo caso agregado'
+            ];
+        } catch (PDOException $e) {
+            return [
+                'status'=>500,
+                'error'=>$e
+            ];
+        }
+    }
+
+    public function createNovelty($data)
+    {
+        try {
+            $query = $this->db->connect()->prepare('INSERT INTO committee_sessions(start_hour, end_hour, committee_session_type_id, novelty_type_id, committee_id, learner_id) VALUES (:start_hour, :end_hour, :committee_session_type_id, :stimulus, :stimulus_justification, :committee_id, :learner_id)');
             $query->execute([
                 'start_hour'=>$data['start_hour'],
                 'end_hour'=>$data['end_hour'],

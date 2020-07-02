@@ -61,9 +61,10 @@ const app = {
                 <td>${group.name_formation}</td>
                 <td>${group.name_modalities}</td>
                 <td>${group.quantity_learners}</td>
-                <td>
+                <td class="buttons">
                     <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
                     <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
+                    <button class="btn btn-sm btn-outline-primary view"><i class="far fa-eye"></i></button>
                 </td>
             </tr>
      `
@@ -178,12 +179,14 @@ $(document).ready(async function () {
         responsive: true,
         info: false,
         columnDefs: [
-            { responsivePriority: 1, targets: 0 },
-            { responsivePriority: 2, targets: -1 }
+            { responsivePriority: 1, targets: 1 },
+            { responsivePriority: 1, targets: -1 }
         ],
+        
         "language": {
             "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
         }
+
     });
     document.getElementById('btn-create').onclick = function(){
         $('.modal #form').trigger('reset');

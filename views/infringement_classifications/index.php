@@ -3,12 +3,12 @@
 
 <div class="container my-5">
     <div class="row">
-        <div class="col col-8 col-md-10">
+        <div class="col col-6 col-md-9 col-xl-10">
             <h4>Clasificacion de Falta</h4>
         </div>
-        <div class="col-2 text-md-right">
+        <div class="col col-5 col-md ml-4 col-xl ml-md-5 ml-xl-5">
             <div class="dropdown">
-                <button class="btn btn-success btn-sm" type="button" id="btn-create" ><i class="fa fa-plus"></i> Agregar</button>
+                <button class="btn btn-outline-primary  ml-xl-2" type="button" id="btn-create" ><i class="fa fa-plus"></i> Agregar</button>
 
             </div>
         </div>

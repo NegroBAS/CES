@@ -3,14 +3,11 @@
 
 <div class="container my-5">
     <div class="row">
-        <div class="col col-8 col-md-10">
+        <div class="col col-7 col-md-9 col-xl-10">
             <h4>Tipos de Falta</h4>
         </div>
-        <div class="col-2 text-md-right">
-            <div class="dropdown">
-                <button class="btn btn-success btn-sm" type="button" id="btn-create" ><i class="fa fa-plus"></i> Agregar</button>
-
-            </div>
+        <div class="col col-5 col-md-3 col-xl ml-xl-2">
+            <button class="btn btn-outline-primary ml-md-5 ml-xl-5" type="button" id="btn-create" ><i class="fa fa-plus"></i> Agregar</button>
         </div>
     </div>
     <div class="row mt-3" id="data-infringement_types">
