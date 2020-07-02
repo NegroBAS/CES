@@ -356,12 +356,11 @@ $(document).ready(async function () {
             if (numberRegex.test(this.value)) {
                 this.classList.remove("is-invalid");
                 this.classList.add("is-valid");
-                estado[0] = "si";
             } else {
                 document.getElementById("documentMessage").innerHTML =
                     "Este campo es requerido";
                 this.classList.add("is-invalid");
-                estado[0] = "no";
+                btnForm.setAttribute("disabled", "disabled");
             }
 
             if (this.value.length < 7) {
@@ -369,7 +368,7 @@ $(document).ready(async function () {
                 this.classList.add("is-invalid");
                 document.getElementById("documentMessage").innerHTML =
                     "Ingrese un documento valido";
-                estado[0] = "no";
+                    btnForm.setAttribute("disabled", "disabled");
             }
         };
 
@@ -379,13 +378,12 @@ $(document).ready(async function () {
                 document.getElementById("nameMessage").innerHTML =
                     "Este campo es requerido";
                 this.classList.add("is-invalid");
-                estado[1] = "no";
+                btnForm.setAttribute("disabled", "disabled");
             }
 
             if (this.value.length > 0) {
                 this.classList.remove("is-invalid");
                 this.classList.add("is-valid");
-                estado[1] = "si";
             }
 
             if (letrasRegex.test(this.value)) {
@@ -396,6 +394,7 @@ $(document).ready(async function () {
                 this.classList.add("is-invalid");
                 document.getElementById("nameMessage").innerHTML =
                     "Ingrese un nombre valido";
+                    btnForm.setAttribute("disabled", "disabled");
             }
         };
 
@@ -403,44 +402,38 @@ $(document).ready(async function () {
             if (emailRegex.test(this.value)) {
                 this.classList.remove("is-invalid");
                 this.classList.add("is-valid");                
-                estado[2] = "si";
             } else {
                 document.getElementById("emailMessage").innerHTML =
                     "Ingrese un correo valido";
                 this.classList.add("is-invalid");
                 btnForm.setAttribute("disabled", "disabled");
-                estado[2] = "no";
             }
 
             if (this.value === "" || this.value == null) {
-                console.log("campo requerido");
                 this.classList.add("is-invalid");
                 btnForm.setAttribute("disabled", "disabled");
-                estado[2] = "no";
             }
         };
 
         phone.oninput = function () {
             if (this.value === "" || this.value < 9) {
-                console.log("campo requerido");
                 document.getElementById("phoneMessage").innerHTML =
                     "Este campo es requerido";
                 this.classList.add("is-invalid");
-                estado[5] = "no";
+                btnForm.setAttribute("disabled", "disabled");
             }
 
             if (this.value.length > 9) {
                 this.classList.remove("is-invalid");
                 this.classList.add("is-valid");
-                estado[5] = "si";
             }
         };
 
         
         setInterval(input,3000);
         function input(){
-            if(numberRegex.test(documento.value)){         
-                if(letrasRegex.test(username.value)){                   
+            if(numberRegex.test(documento.value) && documento.value != "" && documento.value.length > 6 ){         
+                if(letrasRegex.test(username.value) ){                   
                     if(emailRegex.test(email.value)){
                         if(phone.value.length > 9){
                             btnForm.removeAttribute("disabled");
