@@ -119,6 +119,7 @@
                         <div class="mt-2 ml-2" id="committee_session_types"></div>
                     </div>
                 </div>
+                <hr>
                 <div class="row mt-3">
                     <div class="col" id="content">
                         
@@ -149,6 +150,84 @@
                     <div class="col" id="novelties">
                     </div>
                     <div class="col" id="academics">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Stimulus Detail -->
+<div class="modal fade" id="modal-stimulus-detail" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <h6>Hora</h6>
+                        <p id="hours"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Aprendiz</h6>
+                        <p id="learner"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Estimulo</h6>
+                        <p id="stimulus"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Justificacion</h6>
+                        <p id="stimulus_justification"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Stimulus Detail -->
+<div class="modal fade" id="modal-novelty-detail" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <h6>Tipo de novedad</h6>
+                        <p id="novelty_type"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Aprendiz</h6>
+                        <p id="learner"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h6>Jusitificacion</h6>
+                        <p id="justification"></p>
                     </div>
                 </div>
             </div>

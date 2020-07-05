@@ -31,8 +31,7 @@ class Learner_noveltiesController extends Controller{
             $committees,
             $learners,
             $novelty_types
-
-            ]);
+        ]);
         return;
 
     }
@@ -44,7 +43,6 @@ class Learner_noveltiesController extends Controller{
         $committee_id = $_POST['committee_id'];
         $novelty_type_id = $_POST['novelty_type_id'];
         $justification = $_POST['justification'];
-        $reply_date = $_POST['reply_date'];
         $created_at =date("Y,m,d,g,i,s");
         $updated_at=date("Y,m,d,g,i,s");
         $res = $this->learner_novelty->create([
@@ -52,7 +50,6 @@ class Learner_noveltiesController extends Controller{
             'committee_id' => $committee_id,
             'novelty_type_id' => $novelty_type_id,
             'justification' => $justification,
-            'reply_date' => $reply_date,
             'created_at' => $created_at,
             'updated_at' => $updated_at
         ]);

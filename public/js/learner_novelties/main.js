@@ -14,7 +14,7 @@ const app = {
                 <td>${learner_novelty.committees_number}</td>
                 <td>${learner_novelty.novelty_name}</td>
                 <td>${learner_novelty.justification}</td>
-                <td>${learner_novelty.reply_date}</td>
+                <td>${learner_novelty.reply_date!=null?learner_novelty.reply_date:'No tiene fecha de respuesta'}</td>
                 <td>
                 <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
                 <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
@@ -25,27 +25,27 @@ const app = {
         document.getElementById('data-learner_novelties').innerHTML = html;
 
         let committees = res[1].committees;
-         html = '';
-         committees.forEach(committee => {
-            html +=  `
+        html = '';
+        committees.forEach(committee => {
+            html += `
              <option value="${committee.id}">${committee.record_number}</option>
              `
         });
         document.getElementById('committee_id').innerHTML = html;
 
         let learners = res[2].learners;
-         html = '';
+        html = '';
         learners.forEach(learner => {
-            html +=  `
+            html += `
              <option value="${learner.id}">${learner.username}</option>
              `
         });
         document.getElementById('learner_id').innerHTML = html;
 
         let novelty_types = res[3].novelty_types;
-         html = '';
+        html = '';
         novelty_types.forEach(novelty_type => {
-            html +=  `
+            html += `
              <option value="${novelty_type.id}">${novelty_type.name}</option>
              `
         });
@@ -56,7 +56,7 @@ const app = {
             let res = await fetch(`${this.url}learner_novelties/show/${id}`);
             let data = await res.json();
             console.log(data);
-            if(data.status===200){
+            if (data.status === 200) {
                 $('.modal #form').trigger('reset');
                 $('.modal').modal('toggle');
                 $('.modal').find('.modal-title').text('Editar novedad');
@@ -70,22 +70,22 @@ const app = {
             console.log(error);
         }
     },
-    create:async function(form){
+    create: async function (form) {
         try {
             let res = await fetch(`${this.url}learner_novelties/store`, {
-                method:'POST',
+                method: 'POST',
                 body: new FormData(form)
             });
             let data = await res.json();
             console.log(data);
-            if(data.status===200){
+            if (data.status === 200) {
                 $('.modal').modal('toggle');
                 app.get();
                 toastr.success('', data.message, {
-                    closeButton:true
+                    closeButton: true
                 });
             }
-            if(data.status===500){
+            if (data.status === 500) {
                 console.log(data.error);
                 toastr.error('', data.error.errorInfo[2], {
                     closeButton: true
@@ -97,15 +97,15 @@ const app = {
     },
     delete: async function (id) {
         try {
-            let res  = await fetch(`${this.url}learner_novelties/destroy/${id}`);
+            let res = await fetch(`${this.url}learner_novelties/destroy/${id}`);
             let data = await res.json();
-            if(data.status === 200){
+            if (data.status === 200) {
                 toastr.success('', data.message, {
-                    closeButton:true
+                    closeButton: true
                 });
                 this.get();
             }
-            if(data.status===500){
+            if (data.status === 500) {
                 console.log(data.error);
             }
         } catch (error) {
@@ -115,12 +115,12 @@ const app = {
     update: async function (form, id) {
         try {
             let res = await fetch(`${this.url}learner_novelties/edit/${id}`, {
-                method:'POST',
-                body:new FormData(form)
+                method: 'POST',
+                body: new FormData(form)
             });
             let data = await res.json();
             console.log(data);
-            if(data.status===200){
+            if (data.status === 200) {
                 toastr.success('', data.message, {
                     closeButton: true
                 });
@@ -128,7 +128,7 @@ const app = {
                 $('.modal').modal('toggle');
                 this.edit = false;
             }
-            if(data.status===500){
+            if (data.status === 500) {
                 console.log(data.error);
             }
         } catch (error) {
@@ -140,18 +140,32 @@ const app = {
 $(document).ready(async function () {
     let id = null;
     await app.get();
-    document.getElementById('btn-create').onclick = function(){
+
+    $('#requestab').DataTable({
+        responsive: true,
+        info: false,
+        columnDefs: [
+            { responsivePriority: 1, targets: 0 },
+            { responsivePriority: 1, targets: -1 },
+            { responsivePriority: 2, targets: 2 }
+
+        ],
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+        }
+    });
+    document.getElementById('btn-create').onclick = function () {
         $('.modal #form').trigger('reset');
         $('.modal').modal('toggle');
         $('.modal').find('.modal-title').text('Crear novedad');
         val.limpiar();
         val.validaciones();
     }
-    document.getElementById('form').onsubmit = function(e){
+    document.getElementById('form').onsubmit = function (e) {
         e.preventDefault();
-        if(app.edit){
+        if (app.edit) {
             app.update(this, id);
-        }else{
+        } else {
             app.create(this);
         }
     }
@@ -166,14 +180,14 @@ $(document).ready(async function () {
             cancelButtonColor: "#d33",
             cancelButtonText: "Cancelar",
             confirmButtonText: "Si, eliminar",
-          }).then((result) => {
+        }).then((result) => {
             if (result.value) {
-              Swal.fire("Eliminado!", "La novedad ha sido eliminada.", "success");
-              let id = $($(this)[0].parentElement.parentElement).data("id");
-              app.delete(id);
-              app.get();
+                Swal.fire("Eliminado!", "La novedad ha sido eliminada.", "success");
+                let id = $($(this)[0].parentElement.parentElement).data("id");
+                app.delete(id);
+                app.get();
             }
-          });
+        });
 
     });
     $(document).on('click', '.edit', function () {
@@ -187,65 +201,52 @@ $(document).ready(async function () {
 });
 
 
-$('#requestab').DataTable({
-    responsive: true,
-    info: false,
-    columnDefs: [
-        { responsivePriority: 1, targets: 0 },
-        { responsivePriority: 1, targets: -1 },
-        { responsivePriority: 2, targets: 2 }
-        
-    ],
-    "language": {
-        "url": "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
-    }
-});
 
 const val = {
-     validaciones() {
+    validaciones() {
         let justification = document.getElementById("justification");
-    
+
         let letrasRegex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\u00E0-\u00FC\s]+$/;
         let btn = document.getElementById("btnForm");
 
         btn.setAttribute("disabled", "disabled");
-    
-        justification.oninput = function () {
-          if (letrasRegex.test(this.value)) {
-            this.classList.remove("is-invalid");
-            this.classList.add("is-valid");
-          } else {
-            this.classList.remove("is-valid");
-            this.classList.add("is-invalid");
-            document.getElementById("justificationMessage").innerHTML =
-              "Este campo es requerido";
-          }
-    
-          if (this.value === "") {
-            console.log("campo requerido");
-            document.getElementById("justificationMessage").innerHTML =
-              "Este campo es requerido";
-            this.classList.add("is-invalid");
-          }
-    
-          if (letrasRegex.test(this.value)) {
-            btn.removeAttribute("disabled");
-          } else {
-            btn.setAttribute("disabled", "disabled");
-          }
-        };
-    
-      },
 
-      limpiar(){
+        justification.oninput = function () {
+            if (letrasRegex.test(this.value)) {
+                this.classList.remove("is-invalid");
+                this.classList.add("is-valid");
+            } else {
+                this.classList.remove("is-valid");
+                this.classList.add("is-invalid");
+                document.getElementById("justificationMessage").innerHTML =
+                    "Este campo es requerido";
+            }
+
+            if (this.value === "") {
+                console.log("campo requerido");
+                document.getElementById("justificationMessage").innerHTML =
+                    "Este campo es requerido";
+                this.classList.add("is-invalid");
+            }
+
+            if (letrasRegex.test(this.value)) {
+                btn.removeAttribute("disabled");
+            } else {
+                btn.setAttribute("disabled", "disabled");
+            }
+        };
+
+    },
+
+    limpiar() {
         let justification = document.getElementById("justification");
-        
+
 
         console.log("limpiando");
-        justification.classList.remove("is-invalid");    
+        justification.classList.remove("is-invalid");
         justification.classList.remove("is-valid");
 
-      }
+    }
 
 
 }
