@@ -74,7 +74,6 @@ const app = {
         try {
             let res = await fetch(`${this.url}modalities/show/${id}`);
             let data = await res.json();
-            console.log(data);
             if (data.status === 200) {
                 $('.modal #form').trigger('reset');
                 $('.modal').modal('toggle');
@@ -230,7 +229,6 @@ const val = {
             }
 
             if (this.value === "") {
-                console.log("campo requerido");
                 document.getElementById("nameMessage").innerHTML =
                     "Este campo es requerido";
                 this.classList.add("is-invalid");
@@ -243,14 +241,18 @@ const val = {
             }
         };
 
+        setInterval(input,3000);
+        function input(){       
+             if(letrasRegex.test(name.value)){                   
+                btnForm.removeAttribute("disabled");
+             }  
+        }
+
     },
 
     limpiar() {
         let name = document.getElementById("name");
 
-
-
-        console.log("limpiando");
         name.classList.remove("is-invalid");
         name.classList.remove("is-valid");
 

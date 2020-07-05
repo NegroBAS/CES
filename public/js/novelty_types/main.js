@@ -159,11 +159,10 @@ const val = {
            this.classList.remove("is-valid");
            this.classList.add("is-invalid");
            document.getElementById("nameMessage").innerHTML =
-             "Este campo es requerido";
+             "Este campo solo resibe caracteres";
          }
    
          if (this.value === "") {
-           console.log("campo requerido");
            document.getElementById("nameMessage").innerHTML =
              "Este campo es requerido";
            this.classList.add("is-invalid");
@@ -176,14 +175,18 @@ const val = {
          }
        };
 
+       setInterval(input,3000);
+            function input(){       
+                if(letrasRegex.test(name.value)){                   
+                    btn.removeAttribute("disabled");
+                }  
+            }
+
      },
 
      limpiar(){
        let name = document.getElementById("name");
 
-       
-
-       console.log("limpiando");
        name.classList.remove("is-invalid");    
        name.classList.remove("is-valid");
 

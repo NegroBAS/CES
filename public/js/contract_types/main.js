@@ -267,14 +267,19 @@ const val = {
             }
         };
 
+        setInterval(input,3000);
+        function input(){       
+             if(letrasRegex.test(name.value)){                   
+                btnForm.removeAttribute("disabled");
+             }  
+        }
+
     },
 
     limpiar() {
         let name = document.getElementById("name");
         let type = document.getElementById("type");
 
-
-        console.log("limpiando");
         name.classList.remove("is-invalid");
         name.classList.remove("is-valid");
 

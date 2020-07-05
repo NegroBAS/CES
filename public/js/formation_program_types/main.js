@@ -220,9 +220,7 @@ $(document).ready(async function () {
             let name = document.getElementById('name');
           let elective_months = document.getElementById('elective_months');
           let practice_months = document.getElementById('practice_months');
-         
-     
-        
+
         
           let numberRegex = /^([0-9])*$/;
           let letrasRegex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\u00E0-\u00FC\s]+$/;
@@ -240,7 +238,7 @@ $(document).ready(async function () {
                 this.classList.remove('is-valid');
                 this.classList.add('is-invalid');
                 btn.setAttribute('disabled', 'disabled');
-                document.getElementById('nameMessage').innerHTML = "Este campo es requerido"
+                document.getElementById('nameMessage').innerHTML = "Este campo solo resibe caracteres"
             
             }
     
@@ -297,16 +295,25 @@ $(document).ready(async function () {
                 if(this.value === "" || this.value == null){
                     console.log("campo requerido");
                     document.getElementById('practiceMessage').innerHTML = "Este campo es requerido"
+                    btn.setAttribute('disabled', 'disabled');
                     this.classList.add('is-invalid');
                 }
     
-                if(numberRegex.test(this.value) && numberRegex.test(elective_months.value) && letrasRegex.test(name.value)){
-                    btn.removeAttribute('disabled');
-                }else{
-                    btn.setAttribute('disabled', 'disabled');
-                }
     
             }
+
+            setInterval(input,3000);
+            function input(){   
+                if(name.value > 0 || name.value != ""){
+                    if(numberRegex.test(elective_months.value) && elective_months.value > 0){
+                        if(numberRegex.test(practice_months.value) && practice_months.value > 0){
+                            btn.removeAttribute('disabled');
+                        }
+                    }
+                }
+            }
+
+           
     
     
         
