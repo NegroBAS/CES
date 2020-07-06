@@ -71,16 +71,20 @@ const app = {
     },
     create: async function (form) {
         try {
+            let loader = document.getElementById("loader");
+            loader.removeAttribute("hidden","hidden");
             console.log("creando");
             let res = await fetch(`${this.url}learners/store`, {
                 method: "POST",
                 body: new FormData(form),
             });
             console.log(res);
+            
             let data = await res.json();
             console.log(data);
             if (data.status === 200) {
-                // $("#createModal").modal("toggle");
+                $("#createModal").modal("toggle");
+                loader.setAttribute("hidden","hidden");
                 app.getData();
                 toastr.success("", data.message, {
                     closeButton: true,
@@ -246,8 +250,9 @@ $(document).ready(async function () {
 
         limpiar();
         validaciones();
-        loader();
     };
+
+
     document.getElementById("form").onsubmit = function (e) {
         e.preventDefault();
         if (app.edit) {
@@ -307,36 +312,6 @@ $(document).ready(async function () {
             .html(fileName);
     });
 
-    function loader(){
-       
-    
-        var barra_estado = document.getElementById('barra_estado');
-        var span = document.getElementById('span');
-
-        //peticion
-        let peticion = new XMLHttpRequest();
-
-        //progreso
-        // console.log('loader entro');
-
-        peticion.upload.addEventListener("progress", (event) => {
-            let porcentaje = Math.round((event.loaded / event.total) * 100 );
-            
-            console.log(porcentaje);
-            console.log('cargando subida');
-            
-            barra_estado.style.width =porcentaje + '%';
-            span.innerHTML = porcentaje+'%';
-        });
-
-        //finalizado
-        peticion.addEventListener("load", () => {
-            barra_estado.classlist.add('bg-success');
-            span.innerHTML= "Proceso completado";
-        });
-          
-        
-    }
 
     function validaciones() {
         let documento = document.getElementById("document");

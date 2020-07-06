@@ -131,9 +131,9 @@
                                         <div class="custom-file">                        
                                             <input type="file" class="custom-file-input" id="photo" name="photo"  lang="es" value="" >
                                             <label class="custom-file-label" for="photo"  data-browse="Buscar">Seleccionar Archivo</label>
-                                        </div>
+                                        </div>        
                                         <!-- //link photo hidden -->
-                                        <input type="text" hidden name="photo_2" id="photo_2" value=""> 
+                                        <input type="text" hidden name="photo_2" id="photo_2" value="">
 
                                     </div>
                                     
@@ -141,13 +141,18 @@
                             </div>
                         
                         </div>
+
                         <div class="form-row">
-                                <div class="form-group">                               
-                                                <div id="loader" class="spinner-border text-primary" hidden="hidden" role="status">
-                                                     <span class="sr-only">Loading...</span>
-                                                 </div>  
-                                                                                                                                     
-                                    </div>
+                            <div class="col text-center">
+                                <div class="form-group">    
+                                    <div id="loader" hidden="hidden">
+                                            <div class="spinner-border" role="status"></div>
+                                            <span>Loading...</span>
+                                    </div>                                                             
+                                                                                                                                                                      
+                                </div>
+                            </div>
+                                
                         </div>
                         
 

@@ -76,20 +76,30 @@ class LearnersController extends Controller
             }
         }
 
+        $exists = false;
+
+        do {
+            
+            if(is_file($destinoA1)){
+                $exists = true;
+                $res = $this->learner->create([
+                    'username' => $username,
+                     'document_type_id' => $document_type_id,
+                    'document' => $document,
+                    'phone' => $phone,
+                    'email' => $email,
+                    'group_id' => $group_id,
+                    'birthdate' => $birthdate,
+                    'photo' => $photo
+                ]);
+         
+                echo json_encode($res);
+            }
+            
+        } while ($exists != true);
 
 
-       $res = $this->learner->create([
-           'username' => $username,
-            'document_type_id' => $document_type_id,
-           'document' => $document,
-           'phone' => $phone,
-           'email' => $email,
-           'group_id' => $group_id,
-           'birthdate' => $birthdate,
-           'photo' => $photo
-       ]);
-
-       echo json_encode($res);
+       
 
        
        return;
@@ -214,11 +224,15 @@ class LearnersController extends Controller
         
                 //recorremos filas del csv
                 foreach ($readCsv as $itemCsv) {                              
-                    //recorremos celdas del csv
+                    //recorremos celdas del csv                  
                     foreach ($itemCsv as $elementoItemCSV) {
                       
                         //mostramos la celda
-                        $data[] = $elementoItemCSV;
+                        if($elementoItemCSV === null || $elementoItemCSV === ""){
+                            $data[] = "";
+                        }else{
+                            $data[] = $elementoItemCSV;
+                        }
                            
                     }
                                
@@ -246,15 +260,15 @@ class LearnersController extends Controller
                     $x++;
                     $x++;
 
-                    $res = $this->learner->create_csv([
-                        'username' => $username,
-                         'document_type_id' => $document_type_id,
-                        'document' => $document,
-                        'phone' => $phone,
-                        'email' => $email,
-                        'group_id' => $group_id
+                    // $res = $this->learner->create_csv([
+                    //     'username' => $username,
+                    //      'document_type_id' => $document_type_id,
+                    //     'document' => $document,
+                    //     'phone' => $phone,
+                    //     'email' => $email,
+                    //     'group_id' => $group_id
                       
-                    ]);
+                    // ]);
              
                     
 
@@ -264,7 +278,7 @@ class LearnersController extends Controller
                                    
                 } while ($boolean);
 
-                echo json_encode($res);
+                echo json_encode($data);
 
     }
 
