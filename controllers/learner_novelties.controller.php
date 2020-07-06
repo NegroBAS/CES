@@ -20,6 +20,13 @@ class Learner_noveltiesController extends Controller{
         $this->novelty_type = $this->loadModel('NoveltyType');
     }
 
+    public function findByLearner($param = null)
+    {
+        $id = $param[0];
+        $novelties = $this->learner_novelty->findByLearner($id);
+        echo json_encode($novelties);
+    }
+
     public function index()
     {
         $learner_novelties = $this->learner_novelty->all();
@@ -31,8 +38,7 @@ class Learner_noveltiesController extends Controller{
             $committees,
             $learners,
             $novelty_types
-
-            ]);
+        ]);
         return;
 
     }
@@ -44,7 +50,6 @@ class Learner_noveltiesController extends Controller{
         $committee_id = $_POST['committee_id'];
         $novelty_type_id = $_POST['novelty_type_id'];
         $justification = $_POST['justification'];
-        $reply_date = $_POST['reply_date'];
         $created_at =date("Y,m,d,g,i,s");
         $updated_at=date("Y,m,d,g,i,s");
         $res = $this->learner_novelty->create([
@@ -52,7 +57,6 @@ class Learner_noveltiesController extends Controller{
             'committee_id' => $committee_id,
             'novelty_type_id' => $novelty_type_id,
             'justification' => $justification,
-            'reply_date' => $reply_date,
             'created_at' => $created_at,
             'updated_at' => $updated_at
         ]);

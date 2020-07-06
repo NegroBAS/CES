@@ -33,5 +33,19 @@ $(document).ready(function () {
         e.preventDefault();
         app.login(this);
     }
+    let show = false;
+    document.getElementById('showHide').onclick = function(){
+        if(show){
+            document.getElementById('password').setAttribute('type', 'password');
+            document.getElementById('icon').classList.add('fa-eye-slash');
+            document.getElementById('icon').classList.remove('fa-eye');
+            show = !show;
+        }else{
+            document.getElementById('password').setAttribute('type', 'text');
+            document.getElementById('icon').classList.remove('fa-eye-slash');
+            document.getElementById('icon').classList.add('fa-eye');
+            show = !show; 
+        }
+    }
 });
 
