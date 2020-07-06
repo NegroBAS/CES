@@ -24,7 +24,7 @@
                                 <div class="input-group mb-3">
                                     <input type="password" class="form-control" name="password" id="password">
                                     <div class="input-group-append">
-                                        <button class="btn btn-link border" type="button" id="showHide"><i class="far fa-eye"></i></button>
+                                        <button class="btn btn-link border" type="button" id="showHide"><i class="far fa-eye-slash" id="icon"></i></button>
                                     </div>
                                 </div>
                             </div>
