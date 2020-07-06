@@ -18,7 +18,6 @@ class LearnersController extends Controller
         $this->learner = $this->loadModel('Learner');
         $this->document_type = $this->loadModel('DocumentType');
         $this->group = $this->loadModel('Group');
-
     }
 
     public function index()
@@ -45,9 +44,9 @@ class LearnersController extends Controller
         $group_id = $_POST['group_id'];
         $birthdate = $_POST['birthdate'];
 
-       $photo = $url_photo. basename($_FILES["photo"]["name"]);
-       $typeFile = strtolower(pathinfo($photo, PATHINFO_EXTENSION));
-       $token = uniqid();
+        $photo = $url_photo . basename($_FILES["photo"]["name"]);
+        $typeFile = strtolower(pathinfo($photo, PATHINFO_EXTENSION));
+        $token = uniqid();
 
 
         if (isset($_FILES['photo'])) {
@@ -55,20 +54,17 @@ class LearnersController extends Controller
 
                 $rutaA1 = $_FILES['photo']['tmp_name'];
 
-                    if($typeFile == "jpg" || $typeFile == "jpeg" || $typeFile == "png"){
+                if ($typeFile == "jpg" || $typeFile == "jpeg" || $typeFile == "png") {
 
-                        if(is_uploaded_file($rutaA1)){
-                            $destinoA1= $url_photo.$token.".".$typeFile;
-                            $photo=$destinoA1;
-                            copy($rutaA1,$destinoA1);
-                        }else{
-                            echo "debe selecionar una imagen 1";
-                        }
-    
-    
-                    }else{
-                        echo "solo se admiten archivos jpg o jpeg";
-
+                    if (is_uploaded_file($rutaA1)) {
+                        $destinoA1 = $url_photo . $token . "." . $typeFile;
+                        $photo = $destinoA1;
+                        copy($rutaA1, $destinoA1);
+                    } else {
+                        echo "debe selecionar una imagen 1";
+                    }
+                } else {
+                    echo "solo se admiten archivos jpg o jpeg";
                 }
             } else {
 
@@ -78,23 +74,21 @@ class LearnersController extends Controller
 
 
 
-       $res = $this->learner->create([
-           'username' => $username,
+        $res = $this->learner->create([
+            'username' => $username,
             'document_type_id' => $document_type_id,
-           'document' => $document,
-           'phone' => $phone,
-           'email' => $email,
-           'group_id' => $group_id,
-           'birthdate' => $birthdate,
-           'photo' => $photo
-       ]);
+            'document' => $document,
+            'phone' => $phone,
+            'email' => $email,
+            'group_id' => $group_id,
+            'birthdate' => $birthdate,
+            'photo' => $photo
+        ]);
 
-       echo json_encode($res);
+        echo json_encode($res);
 
-       
-       return;
-        
 
+        return;
     }
 
     public function show($param = null)
@@ -123,54 +117,46 @@ class LearnersController extends Controller
         $email = $_POST['email'];
         $group_id = $_POST['group_id'];
         $birthdate = $_POST['birthdate'];
-        
-       
-            //si hay una nueva foto//
-        if($_FILES['photo']['name']){
+
+
+        //si hay una nueva foto//
+        if ($_FILES['photo']['name']) {
 
             $photo = $url_photo . basename($_FILES["photo"]["name"]);
             $typeFile = strtolower(pathinfo($photo, PATHINFO_EXTENSION));
 
-     
-            if(isset($_FILES['photo'])){
 
-                 if (is_uploaded_file($_FILES['photo']['tmp_name'])) { 
+            if (isset($_FILES['photo'])) {
 
-                    $_SESSION["progreso"]= "cargando";
+                if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
 
-                         $rutaA1=$_FILES['photo']['tmp_name'];
-     
-                         if($typeFile == "jpg" || $typeFile == "jpeg" || $typeFile == "png"){
-     
-     
-                             if(is_uploaded_file($rutaA1)){
-                                //  $destinoA1= $url_photo.$username."_".$document.".".$typeFile;
-                                 $url_back = $_POST['photo_2'];
-                                 $destinoA1= $url_back;
-                                 $photo= $destinoA1;
-                                 copy($rutaA1,$destinoA1);
-                                 $progreso = "si";
-                                 $_SESSION["progreso"] = $progreso;
-                             }else{
-                                 echo "debe selecionar una imagen";
-                             }
-         
-         
-                         }else{
-                             echo "solo se admiten archivos jpg o jpeg";
-                         }
-                         
-                         
-                 
-                 }else{
-             
-                     $destinoA1=$_POST['photo_2'];
-                     
-                 
-                 }
-             
-             }
-        }else{
+                    $_SESSION["progreso"] = "cargando";
+
+                    $rutaA1 = $_FILES['photo']['tmp_name'];
+
+                    if ($typeFile == "jpg" || $typeFile == "jpeg" || $typeFile == "png") {
+
+
+                        if (is_uploaded_file($rutaA1)) {
+                            //  $destinoA1= $url_photo.$username."_".$document.".".$typeFile;
+                            $url_back = $_POST['photo_2'];
+                            $destinoA1 = $url_back;
+                            $photo = $destinoA1;
+                            copy($rutaA1, $destinoA1);
+                            $progreso = "si";
+                            $_SESSION["progreso"] = $progreso;
+                        } else {
+                            echo "debe selecionar una imagen";
+                        }
+                    } else {
+                        echo "solo se admiten archivos jpg o jpeg";
+                    }
+                } else {
+
+                    $destinoA1 = $_POST['photo_2'];
+                }
+            }
+        } else {
             $photo = $_POST['photo_2'];
         }
 
@@ -204,68 +190,64 @@ class LearnersController extends Controller
         $this->view->render('learners/index');
     }
 
-    public function csv(){
+    public function csv()
+    {
 
-                $data = array();
-                $archivo = $_FILES['archivo']['tmp_name'];
-                $group_id =$_POST['group_id_csv'];
-                $readCsv = array_map('str_getcsv', file($archivo));
-            
-        
-                //recorremos filas del csv
-                foreach ($readCsv as $itemCsv) {                              
-                    //recorremos celdas del csv
-                    foreach ($itemCsv as $elementoItemCSV) {
-                      
-                        //mostramos la celda
-                        $data[] = $elementoItemCSV;
-                           
-                    }
-                               
-                }
+        $data = array();
+        $archivo = $_FILES['archivo']['tmp_name'];
+        $group_id = $_POST['group_id_csv'];
+        $readCsv = array_map('str_getcsv', file($archivo));
 
-                $count = count($data);
 
-                //store database
-                $x=21;
-                $boolean = true;
-                
+        //recorremos filas del csv
+        foreach ($readCsv as $itemCsv) {
+            //recorremos celdas del csv
+            foreach ($itemCsv as $elementoItemCSV) {
 
-                do {
+                //mostramos la celda
+                $data[] = $elementoItemCSV;
+            }
+        }
 
-                    $document_type_id = $data[$x] == "CC"? 1 : 2;
-                    $x++;
-                    $document = $data[$x];
-                    $x++;
-                    $username = $data[$x]." ".$data[$x+1];
-                    $x++;
-                    $x++;
-                    $phone = $data[$x];
-                    $x++;
-                    $email = $data[$x];
-                    $x++;
-                    $x++;
+        $count = count($data);
 
-                    $res = $this->learner->create_csv([
-                        'username' => $username,
-                         'document_type_id' => $document_type_id,
-                        'document' => $document,
-                        'phone' => $phone,
-                        'email' => $email,
-                        'group_id' => $group_id
-                      
-                    ]);
-             
-                    
+        //store database
+        $x = 21;
+        $boolean = true;
 
-                    if($x == $count){
-                        $boolean = false;
-                    }
-                                   
-                } while ($boolean);
 
-                echo json_encode($res);
+        do {
 
+            $document_type_id = $data[$x] == "CC" ? 1 : 2;
+            $x++;
+            $document = $data[$x];
+            $x++;
+            $username = $data[$x] . " " . $data[$x + 1];
+            $x++;
+            $x++;
+            $phone = $data[$x];
+            $x++;
+            $email = $data[$x];
+            $x++;
+            $x++;
+
+            $res = $this->learner->create_csv([
+                'username' => $username,
+                'document_type_id' => $document_type_id,
+                'document' => $document,
+                'phone' => $phone,
+                'email' => $email,
+                'group_id' => $group_id
+
+            ]);
+
+
+
+            if ($x == $count) {
+                $boolean = false;
+            }
+        } while ($boolean);
+
+        echo json_encode($res);
     }
-
 }

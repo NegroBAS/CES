@@ -20,6 +20,13 @@ class Learner_noveltiesController extends Controller{
         $this->novelty_type = $this->loadModel('NoveltyType');
     }
 
+    public function findByLearner($param = null)
+    {
+        $id = $param[0];
+        $novelties = $this->learner_novelty->findByLearner($id);
+        echo json_encode($novelties);
+    }
+
     public function index()
     {
         $learner_novelties = $this->learner_novelty->all();

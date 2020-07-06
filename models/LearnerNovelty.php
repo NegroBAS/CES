@@ -17,6 +17,37 @@ class LearnerNovelty extends Model
         parent::__construct();
     }
 
+    public function findByLearner($id)
+    {
+        try {
+            $query = $this->db->connect()->prepare('SELECT learner_novelties.*, novelty_types.name AS novelty_type FROM learner_novelties INNER JOIN novelty_types ON learner_novelties.novelty_type_id = novelty_types.id WHERE learner_id = :id');
+            $query->execute([
+                'id'=>$id
+            ]);
+            $learner_novelties = [];
+            while($row = $query->fetch()){
+                $learner_novelty = new LearnerNovelty();
+                $learner_novelty->id = $row['id'];
+                $learner_novelty->learner_id = $row['learner_id'];
+                $learner_novelty->committee_id = $row['committee_id'];
+                $learner_novelty->justification = $row['justification'];
+                $learner_novelty->reply_date = $row['reply_date'];
+                $learner_novelty->novelty_type = $row['novelty_type'];
+                $learner_novelty->novelty_type_id = $row['novelty_type_id'];
+                array_push($learner_novelties, $learner_novelty);
+            }
+            return [
+                'status'=>200,
+                'learner_novelties'=>$learner_novelties
+            ];
+        } catch (PDOException $e) {
+            return [
+                'status'=>500,
+                'error'=>$e
+            ];
+        }
+    }
+
     public function all()
     {
         try {
