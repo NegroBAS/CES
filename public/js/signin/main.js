@@ -33,5 +33,15 @@ $(document).ready(function () {
         e.preventDefault();
         app.login(this);
     }
+    let show = false;
+    document.getElementById('showHide').onclick = function(){
+        if(show){
+            document.getElementById('password').setAttribute('type', 'password');
+            show = !show;
+        }else{
+            document.getElementById('password').setAttribute('type', 'text');
+            show = !show; 
+        }
+    }
 });
 

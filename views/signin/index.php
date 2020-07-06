@@ -20,9 +20,13 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Contraseña</label>
-                                <input class="form-control" type="password" name="password" id="password" placeholder="Contraseña">
-                                <div class="invalid-feedback" id="password-error"></div>
+                                <label for="password">Contraseña</label>
+                                <div class="input-group mb-3">
+                                    <input type="password" class="form-control" name="password" id="password">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-link border" type="button" id="showHide"><i class="far fa-eye"></i></button>
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row mt-2 ml-2">

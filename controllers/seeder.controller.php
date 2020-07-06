@@ -4,8 +4,6 @@ class SeederController extends Controller
     public function __construct()
     {
         parent::__construct();
-
-        $this->document_type = $this->loadModel('DocumentType');
         $this->committee_session_type = $this->loadModel('CommitteeSessionType');
         $this->formative_measure = $this->loadModel('FormativeMeasure');
         $this->infringement_classification = $this->loadModel('InfringementClassification');
@@ -16,22 +14,6 @@ class SeederController extends Controller
         $this->user = $this->loadModel('User');
     }
 
-    public function seed_document_types()
-    {
-        $data = [
-            [
-                'name' => 'Cedula de ciudadania'
-            ],
-            [
-                'name' => 'Tarjeta de identidad'
-            ]
-        ];
-        $responses = [];
-        for ($i = 0; $i < count($data); $i++) {
-            $response = $this->document_type->create($data[$i]);
-            array_push($responses, $response);
-        }
-    }
     public function seed_committee_session_types()
     {
         $data = [
@@ -190,6 +172,15 @@ class SeederController extends Controller
         }
     }
 
+    public function seed_committee_session_states()
+    {
+        $data = [
+            [
+                'name'=>'Comunicación al aprendiz'
+            ]
+        ];
+    }
+
     public function seed_learners()
     {
         $data = [
@@ -208,7 +199,6 @@ class SeederController extends Controller
     {
         $this->view->title = 'Seeder';
         $this->view->render('seeder/index');
-        $this->seed_document_types();
         $this->seed_committee_session_types();
         $this->seed_formative_measures();
         $this->seed_infringement_classifications();

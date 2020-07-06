@@ -18,40 +18,15 @@ const app = {
         let html = '';
         this.academics.map(academic => {
             html+= `
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col">
-                                <h6>Hora</h6>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <p>${academic.start_hour} a ${academic.end_hour}</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <h6>Aprendiz</h6>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <a href="#" data-id="${academic.learner_id}" class="history">${academic.learner_name}</a>
-                            </div>
-                        </div>
-                        <div class="row mt-3">
-                            <div class="col">
-                                <button class="btn btn-outline-primary">Empezar proceso</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            `
+            <tr>
+                <td>${academic.learner_name}</td>
+                <td>${academic.start_hour}</td>
+                <td>${academic.end_hour}</td>
+                <td></td>
+            </tr>
+            `;
         });
-        document.getElementById('content').innerHTML = html;
+        document.getElementById('data-academics').innerHTML = html;
     },
     getLeaner: async function(id){
         try {
@@ -94,5 +69,8 @@ $(document).ready(async function(){
     $(document).on('click', '.history', async function(){
         let id = $(this).data('id');
         await app.getLeaner(id);
-    })
+    });
+    $(document).on('click', '.start', async function(){
+        console.log('click');
+    });
 });
