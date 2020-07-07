@@ -597,25 +597,6 @@ $(document).ready(async function () {
 		if (this.value == 1) {
 			document.getElementById('content').innerHTML = `
 			<form id="formStimulus" method="POST">
-				<div class="form-row">
-					<div class="col">
-						<h6>Hora</h6>
-					</div>
-				</div>
-				<div class="form-row mb-3">
-					<div class="col">
-						<div className="form-group">
-							<label for="start_hour" class="text-muted">Inicia</label>
-							<input type="time" name="start_hour" id="start_hour" class="form-control"/>
-						</div>
-					</div>
-					<div class="col">
-						<div className="form-group">
-							<label for="end_hour" class="text-muted">Termina</label>
-							<input type="time" name="end_hour" id="end_hour" class="form-control"/>
-						</div>
-					</div>
-				</div>
 				<div className="form-row">
 					<div className="col">
 						<div class="form-group">

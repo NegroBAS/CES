@@ -66,7 +66,12 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="document_type_id">Tipo Documento</label>
-                                <select name="document_type_id" id="document_type_id" class="form-control"></select>
+                                <select name="document_type" id="document_type" class="form-control">
+                                    <option value="">Seleccione uno</option>
+                                    <option value="CC">Cedula de ciudadania</option>
+                                    <option value="TI">Tarjeta de identidad</option>
+                                    <option value="CE">Cedula extranjera</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-12 col-md-6">

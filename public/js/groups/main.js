@@ -32,7 +32,6 @@ const app = {
                 }
             });
             let data = await res.json();
-            console.log(data);
             let fd = new FormData();
             fd.append('groups', JSON.stringify(data.groups));
             res = await fetch(`${this.url}groups/masive`, {
@@ -40,6 +39,7 @@ const app = {
                 body:fd
             });
             data = await res.json();
+            console.log(data);
             if(data.status===200){
                 await app.get();
                 toastr.success('', data.message, {

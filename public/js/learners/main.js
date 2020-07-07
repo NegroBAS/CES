@@ -71,21 +71,15 @@ const app = {
     },
     create: async function (form) {
         try {
-            let loader = document.getElementById("loader");
-            loader.removeAttribute("hidden","hidden");
-            console.log("creando");
             let res = await fetch(`${this.url}learners/store`, {
                 method: "POST",
                 body: new FormData(form),
             });
-            console.log(res);
-            
             let data = await res.json();
             console.log(data);
             if (data.status === 200) {
                 $("#createModal").modal("toggle");
-                loader.setAttribute("hidden","hidden");
-                app.getData();
+                await app.getData();
                 toastr.success("", data.message, {
                     closeButton: true,
                 });

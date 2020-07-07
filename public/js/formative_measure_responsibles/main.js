@@ -78,31 +78,24 @@ const app = {
                 }
             }
 
-            html = '';
-            data[2].document_types.forEach(document_type => {
-                html += `
-                       <option value="${document_type.id}">${document_type.name}</option>
-                        `;
-            });
-            document.getElementById('document_type_id').innerHTML = html;
+            // html = '';
 
 
-            html = '';
-            data[1].contract_types.forEach(contract_type => {
-                html += `
-                <option value="${contract_type.id}">${contract_type.name}</option>
-                `;
-            });
-            document.getElementById('contract_type_id').innerHTML = html;
+            // html = '';
+            // data[1].contract_types.forEach(contract_type => {
+            //     html += `
+            //     <option value="${contract_type.id}">${contract_type.name}</option>
+            //     `;
+            // });
+            // document.getElementById('contract_type_id').innerHTML = html;
 
-            html = '';
-            data[3].positions.forEach(position => {
-                html += `
-                <option value="${position.id}">${position.name}</option>
-                `;
-            });
-            document.getElementById('position_id').innerHTML = html;
-
+            // html = '';
+            // data[3].positions.forEach(position => {
+            //     html += `
+            //     <option value="${position.id}">${position.name}</option>
+            //     `;
+            // });
+            // document.getElementById('position_id').innerHTML = html;
         } catch (error) {
             console.log(error);
         }
