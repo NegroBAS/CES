@@ -23,12 +23,8 @@ class LearnersController extends Controller
     public function index()
     {
         $leaners = $this->learner->all();
-        $document_types = $this->document_type->all();
-        $groups = $this->group->all();
         echo json_encode([
             $leaners,
-            $document_types,
-            $groups
         ]);
     }
 

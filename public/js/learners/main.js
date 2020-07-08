@@ -5,15 +5,13 @@ const app = {
         try {
             let res = await fetch(`${this.url}learners/index`);
             let data = await res.json();
+            console.log(data);
             let html = "";
             data[0].learners.forEach((learner) => {
-                //fila de td para imagen
-                // <td class="text-center"><img class="img-fluid img-thumbnail" width="200" height="200" src="${learner.photo}"></td>
                 html += `
                 <tr data-id="${learner.id}">
-                    <td>${learner.username}</td>
-                    <td>${learner.document_type_id}</td>                   
-                    <td>${learner.document}</td>
+                    <td>${learner.document_type} ${learner.document}</td>
+                    <td>${learner.username}</td>                  
                     <td>${learner.phone}</td>
                     <td>${learner.email}</td>
                     <td class="buttons">
@@ -25,22 +23,6 @@ const app = {
                 `;
             });
             document.getElementById("data-learners").innerHTML = html;
-
-            html = "";
-            data[1].document_types.forEach((document) => {
-                html += `
-             <option value="${document.id}">${document.name}</option>
-                `;
-            });
-            document.getElementById("document_type_id").innerHTML = html;
-            html = "";
-            data[2].groups.forEach((group) => {
-                html += `
-             <option value="${group.id}">${group.code_tab}</option>
-                `;
-            });
-            document.getElementById("group_id").innerHTML = html;
-            document.getElementById("group_id_csv").innerHTML = html;
         } catch (error) {
             console.log(error);
         }

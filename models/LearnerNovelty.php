@@ -48,18 +48,21 @@ class LearnerNovelty extends Model
         }
     }
 
-    public function all()
+    public function all($id)
     {
         try {
-            $learner_novelties = [];
-            $query = $this->db->connect()->query('SELECT learner_novelties.id,learner_novelties.learner_id,
+            $query = $this->db->connect()->prepare('SELECT learner_novelties.id,learner_novelties.learner_id,
             learner_novelties.committee_id,learner_novelties.novelty_type_id,learner_novelties.justification,
             learner_novelties.reply_date,learner_novelties.created_at,learner_novelties.updated_at,learners.id as learners_id,
             learners.username as learners_name,committees.id as committees_id, committees.record_number as committees_number,
             novelty_types.id as novelty_id, novelty_types.name as novelty_name  FROM learner_novelties
             INNER JOIN learners ON learner_novelties.learner_id = learners.id 
             INNER JOIN committees ON learner_novelties.committee_id = committees.id  
-            INNER JOIN novelty_types ON learner_novelties.novelty_type_id = novelty_types.id');
+            INNER JOIN novelty_types ON learner_novelties.novelty_type_id = novelty_types.id WHERE learner_novelties.committee_id = :id');
+            $query->execute([
+                'id'=>$id
+            ]);
+            $learner_novelties = [];
             while ($row = $query->fetch()) {
                 $learner_novelty = new LearnerNovelty();
                 $learner_novelty->id = $row['id'];
@@ -84,10 +87,7 @@ class LearnerNovelty extends Model
                 'status' => 200
             ];
         } catch (PDOException $e) {
-            return [
-                'status' => 500,
-                'error' => $e
-            ];
+            return $e->getMessage();
         }
     }
 

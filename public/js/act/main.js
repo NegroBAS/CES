@@ -4,25 +4,41 @@ const config = {
 }
 
 const app = {
-    academics: null,
+    committee_sessions: null,
     getData: async function(){
         try {
             let res = await fetch(`${config.url}committee_sessions/index/${config.committee_id}`);
             let data = await res.json();
-            this.academics = data.data[2].committee_sessions_academics;
+            this.committee_sessions = data.committee_sessions;
         } catch (error) {
             console.log(error);
         }
     },
-    renderAcademics: async function(){
+    render: async function(){
         let html = '';
-        this.academics.map(academic => {
+        this.committee_sessions.map(committee_session => {
             html+= `
             <tr>
-                <td>${academic.learner_name}</td>
-                <td>${academic.start_hour}</td>
-                <td>${academic.end_hour}</td>
-                <td></td>
+                <td><a href="#" data-id="${committee_session.learner.id}">${committee_session.learner.username}</a></td>
+                <td>${committee_session.start_hour}</td>
+                <td>${committee_session.end_hour}</td>
+                <td>
+                    <h5>
+                        <span class="badge badge-pill badge-primary">Notificacion</span>
+                    </h5>
+                </td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Acciones
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="#">Action</a>
+                          <a class="dropdown-item" href="#">Another action</a>
+                          <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </div>
+                </td>
             </tr>
             `;
         });
@@ -65,7 +81,7 @@ $(document).ready(async function(){
     document.getElementById('loader').innerHTML = 'Cargando...';
     await app.getData();
     document.getElementById('loader').innerHTML = '';
-    await app.renderAcademics();
+    await app.render();
     $(document).on('click', '.history', async function(){
         let id = $(this).data('id');
         await app.getLeaner(id);

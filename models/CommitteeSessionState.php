@@ -52,7 +52,14 @@ class CommitteeSessionState extends Model{
     public function create($data)
     {
         try {
-
+            $query = $this->db->connect()->prepare("INSERT INTO committee_session_states(name) VALUES (:name)");
+            $query->execute([
+                'name'=>$data['name']
+            ]);
+            return [
+                'status'=>200,
+                'message'=>'Nuevo estado de comité creado'
+            ];
         } catch (PDOException $e) {
             return [
                 'status'=>500,

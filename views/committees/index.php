@@ -172,12 +172,6 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col">
-                        <h6>Hora</h6>
-                        <p id="hours"></p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
                         <h6>Aprendiz</h6>
                         <p id="learner"></p>
                     </div>

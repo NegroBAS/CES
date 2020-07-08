@@ -12,13 +12,14 @@
     <div id="loader"></div>
     <div class="row mt-3">
         <div class="col">
-            <table class="table">
+            <table class="table table-sm">
                 <thead>
                     <tr>
                         <th>Aprendiz</th>
                         <th>Hora inicio</th>
                         <th>Hora fin</th>
                         <th>Estado</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody id="data-academics">

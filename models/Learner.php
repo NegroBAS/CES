@@ -24,7 +24,7 @@ class Learner extends Model{
                 $learner = new Learner();
                 $learner->id = $row['id'];
                 $learner->username = $row['username'];
-                $learner->document_type_id = $row['document_type_id'];
+                $learner->document_type = $row['document_type'];
                 $learner->document = $row['document'];
                 $learner->phone = $row['phone'];
                 $learner->email = $row['email'];

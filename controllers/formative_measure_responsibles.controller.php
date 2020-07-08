@@ -15,7 +15,6 @@ class Formative_measure_responsiblesController extends Controller{
         $this->view->user = $_SESSION['user'];
         $this->formative_measure_responsible = $this->loadModel('FormativeMeasureResponsible');
         $this->contract_type = $this->loadModel('ContractType');
-        $this->document_type = $this->loadModel('DocumentType');
         $this->position = $this->loadModel('Position');
     }
 

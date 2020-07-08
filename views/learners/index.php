@@ -21,9 +21,8 @@
         <div class="col">
             <table id="learners" class="table table-bordered display" style="width:100%">
                 <thead>
-                    <th>Nombre</th>
-                    <th>Tipo de documento</th>
                     <th>Documento</th>
+                    <th>Nombre</th>
                     <th>Telefono</th>
                     <th>Correo electronico</th>
                     <th>Opciones</th>
