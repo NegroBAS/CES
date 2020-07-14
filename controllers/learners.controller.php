@@ -214,7 +214,7 @@ class LearnersController extends Controller
         for ($i=3; $i < $count ; $i++) { 
             $div = explode( ';', $data[$i] );
 
-            $document_type = $div[0] == "CC" ? "Cedula de ciudadania" : "Tarjeta de identidad";
+            $document_type = $div[0] == "CC" ? "CC" : "TI";
             $document = $div[1];
             $username = $div[2]." ".$div[3];
             $phone = $div[4];
