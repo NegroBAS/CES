@@ -108,7 +108,7 @@ class LearnersController extends Controller
 
         $id = $param[0];
         $username = $_POST['username'];
-        $document_type = $_POST['document_type_id'];
+        $document_type = $_POST['document_type'];
         $document = $_POST['document'];
         $phone = $_POST['phone'];
         $email = $_POST['email'];
@@ -161,7 +161,18 @@ class LearnersController extends Controller
 
 
 
-        $res = $this->learner->update([
+        // $res = $this->learner->update([
+        //     'id' => $id,
+        //     'username' => $username,
+        //     'document_type' => $document_type,
+        //     'document' => $document,
+        //     'phone' => $phone,
+        //     'email' => $email,
+        //     'group_id' => $group_id,
+        //     'birthdate' => $birthdate,
+        //     'photo' => $photo
+        // ]);
+        echo json_encode([
             'id' => $id,
             'username' => $username,
             'document_type' => $document_type,
@@ -172,7 +183,6 @@ class LearnersController extends Controller
             'birthdate' => $birthdate,
             'photo' => $photo
         ]);
-        echo json_encode($res);
         return;
     }
 

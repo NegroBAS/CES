@@ -117,7 +117,7 @@ const app = {
                     closeButton: true,
                 });
                 app.getData();
-                $(".modal").modal("toggle");
+                $("#createModal").modal("toggle");
                 this.edit = false;
             }
             if (data.status === 500) {

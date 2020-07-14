@@ -134,7 +134,7 @@ class Learner extends Model{
     public function update($data)
     {
         try {
-            $query = $this->db->connect()->prepare('UPDATE learners SET username = :username, document_type = :document_type_id, document = :document, phone = :phone, email = :email, group_id = :group_id, birthdate = :birthdate, photo = :photo WHERE id = :id');
+            $query = $this->db->connect()->prepare('UPDATE learners SET username = :username, document_type = :document_type, document = :document, phone = :phone, email = :email, group_id = :group_id, birthdate = :birthdate, photo = :photo WHERE id = :id');
             $query->execute([
                 'username' => $data['username'],
                 'document_type' => $data['document_type'],
