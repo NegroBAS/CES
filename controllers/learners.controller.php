@@ -94,25 +94,6 @@ class LearnersController extends Controller
             
         } while ($exists != true);
 
-<<<<<<< HEAD
-
-       
-=======
-        $res = $this->learner->create([
-            'username' => $username,
-            'document_type_id' => $document_type_id,
-            'document' => $document,
-            'phone' => $phone,
-            'email' => $email,
-            'group_id' => $group_id,
-            'birthdate' => $birthdate,
-            'photo' => $photo
-        ]);
-
-        echo json_encode($res);
->>>>>>> 0fe4175582a4141614836fe2f535853a69360526
-
-
         return;
     }
 
@@ -215,73 +196,6 @@ class LearnersController extends Controller
         $this->view->render('learners/index');
     }
 
-<<<<<<< HEAD
-    public function csv(){
-
-                $data = array();
-                $archivo = $_FILES['archivo']['tmp_name'];
-                $group_id =$_POST['group_id_csv'];
-                $readCsv = array_map('str_getcsv', file($archivo));
-            
-        
-                //recorremos filas del csv
-                foreach ($readCsv as $itemCsv) {                              
-                    //recorremos celdas del csv                  
-                    foreach ($itemCsv as $elementoItemCSV) {
-                      
-                        //mostramos la celda
-                        if($elementoItemCSV === null || $elementoItemCSV === ""){
-                            $data[] = "";
-                        }else{
-                            $data[] = $elementoItemCSV;
-                        }
-                           
-                    }
-                               
-                }
-
-                $count = count($data);
-
-                //store database
-                $x=21;
-                $boolean = true;
-                
-
-                do {
-
-                    $document_type_id = $data[$x] == "CC"? 1 : 2;
-                    $x++;
-                    $document = $data[$x];
-                    $x++;
-                    $username = $data[$x]." ".$data[$x+1];
-                    $x++;
-                    $x++;
-                    $phone = $data[$x];
-                    $x++;
-                    $email = $data[$x];
-                    $x++;
-                    $x++;
-
-                    // $res = $this->learner->create_csv([
-                    //     'username' => $username,
-                    //      'document_type_id' => $document_type_id,
-                    //     'document' => $document,
-                    //     'phone' => $phone,
-                    //     'email' => $email,
-                    //     'group_id' => $group_id
-                      
-                    // ]);
-             
-                    
-
-                    if($x == $count){
-                        $boolean = false;
-                    }
-                                   
-                } while ($boolean);
-
-                echo json_encode($data);
-=======
     public function csv()
     {
 
@@ -290,7 +204,7 @@ class LearnersController extends Controller
         $group_id = $_POST['group_id_csv'];
         $readCsv = array_map('str_getcsv', file($archivo));
 
->>>>>>> 0fe4175582a4141614836fe2f535853a69360526
+
 
         //recorremos filas del csv
         foreach ($readCsv as $itemCsv) {
@@ -302,31 +216,31 @@ class LearnersController extends Controller
             }
         }
 
+        
+
         $count = count($data);
 
         //store database
-        $x = 21;
+        $x = 3;
         $boolean = true;
 
+        // $div = explode( ';', $data[$x] );
 
-        do {
+        // echo json_encode($div[2]);
 
-            $document_type_id = $data[$x] == "CC" ? 1 : 2;
-            $x++;
-            $document = $data[$x];
-            $x++;
-            $username = $data[$x] . " " . $data[$x + 1];
-            $x++;
-            $x++;
-            $phone = $data[$x];
-            $x++;
-            $email = $data[$x];
-            $x++;
-            $x++;
+        for ($i=3; $i < $count ; $i++) { 
+            $div = explode( ';', $data[$i] );
+
+            $document_type = $div[0] == "CC" ? "Cedula de ciudadania" : "Tarjeta de identidad";
+            $document = $div[1];
+            $username = $div[2]." ".$div[3];
+            $phone = $div[4];
+            $email = $div[5];
+            
 
             $res = $this->learner->create_csv([
                 'username' => $username,
-                'document_type_id' => $document_type_id,
+                'document_type' => $document_type,
                 'document' => $document,
                 'phone' => $phone,
                 'email' => $email,
@@ -334,12 +248,7 @@ class LearnersController extends Controller
 
             ]);
 
-
-
-            if ($x == $count) {
-                $boolean = false;
-            }
-        } while ($boolean);
+        }
 
         echo json_encode($res);
     }

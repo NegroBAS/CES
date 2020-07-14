@@ -24,7 +24,7 @@ class Learner extends Model{
                 $learner = new Learner();
                 $learner->id = $row['id'];
                 $learner->username = $row['username'];
-                $learner->document_type_id = $row['document_type_id'];
+                $learner->document_type = $row['document_type'];
                 $learner->document = $row['document'];
                 $learner->phone = $row['phone'];
                 $learner->email = $row['email'];
@@ -110,10 +110,10 @@ class Learner extends Model{
     public function create_csv($data)
     {
         try {
-            $query = $this->db->connect()->prepare('INSERT INTO learners(username, document_type_id, document, phone, email, group_id) VALUES (:username, :document_type_id, :document, :phone, :email, :group_id)');
+            $query = $this->db->connect()->prepare('INSERT INTO learners(username, document_type, document, phone, email, group_id) VALUES (:username, :document_type, :document, :phone, :email, :group_id)');
             $query->execute([
                 'username' => $data['username'],
-                'document_type_id' => $data['document_type_id'],
+                'document_type' => $data['document_type'],
                 'document' => $data['document'],
                 'phone' => $data['phone'],
                 'email' => $data['email'],

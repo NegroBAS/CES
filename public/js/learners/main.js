@@ -12,7 +12,7 @@ const app = {
                 html += `
                 <tr data-id="${learner.id}">
                     <td>${learner.username}</td>
-                    <td>${learner.document_type_id}</td>                   
+                    <td>${learner.document_type}</td>                   
                     <td>${learner.document}</td>
                     <td>${learner.phone}</td>
                     <td>${learner.email}</td>
@@ -26,13 +26,6 @@ const app = {
             });
             document.getElementById("data-learners").innerHTML = html;
 
-            html = "";
-            data[1].document_types.forEach((document) => {
-                html += `
-             <option value="${document.id}">${document.name}</option>
-                `;
-            });
-            document.getElementById("document_type_id").innerHTML = html;
             html = "";
             data[2].groups.forEach((group) => {
                 html += `
