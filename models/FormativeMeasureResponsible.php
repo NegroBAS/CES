@@ -32,7 +32,7 @@ class FormativeMeasureResponsible extends Model{
                 $formative_measure_responsible->username = $row['username'];
                 $formative_measure_responsible->misena_email = $row['misena_email'];
                 $formative_measure_responsible->institutional_email = $row['institutional_email'];
-                $formative_measure_responsible->document_type_id = $row['document_type_id'];
+                $formative_measure_responsible->document_type = $row['document_type'];
                 $formative_measure_responsible->document = $row['document'];
                 $formative_measure_responsible->birthdate = $row['birthdate'];
                 $formative_measure_responsible->phone = $row['phone'];
@@ -98,12 +98,12 @@ class FormativeMeasureResponsible extends Model{
     public function create($data)
     {
         try {
-            $query = $this->db->connect()->prepare('INSERT INTO formative_measure_responsibles(username, misena_email, institutional_email, document_type_id, document, birthdate,phone, phone_ip, gender, position_id,contract_type_id,type,state) VALUES (:username, :misena_email, :institutional_email, :document_type_id, :document, :birthdate,:phone, :phone_ip, :gender, :position_id, :contract_type_id, :type, :state)');
+            $query = $this->db->connect()->prepare('INSERT INTO formative_measure_responsibles(username, misena_email, institutional_email, document_type, document, birthdate,phone, phone_ip, gender, position_id,contract_type_id,type,state) VALUES (:username, :misena_email, :institutional_email, :document_type, :document, :birthdate,:phone, :phone_ip, :gender, :position_id, :contract_type_id, :type, :state)');
             $query->execute([
                 'username' => $data['username'],
                 'misena_email' => $data['misena_email'],
                 'institutional_email' => $data['institutional_email'],
-                'document_type_id' => $data['document_type_id'],
+                'document_type' => $data['document_type'],
                 'document' => $data['document'],
                 'birthdate' => $data['birthdate'],
                 'phone' => $data['phone'],

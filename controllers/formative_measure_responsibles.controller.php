@@ -22,14 +22,12 @@ class Formative_measure_responsiblesController extends Controller{
     public function index()
     {
         $formative_measure_responsibles = $this->formative_measure_responsible->all();
-        $contract_types = $this->contract_type->all();
-        $document_types = $this->document_type->all();
-        $positions = $this->position->all();
+        // $contract_types = $this->contract_type->all();
+        // $positions = $this->position->all();
         echo json_encode([
             $formative_measure_responsibles,
-            $contract_types,
-            $document_types,
-            $positions
+            // $contract_types,
+            // $positions
         ]);
         return;
     }
@@ -44,7 +42,7 @@ class Formative_measure_responsiblesController extends Controller{
                 'username' => $instructor->username,
                 'misena_email' => $instructor->misena_email,
                 'institutional_email'=>$instructor->institutional_email,
-                'document_type_id' => 1,
+                'document_type' => 'CC',
                 'document' => $instructor->document,
                 'gender' => $instructor->gender,
                 'birthdate' => date('Y-m-d H:i:s', strtotime($instructor->birthdate)),

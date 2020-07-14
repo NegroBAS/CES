@@ -84,10 +84,10 @@ class Learner extends Model{
     public function create($data)
     {
         try {
-            $query = $this->db->connect()->prepare('INSERT INTO learners(username, document_type_id, document, phone, email, group_id, birthdate, photo) VALUES (:username, :document_type_id, :document, :phone, :email, :group_id, :birthdate, :photo)');
+            $query = $this->db->connect()->prepare('INSERT INTO learners(username, document_type, document, phone, email, group_id, birthdate, photo) VALUES (:username, :document_type, :document, :phone, :email, :group_id, :birthdate, :photo)');
             $query->execute([
                 'username' => $data['username'],
-                'document_type_id' => $data['document_type_id'],
+                'document_type' => $data['document_type'],
                 'document' => $data['document'],
                 'phone' => $data['phone'],
                 'email' => $data['email'],
