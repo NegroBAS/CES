@@ -43,6 +43,7 @@ class LearnersController extends Controller
             $group_id = $_POST['group_id'];
             $birthdate = $_POST['birthdate'];
             $path = "public/uploads/" . uniqid() . "." . strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
+            
             if (getimagesize($_FILES['photo']['tmp_name'])) {
                 if ($_FILES['photo']['size'] <= 500000) {
                     $type = strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
@@ -129,10 +130,7 @@ class LearnersController extends Controller
                     $_SESSION["progreso"] = "cargando";
 
                     $rutaA1 = $_FILES['photo']['tmp_name'];
-
                     if ($typeFile == "jpg" || $typeFile == "jpeg" || $typeFile == "png") {
-
-
                         if (is_uploaded_file($rutaA1)) {
                             //  $destinoA1= $url_photo.$username."_".$document.".".$typeFile;
                             $url_back = $_POST['photo_2'];
@@ -142,13 +140,18 @@ class LearnersController extends Controller
                             $progreso = "si";
                             $_SESSION["progreso"] = $progreso;
                         } else {
-                            echo "debe selecionar una imagen";
+                            echo json_encode([
+                                'status' => 400,
+                                'message' => 'debe seleccionar una imagen'
+                            ]);
                         }
                     } else {
-                        echo "solo se admiten archivos jpg o jpeg";
+                        echo json_encode([
+                            'status' => 400,
+                            'message' => 'La foto debe ser jpg/jpeg/png'
+                        ]);
                     }
                 } else {
-
                     $destinoA1 = $_POST['photo_2'];
                 }
             }
