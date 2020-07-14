@@ -107,7 +107,7 @@ class LearnersController extends Controller
 
         $id = $param[0];
         $username = $_POST['username'];
-        $document_type_id = $_POST['document_type_id'];
+        $document_type = $_POST['document_type_id'];
         $document = $_POST['document'];
         $phone = $_POST['phone'];
         $email = $_POST['email'];
@@ -161,7 +161,7 @@ class LearnersController extends Controller
         $res = $this->learner->update([
             'id' => $id,
             'username' => $username,
-            'document_type_id' => $document_type_id,
+            'document_type' => $document_type,
             'document' => $document,
             'phone' => $phone,
             'email' => $email,
