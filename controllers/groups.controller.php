@@ -88,11 +88,23 @@ class GroupsController extends Controller
             ]);
             array_push($responses, $response);
         }
-        echo json_encode([
-            'status'=>200,
-            'message'=>'Grupos actualizados',
-            'responses'=>$responses
-        ]);
+        
+        if(isset($response['error'])){
+            $error = $response['error'];
+            if($error[1] == "1452"){
+                echo json_encode([
+                        'status'=>500,
+                        'message'=>'Crear modalidad y/o programa formacion correspondiente',
+                        'responses'=>$responses
+                    ]);
+                }
+            }else{
+                echo json_encode([
+                    'status'=>200,
+                    'message'=>'Grupos actualizados',
+                    'responses'=>$responses
+                ]);
+            }
     }
 
     public function show($param = null)
