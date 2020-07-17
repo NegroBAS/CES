@@ -39,6 +39,7 @@ class LearnersController extends Controller
             $group_id = $_POST['group_id'];
             $birthdate = $_POST['birthdate'];
             $path = "public/uploads/" . uniqid() . "." . strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
+            
             if (getimagesize($_FILES['photo']['tmp_name'])) {
                 if ($_FILES['photo']['size'] <= 500000) {
                     $type = strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
@@ -74,11 +75,13 @@ class LearnersController extends Controller
                     'message' => 'Este archivo no es una imagen'
                 ]);
             }
+
         } catch (Throwable $e) {
             echo json_encode([
                 'error' => $e->getMessage()
             ]);
         }
+
     }
 
     public function show($param = null)
@@ -101,7 +104,7 @@ class LearnersController extends Controller
 
         $id = $param[0];
         $username = $_POST['username'];
-        $document_type_id = $_POST['document_type_id'];
+        $document_type = $_POST['document_type'];
         $document = $_POST['document'];
         $phone = $_POST['phone'];
         $email = $_POST['email'];
@@ -123,10 +126,7 @@ class LearnersController extends Controller
                     $_SESSION["progreso"] = "cargando";
 
                     $rutaA1 = $_FILES['photo']['tmp_name'];
-
                     if ($typeFile == "jpg" || $typeFile == "jpeg" || $typeFile == "png") {
-
-
                         if (is_uploaded_file($rutaA1)) {
                             //  $destinoA1= $url_photo.$username."_".$document.".".$typeFile;
                             $url_back = $_POST['photo_2'];
@@ -136,13 +136,18 @@ class LearnersController extends Controller
                             $progreso = "si";
                             $_SESSION["progreso"] = $progreso;
                         } else {
-                            echo "debe selecionar una imagen";
+                            echo json_encode([
+                                'status' => 400,
+                                'message' => 'debe seleccionar una imagen'
+                            ]);
                         }
                     } else {
-                        echo "solo se admiten archivos jpg o jpeg";
+                        echo json_encode([
+                            'status' => 400,
+                            'message' => 'La foto debe ser jpg/jpeg/png'
+                        ]);
                     }
                 } else {
-
                     $destinoA1 = $_POST['photo_2'];
                 }
             }
@@ -152,10 +157,21 @@ class LearnersController extends Controller
 
 
 
-        $res = $this->learner->update([
+        // $res = $this->learner->update([
+        //     'id' => $id,
+        //     'username' => $username,
+        //     'document_type' => $document_type,
+        //     'document' => $document,
+        //     'phone' => $phone,
+        //     'email' => $email,
+        //     'group_id' => $group_id,
+        //     'birthdate' => $birthdate,
+        //     'photo' => $photo
+        // ]);
+        echo json_encode([
             'id' => $id,
             'username' => $username,
-            'document_type_id' => $document_type_id,
+            'document_type' => $document_type,
             'document' => $document,
             'phone' => $phone,
             'email' => $email,
@@ -163,7 +179,6 @@ class LearnersController extends Controller
             'birthdate' => $birthdate,
             'photo' => $photo
         ]);
-        echo json_encode($res);
         return;
     }
 
@@ -191,94 +206,30 @@ class LearnersController extends Controller
 
         //recorremos filas del csv
         foreach ($readCsv as $itemCsv) {
-            //recorremos celdas del csv                  
-            foreach ($itemCsv as $elementoItemCSV) {
-
-                //mostramos la celda
-                if ($elementoItemCSV === null || $elementoItemCSV === "") {
-                    $data[] = "";
-                } else {
-                    $data[] = $elementoItemCSV;
-                }
-            }
-        }
-
-        $count = count($data);
-
-        //store database
-        $x = 21;
-        $boolean = true;
-
-
-        do {
-
-            $document_type_id = $data[$x] == "CC" ? 1 : 2;
-            $x++;
-            $document = $data[$x];
-            $x++;
-            $username = $data[$x] . " " . $data[$x + 1];
-            $x++;
-            $x++;
-            $phone = $data[$x];
-            $x++;
-            $email = $data[$x];
-            $x++;
-            $x++;
-
-            // $res = $this->learner->create_csv([
-            //     'username' => $username,
-            //      'document_type_id' => $document_type_id,
-            //     'document' => $document,
-            //     'phone' => $phone,
-            //     'email' => $email,
-            //     'group_id' => $group_id
-
-            // ]);
-
-
-
-            if ($x == $count) {
-                $boolean = false;
-            }
-        } while ($boolean);
-
-        echo json_encode($data);
-
-        //recorremos filas del csv
-        foreach ($readCsv as $itemCsv) {
             //recorremos celdas del csv
             foreach ($itemCsv as $elementoItemCSV) {
 
-                //mostramos la celda
+                //guardando las filas
                 $data[] = $elementoItemCSV;
             }
         }
 
+
         $count = count($data);
 
-        //store database
-        $x = 21;
-        $boolean = true;
+        for ($i=3; $i < $count ; $i++) { 
+            $div = explode( ';', $data[$i] );
 
-
-        do {
-
-            $document_type_id = $data[$x] == "CC" ? 1 : 2;
-            $x++;
-            $document = $data[$x];
-            $x++;
-            $username = $data[$x] . " " . $data[$x + 1];
-            $x++;
-            $x++;
-            $phone = $data[$x];
-            $x++;
-            $email = $data[$x];
-            $x++;
-            $x++;
+            $document_type = $div[0] == "CC" ? "CC" : "TI";
+            $document = $div[1];
+            $username = $div[2]." ".$div[3];
+            $phone = $div[4];
+            $email = $div[5];
+            
 
             $res = $this->learner->create_csv([
                 'username' => $username,
-                'document_type_id' => $document_type_id,
+                'document_type' => $document_type,
                 'document' => $document,
                 'phone' => $phone,
                 'email' => $email,
@@ -286,12 +237,7 @@ class LearnersController extends Controller
 
             ]);
 
-
-
-            if ($x == $count) {
-                $boolean = false;
-            }
-        } while ($boolean);
+        }
 
         echo json_encode($res);
     }
