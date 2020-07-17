@@ -39,7 +39,9 @@ class Stimulus extends Model{
     public function find($id)
     {
         try {
-            $query = $this->db->connect()->prepare("SELECT * FROM stimuli INNER JOIN learners ON learners.id = stimuli.learner_id WHERE stimuli.id = :id");
+            $query = $this->db->connect()->prepare("SELECT * FROM stimuli 
+                INNER JOIN learners ON learners.id = stimuli.learner_id 
+                WHERE stimuli.id = :id");
             $query->execute([
                 'id'=>$id
             ]);
@@ -55,6 +57,38 @@ class Stimulus extends Model{
             return [
                 'status'=>200,
                 'stimulus'=>$stimulus
+            ];
+        } catch (PDOException $e) {
+            return [
+                'status' => 500,
+                'error' => $e
+            ];
+        }
+    }
+
+    public function findByLearner($id)
+    {
+        try {
+            $query = $this->db->connect()->prepare("SELECT * FROM stimuli 
+                INNER JOIN learners ON learners.id = stimuli.learner_id 
+                WHERE stimuli.learner_id = :id");
+            $query->execute([
+                'id'=>$id
+            ]);
+            $stimuli = [];
+            while($row = $query->fetch()){
+                $stimulus = new Stimulus();
+                $stimulus->id = $row['id'];
+                $stimulus->learner_id = $row['learner_id'];
+                $stimulus->learner_username = $row['username'];
+                $stimulus->committee_id = $row['committee_id'];
+                $stimulus->stimulus = $row['stimulus'];
+                $stimulus->justification = $row['justification'];
+                array_push($stimuli, $stimulus);
+            }
+            return [
+                'status'=>200,
+                'stimuli'=>$stimuli
             ];
         } catch (PDOException $e) {
             return [

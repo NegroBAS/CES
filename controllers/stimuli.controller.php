@@ -34,6 +34,13 @@ class StimuliController extends Controller
         echo json_encode($response);
     }
 
+    public function findByLearner($param = null)
+    {
+        $learner_id = $param[0];
+        $response = $this->stimulus->findByLearner($learner_id);
+        echo json_encode($response);
+    }
+
     public function show($param = null)
     {
         $id = $param[0];

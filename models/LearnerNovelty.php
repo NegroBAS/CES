@@ -3,15 +3,6 @@
 class LearnerNovelty extends Model
 {
 
-    public $id;
-    public $learner_id;
-    public $committee_id;
-    public $novelty_type_id;
-    public $justification;
-    public $reply_date;
-    public $created_at;
-    public $updated_at;
-
     public function __construct()
     {
         parent::__construct();

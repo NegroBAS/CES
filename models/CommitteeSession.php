@@ -14,17 +14,19 @@ class CommitteeSession extends Model
             $query = $this->db->connect()->prepare("SELECT 
                 committee_sessions.*, 
                 learners.id AS learner_id, 
-                learners.username AS 
-                learner_username, 
+                learners.username AS learner_username, 
                 learners.document_type AS learner_document_type,
                 learners.document AS learner_document,
                 learners.phone AS learner_phone,
                 learners.email AS learner_email,
                 learners.group_id AS learner_group_id,
                 learners.birthdate AS learner_birthdate,
-                learners.photo AS learner_photo
+                learners.photo AS learner_photo,
+                committee_session_states.id AS committee_session_state_id,
+                committee_session_states.name AS committee_session_state_name
                 FROM committee_sessions 
                 INNER JOIN learners ON learners.id = committee_sessions.learner_id 
+                INNER JOIN committee_session_states ON committee_session_states.id = committee_sessions.committee_session_state_id 
                 WHERE committee_sessions.committee_id = :id");
             $query->execute([
                 'id' => $committee_id
@@ -37,6 +39,106 @@ class CommitteeSession extends Model
                 $committee_session->committee_id = $row['committee_id'];
                 $committee_session->committee_session_type_id = $row['committee_session_type_id'];
                 $committee_session->committee_session_state_id = $row['committee_session_state_id'];
+                $committee_session->committee_session_state = [
+                    'id'=>$row['committee_session_state_id'],
+                    'name'=>$row['committee_session_state_name'],
+                ];
+                $committee_session->learner_id = $row['learner_id'];
+                $committee_session->learner = [
+                    'id'=>$row['learner_id'],
+                    'username'=>$row['learner_username'],
+                    'document_type'=>$row['learner_document_type'],
+                    'document'=>$row['learner_document'],
+                    'phone'=>$row['learner_phone'],
+                    'email'=>$row['learner_email'],
+                    'group_id'=>$row['learner_group_id'],
+                    'birthdate'=>$row['learner_birthdate'],
+                    'photo'=>$row['learner_photo']
+                ];
+                $committee_session->infringement_type_id = $row['infringement_type_id'];
+                $committee_session->infringement_classification_id = $row['infringement_classification_id'];
+                $committee_session->act_sanction_id = $row['act_sanction_id'];
+                $committee_session->place = $row['place'];
+                $committee_session->start_hour = $row['start_hour'];
+                $committee_session->end_hour = $row['end_hour'];
+                $committee_session->date_academic_act_sanction = $row['date_academic_act_sanction'];
+                $committee_session->date_notification_act_sanction = $row['date_notification_act_sanction'];
+                $committee_session->date_expiration_act_sanction = $row['date_expiration_act_sanction'];
+                $committee_session->date_lifting_act_sanction = $row['date_lifting_act_sanction'];
+                $committee_session->sanction_justification = $row['sanction_justification'];
+                $committee_session->notification_acts = $row['notification_acts'];
+                $committee_session->notification_infringements = $row['notification_infringements'];
+                $committee_session->committee_a_case_treat = $row['committee_a_case_treat'];
+                $committee_session->committee_a_type_discharge = $row['committee_a_type_discharge'];
+                $committee_session->committee_a_discharges = $row['committee_a_discharges'];
+                $committee_session->committee_a_clarification = $row['committee_a_clarification'];
+                $committee_session->committee_b_valuation_discharges = $row['committee_b_valuation_discharges'];
+                $committee_session->committee_b_existing_behavior = $row['committee_b_existing_behavior'];
+                $committee_session->committee_b_behavior_type = $row['committee_b_behavior_type'];
+                $committee_session->committee_b_responsibility_grade = $row['committee_b_responsibility_grade'];
+                $committee_session->committee_b_infringement_classification = $row['committee_b_infringement_classification'];
+                $committee_session->committee_b_determination_sanction_recomendation = $row['committee_b_determination_sanction_recomendation'];
+                $committee_session->act_sanction_acts_investigated = $row['act_sanction_acts_investigated'];
+                $committee_session->act_sanction_discharges = $row['act_sanction_discharges'];
+                $committee_session->act_sanction_evidences = $row['act_sanction_evidences'];
+                $committee_session->act_sanction_evidence_analysis = $row['act_sanction_evidence_analysis'];
+                $committee_session->act_sanction_infringements = $row['act_sanction_infringements'];
+                $committee_session->act_sanction_responsibility_grade = $row['act_sanction_responsibility_grade'];
+                $committee_session->act_sanction_definitive_infringement_classification = $row['act_sanction_definitive_infringement_classification'];
+                $committee_session->act_sanction_infringement_type = $row['act_sanction_infringement_type'];
+                $committee_session->act_sanction_reasons = $row['act_sanction_reasons'];
+                $committee_session->act_sanction_notification = $row['act_sanction_notification'];
+                $committee_session->act_sanction_committee_recomendation = $row['act_sanction_committee_recomendation'];
+
+                array_push($committee_sessions, $committee_session);
+            }
+            return [
+                'status' => 200,
+                'committee_sessions' => $committee_sessions
+            ];
+        } catch (PDOException $e) {
+            return [
+                'status' => 500,
+                'error' => $e
+            ];
+        }
+    }
+
+    public function findByLearner($learner_id)
+    {
+        try {
+            $query = $this->db->connect()->prepare("SELECT 
+                committee_sessions.*, 
+                learners.id AS learner_id, 
+                learners.username AS learner_username, 
+                learners.document_type AS learner_document_type,
+                learners.document AS learner_document,
+                learners.phone AS learner_phone,
+                learners.email AS learner_email,
+                learners.group_id AS learner_group_id,
+                learners.birthdate AS learner_birthdate,
+                learners.photo AS learner_photo,
+                committee_session_states.id AS committee_session_state_id,
+                committee_session_states.name AS committee_session_state_name
+                FROM committee_sessions 
+                INNER JOIN learners ON learners.id = committee_sessions.learner_id 
+                INNER JOIN committee_session_states ON committee_session_states.id = committee_sessions.committee_session_state_id 
+                WHERE committee_sessions.learner_id = :id");
+            $query->execute([
+                'id' => $learner_id
+            ]);
+            $committee_sessions = [];
+            while ($row = $query->fetch()) {
+                $committee_session = new CommitteeSession();
+                $committee_session->id = $row['id'];
+                $committee_session->complainer_id = $row['complainer_id'];
+                $committee_session->committee_id = $row['committee_id'];
+                $committee_session->committee_session_type_id = $row['committee_session_type_id'];
+                $committee_session->committee_session_state_id = $row['committee_session_state_id'];
+                $committee_session->committee_session_state = [
+                    'id'=>$row['committee_session_state_id'],
+                    'name'=>$row['committee_session_state_name'],
+                ];
                 $committee_session->learner_id = $row['learner_id'];
                 $committee_session->learner = [
                     'id'=>$row['learner_id'],

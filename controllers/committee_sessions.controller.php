@@ -36,6 +36,13 @@ class Committee_sessionsController extends Controller
         echo json_encode($response);
     }
 
+    public function findByLearner($param = null)
+    {
+        $learner_id = $param[0];
+        $response = $this->committee_session->findByLearner($learner_id);
+        echo json_encode($response);
+    }
+
     public function edit()
     {
     }
