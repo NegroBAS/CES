@@ -102,13 +102,6 @@ class LearnersController extends Controller
         echo json_encode($res);
     }
 
-    public function view($param = null)
-    {
-        $id = $param[0];
-        $res = $this->learner->findview($id);
-        echo json_encode($res);
-    }
-
     public function edit($param = null)
     {
 
