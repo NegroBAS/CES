@@ -137,7 +137,7 @@ class Learner extends Model
                 'email' => $data['email'],
                 'group_id' => $data['group_id'],
                 'birthdate' => $data['birthdate'],
-                'photo' => $data['photo']
+                'photo' => isset($data['photo'])?$data['photo']:null
             ]);
             return [
                 'status' => 200,

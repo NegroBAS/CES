@@ -24,13 +24,9 @@ class Committee_sessionsController extends Controller
     public function store()
     {
         $committee_id = $_POST['committee_id'];
-        $start_hour = $_POST['start_hour'];
-        $end_hour = $_POST['end_hour'];
         $learner_id = $_POST['learner_id'];
         $response = $this->committee_session->create([
             'committee_id'=>$committee_id,
-            'start_hour'=>$start_hour,
-            'end_hour'=>$end_hour,
             'learner_id'=>$learner_id
         ]);
         echo json_encode($response);

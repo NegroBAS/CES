@@ -694,24 +694,6 @@ $(document).ready(async function () {
 			<form id="formAcademic">
 				<div class="form-row">
 					<div class="col">
-						<div class="form-group">
-							<h6>Hora</h6>
-							<div class="row">
-								<div class="col">
-									<label class="text-muted" for="start_hour">Inicia</label>
-									<input type="time" name="start_hour" id="start_hour" class="form-control"/>
-								</div>
-								<div class="col">
-									<label class="text-muted" for="end_hour">Termina</label>
-									<input type="time" name="end_hour" id="end_hour" class="form-control"/>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				</div>
-				<div class="form-row">
-					<div class="col">
 						<h6>Aprendiz</h6>
 						<div className="form-group">
 							<div class="form-group my-3">
