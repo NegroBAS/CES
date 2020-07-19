@@ -69,7 +69,7 @@ class Formation_programsController extends Controller
             if($error[1] == "1452"){
                 echo json_encode([
                         'status'=>500,
-                        'message'=>'Crear tipo de programa formacion correspondientes',
+                        'message'=>'Actualizar tipo de programa formacion',
                         'responses'=>$responses
                     ]);
                 }

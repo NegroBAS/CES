@@ -94,7 +94,7 @@ class GroupsController extends Controller
             if($error[1] == "1452"){
                 echo json_encode([
                         'status'=>500,
-                        'message'=>'Crear modalidad y/o programa formacion correspondiente',
+                        'message'=>'Actualizar modalidades y/o programa formacion correspondientes',
                         'responses'=>$responses
                     ]);
                 }
