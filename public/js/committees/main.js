@@ -316,7 +316,7 @@ const app = {
 											Fecha:
 											<p class="text-muted">${committee.date}</p>
 										</div>
-										<div class="col">
+										<div class="col-12 col-md-6">
 											Hora:
 											<p class="text-muted">
 												${committee.start_hour}
@@ -344,9 +344,9 @@ const app = {
 										</div>
 									</div>
 									<div class="row">
-										<div class="col">
+										<div class="col-5">
 											<div class="dropdown d-inline">
-												<button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<button class="btn btn-outline-primary dropdown-toggle mb-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 												  Opciones
 												</button>
 												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -356,9 +356,9 @@ const app = {
 												  <a class="dropdown-item p-2 delete" data-id="${committee.id}" href="#"><i class="far fa-trash-alt text-danger"></i> Eliminar</a>
 												</div>
 									  		</div>
-											<button class="btn btn-outline-success btn-add-case" data-id="${committee.id}" >Agregar caso</button>
+											<button class="btn btn-outline-success btn-add-case mb-2" data-id="${committee.id}" >Agregar caso</button>
 										</div>
-										<div class="col-4 ml-auto text-right">
+										<div class="col-7 col-md-7 ml-auto text-right">
 											<a href="${app.url}act/committee/${committee.id}" class="btn btn-outline-primary" data-id="${committee.id}" >Generar acta</a>
 										</div>
 									</div>

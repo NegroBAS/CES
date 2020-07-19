@@ -25,7 +25,7 @@
             <div class="modal-body">
                 <form id="form">
                     <div class="form-row">
-                        <div class="col">
+                        <div class="col-12 col-md-4">
                             <div class="form-group">
                                 <label for="date">Fecha:</label>
                                 <input type="date" name="date" id="date" class="form-control">
@@ -50,13 +50,13 @@
                         </div>
                     </div>
                     <div class="form-row">
-                        <div class="col">
+                        <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="record_number">Numero de acta</label>
                                 <input type="text" name="record_number" id="record_number" class="form-control">
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="place">Lugar</label>
                                 <input type="text" name="place" id="place" class="form-control">
@@ -145,11 +145,11 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col" id="stimulus">
+                    <div class="col-12 col-lg-4" id="stimulus">
                     </div>
-                    <div class="col" id="novelties">
+                    <div class="col-12 col-lg-4" id="novelties">
                     </div>
-                    <div class="col" id="academics">
+                    <div class="col-12 col-lg-4" id="academics">
                     </div>
                 </div>
             </div>
@@ -245,24 +245,16 @@
                 <div class="row">
                     <div class="col border-right">
                         <div class="row">
-                            <div class="col">
+                            <div class="col-12 col-lg-4">
                                 <h6>Fecha</h6>
-                            </div>
-                            <div class="col">
-                                <h6>Hora inicio</h6>
-                            </div>
-                            <div class="col">
-                                <h6>Hora fin</h6>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col">
                                 <p class="text-muted" id="date"></p>
                             </div>
                             <div class="col">
+                                <h6>Hora inicio</h6>
                                 <p class="text-muted" id="start_hour"></p>
                             </div>
                             <div class="col">
+                                <h6>Hora fin</h6>
                                 <p class="text-muted" id="end_hour"></p>
                             </div>
                         </div>
@@ -307,7 +299,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-12 col-lg-6">
                         <div class="row">
                             <div class="col">
                                 <h6>Asistentes</h6>
