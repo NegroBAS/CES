@@ -167,11 +167,10 @@ const val = {
             this.classList.remove("is-valid");
             this.classList.add("is-invalid");
             document.getElementById("nameMessage").innerHTML =
-              "Este campo solo resibe caracteres";
+              "Ingrese un nombre valido";
           }
     
           if (this.value === "") {
-            console.log("campo requerido");
             document.getElementById("nameMessage").innerHTML =
               "Este campo es requerido";
             this.classList.add("is-invalid");

@@ -299,10 +299,17 @@ const val = {
 
             }
 
-            if (this.value.length < 7 || this.value === "" || this.value == null) {
+            if (this.value == "" || this.value == null || this.value == 0) {
                 this.classList.remove('is-valid');
                 this.classList.add('is-invalid');
                 document.getElementById('documentMessage').innerHTML = "Este campo es requerido"
+                btnForm.setAttribute('disabled', 'disabled');
+            }
+
+            if (this.value.length < 7 && this.value.length > 0) {
+                this.classList.remove('is-valid');
+                this.classList.add('is-invalid');
+                document.getElementById('documentMessage').innerHTML = "Ingrese un documento valido"
                 btnForm.setAttribute('disabled', 'disabled');
             }
 
@@ -311,17 +318,6 @@ const val = {
         }
 
         username.oninput = function () {
-            if (this.value === "" || this.value == null) {
-                document.getElementById('nameMessage').innerHTML = "Este campo es requerido"
-                btnForm.setAttribute('disabled', 'disabled');
-                this.classList.add('is-invalid');
-              
-            }
-
-            if (this.value.length > 0) {
-                this.classList.remove('is-invalid');
-                this.classList.add('is-valid');
-            }
 
             if (letrasRegex.test(this.value)) {
                 this.classList.remove('is-invalid');
@@ -329,60 +325,85 @@ const val = {
             } else {
                 this.classList.remove('is-valid');
                 this.classList.add('is-invalid');
-                document.getElementById('nameMessage').innerHTML = "Este campo es requerido"
+                document.getElementById('nameMessage').innerHTML = "Ingrese un nombre valido"
                 btnForm.setAttribute('disabled', 'disabled');
             }
 
-            // if (this.value.length == 0 || this.value == "" ) {
-            //     this.classList.remove('is-valid');
-            //     this.classList.add('is-invalid');
-            //     document.getElementById('documentMessage').innerHTML = "Este campo es requerido"
-            //     btnForm.setAttribute('disabled', 'disabled');
-            // }
+            if (this.value == "" || this.value == null) {
+                document.getElementById('nameMessage').innerHTML = "Este campo es requerido"
+                btnForm.setAttribute('disabled', 'disabled');
+                this.classList.add('is-invalid');
+              
+            }
+
+            
 
         }
 
         misena_email.oninput = function () {
-
+            let str = misena_email.value;
+            let emailValue = str.substr(0,1);
 
             if (emailRegex.test(this.value)) {
-                this.classList.remove('is-invalid');
-                this.classList.add('is-valid');
-                estado[2] = 'si';
+                this.classList.remove("is-invalid");
+                this.classList.add("is-valid");                
             } else {
-                document.getElementById('misena_emailMessage').innerHTML = "Este campo es requerido"
-                this.classList.add('is-invalid');
-                btnForm.setAttribute('disabled', 'disabled');
-
+                document.getElementById("misena_emailMessage").innerHTML =
+                    "Ingrese un correo valido";
+                this.classList.add("is-invalid");
+                btnForm.setAttribute("disabled", "disabled");
             }
 
-            if (this.value === "" || this.value == null) {
-                this.classList.add('is-invalid');
-                btnForm.setAttribute('disabled', 'disabled');
-
+            if(numberRegex.test(emailValue)){
+                document.getElementById("misena_emailMessage").innerHTML =
+                "El correo debe comenzar con una letra";
+                this.classList.add("is-invalid");
+                btnForm.setAttribute("disabled", "disabled"); 
             }
+
+
+            if (this.value == "" || this.value == null) {
+                this.classList.add("is-invalid");
+                document.getElementById("misena_emailMessage").innerHTML =
+                    "Este campo es requerido";
+                btnForm.setAttribute("disabled", "disabled");
+            }
+
+
 
 
         }
 
         institutional_email.oninput = function () {
-
+            let str = institutional_email.value;
+            let emailValue = str.substr(0,1);
 
             if (emailRegex.test(this.value)) {
-                this.classList.remove('is-invalid');
-                this.classList.add('is-valid');
+                this.classList.remove("is-invalid");
+                this.classList.add("is-valid");                
             } else {
-                document.getElementById('institutional_emailMessage').innerHTML = "Este campo es requerido"
-                this.classList.add('is-invalid');
-                btnForm.setAttribute('disabled', 'disabled');
-
+                document.getElementById("institutional_emailMessage").innerHTML =
+                    "Ingrese un correo valido";
+                this.classList.add("is-invalid");
+                btnForm.setAttribute("disabled", "disabled");
             }
 
-            if (this.value === "" || this.value == null) {
-
-                this.classList.add('is-invalid');
-                btnForm.setAttribute('disabled', 'disabled');
+            if(numberRegex.test(emailValue)){
+                document.getElementById("institutional_emailMessage").innerHTML =
+                "El correo debe comenzar con una letra";
+                this.classList.add("is-invalid");
+                btnForm.setAttribute("disabled", "disabled"); 
             }
+
+
+            if (this.value == "" || this.value == null) {
+                this.classList.add("is-invalid");
+                document.getElementById("institutional_emailMessage").innerHTML =
+                    "Este campo es requerido";
+                btnForm.setAttribute("disabled", "disabled");
+            }
+
+
 
 
         }
@@ -390,8 +411,8 @@ const val = {
 
         phone.oninput = function () {
 
-
-            if (this.value === "" || this.value < 9) {
+        
+            if (this.value == "" || this.value < 9) {
                 document.getElementById('phoneMessage').innerHTML = "Este campo es requerido"
                 btnForm.setAttribute('disabled', 'disabled');
                 this.classList.add('is-invalid');
@@ -403,6 +424,15 @@ const val = {
                 this.classList.add('is-valid');
    
             }
+
+            if (this.value.length < 9 && this.value.length > 0) {
+                this.classList.remove('is-valid');
+                this.classList.add('is-invalid');
+                document.getElementById('phoneMessage').innerHTML = "Ingrese un telefono valido"
+                btnForm.setAttribute('disabled', 'disabled');
+            }
+
+            
 
 
         }
@@ -422,6 +452,13 @@ const val = {
                 this.classList.remove('is-invalid');
                 this.classList.add('is-valid');
 
+            }
+
+            if (this.value.length < 6 && this.value.length > 0) {
+                this.classList.remove('is-valid');
+                this.classList.add('is-invalid');
+                document.getElementById('phone_ipMessage').innerHTML = "Ingrese un telefono valido"
+                btnForm.setAttribute('disabled', 'disabled');
             }
 
 

@@ -129,14 +129,11 @@ const app = {
     },
     csv: async function () {
         try {
-            console.log("csv");
             let res = await fetch(`${this.url}learners/csv`, {
                 method: "POST",
                 body: new FormData(form_csv),
-            });
-            console.log(res);
+            });    
             let data = await res.json();
-            console.log(data);
             if (data.status === 200) {
                 $("#filecsv").modal("toggle");
                 app.getData();
@@ -252,10 +249,14 @@ $(document).ready(async function () {
         $("#filecsv").trigger("reset");
         $("#filecsv").modal("toggle");
         $("#filecsv").find(".modal-title").text("Cargar aprendices");
+        validacion_csv();
     };
+
     document.getElementById("btnFormCsv").onclick = function (e) {
         e.preventDefault();
         app.csv(this);
+        validacion_csv();
+        limpiar();
     };
 
 
@@ -310,7 +311,7 @@ $(document).ready(async function () {
         let numberRegex = /^([0-9])*$/;
         let letrasRegex = /^[a-zA-ZñÑáéíóúÁÉÍÓÚ\u00E0-\u00FC\s]+$/;
         let btnForm = document.getElementById("btnForm");
-        let estado = new Array(5);
+
 
         btnForm.setAttribute("disabled", "disabled");
 
@@ -332,20 +333,21 @@ $(document).ready(async function () {
                     "Ingrese un documento valido";
                     btnForm.setAttribute("disabled", "disabled");
             }
-        };
 
-        username.oninput = function () {
-            if (this.value === "" || this.value == null) {
-                console.log("campo requerido");
-                document.getElementById("nameMessage").innerHTML =
+            if (this.value == "" || this.value == null || this.value == 0) {
+                document.getElementById("documentMessage").innerHTML =
                     "Este campo es requerido";
                 this.classList.add("is-invalid");
                 btnForm.setAttribute("disabled", "disabled");
             }
+        };
 
-            if (this.value.length > 0) {
-                this.classList.remove("is-invalid");
-                this.classList.add("is-valid");
+        username.oninput = function () {
+            if (this.value == "" || this.value == null || this.value == 0) {
+                document.getElementById("nameMessage").innerHTML =
+                    "Este campo es requerido";
+                this.classList.add("is-invalid");
+                btnForm.setAttribute("disabled", "disabled");
             }
 
             if (letrasRegex.test(this.value)) {
@@ -354,13 +356,25 @@ $(document).ready(async function () {
             } else {
                 this.classList.remove("is-valid");
                 this.classList.add("is-invalid");
-                document.getElementById("nameMessage").innerHTML =
+                if(this.value == 0 || this.value == ""){
+                    document.getElementById("nameMessage").innerHTML =
+                    "Este campo es requerido";
+                    btnForm.setAttribute("disabled", "disabled");
+                }else{
+                    document.getElementById("nameMessage").innerHTML =
                     "Ingrese un nombre valido";
                     btnForm.setAttribute("disabled", "disabled");
+                }
+                
             }
         };
 
+        
+
         email.oninput = function () {
+            let str = email.value;
+            let emailValue = str.substr(0,1);
+
             if (emailRegex.test(this.value)) {
                 this.classList.remove("is-invalid");
                 this.classList.add("is-valid");                
@@ -371,8 +385,19 @@ $(document).ready(async function () {
                 btnForm.setAttribute("disabled", "disabled");
             }
 
-            if (this.value === "" || this.value == null) {
+            if(numberRegex.test(emailValue)){
+                document.getElementById("emailMessage").innerHTML =
+                "El correo debe comenzar con una letra";
                 this.classList.add("is-invalid");
+                btnForm.setAttribute("disabled", "disabled"); 
+            }
+
+
+
+            if (this.value == "" || this.value == null) {
+                this.classList.add("is-invalid");
+                document.getElementById("emailMessage").innerHTML =
+                "Este campo es requerido";
                 btnForm.setAttribute("disabled", "disabled");
             }
         };
@@ -380,7 +405,7 @@ $(document).ready(async function () {
         phone.oninput = function () {
             if (this.value === "" || this.value < 9) {
                 document.getElementById("phoneMessage").innerHTML =
-                    "Este campo es requerido";
+                    "Ingrese un telefono valido";
                 this.classList.add("is-invalid");
                 btnForm.setAttribute("disabled", "disabled");
             }
@@ -388,6 +413,13 @@ $(document).ready(async function () {
             if (this.value.length > 9) {
                 this.classList.remove("is-invalid");
                 this.classList.add("is-valid");
+            }
+
+            if (this.value == "" || this.value == null || this.value == 0) {
+                document.getElementById("phoneMessage").innerHTML =
+                    "Este campo es requerido";
+                this.classList.add("is-invalid");
+                btnForm.setAttribute("disabled", "disabled");
             }
         };
 
@@ -407,11 +439,37 @@ $(document).ready(async function () {
         
     }
 
+    function validacion_csv() {
+        let group = document.getElementById("group_id_csv");
+        let btnForm = document.getElementById("btnFormCsv");
+
+        btnForm.setAttribute("disabled", "disabled");
+
+        group.oninput = function (){
+            if (this.value == "" || this.value == null || this.value == 0) {
+                this.classList.add("is-invalid");
+                btnForm.setAttribute("disabled", "disabled");
+            }
+        };
+        
+        setInterval(input,3000);
+        function input(){    
+            if(group.value != "" || group.value.length > 0){
+                btnForm.removeAttribute("disabled");
+            }
+        }
+        
+    }
+
     function limpiar() {
         let documento = document.getElementById("document");
         let username = document.getElementById("username");
         let email = document.getElementById("email");
         let phone = document.getElementById("phone");
+        let group_name_csv = document.getElementById("group_name_csv");
+        let group_id_csv = document.getElementById("group_id_csv");
+        let group_name = document.getElementById("group_name");
+        let archivo_label = document.getElementById("archivo_label");
 
         username.classList.remove("is-invalid");
         username.classList.remove("is-valid");
@@ -430,6 +488,25 @@ $(document).ready(async function () {
         phone.classList.remove("is-invalid");
         phone.classList.remove("is-valid");
         phone.value ="";
+
+        group_name_csv.classList.remove("is-invalid");
+        group_name_csv.classList.remove("is-valid");
+        group_name_csv.value ="";
+
+        group_name.classList.remove("is-invalid");
+        group_name.classList.remove("is-valid");
+        group_name.value ="";
+
+        group_id_csv.classList.remove("is-invalid");
+        group_id_csv.classList.remove("is-valid");
+        group_id_csv.value ="";
+
+        archivo_label.classList.remove("is-invalid");
+        archivo_label.classList.remove("is-valid");
+        archivo_label.innerHTML ="Seleccionar Archivo";
+
+
+
 
     }
 });

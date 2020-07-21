@@ -256,7 +256,7 @@ const val = {
                 this.classList.remove("is-valid");
                 this.classList.add("is-invalid");
                 document.getElementById("nameMessage").innerHTML =
-                    "Este campo es requerido";
+                    "Ingrese un nombre valido";
             }
 
             if (this.value === "") {
@@ -281,7 +281,7 @@ const val = {
                 this.classList.remove("is-valid");
                 this.classList.add("is-invalid");
                 document.getElementById("typeMessage").innerHTML =
-                    "Este campo es requerido";
+                "Ingrese un nombre valido";
             }
 
             if (this.value === "") {

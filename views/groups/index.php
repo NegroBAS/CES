@@ -58,7 +58,7 @@
             <div class="col-12 col-md-6">
               <div class="form-group">
                 <label for="code_tab">Ficha</label>
-                <input type="text" name="code_tab" id="code_tab" class="form-control">
+                <input type="number" name="code_tab" id="code_tab" class="form-control">
                 <div class="invalid-feedback" id="codeMessage"></div>
               </div>
             </div>
@@ -72,8 +72,13 @@
           <div class="form-row">
             <div class="col">
               <div class="form-group">
-                <label for="code_tab">Programa de formacion</label>
-                <select name="formation_program_id" id="formation_program_id" class="form-control"></select>
+                            <div class="form-group">
+                                <label for="group_id">Programa de formacion</label>
+                                <input type="text" name="formation_program_name" id="formation_program_name" class="form-control" placeholder="Busca aqui...">
+                                <input type="text" hidden name="formation_program_id" id="formation_program_id" value="">                                                        
+                                <div id="content-program">
+                                </div>
+                            </div>
               </div>
             </div>
           </div>

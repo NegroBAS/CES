@@ -169,12 +169,28 @@ const app = {
         } catch (error) {
             console.log(error);
         }
-    }
+    },
+    getPrograms: async function(){
+        try {
+			let res = await fetch(`${this.url}formation_programs/index`);
+            let data = await res.json();
+			this.formation_programs = data[0].formation_programs;
+		} catch (error) {
+			console.log(error);
+		}
+	}
+}
+
+function selectProgram(value,name) {
+    document.getElementById('formation_program_id').value = value;
+    document.getElementById('formation_program_name').value = name;
+    document.getElementById('content-program').innerHTML = "";
 }
 
 $(document).ready(async function () {
     let id = null;
     await app.get();
+    await app.getPrograms();
     $('#group').DataTable({
         responsive: true,
         info: false,
@@ -188,6 +204,40 @@ $(document).ready(async function () {
         }
 
     });
+
+    document.getElementById('formation_program_name').oninput = function(){
+  
+        let matches = app.formation_programs.filter(formation_programs => {
+            const rgex = new RegExp(`^${this.value}`, 'gi');
+            if(isNaN(this.value)){
+                return formation_programs.name.match(rgex)
+            }else{
+                return formation_programs.code.match(rgex)
+            }
+           
+        });
+        if(this.value.length === 0){
+            matches=[];
+        }
+        let html = '<ul class="list-group">';
+        if(matches.length > 0){
+            if(isNaN(this.value)){
+                matches.forEach(match => {
+                    html+=`<div onclick="selectProgram('${match.id}','${match.code} ${match.name}')" class="list-group-item list-group-item-action">${match.code} ( ${match.name} )</div>`
+                });
+                html+="</ul>";
+                document.getElementById('content-program').innerHTML = html;
+            }else{
+                matches.forEach(match => {
+                    html+=`<div onclick="selectProgram('${match.id}','${match.code} ${match.name}')" class="list-group-item list-group-item-action">${match.code} ( ${match.name} )</div>`
+                });
+                html+="</ul>";
+                document.getElementById('content-program').innerHTML = html;
+            }
+        }else{
+            document.getElementById('content-program').innerHTML = "<div class='mt-3'>El registro no existe</div>";
+        }
+    }
     document.getElementById('btn-create').onclick = function(){
         $('.modal #form').trigger('reset');
         $('.modal').modal('toggle');
@@ -262,24 +312,18 @@ $(document).ready(async function () {
     
                 if(numberRegex.test(this.value)){
                     this.classList.remove('is-invalid');
-                        this.classList.add('is-valid');
-                        estado[0] = 'si';
+                    this.classList.add('is-valid');
                 }else {
                     document.getElementById('codeMessage').innerHTML = "Este campo es requerido"
                     this.classList.add('is-invalid');
-                    estado[0] = 'no';
                 }
                     
         
-                if(this.value === "" || this.value.length < 4 ){
+                if(this.value === "" || this.value.length < 3 ){
                     document.getElementById('codeMessage').innerHTML = "Este campo es requerido"
                     this.classList.add('is-invalid');
-                    estado[5] = 'no';
         
                 }
-        
-              
-        
         
             }
     
@@ -292,15 +336,21 @@ $(document).ready(async function () {
                 }else {
                     document.getElementById('quantityMessage').innerHTML = "Este campo es requerido"
                     this.classList.add('is-invalid');
-                    estado[0] = 'no';
                 }
                     
         
-                if(this.value === "" || this.value.length < 2 || this.value < 8  ){
-                    document.getElementById('quantityMessage').innerHTML = "Este campo es requerido"
+                if(this.value.length < 2 || this.value < 8  ){
+                    document.getElementById('quantityMessage').innerHTML = "Ingrese una cantidad valida"
                     this.classList.add('is-invalid');
                     estado[5] = 'no';
         
+                }
+
+                if (this.value == "" || this.value == null || this.value == 0) {
+                    document.getElementById("quantityMessage").innerHTML =
+                        "Este campo es requerido";
+                    this.classList.add("is-invalid");
+                    btnForm.setAttribute("disabled", "disabled");
                 }
         
             
@@ -323,12 +373,18 @@ $(document).ready(async function () {
                 }
                     
         
-                if(this.value === "" || this.value.length < 1 || this.value < 8 ){
-                    document.getElementById('activeMessage').innerHTML = "Este campo es requerido"
+                if(this.value.length < 2 || this.value < 8  ){
+                    document.getElementById('activeMessage').innerHTML = "Ingrese una cantidad valida"
                     this.classList.add('is-invalid');
-                    btnForm.setAttribute('disabled','disabled');
                     estado[5] = 'no';
         
+                }
+
+                if (this.value == "" || this.value == null || this.value == 0) {
+                    document.getElementById("activeMessage").innerHTML =
+                        "Este campo es requerido";
+                    this.classList.add("is-invalid");
+                    btnForm.setAttribute("disabled", "disabled");
                 }
         
         

@@ -244,7 +244,6 @@ $(document).ready(async function () {
     
     
               if(this.value === "" || this.value == null){
-                  console.log("campo requerido");
                   document.getElementById('nameMessage').innerHTML = "Este campo es requerido"
                   this.classList.add('is-invalid');
               }
@@ -267,10 +266,10 @@ $(document).ready(async function () {
                     
         
                 if(this.value === "" || this.value == null || this.value < 1 ){
-                    console.log("campo requerido");
                     document.getElementById('electiveMessage').innerHTML = "Este campo es requerido"
                     this.classList.remove('is-valid');
                     this.classList.add('is-invalid');
+                    btn.setAttribute('disabled', 'disabled');
                 }
         
         
@@ -292,8 +291,7 @@ $(document).ready(async function () {
                 }
                     
         
-                if(this.value === "" || this.value == null){
-                    console.log("campo requerido");
+                if(this.value === "" || this.value == null || this.value < 1 ){
                     document.getElementById('practiceMessage').innerHTML = "Este campo es requerido"
                     btn.setAttribute('disabled', 'disabled');
                     this.classList.add('is-invalid');

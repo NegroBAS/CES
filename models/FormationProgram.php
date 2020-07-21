@@ -23,11 +23,13 @@ class FormationProgram extends Model
             formation_programs.formation_program_type_id,formation_programs.created_at,formation_programs.updated_at,
             formation_program_types.id as id_formation, formation_program_types.name as name_formation FROM formation_programs
             INNER JOIN formation_program_types ON formation_programs.formation_program_type_id = formation_program_types.id');
+            
             while ($row = $query->fetch()) {
                 $formation_program = new FormationProgram();
                 $formation_program->id = $row['id'];
                 $formation_program->code = $row['code'];
-                $formation_program->name = $row['name'];
+                $col = explode($row['code']." - ",$row['name']);
+                $formation_program->name = $col[1];
                 $formation_program->formation_program_type_id = $row['formation_program_type_id'];
                 $formation_program->created_at = $row['created_at'];
                 $formation_program->updated_at = $row['updated_at'];

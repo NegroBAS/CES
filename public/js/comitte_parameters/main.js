@@ -200,18 +200,16 @@ const val = {
             } else {
                 this.classList.remove('is-valid');
                 this.classList.add('is-invalid');
-                document.getElementById('nameMessage').innerHTML = "Este campo es requerido"
+                document.getElementById('nameMessage').innerHTML = "Ingrese un nombre valido"
             }
 
             if (this.value === "") {
-                console.log("campo requerido");
                 document.getElementById('nameMessage').innerHTML = "Este campo es requerido"
                 this.classList.add('is-invalid');
 
             }
 
             if (letrasRegex.test(name.value) && content.value.length > 0) {
-                console.log('Bueno');
                 btn.removeAttribute('disabled');
             } else {
                 btn.setAttribute('disabled', 'disabled');
@@ -221,7 +219,6 @@ const val = {
 
         content.oninput = function () {
             if (this.value === "" || this.value == null) {
-                console.log("campo requerido");
                 document.getElementById('contentMessage').innerHTML = "Este campo es requerido"
                 this.classList.add('is-invalid');
             }
@@ -233,7 +230,6 @@ const val = {
 
 
             if (letrasRegex.test(name.value) && content.value.length > 0) {
-                console.log('Bueno');
                 btn.removeAttribute('disabled');
             } else {
                 btn.setAttribute('disabled', 'disabled');

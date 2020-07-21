@@ -104,7 +104,7 @@ class LearnersController extends Controller
 
     public function edit($param = null)
     {
-        $url_photo = "public/photos/";
+        $url_photo = "public/uploads/";
 
         $id = $param[0];
         $username = $_POST['username'];
@@ -126,8 +126,6 @@ class LearnersController extends Controller
             if (isset($_FILES['photo'])) {
 
                 if (is_uploaded_file($_FILES['photo']['tmp_name'])) {
-
-                    $_SESSION["progreso"] = "cargando";
 
                     $rutaA1 = $_FILES['photo']['tmp_name'];
                     if ($typeFile == "jpg" || $typeFile == "jpeg" || $typeFile == "png") {
@@ -159,20 +157,7 @@ class LearnersController extends Controller
             $photo = $_POST['photo_2'];
         }
 
-
-
-        // $res = $this->learner->update([
-        //     'id' => $id,
-        //     'username' => $username,
-        //     'document_type' => $document_type,
-        //     'document' => $document,
-        //     'phone' => $phone,
-        //     'email' => $email,
-        //     'group_id' => $group_id,
-        //     'birthdate' => $birthdate,
-        //     'photo' => $photo
-        // ]);
-        echo json_encode([
+        $res = $this->learner->update([
             'id' => $id,
             'username' => $username,
             'document_type' => $document_type,
@@ -183,6 +168,8 @@ class LearnersController extends Controller
             'birthdate' => $birthdate,
             'photo' => $photo
         ]);
+        echo json_encode($res);
+
         return;
     }
 

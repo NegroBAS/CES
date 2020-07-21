@@ -89,7 +89,7 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="phone">Telefono</label>
-                                <input type="number" name="phone" id="phone" class="form-control">
+                                <input type="number" name="phone"  minlength="7" maxlength="12" id="phone" class="form-control">
                                 <div class="invalid-feedback" id="phoneMessage">
 
                                 </div>
@@ -187,11 +187,11 @@
       <div class="modal-body">
             <form id="form_csv" enctype="multipart/form-data" method="post" autocomplete="off">   
                     <div class="form-row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <div class="form-group">
                                 <label for="group_id_csv">Grupo</label>
                                 <input type="text" name="group_name_csv" id="group_name_csv" class="form-control" placeholder="Busca aqui...">
-                                <input type="text" hidden name="group_id_csv" id="group_id_csv" value="">                                                        
+                                <input type="text" hidden name="group_id_csv" id="group_id_csv">                                                        
                                 <div id="content_group_csv">
                                 </div>
                             </div>
@@ -209,20 +209,11 @@
 
                                        <div class="custom-file">                        
                                            <input type="file" class="custom-file-input" id="archivo" name="archivo"  lang="es" value="" >
-                                           <label class="custom-file-label" for="archivo"  data-browse="Buscar">Seleccionar Archivo</label>
+                                           <label class="custom-file-label" id="archivo_label" for="archivo"  data-browse="Buscar">Seleccionar Archivo</label>
                                        </div>
-                                       <!-- //link photo hidden -->
-                                       <!-- <input type="text" hidden name="photo_2" id="photo_2" value="">  -->
 
                                    </div>                                  
                                </div>
-                               <!-- <div class="form-group">
-                                        <div class="barra">
-                                            <div class="" id="barra_estado">
-                                                <span id="span"></span>
-                                            </div>
-                                        </div>
-                               </div> -->
                            </div>
                        
                        </div>               
