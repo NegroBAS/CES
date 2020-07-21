@@ -45,6 +45,11 @@ const app = {
                 toastr.success('', data.message, {
                     closeButton: true
                 });
+            }else if(data.status===500){
+                toastr.error('', data.message, {
+                    closeButton: true
+                });
+            document.getElementById('data-groups').innerHTML = '';
             }
         } catch (error) {
             console.log(error);

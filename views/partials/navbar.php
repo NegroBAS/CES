@@ -15,7 +15,6 @@
                         <a class="dropdown-item" href="<?php echo constant('URL') ?>learners">Aprendices</a>
                         <a class="dropdown-item" href="<?php echo constant('URL') ?>positions">Cargos</a>
                         <a class="dropdown-item" href="<?php echo constant('URL') ?>contract_types">Tipos de contratos</a>
-                        <a class="dropdown-item" href="<?php echo constant('URL') ?>document_types">Tipos de documentos</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">

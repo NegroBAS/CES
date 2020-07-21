@@ -21,9 +21,8 @@
         <div class="col">
             <table id="learners" class="table table-bordered display" style="width:100%">
                 <thead>
-                    <th>Nombre</th>
-                    <th>Tipo de documento</th>
                     <th>Documento</th>
+                    <th>Nombre</th>
                     <th>Telefono</th>
                     <th>Correo electronico</th>
                     <th>Opciones</th>
@@ -49,7 +48,7 @@
             </div>
             <div class="modal-body">
 
-                <form enctype="multipart/form-data" method="post" id="form" autocomplete="off">
+                <form action="<?php echo constant('URL') ?>learners/store" enctype="multipart/form-data" method="post" id="form" autocomplete="off">
                     <div class="form-row">
                         <div class="col">
                                 <div class="form-group">

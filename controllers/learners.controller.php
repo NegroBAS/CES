@@ -23,12 +23,8 @@ class LearnersController extends Controller
     public function index()
     {
         $leaners = $this->learner->all();
-        $document_types = $this->document_type->all();
-        $groups = $this->group->all();
         echo json_encode([
             $leaners,
-            $document_types,
-            $groups
         ]);
     }
 
@@ -42,45 +38,56 @@ class LearnersController extends Controller
             $email = $_POST['email'];
             $group_id = $_POST['group_id'];
             $birthdate = $_POST['birthdate'];
-            $path = "public/uploads/" . uniqid() . "." . strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
-            
-            if (getimagesize($_FILES['photo']['tmp_name'])) {
-                if ($_FILES['photo']['size'] <= 500000) {
-                    $type = strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
-                    if ($type == 'jpg' || $type == 'jpeg' || $type == 'png') {
-                        if (move_uploaded_file($_FILES['photo']['tmp_name'], $path)) {
-                            $response = $this->learner->create([
-                                'username' => $username,
-                                'document_type' => $document_type,
-                                'document' => $document,
-                                'phone' => $phone,
-                                'email' => $email,
-                                'group_id' => $group_id,
-                                'birthdate' => $birthdate,
-                                'photo' => $path
+            if($_FILES['photo']['tmp_name']===""){
+                $response = $this->learner->create([
+                    'username' => $username,
+                    'document_type' => $document_type,
+                    'document' => $document,
+                    'phone' => $phone,
+                    'email' => $email,
+                    'group_id' => $group_id,
+                    'birthdate' => $birthdate,
+                ]);
+                echo json_encode($response);
+            }else{
+                if (getimagesize($_FILES['photo']['tmp_name'])) {
+                    $path = "public/uploads/" . uniqid() . "." . strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
+                    if ($_FILES['photo']['size'] <= 500000) {
+                        $type = strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
+                        if ($type == 'jpg' || $type == 'jpeg' || $type == 'png') {
+                            if (move_uploaded_file($_FILES['photo']['tmp_name'], $path)) {
+                                $response = $this->learner->create([
+                                    'username' => $username,
+                                    'document_type' => $document_type,
+                                    'document' => $document,
+                                    'phone' => $phone,
+                                    'email' => $email,
+                                    'group_id' => $group_id,
+                                    'birthdate' => $birthdate,
+                                    'photo' => $path
+                                ]);
+                                echo json_encode($response);
+                            }
+                        } else {
+                            echo json_encode([
+                                'status' => 400,
+                                'message' => 'La foto debe ser jpg/jpeg/png'
                             ]);
-                            echo json_encode($response);
                         }
                     } else {
                         echo json_encode([
                             'status' => 400,
-                            'message' => 'La foto debe ser jpg/jpeg/png'
+                            'message' => 'Este archivo es demasiado grande'
                         ]);
                     }
                 } else {
                     echo json_encode([
                         'status' => 400,
-                        'message' => 'Este archivo es demasiado grande'
+                        'message' => 'Este archivo no es una imagen'
                     ]);
                 }
-            } else {
-                echo json_encode([
-                    'status' => 400,
-                    'message' => 'Este archivo no es una imagen'
-                ]);
             }
-
-        } catch (Throwable $e) {
+        } catch (PDOException $e) {
             echo json_encode([
                 'error' => $e->getMessage()
             ]);
@@ -92,13 +99,6 @@ class LearnersController extends Controller
     {
         $id = $param[0];
         $res = $this->learner->find($id);
-        echo json_encode($res);
-    }
-
-    public function view($param = null)
-    {
-        $id = $param[0];
-        $res = $this->learner->findview($id);
         echo json_encode($res);
     }
 
@@ -176,6 +176,10 @@ class LearnersController extends Controller
     public function destroy($param = null)
     {
         $id = $param[0];
+        $learner = $this->learner->find($id);
+        if($learner['learner']->photo){
+            unlink($learner['learner']->photo);
+        }
         $res = $this->learner->Delete($id);
         echo json_encode($res);
     }

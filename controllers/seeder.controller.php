@@ -5,6 +5,7 @@ class SeederController extends Controller
     {
         parent::__construct();
         $this->committee_session_type = $this->loadModel('CommitteeSessionType');
+        $this->committee_session_state = $this->loadModel('CommitteeSessionState');
         $this->formative_measure = $this->loadModel('FormativeMeasure');
         $this->infringement_classification = $this->loadModel('InfringementClassification');
         $this->infringement_type = $this->loadModel('InfringementType');
@@ -33,6 +34,7 @@ class SeederController extends Controller
             array_push($responses, $response);
         }
     }
+
     public function seed_formative_measures()
     {
         $data = [
@@ -177,8 +179,19 @@ class SeederController extends Controller
         $data = [
             [
                 'name'=>'Comunicación al aprendiz'
+            ],
+            [
+                'name'=>'Acta de comité'
+            ],
+            [
+                'name'=>'Acto sancionatorio'
             ]
         ];
+        $responses = [];
+        for ($i=0; $i < count($data); $i++) { 
+            $response = $this->committee_session_state->create($data[$i]);
+            array_push($responses,$response);
+        }
     }
 
     public function seed_learners()
@@ -200,6 +213,7 @@ class SeederController extends Controller
         $this->view->title = 'Seeder';
         $this->view->render('seeder/index');
         $this->seed_committee_session_types();
+        $this->seed_committee_session_states();
         $this->seed_formative_measures();
         $this->seed_infringement_classifications();
         $this->seed_infringement_types();

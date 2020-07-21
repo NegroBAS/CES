@@ -7,7 +7,7 @@
             <h4>Usuarios</h4>
         </div>
         <div class="col-2 ml-4 ml-md-0 text-right">
-            <button id="btn-create" class="btn btn-success btn-sm">Crear</button>
+            <button id="btn-create" class="btn btn-outline-primary">Crear</button>
         </div>
     </div>
     <div class="row mt-3">

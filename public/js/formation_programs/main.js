@@ -45,6 +45,12 @@ const app = {
                     closeButton: true
                 });
             }
+            else if(data.status===500){
+                toastr.error('', data.message, {
+                    closeButton: true
+                });
+            document.getElementById('data-formation_programs').innerHTML = '';
+            }
         } catch (error) {
             console.log(error);
         }

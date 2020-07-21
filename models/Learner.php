@@ -1,17 +1,10 @@
 <?php
 
-class Learner extends Model{
-    public $id;
-    public $username;
-    public $document_type_id;
-    public $document;
-    public $phone;
-    public $email;
-    public $group_id;
-    public $birthdate;
-    public $photo;
+class Learner extends Model
+{
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -20,7 +13,7 @@ class Learner extends Model{
         $learners = [];
         try {
             $query = $this->db->connect()->query('SELECT * FROM learners');
-            while($row = $query->fetch()){
+            while ($row = $query->fetch()) {
                 $learner = new Learner();
                 $learner->id = $row['id'];
                 $learner->username = $row['username'];
@@ -34,13 +27,13 @@ class Learner extends Model{
                 array_push($learners, $learner);
             }
             return [
-                'status'=>200,
+                'status' => 200,
                 'learners' => $learners
             ];
         } catch (PDOException $e) {
             return [
-                'status'=>500,
-                'error'=>$e
+                'status' => 500,
+                'error' => $e
             ];
         }
     }
@@ -48,11 +41,39 @@ class Learner extends Model{
     public function find($id)
     {
         try {
-            $query = $this->db->connect()->prepare('SELECT * FROM learners WHERE id = :id');
+            $query = $this->db->connect()->prepare('SELECT 
+                learners.*,
+                groups.id AS group_id,
+                groups.code_tab AS group_code_tab,
+                groups.modality_id AS group_modality_id,
+                groups.formation_program_id AS group_formation_program_id,
+                groups.quantity_learners AS group_quantity_learners,
+                groups.active_learners AS group_active_learners,
+                groups.elective_start_date AS group_elective_start_date,
+                groups.elective_end_date AS group_elective_end_date,
+                groups.practice_start_date AS group_practice_start_date,
+                groups.practice_end_date AS group_practice_end_date,
+                formation_programs.id AS formation_program_id,
+                formation_programs.code AS formation_program_code,
+                formation_programs.name AS formation_program_name,
+                formation_programs.formation_program_type_id AS formation_program_formation_program_type_id,
+                modalities.id AS modality_id,
+                modalities.name AS modality_name,
+                formation_program_types.id AS formation_program_type_id,
+                formation_program_types.name AS formation_program_type_name,
+                formation_program_types.elective_months AS formation_program_type_elective_months,
+                formation_program_types.practice_months AS formation_program_type_practice_months
+                FROM learners 
+                INNER JOIN groups ON groups.id = learners.group_id
+                INNER JOIN formation_programs ON formation_programs.id = groups.formation_program_id
+                INNER JOIN formation_program_types ON formation_program_types.id = formation_programs.formation_program_type_id
+                INNER JOIN modalities ON modalities.id = groups.modality_id
+                WHERE learners.id = :id'
+            );
             $query->execute([
                 'id' => $id
             ]);
-            while($row = $query->fetch()){
+            while ($row = $query->fetch()) {
                 $learner = new Learner();
                 $learner->id = $row['id'];
                 $learner->username = $row['username'];
@@ -61,6 +82,34 @@ class Learner extends Model{
                 $learner->phone = $row['phone'];
                 $learner->email = $row['email'];
                 $learner->group_id = $row['group_id'];
+                $learner->group = [
+                    'id'=>$row['group_id'],
+                    'code_tab'=>$row['group_code_tab'],
+                    'modality_id'=>$row['group_modality_id'],
+                    'modality'=>[
+                        'id'=>$row['modality_id'],
+                        'name'=>$row['modality_name'],
+                    ],
+                    'formation_program_id'=>$row['group_formation_program_id'],
+                    'formation_program'=>[
+                        'id'=>$row['formation_program_id'],
+                        'code'=>$row['formation_program_code'],
+                        'name'=>$row['formation_program_name'],
+                        'formation_program_type_id'=>$row['formation_program_formation_program_type_id'],
+                        'formation_program_type'=>[
+                            'id'=>$row['formation_program_type_id'],
+                            'name'=>$row['formation_program_type_name'],
+                            'elective_months'=>$row['formation_program_type_elective_months'],
+                            'practice_months'=>$row['formation_program_type_practice_months'],
+                        ],
+                    ],
+                    'quantity_learners'=>$row['group_quantity_learners'],
+                    'active_learners'=>$row['group_active_learners'],
+                    'elective_start_date'=>$row['group_elective_start_date'],
+                    'elective_end_date'=>$row['group_elective_end_date'],
+                    'practice_start_date'=>$row['group_practice_start_date'],
+                    'practice_end_date'=>$row['group_practice_end_date'],
+                ];
                 $learner->birthdate = $row['birthdate'];
                 $learner->photo = $row['photo'];
             }
@@ -76,11 +125,6 @@ class Learner extends Model{
         }
     }
 
-    public function findview($id)
-    {
-        
-    }
-
     public function create($data)
     {
         try {
@@ -93,7 +137,7 @@ class Learner extends Model{
                 'email' => $data['email'],
                 'group_id' => $data['group_id'],
                 'birthdate' => $data['birthdate'],
-                'photo' => $data['photo']
+                'photo' => isset($data['photo'])?$data['photo']:null
             ]);
             return [
                 'status' => 200,
@@ -101,8 +145,8 @@ class Learner extends Model{
             ];
         } catch (PDOException $e) {
             return [
-                'status'=>500,
-                'error'=>$e
+                'status' => 500,
+                'error' => $e
             ];
         }
     }
@@ -125,8 +169,8 @@ class Learner extends Model{
             ];
         } catch (PDOException $e) {
             return [
-                'status'=>500,
-                'error'=>$e
+                'status' => 500,
+                'error' => $e
             ];
         }
     }
@@ -152,8 +196,8 @@ class Learner extends Model{
             ];
         } catch (PDOException $e) {
             return [
-                'status'=>500,
-                'error'=>$e
+                'status' => 500,
+                'error' => $e
             ];
         }
     }
@@ -166,12 +210,12 @@ class Learner extends Model{
                 'id' => $id
             ]);
             return [
-                'status'=>200,
+                'status' => 200,
                 'message' => 'Aprendiz eliminado'
             ];
         } catch (PDOException $e) {
             return [
-                'status'=>500,
+                'status' => 500,
                 'error' => $e
             ];
         }

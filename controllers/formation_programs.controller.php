@@ -64,11 +64,22 @@ class Formation_programsController extends Controller
             ]);
             array_push($responses, $response);
         }
-        echo json_encode([
-            'status'=>200,
-            'message'=>'Programas de formacion actualizados',
-            'responses'=>$responses
-        ]);
+        if(isset($response['error'])){
+            $error = $response['error'];
+            if($error[1] == "1452"){
+                echo json_encode([
+                        'status'=>500,
+                        'message'=>'Actualizar tipo de programa formacion',
+                        'responses'=>$responses
+                    ]);
+                }
+            }else{
+            echo json_encode([
+                'status'=>200,
+                'message'=>'Programas de formacion actualizados',
+                'responses'=>$responses
+            ]);
+        }
     }
 
     public function show($param = null)

@@ -19,10 +19,11 @@
                         <th>Hora inicio</th>
                         <th>Hora fin</th>
                         <th>Estado</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody id="data-academics">
-                    
+
                 </tbody>
             </table>
         </div>
@@ -40,7 +41,10 @@
             <div class="modal-body">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Novedades</a>
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#information" role="tab" aria-controls="home" aria-selected="true">Aprendiz</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Novedades</a>
                     </li>
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Estimulos</a>
@@ -50,7 +54,10 @@
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active pt-2" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="tab-pane fade active show pt-2" id="information" role="tabpanel" aria-labelledby="home-tab">
+                        
+                    </div>
+                    <div class="tab-pane fade show pt-2" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div class="row">
                             <div class="col">
                                 <table class="table">
@@ -74,19 +81,34 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Novedad</th>
+                                            <th>Estimulo</th>
                                             <th>Justificacion</th>
-                                            <th>Fecha de respuesta</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="data-novelties">
+                                    <tbody id="data-stimuli">
 
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <div class="row">
+                            <div class="col">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Estimulo</th>
+                                            <th>Justificacion</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="data-academics">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">

@@ -27,18 +27,11 @@ class Learner_noveltiesController extends Controller{
         echo json_encode($novelties);
     }
 
-    public function index()
+    public function index($param = null)
     {
-        $learner_novelties = $this->learner_novelty->all();
-        $committees = $this->committee->all();
-        $learners = $this->learner->all();
-        $novelty_types = $this->novelty_type->all();
-        echo json_encode([
-            $learner_novelties,
-            $committees,
-            $learners,
-            $novelty_types
-        ]);
+        $committee_id = $param[0];
+        $response = $this->learner_novelty->all($committee_id);
+        echo json_encode($response);
         return;
 
     }

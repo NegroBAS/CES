@@ -3,21 +3,11 @@ const app = {
 	complainers: null,
 	responsibles: null,
 	learners: null,
-	document_types: null,
 	novelties: null,
 	novelty_types: null,
 	id: null,
 	editor: null,
 	edit: false,
-	getDocumentTypes: async function () {
-		try {
-			let res = await fetch(`${this.url}document_types/index`);
-			let data = await res.json();
-			this.document_types = data.document_types;
-		} catch (error) {
-			console.log(error);
-		}
-	},
 	getComplainers: async function () {
 		try {
 			let res = await fetch(`${this.url}formative_measure_responsibles/index`);
@@ -32,11 +22,12 @@ const app = {
 	},
 	addStimulu: async function (form) {
 		try {
-			let res = await fetch(`${this.url}committee_sessions/storeStimulu`, {
+			let res = await fetch(`${this.url}stimuli/store`, {
 				method: 'POST',
 				body: form
 			});
 			let data = await res.json();
+			console.log(data);
 			if (data.status === 200) {
 				$('#modal-case').modal('toggle');
 				toastr.success('', data.message, {
@@ -50,12 +41,11 @@ const app = {
 	},
 	addAcademic: async function (form) {
 		try {
-			let res = await fetch(`${this.url}committee_sessions/storeAcademic`, {
+			let res = await fetch(`${this.url}committee_sessions/store`, {
 				method: 'POST',
 				body: form
 			});
 			let data = await res.json();
-			console.log(data);
 			if (data.status === 200) {
 				$('#modal-case').modal('toggle');
 				toastr.success('', data.message, {
@@ -103,15 +93,14 @@ const app = {
 	},
 	getStimulu: async function (id) {
 		try {
-			let res = await fetch(`${this.url}committee_sessions/showStimulu/${id}`);
+			let res = await fetch(`${this.url}stimuli/show/${id}`);
 			let data = await res.json();
 			console.log(data);
 			if (data.status === 200) {
 				$('#modal-stimulus-detail').find('.modal-title').text('Detalle del caso');
-				$('#modal-stimulus-detail #hours').text(`${data.committee_session.start_hour} a ${data.committee_session.end_hour}`);
-				$('#modal-stimulus-detail #learner').text(`${data.committee_session.learner_name}`);
-				$('#modal-stimulus-detail #stimulus').text(`${data.committee_session.stimulus}`);
-				$('#modal-stimulus-detail #stimulus_justification').text(`${data.committee_session.stimulus_justification}`);
+				$('#modal-stimulus-detail #learner').text(`${data.stimulus.learner_username}`);
+				$('#modal-stimulus-detail #stimulus').text(`${data.stimulus.stimulus}`);
+				$('#modal-stimulus-detail #stimulus_justification').text(`${data.stimulus.justification}`);
 				$('#modal-stimulus-detail').modal('toggle');
 			}
 		} catch (error) {
@@ -121,38 +110,37 @@ const app = {
 	getCases: async function (id) {
 		try {
 			document.getElementById('stimulus').innerHTML = '';
-			let res = await fetch(`${this.url}/committee_sessions/index/${id}`);
+			let res = await fetch(`${this.url}/stimuli/index/${id}`);
 			let data = await res.json();
-			console.log(data);
-			if (data.data[0].status === 200) {
+			if (data.status === 200) {
 				let html = '<h6>Estimulos e incentivos</h6>';
-				if (data.data[0].committee_sessions_stimulus.length === 0) {
-					html += '<p>No hay estimulos que tratar</p>'
+				if (data.stimuli.length === 0) {
+					html += '<p class="text-muted">No hay estimulos que tratar</p>'
 				} else {
-					data.data[0].committee_sessions_stimulus.forEach(stimulu => {
+					data.stimuli.forEach(stimulus => {
 						html += `
 						<div class="card mb-1">
 							<div class="card-header">
-								<div class="row">
-									<div class="col">
-										${stimulu.start_hour} - ${stimulu.end_hour}
-									</div>
-									<div class="col-2 text-right">
-										<div class="dropdown">
-											<button class="btn btn-sm btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											</button>
-											<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-											  <a class="dropdown-item stimulus-case" href="#" data-id="${stimulu.id}"><i class="far fa-eye text-primary"></i> Detalle</a>
-											  <a class="dropdown-item" href="#"><i class="far fa-edit text-primary"></i> Editar</a>
-											  <a class="dropdown-item" href="#"><i class="far fa-trash-alt text-danger"></i> Eliminar</a>
-											</div>
-								  		</div>
+							<div class="row">
+								<div class="col">
+									${stimulus.learner_username}
+								</div>
+								<div class="col-2">
+									<div class="dropdown">
+										<button class="btn btn-sm btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										</button>
+										<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+										  <a class="dropdown-item stimulus-case" href="#" data-id="${stimulus.id}"><i class="far fa-eye text-primary"></i> Detalle</a>
+										  <a class="dropdown-item" href="#"><i class="far fa-edit text-primary"></i> Editar</a>
+										  <a class="dropdown-item" href="#"><i class="far fa-trash-alt text-danger"></i> Eliminar</a>
+										</div>
 									</div>
 								</div>
 							</div>
+								
+							</div>
 							<div class="card-body">
-								<div class="card-title">${stimulu.learner_name}</div>
-								<div class="card-subtitle text-muted">${stimulu.stimulus}</div>
+								<div class="card-subtitle text-muted">${stimulus.stimulus}</div>
 							</div>
 						</div>
 						`;
@@ -164,10 +152,13 @@ const app = {
 					app.getStimulu(id);
 				});
 			}
-			if (data.data[1].status === 200) {
+			res = await fetch(`${this.url}/learner_novelties/index/${id}`);
+			data = await res.json();
+			console.log(data);
+			if (data.status === 200) {
 				let html = '<h6>Novedades del aprendiz</h6>';
-				if (data.data[1].learner_novelties.length > 0) {
-					data.data[1].learner_novelties.forEach(novelty => {
+				if (data.learner_novelties.length > 0) {
+					data.learner_novelties.forEach(novelty => {
 						html += `
 						<div class="card mb-1">
 							<div class="card-header">
@@ -203,23 +194,26 @@ const app = {
 					await app.getNovelty(id);
 				});
 			}
-			if (data.data[2].status === 200) {
+			res = await fetch(`${this.url}/committee_sessions/index/${id}`);
+			data = await res.json();
+			console.log(data);
+			if (data.status === 200) {
 				let html = '<h6>Academico disciplinario</h6>';
-				if (data.data[2].committee_sessions_academics.length > 0) {
-					data.data[2].committee_sessions_academics.forEach(academic => {
+				if (data.committee_sessions.length > 0) {
+					data.committee_sessions.forEach(committee_session => {
 						html += `
 						<div class="card mb-1">
 							<div class="card-header">
 								<div class="row">
 									<div class="col">
-										${academic.start_hour} - ${academic.end_hour}
+										${committee_session.start_hour} - ${committee_session.end_hour}
 									</div>
 									<div class="col-2 text-right">
 										<div class="dropdown">
 											<button class="btn btn-sm btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 											</button>
 											<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-											<a class="dropdown-item academic-case" href="#" data-id="${academic.id}"><i class="far fa-eye text-primary"></i> Detalle</a>
+											<a class="dropdown-item academic-case" href="#" data-id="${committee_session.id}"><i class="far fa-eye text-primary"></i> Detalle</a>
 											<a class="dropdown-item" href="#"><i class="far fa-edit text-primary"></i> Editar</a>
 											<a class="dropdown-item" href="#"><i class="far fa-trash-alt text-danger"></i> Eliminar</a>
 											</div>
@@ -228,7 +222,7 @@ const app = {
 								</div>
 							</div>
 							<div class="card-body">
-								<div class="card-title">${academic.learner_name}</div>
+								<div class="card-title">${committee_session.learner.username}</div>
 							</div>
 						</div>
 						`;
@@ -263,15 +257,6 @@ const app = {
 			let res = await fetch(`${this.url}learners/index`);
 			let data = await res.json();
 			this.learners = data[0].learners;
-		} catch (error) {
-			console.log(error);
-		}
-	},
-	getNovelties: async function () {
-		try {
-			let res = await fetch(`${this.url}learner_novelties/index`);
-			let data = await res.json();
-			this.novelties = data[0].learner_novelties;
 		} catch (error) {
 			console.log(error);
 		}
@@ -331,7 +316,7 @@ const app = {
 											Fecha:
 											<p class="text-muted">${committee.date}</p>
 										</div>
-										<div class="col">
+										<div class="col-12 col-md-6">
 											Hora:
 											<p class="text-muted">
 												${committee.start_hour}
@@ -359,9 +344,9 @@ const app = {
 										</div>
 									</div>
 									<div class="row">
-										<div class="col">
+										<div class="col-5">
 											<div class="dropdown d-inline">
-												<button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<button class="btn btn-outline-primary dropdown-toggle mb-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 												  Opciones
 												</button>
 												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -371,9 +356,9 @@ const app = {
 												  <a class="dropdown-item p-2 delete" data-id="${committee.id}" href="#"><i class="far fa-trash-alt text-danger"></i> Eliminar</a>
 												</div>
 									  		</div>
-											<button class="btn btn-outline-success btn-add-case" data-id="${committee.id}" >Agregar caso</button>
+											<button class="btn btn-outline-success btn-add-case mb-2" data-id="${committee.id}" >Agregar caso</button>
 										</div>
-										<div class="col-4 ml-auto text-right">
+										<div class="col-7 col-md-7 ml-auto text-right">
 											<a href="${app.url}act/committee/${committee.id}" class="btn btn-outline-primary" data-id="${committee.id}" >Generar acta</a>
 										</div>
 									</div>
@@ -543,9 +528,7 @@ $(document).ready(async function () {
     </div>
 	`;
 	await app.get();
-	await app.getDocumentTypes();
 	await app.getLeaners();
-	await app.getNovelties();
 	await app.getSubdirector();
 	await app.getComplainers();
 	document.getElementById('form').onsubmit = async function (e) {
@@ -634,7 +617,7 @@ $(document).ready(async function () {
 					html += "</ul>";
 					document.getElementById('content-learner').innerHTML = html;
 				} else {
-					document.getElementById('content-learner').innerHTML = "<p class='mt-3'>¿No esta? <a href='#' onclick='formComplainer()'>Registralo</a></p>";
+					document.getElementById('content-learner').innerHTML = "<p class='mt-3 text-muted'>No se encuentra el registro :(</p>";
 				}
 			}
 			document.getElementById('btnAddSession').setAttribute('form', 'formStimulus');
@@ -671,14 +654,6 @@ $(document).ready(async function () {
 				<div class="form-row">
 					<div class="col">
 						<div class="form-group">
-							<label for="novelty_id">Novedad</label>
-							<input type="text" class="form-control" placeholder="Buscar aqui..." id="novelties"/>
-						</div>
-					</div>
-				</div>
-				<div class="form-row">
-					<div class="col">
-						<div class="form-group">
 							<label for="justification">Justificación</label>
 							<textarea name="justification" id="justification" class="form-control"></textarea>
 						</div>
@@ -703,7 +678,7 @@ $(document).ready(async function () {
 					html += "</ul>";
 					document.getElementById('content-learner').innerHTML = html;
 				} else {
-					document.getElementById('content-learner').innerHTML = "<p class='mt-3'>¿No esta? <a href='#' onclick='formComplainer()'>Registralo</a></p>";
+					document.getElementById('content-learner').innerHTML = "<p class='mt-3 text-muted'>No se encontro un registro :(</p>";
 				}
 			}
 			document.getElementById('btnAddSession').setAttribute('form', 'formNovelty');
@@ -717,24 +692,6 @@ $(document).ready(async function () {
 		if (this.value == 3) {
 			document.getElementById('content').innerHTML = `
 			<form id="formAcademic">
-				<div class="form-row">
-					<div class="col">
-						<div class="form-group">
-							<h6>Hora</h6>
-							<div class="row">
-								<div class="col">
-									<label class="text-muted" for="start_hour">Inicia</label>
-									<input type="time" name="start_hour" id="start_hour" class="form-control"/>
-								</div>
-								<div class="col">
-									<label class="text-muted" for="end_hour">Termina</label>
-									<input type="time" name="end_hour" id="end_hour" class="form-control"/>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				</div>
 				<div class="form-row">
 					<div class="col">
 						<h6>Aprendiz</h6>
@@ -767,7 +724,7 @@ $(document).ready(async function () {
 					html += "</ul>";
 					document.getElementById('content-learner').innerHTML = html;
 				} else {
-					document.getElementById('content-learner').innerHTML = "<p class='mt-3'>¿No esta? <a href='#' onclick='formComplainer()'>Registralo</a></p>";
+					document.getElementById('content-learner').innerHTML = "<p class='mt-3 text-muted'>No se encontro registro :(</p>";
 				}
 			}
 			document.getElementById('formAcademic').onsubmit = async function (e){
