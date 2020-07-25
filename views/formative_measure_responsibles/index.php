@@ -77,7 +77,12 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="document_type_id">Tipo Documento</label>
-                                <select name="document_type_id" id="document_type_id" class="form-control"></select>
+                                <select name="document_type_id" id="document_type_id" class="form-control">
+                                    <option value="">Seleccione uno</option>
+                                    <option value="CC">Cedula de ciudadania</option>
+                                    <option value="TI">Tarjeta de identidad</option>
+                                    <option value="CE">Cedula extranjera</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
@@ -182,13 +187,19 @@
 
                             <!-- //tipo y cargo// -->
                             <div class="form-row">                               
-                                <div class="col-6 col-12 col-md-6 col-lg-6 col-lx-8">
+                                <div class="col-12 col-12 col-md-12 col-lg-12 col-lx-12">
                                 <div class="form-group">
                                         <label for="position_id">Cargo</label>
-                                        <select name="position_id" id="position_id" class="form-control"></select>
+                                        <input type="text" name="position_name" id="position_name" class="form-control" placeholder="Busca aqui..." autocomplete="off">
+                                        <input type="text" hidden name="position_id" id="position_id" value="">                                                        
+                                        <div id="content-position">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-6 col-12 col-md-6 col-lg-6 col-lx-4">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-6 col-12 col-md-12 col-lg-12 col-lx-4">
                                     <div class="form-group">
                                         <label for="type">Tipo</label>
                                         <input type="text" name="type" id="type" class="form-control"></input>

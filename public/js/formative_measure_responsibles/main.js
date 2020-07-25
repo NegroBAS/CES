@@ -1,5 +1,6 @@
 const app = {
     url: document.getElementById('url').content,
+    positions: null,
     authenticate: async function () {
         try {
             let res = await fetch(
@@ -65,7 +66,7 @@ const app = {
                         <tr data-id="${formative_measure_responsible.id}">
                             <td>${formative_measure_responsible.username}</td>
                             <td>${formative_measure_responsible.misena_email}</td>
-                            <td>${formative_measure_responsible.document}</td>
+                            <td>${formative_measure_responsible.document_type_id} ${formative_measure_responsible.document}</td>
                             <td>${formative_measure_responsible.phone}</td>
                             <td>
                             <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
@@ -96,6 +97,31 @@ const app = {
             //     `;
             // });
             // document.getElementById('position_id').innerHTML = html;
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    getPositions: async function () {
+        try {
+            let res = await fetch(`${this.url}positions/index`);
+            let data = await res.json();
+            this.positions = data.positions;
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    getContract_types: async function() {
+        try {
+            let res = await fetch(`${this.url}contract_types/index`);
+            let data = await res.json();
+
+            let contract_types = data.contract_types;
+            let html = "<option value='0'>Seleccione una</option>";
+            contract_types.forEach((contract_types) => {
+                html += `<option value="${contract_types.id}">${contract_types.name}</option>`;
+            });
+            document.getElementById("contract_type_id").innerHTML = html;
+
         } catch (error) {
             console.log(error);
         }
@@ -195,9 +221,17 @@ const app = {
     }
 }
 
+function selectPosition(value, name){
+    document.getElementById('position_id').value = value;
+    document.getElementById('position_name').value = name;
+    document.getElementById('content-position').innerHTML = "";
+}
+
 $(document).ready(async function () {
     let id = null;
     await app.get();
+    await app.getPositions();
+    await app.getContract_types();
     $("#formative-measure-responsibles").DataTable({
         responsive: true,
         info: false,
@@ -210,6 +244,44 @@ $(document).ready(async function () {
                 "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
         },
     });
+
+    document.getElementById('position_name').oninput = function(){
+        if(document.getElementById('position_name').value.length > 0){
+            let matches = app.positions.filter(position => {
+                const rgex = new RegExp(`^${this.value}`, 'gi');
+                if(isNaN(this.value)){
+                    return position.name.match(rgex)
+                }else{
+                    return position.type.match(rgex)
+                }
+                
+            });
+            if(this.value.length === 0){
+                matches=[];
+            }
+            let html = '<ul class="list-group">';
+            if(matches.length > 0){
+                if(isNaN(this.value)){
+                    matches.forEach(match => {
+                        html+=`<p onclick="selectPosition('${match.id}','${match.name} (${match.name}) ')" class="list-group-item list-group-item-action">${match.name} ( ${match.type} )</p>`
+                    });
+                    html+="</ul>";
+                    document.getElementById('content-position').innerHTML = html;
+                }else{
+                    matches.forEach(match => {
+                        html+=`<p onclick="selectPosition('${match.id}','${match.type} (${match.name}) ')" class="list-group-item list-group-item-action">${match.type} ( ${match.type} )</p>`
+                    });
+                    html+="</ul>";
+                    document.getElementById('content-position').innerHTML = html;
+                }
+            }else{
+                document.getElementById('content-position').innerHTML = "<p class='mt-3'>El registro no existe</p>";
+            }
+        }else{
+            document.getElementById('content-position').innerHTML = "";
+        }
+    }
+
     document.getElementById('update').onclick = function () {
         document.getElementById('data-formative-measure-responsible').innerHTML = `
         <tr>
