@@ -47,6 +47,12 @@ const app = {
                 });
                 await app.get();
             }
+            else if(data.status===500){
+                toastr.error('', data.message, {
+                    closeButton: true
+                });
+            document.getElementById('data-formative-measure-responsible').innerHTML = '';
+            }
         } catch (error) {
             toastr.error('', 'Error: Intenta mas tarde', {
                 closeButton: true
@@ -160,7 +166,7 @@ const app = {
                 method: 'POST',
                 body: new FormData(form)
             });
-            let data = await res.json();
+            let data = await res.text();
             console.log(data);
             if (data.status === 200) {
                 $('.modal').modal('toggle');
