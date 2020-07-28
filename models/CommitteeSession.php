@@ -1,5 +1,4 @@
 <?php
-require 'Learner.php';
 class CommitteeSession extends Model
 {
 
@@ -110,7 +109,7 @@ class CommitteeSession extends Model
             $query = $this->db->connect()->query("SELECT learners.*, groups.code_tab AS group_code_tab, formation_programs.name AS program_name FROM learners INNER JOIN groups ON groups.id = learners.group_id INNER JOIN formation_programs ON formation_programs.id = groups.formation_program_id WHERE learners.id NOT IN ( SELECT learner_id FROM committee_sessions )");
             $learners = [];
             while($row = $query->fetch()){
-                $learner = new Learner();
+                $learner = new ArrayObject();
                 $learner->id = $row['id'];
                 $learner->username = $row['username'];
                 $learner->group_code_tab = $row['group_code_tab'];
