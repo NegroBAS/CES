@@ -118,7 +118,7 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="birthdate">Fecha Nacimiento</label>
-                                <input type="date" name=" " id="birthdate" class="form-control">
+                                <input type="date" name="birthdate" id="birthdate" class="form-control">
                             </div>
                         </div>
                     </div>

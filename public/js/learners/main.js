@@ -63,7 +63,6 @@ const app = {
                 method: "POST",
                 body: new FormData(form),
             });
-            console.log(res);
             let data = await res.json();
             console.log(data);
             if (data.status === 200) {

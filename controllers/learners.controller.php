@@ -16,8 +16,6 @@ class LearnersController extends Controller
             '/js/sweetalert.js'
         ];
         $this->learner = $this->loadModel('Learner');
-        $this->document_type = $this->loadModel('DocumentType');
-        $this->group = $this->loadModel('Group');
     }
 
     public function index()
