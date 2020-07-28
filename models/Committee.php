@@ -1,7 +1,5 @@
 <?php
 
-require 'Learner.php';
-
 class Committee extends Model
 {
 
