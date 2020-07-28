@@ -98,6 +98,61 @@ class Group extends Model{
         }
     }
 
+    public function detail($id)
+    {
+        try {
+            $query = $this->db->connect()->prepare('SELECT *,groups.id, modalities.id as id_modalities,
+            modalities.name as name_modalities, formation_programs.id as id_formation,
+            formation_programs.name as name_formation, learners.id as id_learners, learners.username as name_learners,
+            formation_program_types.id AS formation_program_type_id,
+            formation_program_types.name AS formation_program_type_name
+            FROM groups
+            INNER JOIN modalities ON groups.modality_id = modalities.id
+            INNER JOIN formation_programs ON groups.formation_program_id = formation_programs.id
+            INNER JOIN formation_program_types ON formation_program_types.id = formation_programs.formation_program_type_id
+            LEFT JOIN learners ON learners.group_id = groups.id
+            WHERE groups.id =:id');
+            $query->bindParam('id',$id);
+            $query->execute();
+
+            while ($row = $query->fetch()) {
+                $group = new Group();
+                $group->id = $row['id'];
+                $group->code_tab = $row['code_tab'];
+                $group->modality_id = $row['modality_id'];
+                $group->formation_program_id = $row['formation_program_id'];
+                $group->quantity_learners = $row['quantity_learners'];
+                $group->active_learners = $row['active_learners'];
+                $group->elective_start_date = $row['elective_start_date'];
+                $group->elective_end_date = $row['elective_end_date'];
+                $group->practice_start_date = $row['practice_start_date'];
+                $group->practice_end_date = $row['practice_end_date'];
+                $group->created_at = $row['created_at'];
+                $group->updated_at = $row['updated_at'];
+                $group->id_modalities = $row['id_modalities'];
+                $group->name_modalities = $row['name_modalities'];
+                $group->id_formation = $row['id_formation'];
+                $group->name_formation = $row['name_formation'];
+                $group->id_learners = $row['id_learners'];
+                $group->learner = [
+                    'username'=>[
+                        'name_learners' => $row['name_learners']
+                    ]
+                ];
+                $group->formation_program_type_id = $row['formation_program_type_id'];
+                $group->formation_program_type_name = $row['formation_program_type_name'];
+            }
+
+            return $group;
+
+        } catch (PDOException $e) {
+            return [
+                'status' => 500,
+                'error' => $e
+            ];
+        }
+    }
+
     public function create($data)
     {
         try {

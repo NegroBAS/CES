@@ -43,7 +43,7 @@
 
 
 <!-- Modal CREATE -->
-<div class="modal fade">
+<div class="modal fade" id="modal-creat">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -136,4 +136,186 @@
   </div>
 </div>
 </div>
+
+<!-- Modal Detail -->
+<div class="modal fade" id="modal-detail" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Institucionales</a>
+                        <a class="nav-item nav-link" id="nav-learners-tab" data-toggle="tab" href="#nav-learners" role="tab" aria-controls="nav-learners" aria-selected="false">Aprendices Asociados</a>
+                    </div>
+                </nav>
+
+                <div class="tab-content" id="nav-tabContent">
+                        <!-- Tab 1 -->
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                      <div class="container  text-center">
+                          <div class="row">
+                              <div class="col">
+                                  <div class="row mt-3">
+                                      <div class="col">
+                                          <strong>Nombre del Programa de Formación</strong>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col">
+                                          <p class="text-muted" id="name_formation"></p>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col">
+                                  <div class="row mt-1">
+                                        <div class="col">
+                                            <strong>Código del Grupo</strong>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="text-muted" id="code_tab"></p>
+                                        </div>
+                                    </div>
+                              </div>
+                              <div class="col">
+                                    <div class="row mt-1">
+                                        <div class="col">
+                                            <strong>Tipo de programa Formación</strong>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="text-muted" id="formation_program_type_name"></p>
+                                        </div>
+                                    </div>
+                              </div>
+                              <div class="col">
+                                    <div class="row mt-1">
+                                        <div class="col">
+                                            <strong>Modalidad</strong>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="text-muted" id="name_modality"></p>
+                                        </div>
+                                    </div>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col">
+                                  <div class="row mt-1">
+                                        <div class="col">
+                                            <strong>Cantidad de Aprendices</strong>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="text-muted" id="quantity_learners"></p>
+                                        </div>
+                                    </div>
+                              </div>
+                              <div class="col">
+                                    <div class="row mt-1">
+                                        <div class="col">
+                                            <strong>Aprendices Activos</strong>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="text-muted" id="active_learners"></p>
+                                        </div>
+                                    </div>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col">
+                                  <div class="row mt-1">
+                                        <div class="col">
+                                            <strong>Inicio Etapa Lectiva</strong>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="text-muted" id="elective_start_date"></p>
+                                        </div>
+                                    </div>
+                              </div>
+                              <div class="col">
+                                    <div class="row mt-1">
+                                        <div class="col">
+                                            <strong>Fin Etapa Lectiva</strong>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="text-muted" id="elective_end_date"></p>
+                                        </div>
+                                    </div>
+                              </div>
+                              <div class="col">
+                                    <div class="row mt-1">
+                                        <div class="col">
+                                            <strong>Inicio Etapa Práctica</strong>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="text-muted" id="practice_start_date"></p>
+                                        </div>
+                                    </div>
+                              </div>
+                              <div class="col">
+                                    <div class="row mt-1">
+                                        <div class="col">
+                                            <strong>Fin Etapa Práctica</strong>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="text-muted" id="practice_end_date"></p>
+                                        </div>
+                                    </div>
+                              </div>
+                          </div>
+
+                    </div>
+
+                    </div>
+
+                    <!-- Tab 2 -->
+                    <div class="tab-pane fade" id="nav-learners" role="tabpanel" aria-labelledby="nav-learners-tab">
+                        <div class="container">
+                          
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row mt-3 text-center">
+                                        <div class="col">
+                                            <strong>Aprendices Activos</strong>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="text-muted" id="name_learners"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                  </div>
+                  <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                  </div>
+            </div>
+        </div>
+    </div>
 <?php require_once('views/layouts/footer.php') ?>

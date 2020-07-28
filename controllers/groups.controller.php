@@ -114,6 +114,13 @@ class GroupsController extends Controller
         echo json_encode($group);
     }
 
+    public function view($param = null)
+    {
+        $id = $param[0];
+        $group = $this->group->detail($id);
+        echo json_encode($group);
+    }
+
     public function edit($param = null)
     {
         date_default_timezone_set("America/Bogota");

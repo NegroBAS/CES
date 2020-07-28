@@ -69,7 +69,7 @@ const app = {
                 <td class="buttons">
                     <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
                     <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
-                    <button class="btn btn-sm btn-outline-primary view"><i class="far fa-eye"></i></button>
+                    <button class="btn btn-sm btn-outline-primary detail" data-id="${group.id}"><i class="far fa-eye"></i></button>
                 </td>
             </tr>
      `
@@ -96,9 +96,10 @@ const app = {
             let data = await res.json();
             if(data.status===200){
                 $('.modal #form').trigger('reset');
-                $('.modal').modal('toggle');
+                $('#modal-creat').modal('toggle');
                 $('.modal').find('.modal-title').text('Editar grupo');
                 document.getElementById('code_tab').value = data.group.code_tab;
+                document.getElementById('modality_id').value = data.group.modality_id;
                 document.getElementById('quantity_learners').value = data.group.quantity_learners;
                 document.getElementById('active_learners').value = data.group.active_learners;
                 document.getElementById('elective_start_date').value = data.group.elective_start_date;
@@ -119,7 +120,7 @@ const app = {
             let data = await res.json();
             console.log(data);
             if(data.status===200){
-                $('.modal').modal('toggle');
+                $('#modal-creat').modal('toggle');
                 app.get();
                 toastr.success('', data.message, {
                     closeButton:true
@@ -165,7 +166,7 @@ const app = {
                     closeButton: true
                 });
                 app.get();
-                $('.modal').modal('toggle');
+                $('#modal-creat').modal('toggle');
                 this.edit = false;
             }
             if(data.status===500){
@@ -183,7 +184,29 @@ const app = {
 		} catch (error) {
 			console.log(error);
 		}
-	}
+	},
+    detailGroup: async function (id) {
+		try {
+            let res = await fetch(`${this.url}groups/view/${id}`);
+			console.log(res);
+			let data = await res.json();
+			console.log(data);
+			$('#modal-detail #formation_program_type_name').text(data.formation_program_type_name);
+            $('#modal-detail #name_learners').text(data.learner.username.name_learners);
+            $('#modal-detail #name_formation').text(data.name_formation);
+            $('#modal-detail #name_modality').text(data.name_modalities);
+            $('#modal-detail #code_tab').text(data.code_tab);
+			$('#modal-detail #quantity_learners').text(data.quantity_learners);
+			$('#modal-detail #active_learners').text(data.active_learners);
+			$('#modal-detail #elective_start_date').text(data.elective_start_date);
+			$('#modal-detail #elective_end_date').text(data.elective_end_date);
+			$('#modal-detail #practice_start_date').text(data.practice_start_date);
+            $('#modal-detail #practice_end_date').text(data.practice_end_date);
+            
+		} catch (error) {
+			console.log(error);
+		}
+    },
 }
 
 function selectProgram(value,name) {
@@ -209,6 +232,13 @@ $(document).ready(async function () {
         }
 
     });
+
+    $(document).on('click', '.detail', async function () {
+        let id = $(this).data('id');
+		await app.detailGroup(id);
+		$('#modal-detail').find('.modal-title').text('Detalles del Grupo');
+		$('#modal-detail').modal('toggle');
+	});
 
     document.getElementById('formation_program_name').oninput = function(){
   
@@ -245,7 +275,7 @@ $(document).ready(async function () {
     }
     document.getElementById('btn-create').onclick = function(){
         $('.modal #form').trigger('reset');
-        $('.modal').modal('toggle');
+        $('#modal-creat').modal('toggle');
         $('.modal').find('.modal-title').text('Crear grupo');
         val.limpiar();
         val.validaciones();
