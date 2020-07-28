@@ -54,11 +54,24 @@ class Formative_measure_responsiblesController extends Controller{
             ]);
             array_push($responses, $response);
         }
-        echo json_encode([
-            'status'=>200,
-            'message'=>'Responsables actualizados',
-            'responses'=>$responses
-        ]);
+
+
+        if(isset($response['error'])){
+            $error = $response['error'];
+            if($error[1] == "1452"){
+                echo json_encode([
+                        'status'=>500,
+                        'message'=>'Actualizar tipo de contrato y/o cargos',
+                        'responses'=>$responses
+                    ]);
+                }
+            }else{
+                echo json_encode([
+                    'status'=>200,
+                    'message'=>'Responsables actualizados',
+                    'responses'=>$responses
+            ]);
+        }
         // echo json_encode($data);
     }
 

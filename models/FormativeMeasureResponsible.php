@@ -122,7 +122,7 @@ class FormativeMeasureResponsible extends Model{
         } catch (PDOException $e) {
             return [
                 'status'=>500,
-                'error'=>$e
+                'error'=>$e->errorInfo
             ];
         }
     }
