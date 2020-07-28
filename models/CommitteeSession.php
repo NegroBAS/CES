@@ -107,7 +107,7 @@ class CommitteeSession extends Model
     public function getRecommendedLearners()
     {
         try {
-            $query = $this->db->connect()->query("SELECT learners.*, groups.code_tab AS group_code_tab, formation_programs.name AS program_name FROM learners INNER JOIN groups ON groups.id = learners.group_id INNER JOIN formation_programs ON formation_programs.id = groups.formation_program_id WHERE learners.id NOT IN ( SELECT id FROM committee_sessions )");
+            $query = $this->db->connect()->query("SELECT learners.*, groups.code_tab AS group_code_tab, formation_programs.name AS program_name FROM learners INNER JOIN groups ON groups.id = learners.group_id INNER JOIN formation_programs ON formation_programs.id = groups.formation_program_id WHERE learners.id NOT IN ( SELECT learner_id FROM committee_sessions )");
             $learners = [];
             while($row = $query->fetch()){
                 $learner = new Learner();
