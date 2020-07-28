@@ -208,24 +208,31 @@
                                                              
                             </div>
 
-                            <div class="form-row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label for="photo">Fotografia</label>
-                                        <div class="input-group mb-3">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Subir</span>
-                                            </div>
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="photo"  lang="es"  >
-                                                <label class="custom-file-label" for="photo"  data-browse="Buscar">Seleccionar Archivo</label>
-                                            </div>
+                            <div class="form-row pb-2">
+                            <div class="col-8">
+                                <div class="form-group">
+                                    <label for="photo">Fotografia</label>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Subir</span>
                                         </div>
-                                        
-                                    </div>
+
+                                        <div class="custom-file">                        
+                                            <input type="file" class="custom-file-input" id="photo" name="photo"  lang="es" value="" >
+                                            <label class="custom-file-label" id="archivo_label2" for="photo"  data-browse="Buscar">Seleccionar archivo</label>
+                                        </div>        
+                                        <!-- //link photo hidden -->
+                                        <input type="text" hidden name="photo_2" id="photo_2" value="">
+
+                                    </div>                               
                                 </div>
-                            
                             </div>
+                            <div class="col-1"></div>
+                            <div class="col-2" id="add-photo">
+                                <img class=" aling-self-center shadow p-1 bg-white rounded" src="public/uploads/silueta.png" id="img-view"  width="100px" height="100px">                                 
+                            </div>
+                            <div class="col-1"></div>
+                        </div>
 
 
 

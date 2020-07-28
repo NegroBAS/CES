@@ -155,28 +155,18 @@ class LearnersController extends Controller
             $photo = $_POST['photo_2'];
         }
 
-        // $res = $this->learner->update([
-        //     'id' => $id,
-        //     'username' => $username,
-        //     'document_type' => $document_type,
-        //     'document' => $document,
-        //     'phone' => $phone,
-        //     'email' => $email,
-        //     'group_id' => $group_id,
-        //     'birthdate' => $birthdate,
-        //     'photo' => $photo
-        // ]);
-        echo json_encode([
+        $res = $this->learner->update([
             'id' => $id,
             'username' => $username,
             'document_type' => $document_type,
             'document' => $document,
-            'phone' => $phone
-            // 'email' => $email,
-            // 'group_id' => $group_id,
-            // 'birthdate' => $birthdate,
-            // 'photo' => $photo
+            'phone' => $phone,
+            'email' => $email,
+            'group_id' => $group_id,
+            'birthdate' => $birthdate,
+            'photo' => $photo
         ]);
+        echo json_encode($res);
 
         return;
     }
