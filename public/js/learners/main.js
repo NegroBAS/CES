@@ -5,7 +5,6 @@ const app = {
         try {
             let res = await fetch(`${this.url}learners/index`);
             let data = await res.json();
-            console.log(data);
             let html = "";
             data[0].learners.forEach((learner) => {
                 html += `
@@ -46,6 +45,13 @@ const app = {
                 document.getElementById("group_id_csv").value = data.learner.group_id;
                 document.getElementById("birthdate").value = data.learner.birthdate;
                 document.getElementById("photo_2").value = data.learner.photo;
+
+                // ###### Mostrar foto  en el editar
+                let mostrar = document.getElementById('img-view');
+                 mostrar.setAttribute("src", data.learner.photo);
+
+                
+                
             }
         } catch (error) {
             console.log(error);
@@ -57,6 +63,7 @@ const app = {
                 method: "POST",
                 body: new FormData(form),
             });
+            console.log(res);
             let data = await res.json();
             console.log(data);
             if (data.status === 200) {
@@ -220,6 +227,9 @@ $(document).ready(async function () {
         $("#createModal").trigger("reset");
         $("#createModal").modal("toggle");
         $("#createModal").find(".modal-title").text("Crear aprendiz");
+        
+        var mostrar = document.getElementById('img-view');
+        mostrar.setAttribute("src", "public/uploads/silueta.png");
 
         limpiar();
         validaciones();
@@ -282,6 +292,22 @@ $(document).ready(async function () {
     });
 
     $(".custom-file-input").on("change", function () {
+        console.log(this.files);
+       
+        var files = this.files;
+        var element;
+        var supportedImages = ["image/jpeg", "image/png", "image/gif"];
+        var seEncontraronElementoNoValidos = false;
+        
+        var imgCodified = URL.createObjectURL(files[0]);
+
+        var mostrar = document.getElementById('img-view');
+        mostrar.setAttribute("src", imgCodified);
+       
+        // var img = $('<img src="' + imgCodified + '" id="img-create" alt="Foto del usuario" class=" mr-5 img shadow p-1 mb-2 bg-white rounded" style=" position:absolute; right:0; z-index:2" width="100px" height="100px" >');
+        // $(img).insertBefore("#add-photo");
+        // document.getElementById('#add-photo').innerHTML = img;
+
         var fileName = $(this).val().split("\\").pop();
         $(this)
             .siblings(".custom-file-label")
@@ -455,10 +481,15 @@ $(document).ready(async function () {
         let username = document.getElementById("username");
         let email = document.getElementById("email");
         let phone = document.getElementById("phone");
+        let birthdate = document.getElementById("birthdate");
         let group_name_csv = document.getElementById("group_name_csv");
         let group_id_csv = document.getElementById("group_id_csv");
         let group_name = document.getElementById("group_name");
         let archivo_label = document.getElementById("archivo_label");
+        let archivo_label2 = document.getElementById("archivo_label2");
+
+        var mostrar = document.getElementById('img-view');
+        mostrar.removeAttribute("hidden", "hidden");
 
         username.classList.remove("is-invalid");
         username.classList.remove("is-valid");
@@ -478,6 +509,10 @@ $(document).ready(async function () {
         phone.classList.remove("is-valid");
         phone.value ="";
 
+        birthdate.classList.remove("is-invalid");
+        birthdate.classList.remove("is-valid");
+        birthdate.value ="";
+
         group_name_csv.classList.remove("is-invalid");
         group_name_csv.classList.remove("is-valid");
         group_name_csv.value ="";
@@ -493,6 +528,10 @@ $(document).ready(async function () {
         archivo_label.classList.remove("is-invalid");
         archivo_label.classList.remove("is-valid");
         archivo_label.innerHTML ="Seleccionar Archivo";
+
+        archivo_label2.classList.remove("is-invalid");
+        archivo_label2.classList.remove("is-valid");
+        archivo_label2.innerHTML ="Seleccionar Archivo";
 
 
 
