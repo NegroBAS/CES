@@ -8,6 +8,44 @@ class LearnerNovelty extends Model
         parent::__construct();
     }
 
+    public function findByYear()
+    {
+        try {
+            $query = $this->db->connect()->prepare("SELECT learner_novelties.*, learners.username, novelty_types.name FROM learner_novelties INNER JOIN learners ON learners.id = learner_novelties.learner_id INNER JOIN novelty_types ON novelty_types.id = learner_novelties.novelty_type_id  WHERE learner_novelties.created_at BETWEEN :start_date AND :end_date");
+            $query->execute([
+                'start_date'=>date('Y')."-01-01",
+                'end_date'=>date('Y')."-12-31",
+            ]);
+            $learner_novelties = [];
+            while($row = $query->fetch()){
+                $learner_novelty = new LearnerNovelty();
+                $learner_novelty->id = $row['id'];
+                $learner_novelty->learner_id = $row['learner_id'];
+                $learner_novelty->learner = [
+                    'username'=>$row['username']
+                ];
+                $learner_novelty->committee_id = $row['committee_id'];
+                $learner_novelty->novelty_type_id = $row['novelty_type_id'];
+                $learner_novelty->novelty_type = [
+                    'name'=>$row['name']
+                ];
+                $learner_novelty->justification = $row['justification'];
+                $learner_novelty->reply_date = $row['reply_date'];
+                $learner_novelty->created_at = $row['created_at'];
+                array_push($learner_novelties, $learner_novelty);
+            }
+            return [
+                'status'=>200,
+                'learner_novelties'=>$learner_novelties
+            ];
+        } catch (PDOException $e) {
+            return [
+                'status'=>500,
+                'error'=>$e
+            ];
+        }
+    }
+
     public function findByLearner($id)
     {
         try {

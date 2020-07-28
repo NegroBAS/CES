@@ -14,14 +14,70 @@ const app = {
             console.log(error);
         }
     },
+    getInfringementTypes: async function(){
+        try {
+            let res = await fetch(`${config.url}infringement_types/index`);
+            let data = await res.json();
+            let html = '';
+            data.infringement_types.map(infringement_type=>{
+                html+=`
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="infringement_type_id" id="exampleRadios${infringement_type.id}" value="${infringement_type.id}">
+                        <label class="form-check-label" for="exampleRadios${infringement_type.id}">
+                            ${infringement_type.name}
+                        </label>
+                    </div>
+                `;
+            });
+            $('#modal-communication').find('#infringement_types').html(html);
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    getInfringementClassifications: async function(){
+        try {
+            let res = await fetch(`${config.url}infringement_classifications/index`);
+            let data = await res.json();
+            let html = '';
+            data.infringement_classifications.map(infringement_classification=>{
+                html+=`
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="infringement_classification_id" id="example${infringement_classification.id}" value="${infringement_classification.id}">
+                        <label class="form-check-label" for="example${infringement_classification.id}">
+                            ${infringement_classification.name}
+                        </label>
+                    </div>
+                `;
+            })
+            $('#modal-communication').find('#infringement_classifications').html(html);
+        } catch (error) {
+            console.log(error);
+        }
+    },
+    generateCommunication:async function(form){
+        try {
+            let res = await fetch(`${config.url}act/generate_communication`, {
+                method:'POST',
+                body:new FormData(form)
+            });
+            let blob = await res.blob();
+            var url = window.URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = "Comunicación.docx";
+            document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+            a.click();    
+            a.remove();
+        } catch (error) {
+            console.log(error);
+        }
+    },
     render: async function(){
         let html = '';
         this.committee_sessions.map(committee_session => {
             html+= `
             <tr>
                 <td><a href="#" class="history" data-id="${committee_session.learner.id}">${committee_session.learner.username}</a></td>
-                <td>${committee_session.start_hour}</td>
-                <td>${committee_session.end_hour}</td>
                 <td>
                     <h5>
                         <a href="#" class="badge badge-pill badge-primary state" data-state="${committee_session.committee_session_state.id}">${committee_session.committee_session_state.name}</a>
@@ -35,6 +91,10 @@ const app = {
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                           <a class="dropdown-item" href="#">Editar</a>
                           <a class="dropdown-item" href="#">Eliminar</a>
+                          <div class="dropdown-divider"></div>
+                          <a class="dropdown-item generate-communication" data-learner="${committee_session.learner.id}" data-id="${committee_session.id}" href="#">Generar comunicacion</a>
+                          <a class="dropdown-item" href="#">Generar acta comite</a>
+                          <a class="dropdown-item" href="#">Generar acto sancionatorio</a>
                         </div>
                     </div>
                 </td>
@@ -42,9 +102,14 @@ const app = {
             `;
         });
         document.getElementById('data-academics').innerHTML = html;
-        $(document).on('click', '.state', function(){
-            let id = $(this).data('state');
-            
+        $(document).on('click', '.generate-communication', async function(){
+            let id = $(this).data('id');
+            let learner_id = $(this).data('learner');
+            $('#modal-communication').find('#committee_id').val(id);
+            $('#modal-communication').find('#learner_id').val(learner_id);
+            await app.getInfringementTypes();
+            await app.getInfringementClassifications();
+            $('#modal-communication').modal('toggle');
         });
     },
     getLeaner: async function(id){
@@ -56,7 +121,7 @@ const app = {
                 $('#modal-history #information').html(`
                 <div class="row mt-3">                            
                     <div class="col-2">
-                        <img src="${config.url}${learner.learner.photo}" alt="profile" class="img-fluid rounded border"/>
+                        <img src="${config.url}${learner.learner.photo?learner.learner.photo:'public/img/profile.png'} " alt="profile" class="img-fluid rounded border"/>
                     </div>
                     <div class="col">
                         <div class="row">
@@ -178,7 +243,8 @@ $(document).ready(async function(){
         let id = $(this).data('id');
         await app.getLeaner(id);
     });
-    $(document).on('click', '.start', async function(){
-        console.log('click');
-    });
+    document.getElementById('form-communication').onsubmit = async function(e){
+        e.preventDefault();
+        await app.generateCommunication(this);
+    }
 });

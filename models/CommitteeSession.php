@@ -1,5 +1,5 @@
 <?php
-
+require 'Learner.php';
 class CommitteeSession extends Model
 {
 
@@ -100,6 +100,31 @@ class CommitteeSession extends Model
             return [
                 'status' => 500,
                 'error' => $e
+            ];
+        }
+    }
+
+    public function getRecommendedLearners()
+    {
+        try {
+            $query = $this->db->connect()->query("SELECT learners.*, groups.code_tab AS group_code_tab, formation_programs.name AS program_name FROM learners INNER JOIN groups ON groups.id = learners.group_id INNER JOIN formation_programs ON formation_programs.id = groups.formation_program_id WHERE learners.id NOT IN ( SELECT id FROM committee_sessions )");
+            $learners = [];
+            while($row = $query->fetch()){
+                $learner = new Learner();
+                $learner->id = $row['id'];
+                $learner->username = $row['username'];
+                $learner->group_code_tab = $row['group_code_tab'];
+                $learner->program_name = $row['program_name'];
+                array_push($learners, $learner);
+            }
+            return [
+                'status'=>200,
+                'learners' => $learners
+            ];
+        } catch (PDOException $e) {
+            return [
+                'status'=>500,
+                'error'=>$e
             ];
         }
     }
@@ -337,9 +362,18 @@ class CommitteeSession extends Model
         }
     }
 
-    public function update($data)
+    public function setCommunicationData($data)
     {
         try {
+            $query = $this->db->connect()->prepare("UPDATE committee_sessions SET notification_acts = :notification_acts, 	notification_infringements = :notification_infringements WHERE committee_id = :id");
+            $query->execute([
+                'notification_acts'=>$data['acts'],
+                'notification_infringements'=>$data['infringements'],
+                'id'=>$data['id']
+            ]);
+            return [
+                'status'=>200,
+            ];
         } catch (PDOException $e) {
             return [
                 'status' => 500,

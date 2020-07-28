@@ -1,6 +1,6 @@
 <?php
 
-use function PHPSTORM_META\type;
+require_once 'vendor/autoload.php';
 
 require_once 'controllers/not_found.controller.php';
 require 'controllers/database_error.controller.php';

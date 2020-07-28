@@ -203,26 +203,19 @@ const app = {
 					data.committee_sessions.forEach(committee_session => {
 						html += `
 						<div class="card mb-1">
-							<div class="card-header">
-								<div class="row">
-									<div class="col">
-										${committee_session.start_hour} - ${committee_session.end_hour}
-									</div>
-									<div class="col-2 text-right">
-										<div class="dropdown">
-											<button class="btn btn-sm btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-											</button>
-											<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-											<a class="dropdown-item academic-case" href="#" data-id="${committee_session.id}"><i class="far fa-eye text-primary"></i> Detalle</a>
-											<a class="dropdown-item" href="#"><i class="far fa-edit text-primary"></i> Editar</a>
-											<a class="dropdown-item" href="#"><i class="far fa-trash-alt text-danger"></i> Eliminar</a>
-											</div>
+							<div class="card-body">
+								<div class="card-title">${committee_session.learner.username}</div>
+								<div class="col-2 text-right">
+									<div class="dropdown">
+										<button class="btn btn-sm btn-link dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+										</button>
+										<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+										<a class="dropdown-item academic-case" href="#" data-id="${committee_session.id}"><i class="far fa-eye text-primary"></i> Detalle</a>
+										<a class="dropdown-item" href="#"><i class="far fa-edit text-primary"></i> Editar</a>
+										<a class="dropdown-item" href="#"><i class="far fa-trash-alt text-danger"></i> Eliminar</a>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="card-body">
-								<div class="card-title">${committee_session.learner.username}</div>
 							</div>
 						</div>
 						`;
@@ -345,21 +338,20 @@ const app = {
 									</div>
 									<div class="row">
 										<div class="col-5">
-											<div class="dropdown d-inline">
+											<div class="dropdown d-inline dropright">
 												<button class="btn btn-outline-primary dropdown-toggle mb-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 												  Opciones
 												</button>
 												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-												  <a class="dropdown-item p-2 detail" href="#" data-id="${committee.id}"><i class="far fa-eye text-primary "></i> Ver detalle</a>
-												  <a class="dropdown-item p-2 cases" href="#" data-id="${committee.id}"><i class="far fa-calendar-check text-primary "></i> Ver casos</a>
-												  <a class="dropdown-item p-2 edit" data-id="${committee.id}" href="#"><i class="far fa-edit text-primary"></i> Editar</a>
-												  <a class="dropdown-item p-2 delete" data-id="${committee.id}" href="#"><i class="far fa-trash-alt text-danger"></i> Eliminar</a>
+												  <a class="dropdown-item detail" href="#" data-id="${committee.id}">Ver detalle</a>
+												  <a class="dropdown-item cases" href="#" data-id="${committee.id}">Ver casos</a>
+												  <a class="dropdown-item edit" data-id="${committee.id}" href="#">Editar</a>
+												  <a class="dropdown-item delete" data-id="${committee.id}" href="#">Eliminar</a>
+												  <div class="dropdown-divider"></div>
+												  <a class="dropdown-item btn-add-case" data-id="${committee.id}" href="#">Agregar caso</a>
+												  <a class="dropdown-item" data-id="${committee.id}" href="${app.url}act/committee/${committee.id}">Generar acta</a>
 												</div>
 									  		</div>
-											<button class="btn btn-outline-success btn-add-case mb-2" data-id="${committee.id}" >Agregar caso</button>
-										</div>
-										<div class="col-7 col-md-7 ml-auto text-right">
-											<a href="${app.url}act/committee/${committee.id}" class="btn btn-outline-primary" data-id="${committee.id}" >Generar acta</a>
 										</div>
 									</div>
 								</div>
