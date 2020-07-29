@@ -16,7 +16,7 @@ const app = {
                     <td class="buttons">
                     <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
                     <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
-                    <button class="btn btn-sm btn-outline-primary view"><i class="far fa-eye"></i></button>
+                    <button class="btn btn-sm btn-outline-primary detail" data-id="${learner.id}"><i class="far fa-eye"></i></button>
                     </td>
                 </tr>
                 `;
@@ -33,7 +33,7 @@ const app = {
             if (data.status === 200) {
                 $("#createModal").trigger("reset");
                 $("#createModal").modal("toggle");
-                $("#createModal").find(".modal-title").text("Editar Cargo");
+                $("#createModal").find(".modal-title").text("Editar Aprendiz");
                 document.getElementById("username").value =
                     data.learner.username;
                 document.getElementById("document").value =
@@ -154,7 +154,25 @@ const app = {
 		} catch (error) {
 			console.log(error);
 		}
-	}
+	},
+    detailLearner: async function (id) {
+		try {
+            let res = await fetch(`${this.url}learners/view/${id}`);
+			console.log(res);
+			let data = await res.json();
+			console.log(data);
+            $('#modal-detail #username').text(data.username);
+            $('#modal-detail #document_type').text(data.document_type);
+            $('#modal-detail #document').text(data.document);
+            $('#modal-detail #phone').text(data.phone);
+            $('#modal-detail #email').text(data.email);
+            $('#modal-detail #birthdate').text(data.birthdate);
+            $('#modal-detail #group').text(data.formation_program_name);
+
+		} catch (error) {
+			console.log(error);
+		}
+    }
 };
 
 function selectGroup(value,name) {
@@ -181,6 +199,12 @@ $(document).ready(async function () {
                 "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
         },
     });
+    $(document).on('click', '.detail', async function () {
+        let id = $(this).data('id');
+		await app.detailLearner(id);
+		$('#modal-detail').find('.modal-title').text('Detalles del Aprendiz');
+		$('#modal-detail').modal('toggle');
+	});
 
     document.getElementById('group_name').oninput = function(){
         let matches = app.groups.filter(group => {
