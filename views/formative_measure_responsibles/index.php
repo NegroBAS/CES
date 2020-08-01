@@ -37,6 +37,7 @@
 </div>
 
 
+
 <!-- Modal CREATE -->
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -186,7 +187,7 @@
                             </div>
 
                             <!-- //tipo y cargo// -->
-                            <div class="form-row">                               
+                            <div class="form-row">
                                 <div class="col-12 col-12 col-md-12 col-lg-12 col-lx-12">
                                 <div class="form-group">
                                         <label for="position_id">Cargo</label>
@@ -204,8 +205,7 @@
                                         <label for="type">Tipo</label>
                                         <input type="text" name="type" id="type" class="form-control"></input>
                                     </div>
-                                </div>                    
-                                                             
+                                </div>
                             </div>
 
                             <div class="form-row pb-2">
@@ -234,26 +234,66 @@
                             <div class="col-1"></div>
                         </div>
 
-
-
                         </form>
 
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                             <button type="submit" form="form" id="btnForm"  class="btn btn-primary"><i class="far fa-save"></i> Guardar</button>
                         </div>
+                    </div>
+                </div>
+            </div>
+</div>
 
 
 
-                   
-                    
 
-                 </div>
+    <!-- Modal Detail -->
+<div class="modal fade" id="DetailModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Institucionales</a>
+                        <a class="nav-item nav-link" id="nav-learners-tab" data-toggle="tab" href="#nav-learners" role="tab" aria-controls="nav-learners" aria-selected="false">Aprendices Asociados</a>
+                    </div>
+                </nav>
+
+                <div class="tab-content" id="nav-tabContent">
+                        <!-- Tab 1 -->
+                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                      <div class="container  text-center">
+                          <div class="row">
+                              <div class="col">
+                                  <div class="row mt-3">
+                                      <div class="col">
+                                          <strong>Nombre del Programa de Formación</strong>
+                                      </div>
+                                  </div>
+                                  <div class="row">
+                                      <div class="col">
+                                          <p class="text-muted" id="name_formation"></p>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                    </div>
+                  <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                  </div>
             </div>
         </div>
     </div>
-
-
+    </div>
+</div>
 
 
 <?php require_once('views/layouts/footer.php') ?>

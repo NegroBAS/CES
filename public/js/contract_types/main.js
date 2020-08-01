@@ -64,6 +64,7 @@ const app = {
                                     <h5>${contract_type.name}</h5>
                                     <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
                                     <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
+                                    <button class="btn btn-sm btn-outline-primary detail" data-id="${contract_type.id}"><i class="far fa-eye"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +90,7 @@ const app = {
             console.log(data);
             if (data.status === 200) {
                 $('.modal #form').trigger('reset');
-                $('.modal').modal('toggle');
+                $('#modal-creat').modal('toggle');
                 $('.modal').find('.modal-title').text('Editar tipo de contrato');
                 document.getElementById('name').value = data.contract_type.name
 
@@ -107,7 +108,7 @@ const app = {
             let data = await res.json();
             console.log(data);
             if (data.status === 200) {
-                $('.modal').modal('toggle');
+                $('#modal-creat').modal('toggle');
                 app.get();
                 toastr.success('', data.message, {
                     closeButton: true
@@ -153,7 +154,7 @@ const app = {
                     closeButton: true
                 });
                 app.get();
-                $('.modal').modal('toggle');
+                $('#modal-creat').modal('toggle');
                 this.edit = false;
             }
             if (data.status === 500) {
@@ -162,6 +163,18 @@ const app = {
         } catch (error) {
             console.log(error);
         }
+    },
+    detailContract_type: async function (id) {
+		try {
+            let res = await fetch(`${this.url}contract_types/view/${id}`);
+			console.log(res);
+			let data = await res.json();
+			console.log(data);
+            $('#modal-detail #name').text(data.name);
+            $('#modal-detail #name_instructor').text(data.name_instructor);
+		} catch (error) {
+			console.log(error);
+		}
     }
 }
 
@@ -187,9 +200,15 @@ $(document).ready(async function () {
         `;
         await app.getByApi();
     }
+    $(document).on('click', '.detail', async function () {
+        let id = $(this).data('id');
+		await app.detailContract_type(id);
+		$('#modal-detail').find('.modal-title').text('Detalles del Contrato');
+		$('#modal-detail').modal('toggle');
+	});
     document.getElementById('btn-create').onclick = function () {
         $('.modal #form').trigger('reset');
-        $('.modal').modal('toggle');
+        $('#modal-creat').modal('toggle');
         $('.modal').find('.modal-title').text('Crear tipo de contrato');
         val.limpiar();
         val.validaciones();

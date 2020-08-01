@@ -121,6 +121,12 @@ class Formative_measure_responsiblesController extends Controller{
         
     }
 
+    public function viewR($param = null){
+        $id = $param[0];
+        $res = $this->formative_measure_responsible->detail($id);
+        echo json_encode($res);
+    }
+
     public function edit($param = null)
     {
         date_default_timezone_set("America/Bogota");

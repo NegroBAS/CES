@@ -168,7 +168,7 @@ const app = {
             $('#modal-detail #email').text(data.email);
             $('#modal-detail #birthdate').text(data.birthdate);
             $('#modal-detail #group').text(data.formation_program_name);
-
+            $('#modal-detail #photo').text(data.photo);
 		} catch (error) {
 			console.log(error);
 		}

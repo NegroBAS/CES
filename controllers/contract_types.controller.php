@@ -46,6 +46,14 @@ class Contract_typesController extends Controller{
         
     }
 
+    public function view($param = null)
+    {
+        $id = $param[0];
+        $contract_type = $this->contract_type->detail($id);
+        echo json_encode($contract_type );
+        
+    }
+
     public function edit($param = null)
     {
         date_default_timezone_set("America/Bogota");

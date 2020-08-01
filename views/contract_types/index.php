@@ -26,7 +26,7 @@
 
 
 <!-- Modal CREATE -->
-<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+<div class="modal fade" id="modal-creat" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -53,5 +53,50 @@
       </div>
     </div>
   </div>
+</div>
+
+
+<!-- Modal Detail -->
+<div class="modal fade mt-4" id="modal-detail" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-m">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row mt-1  text-center">
+                        <div class="col">
+                            <strong>Nombre del Contrato</strong>
+                        </div>
+                    </div>
+                    <div class="row  text-center">
+                        <div class="col">
+                            <p class="text-muted" id="name"></p>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <strong>Instructores Relacionados</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-muted" id="name_instructor"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <?php require_once('views/layouts/footer.php') ?>

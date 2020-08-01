@@ -137,6 +137,7 @@
 </div>
 </div>
 
+
 <!-- Modal Detail -->
 <div class="modal fade" id="modal-detail" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">

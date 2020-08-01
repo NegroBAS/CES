@@ -219,7 +219,7 @@
 </div>
 
 <!-- Modal Detail -->
-<div class="modal fade" id="modal-detail" tabindex="-1" role="dialog">
+<div class="modal fade mt-4 " id="modal-detail" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
@@ -239,10 +239,15 @@
                 <div class="tab-content" id="nav-tabContent">
                         <!-- Tab 1 -->
                     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                      <div class="container  text-center">
-                          <div class="row">
-                              <div class="col-5">
-                                  <div class="row mt-3">
+                        <div class="container  text-center">
+                            <div class="row">
+                                <div class="col">
+                                    <p id="photo"></p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="row mt-3">
                                         <div class="col">
                                             <strong>Documento</strong>
                                         </div>
@@ -255,22 +260,22 @@
                                             <p class="text-muted text-left" id="document"></p>
                                         </div>
                                     </div>
-                              </div>
-                              <div class="col">
-                                  <div class="row mt-3">
-                                      <div class="col">
-                                          <strong>Nombre del Aprendiz</strong>
-                                      </div>
-                                  </div>
-                                  <div class="row">
-                                      <div class="col">
-                                          <p class="text-muted" id="username"></p>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="row">
-                              <div class="col">
+                                </div>
+                                <div class="col">
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <strong>Nombre del Aprendiz</strong>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <p class="text-muted" id="username"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
                                     <div class="row mt-1">
                                         <div class="col">
                                             <strong>Fecha de Nacimiento</strong>
@@ -281,8 +286,8 @@
                                             <p class="text-muted" id="birthdate"></p>
                                         </div>
                                     </div>
-                              </div>
-                              <div class="col">
+                                </div>
+                                <div class="col">
                                     <div class="row mt-1">
                                         <div class="col">
                                             <strong>Teléfono</strong>
@@ -293,8 +298,8 @@
                                             <p class="text-muted" id="phone"></p>
                                         </div>
                                     </div>
-                              </div>
-                              <div class="col">
+                                </div>
+                                <div class="col">
                                     <div class="row mt-1">
                                         <div class="col">
                                             <strong>Correo de Comunicación</strong>
@@ -305,8 +310,8 @@
                                             <p class="text-muted" id="email"></p>
                                         </div>
                                     </div>
-                              </div>
-                          </div>
+                                </div>
+                            </div>
                     </div>
 
                     </div>
@@ -314,7 +319,7 @@
                     <!-- Tab 2 -->
                     <div class="tab-pane fade" id="nav-learners" role="tabpanel" aria-labelledby="nav-learners-tab">
                         <div class="container">
-                          
+                            
                             <div class="row">
                                 <div class="col">
                                     <div class="row mt-3 text-center">

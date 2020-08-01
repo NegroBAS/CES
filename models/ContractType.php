@@ -61,6 +61,36 @@ class ContractType extends Model{
         }
     }
 
+    public function detail($id)
+    {
+        try {
+            $contract_type = [];
+            $query = $this->db->connect()->prepare('SELECT contract_types.* ,formative_measure_responsibles.id as id_instructor,
+            formative_measure_responsibles.username as name_instructor
+            FROM contract_types
+            LEFT JOIN formative_measure_responsibles ON formative_measure_responsibles.contract_type_id = contract_types.id
+            WHERE contract_types.id =:id');
+            $query->bindParam('id', $id);
+            $query->execute();
+
+            while ($row = $query->fetch()) {
+                $contract_type = new ContractType();
+                $contract_type->id = $row['id'];
+                $contract_type->name = $row['name'];
+                $contract_type->name_instructor = $row['name_instructor'];
+            }
+
+            return $contract_type;
+
+
+        } catch (PDOException $e) {
+            return [
+                'status' => 500,
+                'error' => $e
+            ];
+        }
+    }
+
     public function create($data)
     {
         try {

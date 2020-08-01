@@ -77,6 +77,7 @@ const app = {
                             <td>
                             <button class="btn btn-sm btn-outline-danger delete"><i class="far fa-trash-alt"></i></button>
                             <button class="btn btn-sm btn-outline-primary edit"><i class="far fa-edit"></i></button>
+                            <button class="btn btn-sm btn-outline-primary detail" data-id="${formative_measure_responsible.id}"><i class="far fa-eye"></i></button>
                             </td>
                         </tr>
                         `;
@@ -169,7 +170,7 @@ const app = {
             let data = await res.text();
             console.log(data);
             if (data.status === 200) {
-                $('.modal').modal('toggle');
+                $('#modal').modal('toggle');
                 app.get();
                 toastr.success('', data.message, {
                     closeButton: true
@@ -224,6 +225,17 @@ const app = {
         } catch (error) {
             console.log(error);
         }
+    },
+    detailResponsible: async function (id) {
+		try {
+            let res = await fetch(`${this.url}formative_measure_responsibles/viewR/${id}`);
+			console.log(res);
+			let data = await res.json();
+            console.log(data);
+            $('#DetailModal #username').text(data.username);
+		} catch (error) {
+            console.log(error);
+        }
     }
 }
 
@@ -250,6 +262,13 @@ $(document).ready(async function () {
                 "https://cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json",
         },
     });
+
+    $(document).on('click', '.detail', async function () {
+        let id = $(this).data('id');
+		await app.detailResponsible(id);
+		$('#DetailModal').find('.modal-title').text('Detalles del Responsable');
+		$('#DetailModal').modal('toggle');
+	});
 
     document.getElementById('position_name').oninput = function(){
         if(document.getElementById('position_name').value.length > 0){
@@ -288,6 +307,8 @@ $(document).ready(async function () {
         }
     }
 
+    
+
     document.getElementById('update').onclick = function () {
         document.getElementById('data-formative-measure-responsible').innerHTML = `
         <tr>
@@ -297,7 +318,7 @@ $(document).ready(async function () {
     }
     document.getElementById('btn-create').onclick = function () {
         $('.modal #form').trigger('reset');
-        $('.modal').modal('toggle');
+        $('#modal').modal('toggle');
         $('.modal').find('.modal-title').text('Crear responsable');
         val.limpiar();
         val.validaciones();
