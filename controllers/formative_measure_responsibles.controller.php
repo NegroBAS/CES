@@ -121,10 +121,10 @@ class Formative_measure_responsiblesController extends Controller{
         
     }
 
-    public function viewR($param = null){
+    public function view($param = null){
         $id = $param[0];
-        $res = $this->formative_measure_responsible->detail($id);
-        echo json_encode($res);
+        $formative_measure_responsible = $this->formative_measure_responsible->detail($id);
+        echo json_encode($formative_measure_responsible);
     }
 
     public function edit($param = null)

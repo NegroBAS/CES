@@ -246,11 +246,9 @@
 </div>
 
 
-
-
-    <!-- Modal Detail -->
-<div class="modal fade" id="DetailModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg">
+<!-- Modal Detail -->
+<div class="modal fade mt-4" id="modal-detail" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-m">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title"></h5>
@@ -259,39 +257,34 @@
                 </button>
             </div>
             <div class="modal-body">
-                <nav>
-                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Institucionales</a>
-                        <a class="nav-item nav-link" id="nav-learners-tab" data-toggle="tab" href="#nav-learners" role="tab" aria-controls="nav-learners" aria-selected="false">Aprendices Asociados</a>
-                    </div>
-                </nav>
-
-                <div class="tab-content" id="nav-tabContent">
-                        <!-- Tab 1 -->
-                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                      <div class="container  text-center">
-                          <div class="row">
-                              <div class="col">
-                                  <div class="row mt-3">
-                                      <div class="col">
-                                          <strong>Nombre del Programa de Formación</strong>
-                                      </div>
-                                  </div>
-                                  <div class="row">
-                                      <div class="col">
-                                          <p class="text-muted" id="name_formation"></p>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
+                <div class="container">
+                    <div class="row mt-1  text-center">
+                        <div class="col">
+                            <strong>Nombre del Contrato</strong>
                         </div>
                     </div>
-                  <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                  </div>
+                    <div class="row  text-center">
+                        <div class="col">
+                            <p class="text-muted" id="name"></p>
+                        </div>
+                    </div>
+                    <div class="row mt-1">
+                        <div class="col">
+                            <strong>Instructores Relacionados</strong>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-muted" id="name_instructor"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
             </div>
         </div>
-    </div>
     </div>
 </div>
 

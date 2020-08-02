@@ -140,7 +140,7 @@ const app = {
             console.log(data);
             if (data.status === 200) {
                 $('.modal #form').trigger('reset');
-                $('.modal').modal('toggle');
+                $('#modal').modal('toggle');
                 $('.modal').find('.modal-title').text('Editar responsable');
                 document.getElementById('username').value = data.formative_measure_responsible.username;
                 document.getElementById('misena_email').value = data.formative_measure_responsible.misena_email;
@@ -216,7 +216,7 @@ const app = {
                     closeButton: true
                 });
                 app.get();
-                $('.modal').modal('toggle');
+                $('#modal').modal('toggle');
                 this.edit = false;
             }
             if (data.status === 500) {
@@ -228,11 +228,11 @@ const app = {
     },
     detailResponsible: async function (id) {
 		try {
-            let res = await fetch(`${this.url}formative_measure_responsibles/viewR/${id}`);
+            let res = await fetch(`${this.url}formative_measure_responsibles/view/${id}`);
 			console.log(res);
 			let data = await res.json();
             console.log(data);
-            $('#DetailModal #username').text(data.username);
+            $('#modal-detail #username').text(data.username);
 		} catch (error) {
             console.log(error);
         }
@@ -266,8 +266,8 @@ $(document).ready(async function () {
     $(document).on('click', '.detail', async function () {
         let id = $(this).data('id');
 		await app.detailResponsible(id);
-		$('#DetailModal').find('.modal-title').text('Detalles del Responsable');
-		$('#DetailModal').modal('toggle');
+		$('#modal-detail').find('.modal-title').text('Detalles del Responsable');
+		$('#modal-detail').modal('toggle');
 	});
 
     document.getElementById('position_name').oninput = function(){

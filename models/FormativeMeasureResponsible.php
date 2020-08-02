@@ -70,7 +70,7 @@ class FormativeMeasureResponsible extends Model{
                 $formative_measure_responsible->username = $row['username'];
                 $formative_measure_responsible->misena_email = $row['misena_email'];
                 $formative_measure_responsible->institutional_email = $row['institutional_email'];
-                $formative_measure_responsible->document_type_id = $row['document_type_id'];
+                // $formative_measure_responsible->document_type_id = $row['document_type_id'];
                 $formative_measure_responsible->document = $row['document'];
                 $formative_measure_responsible->birthdate = $row['birthdate'];
                 $formative_measure_responsible->phone = $row['phone'];
@@ -98,28 +98,28 @@ class FormativeMeasureResponsible extends Model{
     public function detail($id)
     {
         try {
-            // WHERE formative_measure_responsibles.id = :id
+            $formative_measure_responsible = [];
             $query = $this->db->connect()->prepare('SELECT * FROM formative_measure_responsibles WHERE formative_measure_responsibles.id = :id');
             $query->bindParam('id',$id);
             $query->execute();
 
-            while($row = $query->fetch()){
+            while ($row = $query->fetch()) {
                 $formative_measure_responsible = new FormativeMeasureResponsible();
                 $formative_measure_responsible->id = $row['id'];
                 $formative_measure_responsible->username = $row['username'];
-                // $formative_measure_responsible->misena_email = $row['misena_email'];
-                // $formative_measure_responsible->institutional_email = $row['institutional_email'];
+                $formative_measure_responsible->misena_email = $row['misena_email'];
+                $formative_measure_responsible->institutional_email = $row['institutional_email'];
                 // $formative_measure_responsible->document_type_id = $row['document_type_id'];
-                // $formative_measure_responsible->document = $row['document'];
-                // $formative_measure_responsible->birthdate = $row['birthdate'];
-                // $formative_measure_responsible->phone = $row['phone'];
-                // $formative_measure_responsible->phone_ip = $row['phone_ip'];
-                // $formative_measure_responsible->gender = $row['gender'];
-                // $formative_measure_responsible->position_id = $row['position_id'];
-                // $formative_measure_responsible->contract_type_id = $row['contract_type_id'];
-                // $formative_measure_responsible->type = $row['type'];
-                // $formative_measure_responsible->photo = $row['photo'];
-                // $formative_measure_responsible->state = $row['state'];
+                $formative_measure_responsible->document = $row['document'];
+                $formative_measure_responsible->birthdate = $row['birthdate'];
+                $formative_measure_responsible->phone = $row['phone'];
+                $formative_measure_responsible->phone_ip = $row['phone_ip'];
+                $formative_measure_responsible->gender = $row['gender'];
+                $formative_measure_responsible->position_id = $row['position_id'];
+                $formative_measure_responsible->contract_type_id = $row['contract_type_id'];
+                $formative_measure_responsible->type = $row['type'];
+                $formative_measure_responsible->photo = $row['photo'];
+                $formative_measure_responsible->state = $row['state'];
             }
 
             return $formative_measure_responsible;
