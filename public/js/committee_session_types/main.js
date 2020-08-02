@@ -32,7 +32,7 @@ const app = {
           if(data.status===200){
               $('.modal #form').trigger('reset');
               $('.modal').modal('toggle');
-              $('.modal').find('.modal-title').text('Editar tipo secion comite');
+              $('.modal').find('.modal-title').text('Editar tipo sesión comite');
               document.getElementById('name').value = data.committee_session_type.name
           }
       } catch (error) {
@@ -111,7 +111,7 @@ $(document).ready(async function () {
   document.getElementById('btn-create').onclick = function(){
       $('.modal #form').trigger('reset');
       $('.modal').modal('toggle');
-      $('.modal').find('.modal-title').text('Crear tipo secion comite');
+      $('.modal').find('.modal-title').text('Crear tipo sesión comite');
       val.limpiar();
       val.validaciones();
   }
